@@ -1,0 +1,2683 @@
+{
+  "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc",
+  "metadata": {
+    "name": "player",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "add_item_to_inventory",
+      "discriminator": [
+        55,
+        190,
+        223,
+        211,
+        201,
+        122,
+        169,
+        220
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "inventory"
+          ]
+        },
+        {
+          "name": "inventory",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "item_account"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "advance_action_slot",
+      "docs": [
+        "Advance to the next action slot (called when roll succeeds)"
+      ],
+      "discriminator": [
+        252,
+        131,
+        226,
+        152,
+        148,
+        8,
+        229,
+        82
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "player",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "create_inventory",
+      "discriminator": [
+        199,
+        244,
+        185,
+        148,
+        32,
+        239,
+        38,
+        138
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "inventory",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "create_inventory_for",
+      "docs": [
+        "Create an inventory for another wallet - allows sender to pay for recipient's inventory",
+        "This is used when transferring items to a wallet that doesn't have an inventory yet"
+      ],
+      "discriminator": [
+        65,
+        250,
+        20,
+        54,
+        27,
+        145,
+        180,
+        41
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "docs": [
+            "The payer who funds the account creation (e.g., the sender in a transfer)"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "owner",
+          "docs": [
+            "The owner of the new inventory (doesn't need to sign)"
+          ]
+        },
+        {
+          "name": "inventory",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "create_item_to_inventory",
+      "docs": [
+        "Create a new item via loot roll AND add it to inventory in one transaction",
+        "This combines the loot_rolls::create_item CPI with adding to inventory",
+        "NOTE: Uses manual reallocation to avoid CPI lamport accounting issues"
+      ],
+      "discriminator": [
+        187,
+        99,
+        166,
+        1,
+        230,
+        137,
+        232,
+        192
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "inventory"
+          ]
+        },
+        {
+          "name": "inventory",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "item_account",
+          "docs": [
+            "The PDA is [b\"item\", owner, item_id] under loot_rolls program"
+          ],
+          "writable": true
+        },
+        {
+          "name": "loot_config",
+          "docs": [
+            "Loot config for generating the item"
+          ]
+        },
+        {
+          "name": "loot_rolls_program",
+          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "item_id",
+          "type": "u64"
+        },
+        {
+          "name": "request",
+          "type": {
+            "defined": {
+              "name": "LootRollRequest"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_item_to_inventory_cpi",
+      "docs": [
+        "Session-aware version: create item and add to inventory",
+        "Uses session signer as payer, validates via session account",
+        "NOTE: Uses manual reallocation to avoid CPI lamport accounting issues"
+      ],
+      "discriminator": [
+        132,
+        66,
+        27,
+        120,
+        136,
+        13,
+        214,
+        23
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "docs": [
+            "Session signer - pays for account creation"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority"
+        },
+        {
+          "name": "session",
+          "docs": [
+            "Valid session linking session_key to authority"
+          ]
+        },
+        {
+          "name": "inventory",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "item_account",
+          "docs": [
+            "The PDA is [b\"item\", authority, item_id] under loot_rolls program"
+          ],
+          "writable": true
+        },
+        {
+          "name": "loot_config",
+          "docs": [
+            "Loot config for generating the item"
+          ]
+        },
+        {
+          "name": "loot_rolls_program",
+          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "item_id",
+          "type": "u64"
+        },
+        {
+          "name": "request",
+          "type": {
+            "defined": {
+              "name": "LootRollRequest"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_player",
+      "docs": [
+        "Create a player. Optionally pass ClassConfig as remaining_account[0] to use on-chain actions."
+      ],
+      "discriminator": [
+        19,
+        178,
+        189,
+        216,
+        159,
+        134,
+        0,
+        192
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "player_id",
+          "type": "u8"
+        },
+        {
+          "name": "player_class",
+          "type": {
+            "defined": {
+              "name": "PlayerClass"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_player_with_inventory",
+      "docs": [
+        "Create a player AND their inventory in one transaction",
+        "This is the preferred method for creating a wallet's first player"
+      ],
+      "discriminator": [
+        133,
+        61,
+        154,
+        41,
+        68,
+        143,
+        24,
+        139
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "inventory",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "player_id",
+          "type": "u8"
+        },
+        {
+          "name": "player_class",
+          "type": {
+            "defined": {
+              "name": "PlayerClass"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_session",
+      "docs": [
+        "Create a game session - allows a temporary keypair to act on behalf of the player",
+        "The session keypair can sign transactions without wallet approval popups",
+        "",
+        "Parameters:",
+        "- duration_seconds: How long the session should last (max 24 hours = 86400 seconds)"
+      ],
+      "discriminator": [
+        242,
+        193,
+        143,
+        179,
+        150,
+        25,
+        122,
+        227
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "session_key",
+          "docs": [
+            "The temporary keypair that will sign transactions"
+          ]
+        },
+        {
+          "name": "player",
+          "docs": [
+            "The player this session will control"
+          ]
+        },
+        {
+          "name": "session",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session_key"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "duration_seconds",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "deposit_to_escrow",
+      "docs": [
+        "Deposit SOL into the session escrow",
+        "These funds can be used to fund session keypairs and are always recoverable"
+      ],
+      "discriminator": [
+        246,
+        134,
+        57,
+        199,
+        116,
+        101,
+        68,
+        224
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "equip_item",
+      "discriminator": [
+        38,
+        155,
+        16,
+        165,
+        146,
+        31,
+        4,
+        255
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "item_account"
+        }
+      ],
+      "args": [
+        {
+          "name": "item_slot",
+          "type": {
+            "defined": {
+              "name": "ItemSlot"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "extend_session",
+      "docs": [
+        "Extend an existing session's expiry time"
+      ],
+      "discriminator": [
+        201,
+        215,
+        202,
+        21,
+        222,
+        73,
+        18,
+        96
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "session",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session.session_key",
+                "account": "GameSession"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "additional_seconds",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "fund_session_from_escrow",
+      "docs": [
+        "Fund a session keypair from the escrow",
+        "This transfers SOL from escrow PDA to the session signer",
+        "The session signer must sign to prove ownership of the keypair"
+      ],
+      "discriminator": [
+        86,
+        205,
+        204,
+        211,
+        211,
+        180,
+        78,
+        61
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "docs": [
+            "The authority must sign to authorize the transfer"
+          ],
+          "signer": true
+        },
+        {
+          "name": "escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "session_signer",
+          "docs": [
+            "The session signer receives the funds"
+          ],
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "fund_session_signer_cpi",
+      "docs": [
+        "Fund session signer from escrow via CPI (called by other programs)",
+        "Validates via session account instead of requiring authority signature"
+      ],
+      "discriminator": [
+        39,
+        155,
+        141,
+        219,
+        118,
+        128,
+        18,
+        79
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "docs": [
+            "The session signer - must match session.session_key"
+          ],
+          "writable": true
+        },
+        {
+          "name": "session",
+          "docs": [
+            "Valid session linking session_key to authority"
+          ]
+        },
+        {
+          "name": "escrow",
+          "docs": [
+            "The escrow to fund from - must belong to session's authority"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "session.authority",
+                "account": "GameSession"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "get_all_items",
+      "discriminator": [
+        108,
+        169,
+        64,
+        77,
+        138,
+        165,
+        39,
+        60
+      ],
+      "accounts": [
+        {
+          "name": "owner"
+        },
+        {
+          "name": "inventory",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [],
+      "returns": {
+        "defined": {
+          "name": "AllItems"
+        }
+      }
+    },
+    {
+      "name": "get_current_action",
+      "docs": [
+        "Get the current action for the player"
+      ],
+      "discriminator": [
+        33,
+        4,
+        31,
+        190,
+        95,
+        6,
+        202,
+        106
+      ],
+      "accounts": [
+        {
+          "name": "owner"
+        },
+        {
+          "name": "player"
+        }
+      ],
+      "args": [],
+      "returns": {
+        "defined": {
+          "name": "Action"
+        }
+      }
+    },
+    {
+      "name": "get_player_count",
+      "discriminator": [
+        85,
+        124,
+        159,
+        183,
+        217,
+        36,
+        143,
+        167
+      ],
+      "accounts": [
+        {
+          "name": "owner"
+        },
+        {
+          "name": "player"
+        }
+      ],
+      "args": [],
+      "returns": "u8"
+    },
+    {
+      "name": "get_player_inventory",
+      "discriminator": [
+        158,
+        136,
+        211,
+        89,
+        34,
+        155,
+        228,
+        34
+      ],
+      "accounts": [
+        {
+          "name": "owner"
+        },
+        {
+          "name": "player"
+        }
+      ],
+      "args": [],
+      "returns": {
+        "defined": {
+          "name": "PlayerInventory"
+        }
+      }
+    },
+    {
+      "name": "get_player_stats",
+      "discriminator": [
+        158,
+        23,
+        253,
+        137,
+        219,
+        97,
+        125,
+        189
+      ],
+      "accounts": [
+        {
+          "name": "owner"
+        },
+        {
+          "name": "player"
+        }
+      ],
+      "args": [],
+      "returns": {
+        "defined": {
+          "name": "PlayerStats"
+        }
+      }
+    },
+    {
+      "name": "heal_player",
+      "discriminator": [
+        12,
+        176,
+        30,
+        11,
+        16,
+        116,
+        142,
+        203
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "player",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "heal_player_cpi",
+      "docs": [
+        "Session-aware version of heal_player"
+      ],
+      "discriminator": [
+        66,
+        191,
+        114,
+        80,
+        98,
+        26,
+        170,
+        252
+      ],
+      "accounts": [
+        {
+          "name": "authority"
+        },
+        {
+          "name": "session",
+          "docs": [
+            "Valid session linking session_key to authority"
+          ]
+        },
+        {
+          "name": "player",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize_session_escrow",
+      "docs": [
+        "Initialize a session escrow for the authority",
+        "This is a one-time setup that creates a PDA to hold session funds"
+      ],
+      "discriminator": [
+        50,
+        196,
+        117,
+        5,
+        3,
+        210,
+        211,
+        114
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "recalculate_equipment_stats",
+      "docs": [
+        "Recalculate all equipment stats by reading all equipped items",
+        "Useful for recovering from inconsistent state or after account migrations"
+      ],
+      "discriminator": [
+        85,
+        14,
+        133,
+        126,
+        109,
+        157,
+        42,
+        158
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "player",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "remove_item_from_inventory",
+      "discriminator": [
+        54,
+        89,
+        81,
+        51,
+        245,
+        88,
+        178,
+        150
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "inventory"
+          ]
+        },
+        {
+          "name": "inventory",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "item_account"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "reset_action_slot",
+      "docs": [
+        "Reset action slot to the beginning (called at start of battle or after combat ends)"
+      ],
+      "discriminator": [
+        126,
+        253,
+        127,
+        239,
+        11,
+        20,
+        62,
+        222
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "player",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "return_session_funds_to_escrow",
+      "docs": [
+        "Return unused SOL from session keypair back to escrow",
+        "Call this before ending a session to recover funds"
+      ],
+      "discriminator": [
+        190,
+        194,
+        130,
+        104,
+        149,
+        221,
+        247,
+        145
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "docs": [
+            "The session signer must sign to authorize returning funds"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "escrow",
+          "docs": [
+            "The escrow to return funds to"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "escrow.authority",
+                "account": "SessionEscrow"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "revoke_session",
+      "docs": [
+        "Revoke a game session - ends the session early",
+        "Only the original authority can revoke"
+      ],
+      "discriminator": [
+        86,
+        92,
+        198,
+        120,
+        144,
+        2,
+        7,
+        194
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "session",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session.session_key",
+                "account": "GameSession"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "set_action_enabled",
+      "docs": [
+        "Enable or disable an action slot",
+        "Enforces MAX_ENABLED_ACTIONS limit (currently 3)"
+      ],
+      "discriminator": [
+        24,
+        190,
+        14,
+        186,
+        227,
+        43,
+        157,
+        30
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "player",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "slot_idx",
+          "type": "u8"
+        },
+        {
+          "name": "enabled",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "swap_action_slots",
+      "docs": [
+        "Swap two action slots"
+      ],
+      "discriminator": [
+        234,
+        78,
+        212,
+        178,
+        219,
+        51,
+        17,
+        31
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "player",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "slot_a",
+          "type": "u8"
+        },
+        {
+          "name": "slot_b",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "transfer_item",
+      "discriminator": [
+        48,
+        104,
+        212,
+        94,
+        79,
+        79,
+        48,
+        163
+      ],
+      "accounts": [
+        {
+          "name": "owner_from",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "owner_to"
+        },
+        {
+          "name": "inventory_from",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner_from"
+              }
+            ]
+          }
+        },
+        {
+          "name": "inventory_to",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner_to"
+              }
+            ]
+          }
+        },
+        {
+          "name": "item_account",
+          "docs": [
+            "Item account to be transferred - validated but owned by loot_rolls program"
+          ],
+          "writable": true
+        },
+        {
+          "name": "loot_rolls_program",
+          "docs": [
+            "The loot_rolls program that owns ItemAccount"
+          ]
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "unequip_item",
+      "discriminator": [
+        96,
+        192,
+        232,
+        54,
+        127,
+        191,
+        236,
+        128
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "player",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "item_slot",
+          "type": {
+            "defined": {
+              "name": "ItemSlot"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_player_stats",
+      "discriminator": [
+        61,
+        85,
+        73,
+        244,
+        51,
+        95,
+        21,
+        33
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "player",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "health",
+          "type": {
+            "option": "i16"
+          }
+        },
+        {
+          "name": "wins",
+          "type": {
+            "option": "u32"
+          }
+        },
+        {
+          "name": "losses",
+          "type": {
+            "option": "u32"
+          }
+        },
+        {
+          "name": "experience",
+          "type": {
+            "option": "u64"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_player_stats_cpi",
+      "docs": [
+        "Update player stats via CPI - validates via session instead of owner signature"
+      ],
+      "discriminator": [
+        209,
+        23,
+        200,
+        53,
+        4,
+        46,
+        60,
+        198
+      ],
+      "accounts": [
+        {
+          "name": "authority"
+        },
+        {
+          "name": "session",
+          "docs": [
+            "Valid session linking session_key to authority"
+          ]
+        },
+        {
+          "name": "player",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "health",
+          "type": {
+            "option": "i16"
+          }
+        },
+        {
+          "name": "wins",
+          "type": {
+            "option": "u32"
+          }
+        },
+        {
+          "name": "losses",
+          "type": {
+            "option": "u32"
+          }
+        },
+        {
+          "name": "experience",
+          "type": {
+            "option": "u64"
+          }
+        }
+      ]
+    },
+    {
+      "name": "withdraw_from_escrow",
+      "docs": [
+        "Withdraw SOL from the session escrow back to the authority",
+        "This is always possible - funds are never locked"
+      ],
+      "discriminator": [
+        235,
+        206,
+        216,
+        253,
+        47,
+        163,
+        169,
+        231
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "GameSession",
+      "discriminator": [
+        150,
+        116,
+        20,
+        197,
+        205,
+        121,
+        220,
+        240
+      ]
+    },
+    {
+      "name": "Inventory",
+      "discriminator": [
+        97,
+        218,
+        167,
+        233,
+        216,
+        170,
+        49,
+        27
+      ]
+    },
+    {
+      "name": "LootConfig",
+      "discriminator": [
+        117,
+        243,
+        220,
+        194,
+        39,
+        114,
+        57,
+        248
+      ]
+    },
+    {
+      "name": "Player",
+      "discriminator": [
+        205,
+        222,
+        112,
+        7,
+        165,
+        155,
+        206,
+        218
+      ]
+    },
+    {
+      "name": "SessionEscrow",
+      "discriminator": [
+        251,
+        205,
+        39,
+        211,
+        38,
+        92,
+        234,
+        241
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "NameTooLong",
+      "msg": "Name must be 32 characters or less"
+    },
+    {
+      "code": 6001,
+      "name": "ItemAlreadyInInventory",
+      "msg": "Item already in inventory"
+    },
+    {
+      "code": 6002,
+      "name": "ItemNotInInventory",
+      "msg": "Item not in inventory"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidItemSlot",
+      "msg": "Item cannot be equipped to this slot - slot mismatch"
+    },
+    {
+      "code": 6004,
+      "name": "ItemNotOwnedBySender",
+      "msg": "Item is not owned by the sender"
+    },
+    {
+      "code": 6005,
+      "name": "PlayerIdAlreadyExists",
+      "msg": "Player ID already exists for this wallet"
+    },
+    {
+      "code": 6006,
+      "name": "InvalidItemData",
+      "msg": "Failed to deserialize item data"
+    },
+    {
+      "code": 6007,
+      "name": "InvalidActionSlot",
+      "msg": "Invalid action slot index"
+    },
+    {
+      "code": 6008,
+      "name": "MaxActionsEnabled",
+      "msg": "Maximum number of actions already enabled (3)"
+    },
+    {
+      "code": 6009,
+      "name": "EmptyActionSlot",
+      "msg": "Cannot enable an empty action slot"
+    },
+    {
+      "code": 6010,
+      "name": "SameSlotSwap",
+      "msg": "Cannot swap a slot with itself"
+    },
+    {
+      "code": 6011,
+      "name": "InvalidSessionDuration",
+      "msg": "Invalid session duration"
+    },
+    {
+      "code": 6012,
+      "name": "SessionTooLong",
+      "msg": "Session duration cannot exceed 24 hours"
+    },
+    {
+      "code": 6013,
+      "name": "SessionExpired",
+      "msg": "Session has expired"
+    },
+    {
+      "code": 6014,
+      "name": "NotSessionAuthority",
+      "msg": "Not the session authority"
+    },
+    {
+      "code": 6015,
+      "name": "NotPlayerOwner",
+      "msg": "Not the player owner"
+    },
+    {
+      "code": 6016,
+      "name": "NotEscrowAuthority",
+      "msg": "Not the escrow authority"
+    },
+    {
+      "code": 6017,
+      "name": "InsufficientEscrowBalance",
+      "msg": "Insufficient escrow balance"
+    },
+    {
+      "code": 6018,
+      "name": "InvalidAmount",
+      "msg": "Invalid amount"
+    },
+    {
+      "code": 6019,
+      "name": "InvalidSession",
+      "msg": "Invalid session - session key mismatch"
+    }
+  ],
+  "types": [
+    {
+      "name": "Action",
+      "docs": [
+        "An action that can be used in combat"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "effect",
+            "type": {
+              "defined": {
+                "name": "ActionEffect"
+              }
+            }
+          },
+          {
+            "name": "source",
+            "type": {
+              "defined": {
+                "name": "ActionSource"
+              }
+            }
+          },
+          {
+            "name": "success_threshold",
+            "type": "u8"
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ActionEffect",
+      "docs": [
+        "Effects that can occur during combat from player actions"
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "None"
+          },
+          {
+            "name": "DamageMultiplier",
+            "fields": [
+              {
+                "name": "multiplier",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "FlatDamageBonus",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              }
+            ]
+          },
+          {
+            "name": "ReduceEnemyAttack",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              },
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "ReduceEnemyDefense",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              },
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "BoostSelfAttack",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              },
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "BoostSelfDefense",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              },
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "Heal",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              }
+            ]
+          },
+          {
+            "name": "LifeSteal",
+            "fields": [
+              {
+                "name": "percent",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "CriticalBoost",
+            "fields": [
+              {
+                "name": "chance",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "DamageOverTime",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              },
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "Stun",
+            "fields": [
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "Execute",
+            "fields": [
+              {
+                "name": "threshold_percent",
+                "type": "u8"
+              },
+              {
+                "name": "bonus_multiplier",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "Shield",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              },
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "ActionSource",
+      "docs": [
+        "Where an action comes from (innate class ability or equipment)"
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "ClassInnate"
+          },
+          {
+            "name": "Weapon"
+          },
+          {
+            "name": "Helmet"
+          },
+          {
+            "name": "Chest"
+          },
+          {
+            "name": "Boots"
+          },
+          {
+            "name": "Consumable"
+          },
+          {
+            "name": "Skill"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AllItems",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "items",
+            "type": {
+              "vec": "pubkey"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "GameSession",
+      "docs": [
+        "Game Session - allows temporary keypair to act on behalf of player",
+        "This enables auto-signing transactions without wallet approval popups"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "session_key",
+            "type": "pubkey"
+          },
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "expires_at",
+            "type": "i64"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Inventory",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "items",
+            "type": {
+              "vec": "pubkey"
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ItemSlot",
+      "docs": [
+        "Equipment slots where items can be equipped"
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Weapon"
+          },
+          {
+            "name": "Helmet"
+          },
+          {
+            "name": "Chest"
+          },
+          {
+            "name": "Boots"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LootConfig",
+      "docs": [
+        "Loot roll configuration - admin configurable"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot_weights",
+            "type": "bytes"
+          },
+          {
+            "name": "item_type_weights",
+            "type": "bytes"
+          },
+          {
+            "name": "rarity_weights",
+            "type": "bytes"
+          },
+          {
+            "name": "mod_type_weights",
+            "type": "bytes"
+          },
+          {
+            "name": "mod_count_by_rarity",
+            "type": "bytes"
+          },
+          {
+            "name": "default_drop_chance",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LootRollRequest",
+      "docs": [
+        "Loot roll request parameters"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "character_level",
+            "type": "u8"
+          },
+          {
+            "name": "enemy_level",
+            "type": "u8"
+          },
+          {
+            "name": "num_rolls",
+            "type": "u8"
+          },
+          {
+            "name": "drop_chance",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Player",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "player_id",
+            "type": "u8"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "player_class",
+            "type": {
+              "defined": {
+                "name": "PlayerClass"
+              }
+            }
+          },
+          {
+            "name": "level",
+            "type": "u8"
+          },
+          {
+            "name": "health",
+            "type": "i16"
+          },
+          {
+            "name": "max_health",
+            "type": "i16"
+          },
+          {
+            "name": "base_attack",
+            "type": "i16"
+          },
+          {
+            "name": "base_defense",
+            "type": "i16"
+          },
+          {
+            "name": "total_attack",
+            "type": "i16"
+          },
+          {
+            "name": "total_defense",
+            "type": "i16"
+          },
+          {
+            "name": "equipment_attack_bonus",
+            "type": "i16"
+          },
+          {
+            "name": "equipment_defense_bonus",
+            "type": "i16"
+          },
+          {
+            "name": "equipment_health_bonus",
+            "type": "i16"
+          },
+          {
+            "name": "experience",
+            "type": "u64"
+          },
+          {
+            "name": "wins",
+            "type": "u32"
+          },
+          {
+            "name": "losses",
+            "type": "u32"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "weapon",
+            "type": "pubkey"
+          },
+          {
+            "name": "weapon_equipped",
+            "type": "bool"
+          },
+          {
+            "name": "helmet",
+            "type": "pubkey"
+          },
+          {
+            "name": "helmet_equipped",
+            "type": "bool"
+          },
+          {
+            "name": "chest",
+            "type": "pubkey"
+          },
+          {
+            "name": "chest_equipped",
+            "type": "bool"
+          },
+          {
+            "name": "boots",
+            "type": "pubkey"
+          },
+          {
+            "name": "boots_equipped",
+            "type": "bool"
+          },
+          {
+            "name": "action_slots",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "Action"
+                  }
+                },
+                5
+              ]
+            }
+          },
+          {
+            "name": "current_action_slot",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PlayerClass",
+      "docs": [
+        "Player character classes - determines abilities and stat growth"
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Warrior"
+          },
+          {
+            "name": "Mage"
+          },
+          {
+            "name": "Rogue"
+          },
+          {
+            "name": "Cleric"
+          },
+          {
+            "name": "Ranger"
+          },
+          {
+            "name": "Paladin"
+          },
+          {
+            "name": "Necromancer"
+          },
+          {
+            "name": "Berserker"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PlayerInventory",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "weapon",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "helmet",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "chest",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "boots",
+            "type": {
+              "option": "pubkey"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "PlayerStats",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "level",
+            "type": "u8"
+          },
+          {
+            "name": "player_class",
+            "type": {
+              "defined": {
+                "name": "PlayerClass"
+              }
+            }
+          },
+          {
+            "name": "health",
+            "type": "i16"
+          },
+          {
+            "name": "max_health",
+            "type": "i16"
+          },
+          {
+            "name": "base_attack",
+            "type": "i16"
+          },
+          {
+            "name": "base_defense",
+            "type": "i16"
+          },
+          {
+            "name": "total_attack",
+            "type": "i16"
+          },
+          {
+            "name": "total_defense",
+            "type": "i16"
+          },
+          {
+            "name": "equipment_attack_bonus",
+            "type": "i16"
+          },
+          {
+            "name": "equipment_defense_bonus",
+            "type": "i16"
+          },
+          {
+            "name": "experience",
+            "type": "u64"
+          },
+          {
+            "name": "wins",
+            "type": "u32"
+          },
+          {
+            "name": "losses",
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SessionEscrow",
+      "docs": [
+        "Session Escrow - holds SOL that can be used to fund session keypairs",
+        "This is a PDA controlled by the authority, so funds are always recoverable",
+        "even if localStorage is lost (unlike the session keypair itself)"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "balance",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ]
+}

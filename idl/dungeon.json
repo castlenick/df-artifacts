@@ -1,0 +1,3310 @@
+{
+  "address": "6MVNvrSeVXJskBQM97z9e5v3u9c16MVBJKVbvTSJLi8f",
+  "metadata": {
+    "name": "dungeon",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Dungeon system for DungeonFighters - roguelike room progression"
+  },
+  "instructions": [
+    {
+      "name": "abandon_dungeon",
+      "docs": [
+        "Abandon the dungeon (forfeit without rewards)"
+      ],
+      "discriminator": [
+        234,
+        25,
+        202,
+        157,
+        58,
+        65,
+        194,
+        5
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "battle_generated_room",
+      "docs": [
+        "Battle a generated enemy in the current room"
+      ],
+      "discriminator": [
+        165,
+        5,
+        125,
+        127,
+        201,
+        129,
+        2,
+        167
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "room_log",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "loot_config"
+        },
+        {
+          "name": "loot_rolls_program",
+          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+        },
+        {
+          "name": "player_program",
+          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "battle_generated_room_with_session",
+      "docs": [
+        "Battle generated room using session key"
+      ],
+      "discriminator": [
+        146,
+        153,
+        186,
+        43,
+        147,
+        92,
+        218,
+        248
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority"
+        },
+        {
+          "name": "session"
+        },
+        {
+          "name": "escrow",
+          "docs": [
+            "Session escrow for automatic top-up"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                122,
+                205,
+                249,
+                21,
+                24,
+                196,
+                198,
+                190,
+                192,
+                31,
+                161,
+                242,
+                17,
+                34,
+                134,
+                49,
+                124,
+                243,
+                129,
+                45,
+                255,
+                132,
+                10,
+                135,
+                229,
+                18,
+                174,
+                94,
+                104,
+                215,
+                204,
+                133
+              ]
+            }
+          }
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "room_log",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "loot_config"
+        },
+        {
+          "name": "loot_rolls_program",
+          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+        },
+        {
+          "name": "player_program",
+          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "battle_room",
+      "docs": [
+        "Battle the enemy in the current room (for template-based dungeons)"
+      ],
+      "discriminator": [
+        45,
+        82,
+        227,
+        197,
+        47,
+        122,
+        94,
+        77
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "enemy"
+        },
+        {
+          "name": "room_log",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "loot_config"
+        },
+        {
+          "name": "loot_rolls_program",
+          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+        },
+        {
+          "name": "player_program",
+          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "claim_dungeon_loot",
+      "docs": [
+        "Claim a single item from dungeon loot (call multiple times for multiple items)"
+      ],
+      "discriminator": [
+        84,
+        146,
+        67,
+        39,
+        139,
+        143,
+        205,
+        66
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "inventory",
+          "docs": [
+            "Player's inventory (will be reallocated by CPI)"
+          ],
+          "writable": true
+        },
+        {
+          "name": "item_account",
+          "writable": true
+        },
+        {
+          "name": "loot_config"
+        },
+        {
+          "name": "player_program",
+          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+        },
+        {
+          "name": "loot_rolls_program",
+          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "item_id",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "claim_dungeon_loot_with_session",
+      "docs": [
+        "Claim dungeon loot using session key (no wallet approval needed)"
+      ],
+      "discriminator": [
+        82,
+        100,
+        168,
+        8,
+        144,
+        41,
+        182,
+        56
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority"
+        },
+        {
+          "name": "session"
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "inventory",
+          "docs": [
+            "Player's inventory (will be reallocated by CPI)"
+          ],
+          "writable": true
+        },
+        {
+          "name": "item_account",
+          "writable": true
+        },
+        {
+          "name": "loot_config"
+        },
+        {
+          "name": "player_program",
+          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+        },
+        {
+          "name": "loot_rolls_program",
+          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "item_id",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "close_dungeon_run",
+      "docs": [
+        "Close a finished dungeon run"
+      ],
+      "discriminator": [
+        119,
+        215,
+        198,
+        92,
+        45,
+        140,
+        47,
+        101
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_dungeon_run_with_session",
+      "docs": [
+        "Close dungeon run using session key"
+      ],
+      "discriminator": [
+        125,
+        121,
+        111,
+        120,
+        29,
+        121,
+        255,
+        82
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "signer": true
+        },
+        {
+          "name": "authority"
+        },
+        {
+          "name": "session"
+        },
+        {
+          "name": "escrow",
+          "docs": [
+            "Session escrow receives rent from closed accounts"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                122,
+                205,
+                249,
+                21,
+                24,
+                196,
+                198,
+                190,
+                192,
+                31,
+                161,
+                242,
+                17,
+                34,
+                134,
+                49,
+                124,
+                243,
+                129,
+                45,
+                255,
+                132,
+                10,
+                135,
+                229,
+                18,
+                174,
+                94,
+                104,
+                215,
+                204,
+                133
+              ]
+            }
+          }
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_player_dungeon",
+      "docs": [
+        "Close a player dungeon (returns rent)"
+      ],
+      "discriminator": [
+        126,
+        12,
+        249,
+        190,
+        108,
+        90,
+        247,
+        50
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player_dungeon",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_player_dungeon_with_session",
+      "docs": [
+        "Close a player dungeon using session key (rent goes to escrow)"
+      ],
+      "discriminator": [
+        227,
+        27,
+        177,
+        55,
+        4,
+        146,
+        201,
+        22
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "signer": true
+        },
+        {
+          "name": "authority"
+        },
+        {
+          "name": "session"
+        },
+        {
+          "name": "escrow",
+          "docs": [
+            "Session escrow receives rent from closed account"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                122,
+                205,
+                249,
+                21,
+                24,
+                196,
+                198,
+                190,
+                192,
+                31,
+                161,
+                242,
+                17,
+                34,
+                134,
+                49,
+                124,
+                243,
+                129,
+                45,
+                255,
+                132,
+                10,
+                135,
+                229,
+                18,
+                174,
+                94,
+                104,
+                215,
+                204,
+                133
+              ]
+            }
+          }
+        },
+        {
+          "name": "player_dungeon",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_room_battle_log",
+      "docs": [
+        "Close a room battle log (returns rent to owner)"
+      ],
+      "discriminator": [
+        161,
+        127,
+        24,
+        42,
+        4,
+        217,
+        184,
+        217
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "docs": [
+            "The dungeon run this log belongs to (verifies ownership chain)"
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "room_log",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_room_battle_log_with_session",
+      "docs": [
+        "Close room battle log using session key"
+      ],
+      "discriminator": [
+        71,
+        48,
+        43,
+        217,
+        151,
+        164,
+        246,
+        83
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "signer": true
+        },
+        {
+          "name": "authority"
+        },
+        {
+          "name": "session"
+        },
+        {
+          "name": "escrow",
+          "docs": [
+            "Session escrow receives rent from closed accounts"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                122,
+                205,
+                249,
+                21,
+                24,
+                196,
+                198,
+                190,
+                192,
+                31,
+                161,
+                242,
+                17,
+                34,
+                134,
+                49,
+                124,
+                243,
+                129,
+                45,
+                255,
+                132,
+                10,
+                135,
+                229,
+                18,
+                174,
+                94,
+                104,
+                215,
+                204,
+                133
+              ]
+            }
+          }
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "room_log",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "continue_to_next_room",
+      "docs": [
+        "Continue to the next room in the dungeon (closes previous room's battle log)"
+      ],
+      "discriminator": [
+        128,
+        12,
+        125,
+        120,
+        56,
+        181,
+        76,
+        107
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "previous_room_log",
+          "docs": [
+            "The previous room's battle log - closed to recover rent"
+          ],
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "continue_to_next_room_with_session",
+      "docs": [
+        "Continue to next room using session key"
+      ],
+      "discriminator": [
+        86,
+        90,
+        189,
+        210,
+        7,
+        44,
+        33,
+        32
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "signer": true
+        },
+        {
+          "name": "authority",
+          "writable": true
+        },
+        {
+          "name": "session"
+        },
+        {
+          "name": "escrow",
+          "docs": [
+            "Session escrow receives rent from closed accounts"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                122,
+                205,
+                249,
+                21,
+                24,
+                196,
+                198,
+                190,
+                192,
+                31,
+                161,
+                242,
+                17,
+                34,
+                134,
+                49,
+                124,
+                243,
+                129,
+                45,
+                255,
+                132,
+                10,
+                135,
+                229,
+                18,
+                174,
+                94,
+                104,
+                215,
+                204,
+                133
+              ]
+            }
+          }
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "previous_room_log",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "create_dungeon_template",
+      "docs": [
+        "Create a new dungeon template (admin only - can add access control later)",
+        "Templates are public and can be instantiated by any player"
+      ],
+      "discriminator": [
+        115,
+        155,
+        200,
+        123,
+        86,
+        170,
+        192,
+        225
+      ],
+      "accounts": [
+        {
+          "name": "creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "template",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  116,
+                  101,
+                  109,
+                  112,
+                  108,
+                  97,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "creator"
+              },
+              {
+                "kind": "arg",
+                "path": "name"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "room_count",
+          "type": "u8"
+        },
+        {
+          "name": "base_difficulty",
+          "type": "u8"
+        },
+        {
+          "name": "loot_multiplier",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "exit_dungeon",
+      "docs": [
+        "Exit the dungeon early (after completing a room)"
+      ],
+      "discriminator": [
+        156,
+        110,
+        147,
+        65,
+        204,
+        159,
+        243,
+        40
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "loot_config"
+        },
+        {
+          "name": "loot_rolls_program",
+          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+        },
+        {
+          "name": "player_program",
+          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "generate_player_dungeon",
+      "docs": [
+        "Generate a private dungeon with random enemies",
+        "Only the creating player can run this dungeon",
+        "Scales enemies based on player_level for appropriate difficulty",
+        "environment: 0-9 for specific, 255 for random"
+      ],
+      "discriminator": [
+        231,
+        162,
+        159,
+        94,
+        253,
+        249,
+        184,
+        142
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player_dungeon",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "arg",
+                "path": "name"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "room_count",
+          "type": "u8"
+        },
+        {
+          "name": "difficulty",
+          "type": "u8"
+        },
+        {
+          "name": "player_level",
+          "type": "u8"
+        },
+        {
+          "name": "environment",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "generate_player_dungeon_with_session",
+      "docs": [
+        "Generate a player dungeon using session key (no wallet approval needed)"
+      ],
+      "discriminator": [
+        171,
+        17,
+        236,
+        78,
+        24,
+        53,
+        206,
+        194
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "docs": [
+            "The session keypair signs and pays for the transaction"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority",
+          "docs": [
+            "The original wallet that owns the session (for ownership verification)"
+          ]
+        },
+        {
+          "name": "session",
+          "docs": [
+            "Valid session linking session_key to authority"
+          ]
+        },
+        {
+          "name": "escrow",
+          "docs": [
+            "Session escrow for automatic top-up"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                122,
+                205,
+                249,
+                21,
+                24,
+                196,
+                198,
+                190,
+                192,
+                31,
+                161,
+                242,
+                17,
+                34,
+                134,
+                49,
+                124,
+                243,
+                129,
+                45,
+                255,
+                132,
+                10,
+                135,
+                229,
+                18,
+                174,
+                94,
+                104,
+                215,
+                204,
+                133
+              ]
+            }
+          }
+        },
+        {
+          "name": "player_dungeon",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "arg",
+                "path": "name"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player_program",
+          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "room_count",
+          "type": "u8"
+        },
+        {
+          "name": "difficulty",
+          "type": "u8"
+        },
+        {
+          "name": "player_level",
+          "type": "u8"
+        },
+        {
+          "name": "environment",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "instantiate_dungeon",
+      "docs": [
+        "Create a player dungeon instance from a template",
+        "The instance is private to the player who creates it"
+      ],
+      "discriminator": [
+        143,
+        60,
+        191,
+        5,
+        174,
+        162,
+        19,
+        27
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "template"
+        },
+        {
+          "name": "player_dungeon",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "template"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "set_template_enemy",
+      "docs": [
+        "Set the enemy for a specific room in a template"
+      ],
+      "discriminator": [
+        204,
+        31,
+        58,
+        224,
+        253,
+        41,
+        32,
+        47
+      ],
+      "accounts": [
+        {
+          "name": "creator",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "template"
+          ]
+        },
+        {
+          "name": "template",
+          "writable": true
+        },
+        {
+          "name": "enemy"
+        }
+      ],
+      "args": [
+        {
+          "name": "room_index",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "start_dungeon_run",
+      "docs": [
+        "Start a new dungeon run (only owner of the player dungeon can run it)"
+      ],
+      "discriminator": [
+        232,
+        146,
+        188,
+        171,
+        71,
+        147,
+        113,
+        150
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "start_dungeon_run_with_session",
+      "docs": [
+        "Start a dungeon run using session key"
+      ],
+      "discriminator": [
+        191,
+        115,
+        35,
+        202,
+        46,
+        134,
+        215,
+        199
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority"
+        },
+        {
+          "name": "session"
+        },
+        {
+          "name": "escrow",
+          "docs": [
+            "Session escrow for automatic top-up"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                122,
+                205,
+                249,
+                21,
+                24,
+                196,
+                198,
+                190,
+                192,
+                31,
+                161,
+                242,
+                17,
+                34,
+                134,
+                49,
+                124,
+                243,
+                129,
+                45,
+                255,
+                132,
+                10,
+                135,
+                229,
+                18,
+                174,
+                94,
+                104,
+                215,
+                204,
+                133
+              ]
+            }
+          }
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player_program",
+          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "DungeonRun",
+      "discriminator": [
+        105,
+        118,
+        160,
+        69,
+        75,
+        241,
+        13,
+        36
+      ]
+    },
+    {
+      "name": "DungeonTemplate",
+      "discriminator": [
+        109,
+        226,
+        156,
+        160,
+        4,
+        150,
+        246,
+        9
+      ]
+    },
+    {
+      "name": "Enemy",
+      "discriminator": [
+        167,
+        82,
+        35,
+        144,
+        124,
+        190,
+        3,
+        96
+      ]
+    },
+    {
+      "name": "GameSession",
+      "discriminator": [
+        150,
+        116,
+        20,
+        197,
+        205,
+        121,
+        220,
+        240
+      ]
+    },
+    {
+      "name": "Inventory",
+      "discriminator": [
+        97,
+        218,
+        167,
+        233,
+        216,
+        170,
+        49,
+        27
+      ]
+    },
+    {
+      "name": "Player",
+      "discriminator": [
+        205,
+        222,
+        112,
+        7,
+        165,
+        155,
+        206,
+        218
+      ]
+    },
+    {
+      "name": "PlayerDungeon",
+      "discriminator": [
+        77,
+        84,
+        73,
+        56,
+        189,
+        130,
+        193,
+        111
+      ]
+    },
+    {
+      "name": "RoomBattleLog",
+      "discriminator": [
+        225,
+        211,
+        67,
+        251,
+        68,
+        163,
+        237,
+        225
+      ]
+    },
+    {
+      "name": "SessionEscrow",
+      "discriminator": [
+        251,
+        205,
+        39,
+        211,
+        38,
+        92,
+        234,
+        241
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "NameTooLong",
+      "msg": "Name must be 32 characters or less"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidRoomCount",
+      "msg": "Room count must be between 1 and 10"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidDifficulty",
+      "msg": "Difficulty must be between 1 and 100"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidRoomIndex",
+      "msg": "Invalid room index"
+    },
+    {
+      "code": 6004,
+      "name": "InvalidPlayer",
+      "msg": "Player not found or invalid"
+    },
+    {
+      "code": 6005,
+      "name": "PlayerDead",
+      "msg": "Player is dead - heal before entering dungeon"
+    },
+    {
+      "code": 6006,
+      "name": "DungeonNotInProgress",
+      "msg": "Dungeon run is not in progress"
+    },
+    {
+      "code": 6007,
+      "name": "WrongEnemy",
+      "msg": "Wrong enemy for this room"
+    },
+    {
+      "code": 6008,
+      "name": "WrongDungeon",
+      "msg": "Wrong dungeon for this run"
+    },
+    {
+      "code": 6009,
+      "name": "NoMoreRooms",
+      "msg": "No more rooms in this dungeon"
+    },
+    {
+      "code": 6010,
+      "name": "RoomNotCompleted",
+      "msg": "Must complete current room before continuing"
+    },
+    {
+      "code": 6011,
+      "name": "DungeonStillInProgress",
+      "msg": "Dungeon run is still in progress - complete or abandon it first"
+    },
+    {
+      "code": 6012,
+      "name": "NotGeneratedDungeon",
+      "msg": "This is not a generated dungeon - use battle_room instead"
+    },
+    {
+      "code": 6013,
+      "name": "UseGeneratedBattle",
+      "msg": "This is a generated dungeon - use battle_generated_room instead"
+    },
+    {
+      "code": 6014,
+      "name": "NotDungeonOwner",
+      "msg": "You are not the owner of this dungeon"
+    },
+    {
+      "code": 6015,
+      "name": "InvalidPlayerLevel",
+      "msg": "Player level must be at least 1"
+    },
+    {
+      "code": 6016,
+      "name": "DungeonNotComplete",
+      "msg": "Dungeon must be completed or exited to claim loot"
+    },
+    {
+      "code": 6017,
+      "name": "NoLootAvailable",
+      "msg": "No loot available to claim"
+    },
+    {
+      "code": 6018,
+      "name": "LootAlreadyClaimed",
+      "msg": "Loot has already been claimed"
+    },
+    {
+      "code": 6019,
+      "name": "TemplateNotReady",
+      "msg": "Template is not fully configured - all rooms need enemies"
+    },
+    {
+      "code": 6020,
+      "name": "SessionExpired",
+      "msg": "Session has expired"
+    },
+    {
+      "code": 6021,
+      "name": "InvalidSession",
+      "msg": "Invalid session - session key or authority mismatch"
+    },
+    {
+      "code": 6022,
+      "name": "InsufficientEscrowBalance",
+      "msg": "Insufficient escrow balance - deposit more SOL"
+    }
+  ],
+  "types": [
+    {
+      "name": "Action",
+      "docs": [
+        "An action that can be used in combat"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "effect",
+            "type": {
+              "defined": {
+                "name": "ActionEffect"
+              }
+            }
+          },
+          {
+            "name": "source",
+            "type": {
+              "defined": {
+                "name": "ActionSource"
+              }
+            }
+          },
+          {
+            "name": "success_threshold",
+            "type": "u8"
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ActionEffect",
+      "docs": [
+        "Effects that can occur during combat from player actions"
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "None"
+          },
+          {
+            "name": "DamageMultiplier",
+            "fields": [
+              {
+                "name": "multiplier",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "FlatDamageBonus",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              }
+            ]
+          },
+          {
+            "name": "ReduceEnemyAttack",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              },
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "ReduceEnemyDefense",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              },
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "BoostSelfAttack",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              },
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "BoostSelfDefense",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              },
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "Heal",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              }
+            ]
+          },
+          {
+            "name": "LifeSteal",
+            "fields": [
+              {
+                "name": "percent",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "CriticalBoost",
+            "fields": [
+              {
+                "name": "chance",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "DamageOverTime",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              },
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "Stun",
+            "fields": [
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "Execute",
+            "fields": [
+              {
+                "name": "threshold_percent",
+                "type": "u8"
+              },
+              {
+                "name": "bonus_multiplier",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "Shield",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              },
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "ActionSource",
+      "docs": [
+        "Where an action comes from (innate class ability or equipment)"
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "ClassInnate"
+          },
+          {
+            "name": "Weapon"
+          },
+          {
+            "name": "Helmet"
+          },
+          {
+            "name": "Chest"
+          },
+          {
+            "name": "Boots"
+          },
+          {
+            "name": "Consumable"
+          },
+          {
+            "name": "Skill"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BattleEvent",
+      "docs": [
+        "A single event that occurred during battle"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "turn",
+            "type": "u8"
+          },
+          {
+            "name": "event_type",
+            "type": {
+              "defined": {
+                "name": "EventType"
+              }
+            }
+          },
+          {
+            "name": "damage",
+            "type": "u8"
+          },
+          {
+            "name": "action_slot",
+            "type": "u8"
+          },
+          {
+            "name": "action_name",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "DungeonRun",
+      "docs": [
+        "Active dungeon run"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "player_dungeon",
+            "type": "pubkey"
+          },
+          {
+            "name": "current_room",
+            "type": "u8"
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "DungeonRunStatus"
+              }
+            }
+          },
+          {
+            "name": "rooms_completed",
+            "type": "u8"
+          },
+          {
+            "name": "total_experience",
+            "type": "u16"
+          },
+          {
+            "name": "health_at_room_start",
+            "type": "i16"
+          },
+          {
+            "name": "started_at",
+            "type": "i64"
+          },
+          {
+            "name": "loot_rolls",
+            "type": "u8"
+          },
+          {
+            "name": "loot_drop_chance",
+            "type": "u8"
+          },
+          {
+            "name": "loot_claimed",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DungeonRunStatus",
+      "docs": [
+        "Status of a dungeon run"
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "InProgress"
+          },
+          {
+            "name": "Completed"
+          },
+          {
+            "name": "Failed"
+          },
+          {
+            "name": "Exited"
+          },
+          {
+            "name": "Abandoned"
+          }
+        ]
+      }
+    },
+    {
+      "name": "DungeonTemplate",
+      "docs": [
+        "Dungeon Template - Admin-created, public, can be instantiated by players"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "room_count",
+            "type": "u8"
+          },
+          {
+            "name": "base_difficulty",
+            "type": "u8"
+          },
+          {
+            "name": "loot_multiplier",
+            "type": "u8"
+          },
+          {
+            "name": "room_enemies",
+            "type": {
+              "array": [
+                "pubkey",
+                10
+              ]
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Enemy",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "enemy_type",
+            "type": {
+              "defined": {
+                "name": "EnemyType"
+              }
+            }
+          },
+          {
+            "name": "level",
+            "type": "u8"
+          },
+          {
+            "name": "health",
+            "type": "i16"
+          },
+          {
+            "name": "attack",
+            "type": "i16"
+          },
+          {
+            "name": "defense",
+            "type": "i16"
+          },
+          {
+            "name": "experience_reward",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "EnemyType",
+      "docs": [
+        "All possible enemy types in the game",
+        "New enemy types should be added here and configured via EnemyTypeConfig"
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Goblin"
+          },
+          {
+            "name": "Skeleton"
+          },
+          {
+            "name": "Zombie"
+          },
+          {
+            "name": "Wolf"
+          },
+          {
+            "name": "Spider"
+          },
+          {
+            "name": "Orc"
+          },
+          {
+            "name": "Troll"
+          },
+          {
+            "name": "Ogre"
+          },
+          {
+            "name": "Werewolf"
+          },
+          {
+            "name": "Dragon"
+          },
+          {
+            "name": "DarkKnight"
+          },
+          {
+            "name": "Lich"
+          },
+          {
+            "name": "Demon"
+          },
+          {
+            "name": "DragonLord"
+          },
+          {
+            "name": "UndeadKing"
+          },
+          {
+            "name": "Custom"
+          }
+        ]
+      }
+    },
+    {
+      "name": "EventType",
+      "docs": [
+        "Types of events that can occur during battle"
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "PlayerAttack"
+          },
+          {
+            "name": "PlayerCrit"
+          },
+          {
+            "name": "PlayerMiss"
+          },
+          {
+            "name": "PlayerHeal"
+          },
+          {
+            "name": "PlayerBuff"
+          },
+          {
+            "name": "EnemyAttack"
+          },
+          {
+            "name": "EnemyCrit"
+          },
+          {
+            "name": "EnemyMiss"
+          },
+          {
+            "name": "EnemyDebuff"
+          },
+          {
+            "name": "BattleStart"
+          },
+          {
+            "name": "BattleEnd"
+          },
+          {
+            "name": "TurnStart"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GameSession",
+      "docs": [
+        "Game Session - allows temporary keypair to act on behalf of player",
+        "This enables auto-signing transactions without wallet approval popups"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "session_key",
+            "type": "pubkey"
+          },
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "expires_at",
+            "type": "i64"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GeneratedEnemy",
+      "docs": [
+        "Generated enemy stats (used in procedural dungeons)"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "enemy_type",
+            "type": {
+              "defined": {
+                "name": "EnemyType"
+              }
+            }
+          },
+          {
+            "name": "level",
+            "type": "u8"
+          },
+          {
+            "name": "health",
+            "type": "i16"
+          },
+          {
+            "name": "attack",
+            "type": "i16"
+          },
+          {
+            "name": "defense",
+            "type": "i16"
+          },
+          {
+            "name": "experience_reward",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Inventory",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "items",
+            "type": {
+              "vec": "pubkey"
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Player",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "player_id",
+            "type": "u8"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "player_class",
+            "type": {
+              "defined": {
+                "name": "PlayerClass"
+              }
+            }
+          },
+          {
+            "name": "level",
+            "type": "u8"
+          },
+          {
+            "name": "health",
+            "type": "i16"
+          },
+          {
+            "name": "max_health",
+            "type": "i16"
+          },
+          {
+            "name": "base_attack",
+            "type": "i16"
+          },
+          {
+            "name": "base_defense",
+            "type": "i16"
+          },
+          {
+            "name": "total_attack",
+            "type": "i16"
+          },
+          {
+            "name": "total_defense",
+            "type": "i16"
+          },
+          {
+            "name": "equipment_attack_bonus",
+            "type": "i16"
+          },
+          {
+            "name": "equipment_defense_bonus",
+            "type": "i16"
+          },
+          {
+            "name": "equipment_health_bonus",
+            "type": "i16"
+          },
+          {
+            "name": "experience",
+            "type": "u64"
+          },
+          {
+            "name": "wins",
+            "type": "u32"
+          },
+          {
+            "name": "losses",
+            "type": "u32"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "weapon",
+            "type": "pubkey"
+          },
+          {
+            "name": "weapon_equipped",
+            "type": "bool"
+          },
+          {
+            "name": "helmet",
+            "type": "pubkey"
+          },
+          {
+            "name": "helmet_equipped",
+            "type": "bool"
+          },
+          {
+            "name": "chest",
+            "type": "pubkey"
+          },
+          {
+            "name": "chest_equipped",
+            "type": "bool"
+          },
+          {
+            "name": "boots",
+            "type": "pubkey"
+          },
+          {
+            "name": "boots_equipped",
+            "type": "bool"
+          },
+          {
+            "name": "action_slots",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "Action"
+                  }
+                },
+                5
+              ]
+            }
+          },
+          {
+            "name": "current_action_slot",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PlayerClass",
+      "docs": [
+        "Player character classes - determines abilities and stat growth"
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Warrior"
+          },
+          {
+            "name": "Mage"
+          },
+          {
+            "name": "Rogue"
+          },
+          {
+            "name": "Cleric"
+          },
+          {
+            "name": "Ranger"
+          },
+          {
+            "name": "Paladin"
+          },
+          {
+            "name": "Necromancer"
+          },
+          {
+            "name": "Berserker"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PlayerDungeon",
+      "docs": [
+        "Player Dungeon - Private instance owned by a player"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "template",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "room_count",
+            "type": "u8"
+          },
+          {
+            "name": "base_difficulty",
+            "type": "u8"
+          },
+          {
+            "name": "loot_multiplier",
+            "type": "u8"
+          },
+          {
+            "name": "is_generated",
+            "type": "bool"
+          },
+          {
+            "name": "environment",
+            "type": "u8"
+          },
+          {
+            "name": "room_enemies",
+            "type": {
+              "array": [
+                "pubkey",
+                10
+              ]
+            }
+          },
+          {
+            "name": "generated_enemies",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "GeneratedEnemy"
+                  }
+                },
+                10
+              ]
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RoomBattleLog",
+      "docs": [
+        "Battle log for a single room"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "dungeon_run",
+            "type": "pubkey"
+          },
+          {
+            "name": "room_number",
+            "type": "u8"
+          },
+          {
+            "name": "enemy",
+            "type": "pubkey"
+          },
+          {
+            "name": "enemy_type",
+            "type": {
+              "defined": {
+                "name": "EnemyType"
+              }
+            }
+          },
+          {
+            "name": "player_won",
+            "type": "bool"
+          },
+          {
+            "name": "experience_gained",
+            "type": "u8"
+          },
+          {
+            "name": "total_turns",
+            "type": "u8"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "events",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "BattleEvent"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "SessionEscrow",
+      "docs": [
+        "Session Escrow - holds SOL that can be used to fund session keypairs",
+        "This is a PDA controlled by the authority, so funds are always recoverable",
+        "even if localStorage is lost (unlike the session keypair itself)"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "balance",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ]
+}

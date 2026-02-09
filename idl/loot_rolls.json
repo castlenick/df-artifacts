@@ -1,0 +1,960 @@
+{
+  "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu",
+  "metadata": {
+    "name": "loot_rolls",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "create_item",
+      "discriminator": [
+        176,
+        125,
+        142,
+        227,
+        8,
+        231,
+        222,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "item_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "arg",
+                "path": "item_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  111,
+                  111,
+                  116,
+                  45,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "item_id",
+          "type": "u64"
+        },
+        {
+          "name": "request",
+          "type": {
+            "defined": {
+              "name": "LootRollRequest"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_item_with_payer",
+      "docs": [
+        "Create an item with a separate payer (for session-aware CPI calls)",
+        "Owner is used for seed derivation and ownership, payer pays for account"
+      ],
+      "discriminator": [
+        16,
+        20,
+        213,
+        211,
+        232,
+        124,
+        197,
+        109
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "docs": [
+            "The payer for account creation (e.g., session signer)"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "owner"
+        },
+        {
+          "name": "item_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "arg",
+                "path": "item_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  111,
+                  111,
+                  116,
+                  45,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "item_id",
+          "type": "u64"
+        },
+        {
+          "name": "request",
+          "type": {
+            "defined": {
+              "name": "LootRollRequest"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  111,
+                  111,
+                  116,
+                  45,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "slot_weights",
+          "type": "bytes"
+        },
+        {
+          "name": "item_type_weights",
+          "type": "bytes"
+        },
+        {
+          "name": "rarity_weights",
+          "type": "bytes"
+        },
+        {
+          "name": "mod_type_weights",
+          "type": "bytes"
+        },
+        {
+          "name": "mod_count_by_rarity",
+          "type": "bytes"
+        },
+        {
+          "name": "default_drop_chance",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "roll_loot",
+      "discriminator": [
+        23,
+        139,
+        139,
+        98,
+        93,
+        77,
+        145,
+        195
+      ],
+      "accounts": [
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  111,
+                  111,
+                  116,
+                  45,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "request",
+          "type": {
+            "defined": {
+              "name": "LootRollRequest"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "transfer_item_ownership",
+      "docs": [
+        "Transfer ownership of an item (called via CPI from player program)"
+      ],
+      "discriminator": [
+        32,
+        37,
+        167,
+        183,
+        40,
+        63,
+        118,
+        48
+      ],
+      "accounts": [
+        {
+          "name": "current_owner",
+          "docs": [
+            "Current owner of the item"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "item_account",
+          "docs": [
+            "Item account to transfer ownership of"
+          ],
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "new_owner",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "update_config",
+      "discriminator": [
+        29,
+        158,
+        252,
+        191,
+        10,
+        83,
+        219,
+        99
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  111,
+                  111,
+                  116,
+                  45,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "slot_weights",
+          "type": {
+            "option": "bytes"
+          }
+        },
+        {
+          "name": "item_type_weights",
+          "type": {
+            "option": "bytes"
+          }
+        },
+        {
+          "name": "rarity_weights",
+          "type": {
+            "option": "bytes"
+          }
+        },
+        {
+          "name": "mod_type_weights",
+          "type": {
+            "option": "bytes"
+          }
+        },
+        {
+          "name": "mod_count_by_rarity",
+          "type": {
+            "option": "bytes"
+          }
+        },
+        {
+          "name": "default_drop_chance",
+          "type": {
+            "option": "u8"
+          }
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "ItemAccount",
+      "discriminator": [
+        203,
+        112,
+        16,
+        182,
+        215,
+        183,
+        63,
+        175
+      ]
+    },
+    {
+      "name": "LootConfig",
+      "discriminator": [
+        117,
+        243,
+        220,
+        194,
+        39,
+        114,
+        57,
+        248
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidRoll",
+      "msg": "Invalid roll"
+    }
+  ],
+  "types": [
+    {
+      "name": "BaseStats",
+      "docs": [
+        "Base stats for items"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "damage",
+            "type": "u8"
+          },
+          {
+            "name": "defense",
+            "type": "u8"
+          },
+          {
+            "name": "attack_speed",
+            "type": "u8"
+          },
+          {
+            "name": "special",
+            "type": {
+              "defined": {
+                "name": "SpecialAbility"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "Item",
+      "docs": [
+        "Complete item definition"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "slot",
+            "type": {
+              "defined": {
+                "name": "ItemSlot"
+              }
+            }
+          },
+          {
+            "name": "item_type",
+            "type": {
+              "defined": {
+                "name": "ItemType"
+              }
+            }
+          },
+          {
+            "name": "rarity",
+            "type": {
+              "defined": {
+                "name": "Rarity"
+              }
+            }
+          },
+          {
+            "name": "base_stats",
+            "type": {
+              "defined": {
+                "name": "BaseStats"
+              }
+            }
+          },
+          {
+            "name": "modifiers",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "Modifier"
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ItemAccount",
+      "docs": [
+        "Equippable item account - stored on-chain"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "item",
+            "type": {
+              "defined": {
+                "name": "Item"
+              }
+            }
+          },
+          {
+            "name": "item_id",
+            "type": "u64"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ItemSlot",
+      "docs": [
+        "Equipment slots where items can be equipped"
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Weapon"
+          },
+          {
+            "name": "Helmet"
+          },
+          {
+            "name": "Chest"
+          },
+          {
+            "name": "Boots"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ItemType",
+      "docs": [
+        "All item types in the game"
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "ShortSword"
+          },
+          {
+            "name": "BroadSword"
+          },
+          {
+            "name": "LongSword"
+          },
+          {
+            "name": "CrystalSword"
+          },
+          {
+            "name": "Mace"
+          },
+          {
+            "name": "WarHammer"
+          },
+          {
+            "name": "BattleAxe"
+          },
+          {
+            "name": "Dagger"
+          },
+          {
+            "name": "ThrowingKnife"
+          },
+          {
+            "name": "Staff"
+          },
+          {
+            "name": "Wand"
+          },
+          {
+            "name": "Bow"
+          },
+          {
+            "name": "Crossbow"
+          },
+          {
+            "name": "LeatherCap"
+          },
+          {
+            "name": "IronHelmet"
+          },
+          {
+            "name": "SteelHelmet"
+          },
+          {
+            "name": "MagicHood"
+          },
+          {
+            "name": "Crown"
+          },
+          {
+            "name": "LeatherArmor"
+          },
+          {
+            "name": "ChainMail"
+          },
+          {
+            "name": "PlateArmor"
+          },
+          {
+            "name": "Robes"
+          },
+          {
+            "name": "BattleVest"
+          },
+          {
+            "name": "LeatherBoots"
+          },
+          {
+            "name": "IronBoots"
+          },
+          {
+            "name": "SteelBoots"
+          },
+          {
+            "name": "MagicBoots"
+          },
+          {
+            "name": "RunningShoes"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LootConfig",
+      "docs": [
+        "Loot roll configuration - admin configurable"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot_weights",
+            "type": "bytes"
+          },
+          {
+            "name": "item_type_weights",
+            "type": "bytes"
+          },
+          {
+            "name": "rarity_weights",
+            "type": "bytes"
+          },
+          {
+            "name": "mod_type_weights",
+            "type": "bytes"
+          },
+          {
+            "name": "mod_count_by_rarity",
+            "type": "bytes"
+          },
+          {
+            "name": "default_drop_chance",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LootRollRequest",
+      "docs": [
+        "Loot roll request parameters"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "character_level",
+            "type": "u8"
+          },
+          {
+            "name": "enemy_level",
+            "type": "u8"
+          },
+          {
+            "name": "num_rolls",
+            "type": "u8"
+          },
+          {
+            "name": "drop_chance",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Modifier",
+      "docs": [
+        "A modifier on an item"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "mod_type",
+            "type": {
+              "defined": {
+                "name": "ModifierType"
+              }
+            }
+          },
+          {
+            "name": "value",
+            "type": "u8"
+          },
+          {
+            "name": "max_rolled",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ModifierType",
+      "docs": [
+        "Types of modifiers that can be on items"
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Signature"
+          },
+          {
+            "name": "Masterwork"
+          },
+          {
+            "name": "Bizarre"
+          },
+          {
+            "name": "Swift"
+          },
+          {
+            "name": "Sharpened"
+          },
+          {
+            "name": "Vampiric"
+          },
+          {
+            "name": "Flaming"
+          },
+          {
+            "name": "Frozen"
+          },
+          {
+            "name": "Holy"
+          },
+          {
+            "name": "Light"
+          },
+          {
+            "name": "Padded"
+          },
+          {
+            "name": "Hardened"
+          },
+          {
+            "name": "Fortified"
+          },
+          {
+            "name": "Resilient"
+          },
+          {
+            "name": "MaxRolled"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Rarity",
+      "docs": [
+        "Item rarity tiers"
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Rusty"
+          },
+          {
+            "name": "Damaged"
+          },
+          {
+            "name": "BattleTested"
+          },
+          {
+            "name": "Polished"
+          },
+          {
+            "name": "Masterwork"
+          },
+          {
+            "name": "Legendary"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SpecialAbility",
+      "docs": [
+        "Special abilities for weapons"
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "None"
+          },
+          {
+            "name": "FireDamage"
+          },
+          {
+            "name": "IceDamage"
+          },
+          {
+            "name": "PoisonDamage"
+          },
+          {
+            "name": "LightningDamage"
+          },
+          {
+            "name": "LifeSteal"
+          },
+          {
+            "name": "CriticalStrike"
+          },
+          {
+            "name": "Knockback"
+          },
+          {
+            "name": "Stun"
+          },
+          {
+            "name": "Bleed"
+          },
+          {
+            "name": "ArmorPierce"
+          }
+        ]
+      }
+    }
+  ]
+}

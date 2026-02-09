@@ -1,0 +1,1468 @@
+{
+  "address": "8fa6arkqsEpo72NqB1MzxSYWgeUTqUhabNsDSGUkgJkv",
+  "metadata": {
+    "name": "game_content",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Centralized game content data and admin-configurable tables"
+  },
+  "instructions": [
+    {
+      "name": "create_class_config",
+      "docs": [
+        "Create a new player class configuration"
+      ],
+      "discriminator": [
+        149,
+        85,
+        166,
+        215,
+        52,
+        169,
+        123,
+        1
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "class_config",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "class_id",
+          "type": "u8"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "base_health",
+          "type": "i16"
+        },
+        {
+          "name": "base_attack",
+          "type": "i16"
+        },
+        {
+          "name": "base_defense",
+          "type": "i16"
+        },
+        {
+          "name": "health_per_level",
+          "type": "i16"
+        },
+        {
+          "name": "attack_per_level",
+          "type": "i16"
+        },
+        {
+          "name": "defense_per_level",
+          "type": "i16"
+        }
+      ]
+    },
+    {
+      "name": "create_enemy_type_config",
+      "docs": [
+        "Create a new enemy type configuration"
+      ],
+      "discriminator": [
+        110,
+        110,
+        124,
+        206,
+        165,
+        206,
+        62,
+        59
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "enemy_type_config",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "enemy_type_id",
+          "type": "u8"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "base_health",
+          "type": "i16"
+        },
+        {
+          "name": "base_attack",
+          "type": "i16"
+        },
+        {
+          "name": "base_defense",
+          "type": "i16"
+        },
+        {
+          "name": "base_experience",
+          "type": "u8"
+        },
+        {
+          "name": "health_per_level",
+          "type": "i16"
+        },
+        {
+          "name": "attack_per_level",
+          "type": "i16"
+        },
+        {
+          "name": "defense_per_level",
+          "type": "i16"
+        }
+      ]
+    },
+    {
+      "name": "create_environment_config",
+      "docs": [
+        "Create a new environment configuration"
+      ],
+      "discriminator": [
+        4,
+        252,
+        172,
+        73,
+        209,
+        75,
+        137,
+        153
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "environment_config",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "environment_id",
+          "type": "u8"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "damage_modifier",
+          "type": "i8"
+        },
+        {
+          "name": "defense_modifier",
+          "type": "i8"
+        },
+        {
+          "name": "loot_modifier",
+          "type": "i8"
+        }
+      ]
+    },
+    {
+      "name": "create_item_type_config",
+      "docs": [
+        "Create a new item type configuration"
+      ],
+      "discriminator": [
+        8,
+        179,
+        5,
+        132,
+        217,
+        56,
+        128,
+        242
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "item_type_config",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "item_type_id",
+          "type": "u8"
+        },
+        {
+          "name": "slot",
+          "type": "u8"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "base_damage",
+          "type": "u8"
+        },
+        {
+          "name": "base_defense",
+          "type": "u8"
+        },
+        {
+          "name": "base_attack_speed",
+          "type": "u8"
+        },
+        {
+          "name": "granted_action",
+          "type": {
+            "option": {
+              "defined": {
+                "name": "ActionConfig"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "initialize_registry",
+      "docs": [
+        "Initialize the game content registry (one-time setup by admin)"
+      ],
+      "discriminator": [
+        189,
+        181,
+        20,
+        17,
+        174,
+        57,
+        249,
+        59
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "migrate_class_config",
+      "docs": [
+        "Migrate a ClassConfig account to the new size that includes default_actions.",
+        "This is needed for accounts created before the default_actions field was added.",
+        "After migration, the default_actions array will be initialized to empty/default values."
+      ],
+      "discriminator": [
+        203,
+        124,
+        169,
+        49,
+        153,
+        56,
+        140,
+        131
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "class_config",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "set_class_action",
+      "docs": [
+        "Set a default action for a class at a specific slot"
+      ],
+      "discriminator": [
+        92,
+        81,
+        47,
+        96,
+        126,
+        191,
+        103,
+        20
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "class_config",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "slot",
+          "type": "u8"
+        },
+        {
+          "name": "action_name",
+          "type": "string"
+        },
+        {
+          "name": "effect_type",
+          "type": "u8"
+        },
+        {
+          "name": "effect_value1",
+          "type": "i16"
+        },
+        {
+          "name": "effect_value2",
+          "type": "u8"
+        },
+        {
+          "name": "success_threshold",
+          "type": "u8"
+        },
+        {
+          "name": "enabled",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "transfer_authority",
+      "docs": [
+        "Transfer registry authority to a new admin"
+      ],
+      "discriminator": [
+        48,
+        169,
+        76,
+        72,
+        229,
+        180,
+        55,
+        161
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "new_authority",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "update_class_config",
+      "docs": [
+        "Update class configuration"
+      ],
+      "discriminator": [
+        67,
+        16,
+        0,
+        59,
+        40,
+        47,
+        163,
+        242
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "class_config",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": {
+            "option": "string"
+          }
+        },
+        {
+          "name": "base_health",
+          "type": {
+            "option": "i16"
+          }
+        },
+        {
+          "name": "base_attack",
+          "type": {
+            "option": "i16"
+          }
+        },
+        {
+          "name": "base_defense",
+          "type": {
+            "option": "i16"
+          }
+        },
+        {
+          "name": "health_per_level",
+          "type": {
+            "option": "i16"
+          }
+        },
+        {
+          "name": "attack_per_level",
+          "type": {
+            "option": "i16"
+          }
+        },
+        {
+          "name": "defense_per_level",
+          "type": {
+            "option": "i16"
+          }
+        },
+        {
+          "name": "enabled",
+          "type": {
+            "option": "bool"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_enemy_type_config",
+      "docs": [
+        "Update an existing enemy type configuration"
+      ],
+      "discriminator": [
+        248,
+        109,
+        100,
+        114,
+        44,
+        63,
+        52,
+        160
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "enemy_type_config",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": {
+            "option": "string"
+          }
+        },
+        {
+          "name": "base_health",
+          "type": {
+            "option": "i16"
+          }
+        },
+        {
+          "name": "base_attack",
+          "type": {
+            "option": "i16"
+          }
+        },
+        {
+          "name": "base_defense",
+          "type": {
+            "option": "i16"
+          }
+        },
+        {
+          "name": "base_experience",
+          "type": {
+            "option": "u8"
+          }
+        },
+        {
+          "name": "health_per_level",
+          "type": {
+            "option": "i16"
+          }
+        },
+        {
+          "name": "attack_per_level",
+          "type": {
+            "option": "i16"
+          }
+        },
+        {
+          "name": "defense_per_level",
+          "type": {
+            "option": "i16"
+          }
+        },
+        {
+          "name": "enabled",
+          "type": {
+            "option": "bool"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_environment_config",
+      "docs": [
+        "Update environment configuration"
+      ],
+      "discriminator": [
+        131,
+        5,
+        245,
+        34,
+        191,
+        208,
+        125,
+        194
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "environment_config",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": {
+            "option": "string"
+          }
+        },
+        {
+          "name": "description",
+          "type": {
+            "option": "string"
+          }
+        },
+        {
+          "name": "damage_modifier",
+          "type": {
+            "option": "i8"
+          }
+        },
+        {
+          "name": "defense_modifier",
+          "type": {
+            "option": "i8"
+          }
+        },
+        {
+          "name": "loot_modifier",
+          "type": {
+            "option": "i8"
+          }
+        },
+        {
+          "name": "allowed_enemy_types",
+          "type": {
+            "option": "bytes"
+          }
+        },
+        {
+          "name": "enabled",
+          "type": {
+            "option": "bool"
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_item_type_config",
+      "docs": [
+        "Update item type configuration"
+      ],
+      "discriminator": [
+        31,
+        13,
+        176,
+        10,
+        214,
+        2,
+        147,
+        96
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "item_type_config",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": {
+            "option": "string"
+          }
+        },
+        {
+          "name": "base_damage",
+          "type": {
+            "option": "u8"
+          }
+        },
+        {
+          "name": "base_defense",
+          "type": {
+            "option": "u8"
+          }
+        },
+        {
+          "name": "base_attack_speed",
+          "type": {
+            "option": "u8"
+          }
+        },
+        {
+          "name": "rarity_damage_multipliers",
+          "type": {
+            "option": {
+              "array": [
+                "u8",
+                3
+              ]
+            }
+          }
+        },
+        {
+          "name": "rarity_defense_multipliers",
+          "type": {
+            "option": {
+              "array": [
+                "u8",
+                3
+              ]
+            }
+          }
+        },
+        {
+          "name": "granted_action",
+          "type": {
+            "option": {
+              "defined": {
+                "name": "ActionConfig"
+              }
+            }
+          }
+        },
+        {
+          "name": "clear_granted_action",
+          "type": "bool"
+        },
+        {
+          "name": "enabled",
+          "type": {
+            "option": "bool"
+          }
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "ClassConfig",
+      "discriminator": [
+        12,
+        14,
+        218,
+        247,
+        8,
+        85,
+        10,
+        250
+      ]
+    },
+    {
+      "name": "EnemyTypeConfig",
+      "discriminator": [
+        142,
+        220,
+        82,
+        38,
+        185,
+        160,
+        251,
+        142
+      ]
+    },
+    {
+      "name": "EnvironmentConfig",
+      "discriminator": [
+        193,
+        45,
+        192,
+        63,
+        154,
+        28,
+        131,
+        10
+      ]
+    },
+    {
+      "name": "GameRegistry",
+      "discriminator": [
+        24,
+        88,
+        182,
+        125,
+        149,
+        163,
+        9,
+        71
+      ]
+    },
+    {
+      "name": "ItemTypeConfig",
+      "discriminator": [
+        136,
+        146,
+        215,
+        8,
+        107,
+        218,
+        99,
+        139
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "NameTooLong",
+      "msg": "Name must be 32 characters or less"
+    },
+    {
+      "code": 6001,
+      "name": "DescriptionTooLong",
+      "msg": "Description must be 128 characters or less"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidActionSlot",
+      "msg": "Invalid action slot (must be 0-4)"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidItemSlot",
+      "msg": "Invalid item slot (must be 0-3)"
+    },
+    {
+      "code": 6004,
+      "name": "Unauthorized",
+      "msg": "Unauthorized - you are not the registry authority"
+    }
+  ],
+  "types": [
+    {
+      "name": "ActionConfig",
+      "docs": [
+        "Action configuration for class defaults"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "effect_type",
+            "type": "u8"
+          },
+          {
+            "name": "effect_value1",
+            "type": "i16"
+          },
+          {
+            "name": "effect_value2",
+            "type": "u8"
+          },
+          {
+            "name": "success_threshold",
+            "type": "u8"
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ClassConfig",
+      "docs": [
+        "Configuration for a player class"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "class_id",
+            "type": "u8"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "base_health",
+            "type": "i16"
+          },
+          {
+            "name": "base_attack",
+            "type": "i16"
+          },
+          {
+            "name": "base_defense",
+            "type": "i16"
+          },
+          {
+            "name": "health_per_level",
+            "type": "i16"
+          },
+          {
+            "name": "attack_per_level",
+            "type": "i16"
+          },
+          {
+            "name": "defense_per_level",
+            "type": "i16"
+          },
+          {
+            "name": "default_actions",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "ActionConfig"
+                  }
+                },
+                5
+              ]
+            }
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "EnemyTypeConfig",
+      "docs": [
+        "Configuration for an enemy type"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "enemy_type_id",
+            "type": "u8"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "base_health",
+            "type": "i16"
+          },
+          {
+            "name": "base_attack",
+            "type": "i16"
+          },
+          {
+            "name": "base_defense",
+            "type": "i16"
+          },
+          {
+            "name": "base_experience",
+            "type": "u8"
+          },
+          {
+            "name": "health_per_level",
+            "type": "i16"
+          },
+          {
+            "name": "attack_per_level",
+            "type": "i16"
+          },
+          {
+            "name": "defense_per_level",
+            "type": "i16"
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "EnvironmentConfig",
+      "docs": [
+        "Configuration for an environment"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "environment_id",
+            "type": "u8"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "name": "damage_modifier",
+            "type": "i8"
+          },
+          {
+            "name": "defense_modifier",
+            "type": "i8"
+          },
+          {
+            "name": "loot_modifier",
+            "type": "i8"
+          },
+          {
+            "name": "allowed_enemy_types",
+            "type": "bytes"
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GameRegistry",
+      "docs": [
+        "Game content registry - tracks all content types"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "enemy_type_count",
+            "type": "u16"
+          },
+          {
+            "name": "class_count",
+            "type": "u8"
+          },
+          {
+            "name": "environment_count",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ItemTypeConfig",
+      "docs": [
+        "Configuration for an item type"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "item_type_id",
+            "type": "u8"
+          },
+          {
+            "name": "slot",
+            "type": "u8"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "base_damage",
+            "type": "u8"
+          },
+          {
+            "name": "base_defense",
+            "type": "u8"
+          },
+          {
+            "name": "base_attack_speed",
+            "type": "u8"
+          },
+          {
+            "name": "rarity_damage_multipliers",
+            "type": {
+              "array": [
+                "u8",
+                3
+              ]
+            }
+          },
+          {
+            "name": "rarity_defense_multipliers",
+            "type": {
+              "array": [
+                "u8",
+                3
+              ]
+            }
+          },
+          {
+            "name": "granted_action",
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "ActionConfig"
+                }
+              }
+            }
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ]
+}

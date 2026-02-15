@@ -1557,6 +1557,9 @@
           }
         },
         {
+          "name": "player_from"
+        },
+        {
           "name": "inventory_to",
           "writable": true,
           "pda": {
@@ -1906,76 +1909,81 @@
     },
     {
       "code": 6005,
+      "name": "ItemEquippedCannotTransfer",
+      "msg": "Cannot transfer an item while it is equipped"
+    },
+    {
+      "code": 6006,
       "name": "PlayerIdAlreadyExists",
       "msg": "Player ID already exists for this wallet"
     },
     {
-      "code": 6006,
+      "code": 6007,
       "name": "InvalidItemData",
       "msg": "Failed to deserialize item data"
     },
     {
-      "code": 6007,
+      "code": 6008,
       "name": "InvalidActionSlot",
       "msg": "Invalid action slot index"
     },
     {
-      "code": 6008,
+      "code": 6009,
       "name": "MaxActionsEnabled",
       "msg": "Maximum number of actions already enabled (3)"
     },
     {
-      "code": 6009,
+      "code": 6010,
       "name": "EmptyActionSlot",
       "msg": "Cannot enable an empty action slot"
     },
     {
-      "code": 6010,
+      "code": 6011,
       "name": "SameSlotSwap",
       "msg": "Cannot swap a slot with itself"
     },
     {
-      "code": 6011,
+      "code": 6012,
       "name": "InvalidSessionDuration",
       "msg": "Invalid session duration"
     },
     {
-      "code": 6012,
+      "code": 6013,
       "name": "SessionTooLong",
       "msg": "Session duration cannot exceed 24 hours"
     },
     {
-      "code": 6013,
+      "code": 6014,
       "name": "SessionExpired",
       "msg": "Session has expired"
     },
     {
-      "code": 6014,
+      "code": 6015,
       "name": "NotSessionAuthority",
       "msg": "Not the session authority"
     },
     {
-      "code": 6015,
+      "code": 6016,
       "name": "NotPlayerOwner",
       "msg": "Not the player owner"
     },
     {
-      "code": 6016,
+      "code": 6017,
       "name": "NotEscrowAuthority",
       "msg": "Not the escrow authority"
     },
     {
-      "code": 6017,
+      "code": 6018,
       "name": "InsufficientEscrowBalance",
       "msg": "Insufficient escrow balance"
     },
     {
-      "code": 6018,
+      "code": 6019,
       "name": "InvalidAmount",
       "msg": "Invalid amount"
     },
     {
-      "code": 6019,
+      "code": 6020,
       "name": "InvalidSession",
       "msg": "Invalid session - session key mismatch"
     }

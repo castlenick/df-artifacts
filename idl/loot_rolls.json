@@ -478,11 +478,6 @@
       "code": 6000,
       "name": "InvalidRoll",
       "msg": "Invalid roll"
-    },
-    {
-      "code": 6001,
-      "name": "InvalidOwner",
-      "msg": "Invalid owner - you don't own this item"
     }
   ],
   "types": [

@@ -1605,6 +1605,22 @@
             "type": "i16"
           },
           {
+            "name": "strength",
+            "type": "u16"
+          },
+          {
+            "name": "agility",
+            "type": "u16"
+          },
+          {
+            "name": "technique",
+            "type": "u16"
+          },
+          {
+            "name": "intelligence",
+            "type": "u16"
+          },
+          {
             "name": "attack",
             "type": "i16"
           },

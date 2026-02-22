@@ -2726,6 +2726,9 @@
     },
     {
       "name": "Enemy",
+      "docs": [
+        "On-chain enemy instance used by battle/dungeon systems for template encounters"
+      ],
       "type": {
         "kind": "struct",
         "fields": [
@@ -3018,6 +3021,22 @@
           {
             "name": "max_health",
             "type": "i16"
+          },
+          {
+            "name": "strength",
+            "type": "u16"
+          },
+          {
+            "name": "agility",
+            "type": "u16"
+          },
+          {
+            "name": "technique",
+            "type": "u16"
+          },
+          {
+            "name": "intelligence",
+            "type": "u16"
           },
           {
             "name": "base_attack",

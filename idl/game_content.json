@@ -8,6 +8,95 @@
   },
   "instructions": [
     {
+      "name": "add_admin",
+      "docs": [
+        "Root admin grants delegated admin access to another wallet."
+      ],
+      "discriminator": [
+        177,
+        236,
+        33,
+        205,
+        124,
+        152,
+        55,
+        186
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "new_admin"
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "admin_member",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  100,
+                  109,
+                  105,
+                  110,
+                  95,
+                  109,
+                  101,
+                  109,
+                  98,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "registry"
+              },
+              {
+                "kind": "account",
+                "path": "new_admin"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "create_class_config",
       "docs": [
         "Create a new player class configuration"
@@ -95,6 +184,93 @@
         {
           "name": "defense_per_level",
           "type": "i16"
+        }
+      ]
+    },
+    {
+      "name": "create_enemy",
+      "docs": [
+        "Create a battle-ready enemy account (template encounter content)"
+      ],
+      "discriminator": [
+        81,
+        162,
+        169,
+        170,
+        196,
+        191,
+        252,
+        109
+      ],
+      "accounts": [
+        {
+          "name": "creator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "enemy",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  110,
+                  101,
+                  109,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "creator"
+              },
+              {
+                "kind": "arg",
+                "path": "name"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "enemy_type",
+          "type": {
+            "defined": {
+              "name": "EnemyType"
+            }
+          }
+        },
+        {
+          "name": "level",
+          "type": "u8"
+        },
+        {
+          "name": "health",
+          "type": "i16"
+        },
+        {
+          "name": "attack",
+          "type": "i16"
+        },
+        {
+          "name": "defense",
+          "type": "i16"
+        },
+        {
+          "name": "experience_reward",
+          "type": "u8"
         }
       ]
     },
@@ -477,6 +653,91 @@
         {
           "name": "system_program",
           "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "remove_admin",
+      "docs": [
+        "Root admin revokes delegated admin access."
+      ],
+      "discriminator": [
+        74,
+        202,
+        71,
+        106,
+        252,
+        31,
+        72,
+        183
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "admin"
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "admin_member",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  100,
+                  109,
+                  105,
+                  110,
+                  95,
+                  109,
+                  101,
+                  109,
+                  98,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "registry"
+              },
+              {
+                "kind": "account",
+                "path": "admin"
+              }
+            ]
+          }
         }
       ],
       "args": []
@@ -1047,6 +1308,19 @@
   ],
   "accounts": [
     {
+      "name": "AdminMember",
+      "discriminator": [
+        122,
+        117,
+        154,
+        126,
+        129,
+        69,
+        104,
+        198
+      ]
+    },
+    {
       "name": "ClassConfig",
       "discriminator": [
         12,
@@ -1057,6 +1331,19 @@
         85,
         10,
         250
+      ]
+    },
+    {
+      "name": "Enemy",
+      "discriminator": [
+        167,
+        82,
+        35,
+        144,
+        124,
+        190,
+        3,
+        96
       ]
     },
     {
@@ -1137,6 +1424,16 @@
       "code": 6004,
       "name": "Unauthorized",
       "msg": "Unauthorized - you are not the registry authority"
+    },
+    {
+      "code": 6005,
+      "name": "InvalidLevel",
+      "msg": "Level must be between 1 and 100"
+    },
+    {
+      "code": 6006,
+      "name": "InvalidHealth",
+      "msg": "Health must be greater than 0"
     }
   ],
   "types": [
@@ -1176,6 +1473,33 @@
           {
             "name": "enabled",
             "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AdminMember",
+      "docs": [
+        "Delegated admin membership for the game registry."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "registry",
+            "type": "pubkey"
+          },
+          {
+            "name": "admin",
+            "type": "pubkey"
+          },
+          {
+            "name": "added_by",
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
           }
         ]
       }
@@ -1244,6 +1568,120 @@
           {
             "name": "bump",
             "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Enemy",
+      "docs": [
+        "On-chain enemy instance used by battle/dungeon systems for template encounters"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "creator",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "enemy_type",
+            "type": {
+              "defined": {
+                "name": "EnemyType"
+              }
+            }
+          },
+          {
+            "name": "level",
+            "type": "u8"
+          },
+          {
+            "name": "health",
+            "type": "i16"
+          },
+          {
+            "name": "attack",
+            "type": "i16"
+          },
+          {
+            "name": "defense",
+            "type": "i16"
+          },
+          {
+            "name": "experience_reward",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "EnemyType",
+      "docs": [
+        "All possible enemy types in the game",
+        "New enemy types should be added here and configured via EnemyTypeConfig"
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Goblin"
+          },
+          {
+            "name": "Skeleton"
+          },
+          {
+            "name": "Zombie"
+          },
+          {
+            "name": "Wolf"
+          },
+          {
+            "name": "Spider"
+          },
+          {
+            "name": "Orc"
+          },
+          {
+            "name": "Troll"
+          },
+          {
+            "name": "Ogre"
+          },
+          {
+            "name": "Werewolf"
+          },
+          {
+            "name": "Dragon"
+          },
+          {
+            "name": "DarkKnight"
+          },
+          {
+            "name": "Lich"
+          },
+          {
+            "name": "Demon"
+          },
+          {
+            "name": "DragonLord"
+          },
+          {
+            "name": "UndeadKing"
+          },
+          {
+            "name": "Custom"
           }
         ]
       }

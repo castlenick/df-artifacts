@@ -1063,66 +1063,6 @@
       }
     },
     {
-      "name": "heal_player",
-      "discriminator": [
-        12,
-        176,
-        30,
-        11,
-        16,
-        116,
-        142,
-        203
-      ],
-      "accounts": [
-        {
-          "name": "owner",
-          "writable": true,
-          "signer": true,
-          "relations": [
-            "player"
-          ]
-        },
-        {
-          "name": "player",
-          "writable": true
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "heal_player_cpi",
-      "docs": [
-        "Session-aware version of heal_player"
-      ],
-      "discriminator": [
-        66,
-        191,
-        114,
-        80,
-        98,
-        26,
-        170,
-        252
-      ],
-      "accounts": [
-        {
-          "name": "authority"
-        },
-        {
-          "name": "session",
-          "docs": [
-            "Valid session linking session_key to authority"
-          ]
-        },
-        {
-          "name": "player",
-          "writable": true
-        }
-      ],
-      "args": []
-    },
-    {
       "name": "initialize_session_escrow",
       "docs": [
         "Initialize a session escrow for the authority",
@@ -1986,6 +1926,11 @@
       "code": 6020,
       "name": "InvalidSession",
       "msg": "Invalid session - session key mismatch"
+    },
+    {
+      "code": 6021,
+      "name": "PlayerPermanentlyDead",
+      "msg": "Player is permanently dead and cannot be revived"
     }
   ],
   "types": [
@@ -2433,6 +2378,22 @@
             "type": "i16"
           },
           {
+            "name": "strength",
+            "type": "u16"
+          },
+          {
+            "name": "agility",
+            "type": "u16"
+          },
+          {
+            "name": "technique",
+            "type": "u16"
+          },
+          {
+            "name": "intelligence",
+            "type": "u16"
+          },
+          {
             "name": "base_attack",
             "type": "i16"
           },
@@ -2622,6 +2583,22 @@
           {
             "name": "max_health",
             "type": "i16"
+          },
+          {
+            "name": "strength",
+            "type": "u16"
+          },
+          {
+            "name": "agility",
+            "type": "u16"
+          },
+          {
+            "name": "technique",
+            "type": "u16"
+          },
+          {
+            "name": "intelligence",
+            "type": "u16"
           },
           {
             "name": "base_attack",

@@ -172,35 +172,6 @@
           "type": "u8"
         }
       ]
-    },
-    {
-      "name": "heal_player",
-      "discriminator": [
-        12,
-        176,
-        30,
-        11,
-        16,
-        116,
-        142,
-        203
-      ],
-      "accounts": [
-        {
-          "name": "owner",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "player",
-          "writable": true
-        },
-        {
-          "name": "player_program",
-          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
-        }
-      ],
-      "args": []
     }
   ],
   "accounts": [
@@ -252,16 +223,21 @@
     },
     {
       "code": 6001,
+      "name": "PlayerDead",
+      "msg": "Player is dead and cannot battle"
+    },
+    {
+      "code": 6002,
       "name": "NameTooLong",
       "msg": "Name must be 32 characters or less"
     },
     {
-      "code": 6002,
+      "code": 6003,
       "name": "InvalidLevel",
       "msg": "Level must be between 1 and 100"
     },
     {
-      "code": 6003,
+      "code": 6004,
       "name": "InvalidHealth",
       "msg": "Health must be greater than 0"
     }

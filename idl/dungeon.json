@@ -209,6 +209,11 @@
               {
                 "kind": "account",
                 "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "escrow.state_epoch",
+                "account": "SessionEscrow"
               }
             ],
             "program": {
@@ -705,6 +710,11 @@
               {
                 "kind": "account",
                 "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "escrow.state_epoch",
+                "account": "SessionEscrow"
               }
             ],
             "program": {
@@ -868,6 +878,11 @@
               {
                 "kind": "account",
                 "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "escrow.state_epoch",
+                "account": "SessionEscrow"
               }
             ],
             "program": {
@@ -1037,6 +1052,11 @@
               {
                 "kind": "account",
                 "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "escrow.state_epoch",
+                "account": "SessionEscrow"
               }
             ],
             "program": {
@@ -1245,6 +1265,11 @@
               {
                 "kind": "account",
                 "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "escrow.state_epoch",
+                "account": "SessionEscrow"
               }
             ],
             "program": {
@@ -1729,6 +1754,11 @@
               {
                 "kind": "account",
                 "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "escrow.state_epoch",
+                "account": "SessionEscrow"
               }
             ],
             "program": {
@@ -2066,6 +2096,11 @@
               {
                 "kind": "account",
                 "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "escrow.state_epoch",
+                "account": "SessionEscrow"
               }
             ],
             "program": {
@@ -3036,6 +3071,10 @@
             "type": "pubkey"
           },
           {
+            "name": "state_epoch",
+            "type": "u16"
+          },
+          {
             "name": "expires_at",
             "type": "i64"
           },
@@ -3115,6 +3154,10 @@
             "type": "pubkey"
           },
           {
+            "name": "state_epoch",
+            "type": "u16"
+          },
+          {
             "name": "items",
             "type": {
               "vec": "pubkey"
@@ -3135,6 +3178,10 @@
           {
             "name": "owner",
             "type": "pubkey"
+          },
+          {
+            "name": "state_epoch",
+            "type": "u16"
           },
           {
             "name": "player_id",
@@ -3589,6 +3636,10 @@
           {
             "name": "authority",
             "type": "pubkey"
+          },
+          {
+            "name": "state_epoch",
+            "type": "u16"
           },
           {
             "name": "balance",

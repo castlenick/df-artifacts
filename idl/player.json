@@ -50,6 +50,11 @@
               {
                 "kind": "account",
                 "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "inventory.state_epoch",
+                "account": "Inventory"
               }
             ]
           }
@@ -114,6 +119,41 @@
           "signer": true
         },
         {
+          "name": "namespace_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  110,
+                  97,
+                  109,
+                  101,
+                  115,
+                  112,
+                  97,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
           "name": "inventory",
           "writable": true,
           "pda": {
@@ -135,6 +175,11 @@
               {
                 "kind": "account",
                 "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "namespace_config.state_epoch",
+                "account": "PlayerNamespaceConfig"
               }
             ]
           }
@@ -178,6 +223,41 @@
           ]
         },
         {
+          "name": "namespace_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  110,
+                  97,
+                  109,
+                  101,
+                  115,
+                  112,
+                  97,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
           "name": "inventory",
           "writable": true,
           "pda": {
@@ -199,6 +279,11 @@
               {
                 "kind": "account",
                 "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "namespace_config.state_epoch",
+                "account": "PlayerNamespaceConfig"
               }
             ]
           }
@@ -258,6 +343,11 @@
               {
                 "kind": "account",
                 "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "inventory.state_epoch",
+                "account": "Inventory"
               }
             ]
           }
@@ -356,6 +446,11 @@
               {
                 "kind": "account",
                 "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "inventory.state_epoch",
+                "account": "Inventory"
               }
             ]
           }
@@ -419,6 +514,41 @@
           "signer": true
         },
         {
+          "name": "namespace_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  110,
+                  97,
+                  109,
+                  101,
+                  115,
+                  112,
+                  97,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
           "name": "player",
           "writable": true
         },
@@ -469,6 +599,41 @@
           "signer": true
         },
         {
+          "name": "namespace_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  110,
+                  97,
+                  109,
+                  101,
+                  115,
+                  112,
+                  97,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
           "name": "player",
           "writable": true
         },
@@ -494,6 +659,11 @@
               {
                 "kind": "account",
                 "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "namespace_config.state_epoch",
+                "account": "PlayerNamespaceConfig"
               }
             ]
           }
@@ -554,6 +724,41 @@
           ]
         },
         {
+          "name": "namespace_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  110,
+                  97,
+                  109,
+                  101,
+                  115,
+                  112,
+                  97,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
           "name": "player",
           "docs": [
             "The player this session will control"
@@ -583,6 +788,11 @@
               {
                 "kind": "account",
                 "path": "session_key"
+              },
+              {
+                "kind": "account",
+                "path": "namespace_config.state_epoch",
+                "account": "PlayerNamespaceConfig"
               }
             ]
           }
@@ -648,6 +858,11 @@
               {
                 "kind": "account",
                 "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "escrow.state_epoch",
+                "account": "SessionEscrow"
               }
             ]
           }
@@ -750,6 +965,11 @@
                 "kind": "account",
                 "path": "session.session_key",
                 "account": "GameSession"
+              },
+              {
+                "kind": "account",
+                "path": "session.state_epoch",
+                "account": "GameSession"
               }
             ]
           }
@@ -814,6 +1034,11 @@
               {
                 "kind": "account",
                 "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "escrow.state_epoch",
+                "account": "SessionEscrow"
               }
             ]
           }
@@ -894,6 +1119,11 @@
                 "kind": "account",
                 "path": "session.authority",
                 "account": "GameSession"
+              },
+              {
+                "kind": "account",
+                "path": "session.state_epoch",
+                "account": "GameSession"
               }
             ]
           }
@@ -943,6 +1173,11 @@
               {
                 "kind": "account",
                 "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "inventory.state_epoch",
+                "account": "Inventory"
               }
             ]
           }
@@ -1063,6 +1298,77 @@
       }
     },
     {
+      "name": "initialize_namespace_config",
+      "docs": [
+        "Initialize the global player namespace configuration.",
+        "`state_epoch` is incorporated into new PDA seeds so future resets can",
+        "move to a new namespace without redeploying program IDs."
+      ],
+      "discriminator": [
+        38,
+        35,
+        59,
+        141,
+        140,
+        109,
+        198,
+        93
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "namespace_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  110,
+                  97,
+                  109,
+                  101,
+                  115,
+                  112,
+                  97,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "state_epoch",
+          "type": "u16"
+        }
+      ]
+    },
+    {
       "name": "initialize_session_escrow",
       "docs": [
         "Initialize a session escrow for the authority",
@@ -1083,6 +1389,41 @@
           "name": "authority",
           "writable": true,
           "signer": true
+        },
+        {
+          "name": "namespace_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  110,
+                  97,
+                  109,
+                  101,
+                  115,
+                  112,
+                  97,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
         },
         {
           "name": "escrow",
@@ -1111,6 +1452,11 @@
               {
                 "kind": "account",
                 "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "namespace_config.state_epoch",
+                "account": "PlayerNamespaceConfig"
               }
             ]
           }
@@ -1197,6 +1543,11 @@
               {
                 "kind": "account",
                 "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "inventory.state_epoch",
+                "account": "Inventory"
               }
             ]
           }
@@ -1269,6 +1620,11 @@
               {
                 "kind": "account",
                 "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "inventory.state_epoch",
+                "account": "Inventory"
               }
             ]
           }
@@ -1304,6 +1660,11 @@
               {
                 "kind": "account",
                 "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "escrow.state_epoch",
+                "account": "SessionEscrow"
               }
             ]
           }
@@ -1406,6 +1767,11 @@
                 "kind": "account",
                 "path": "escrow.authority",
                 "account": "SessionEscrow"
+              },
+              {
+                "kind": "account",
+                "path": "escrow.state_epoch",
+                "account": "SessionEscrow"
               }
             ]
           }
@@ -1469,6 +1835,11 @@
                 "kind": "account",
                 "path": "session.session_key",
                 "account": "GameSession"
+              },
+              {
+                "kind": "account",
+                "path": "session.state_epoch",
+                "account": "GameSession"
               }
             ]
           }
@@ -1514,6 +1885,75 @@
         {
           "name": "enabled",
           "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "set_state_epoch",
+      "docs": [
+        "Update the active state epoch used for new account derivations.",
+        "Existing accounts remain valid but new creates land under a new namespace."
+      ],
+      "discriminator": [
+        45,
+        83,
+        215,
+        245,
+        183,
+        239,
+        173,
+        89
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "namespace_config"
+          ]
+        },
+        {
+          "name": "namespace_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  110,
+                  97,
+                  109,
+                  101,
+                  115,
+                  112,
+                  97,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "state_epoch",
+          "type": "u16"
         }
       ]
     },
@@ -1600,6 +2040,11 @@
               {
                 "kind": "account",
                 "path": "owner_from"
+              },
+              {
+                "kind": "account",
+                "path": "inventory_from.state_epoch",
+                "account": "Inventory"
               }
             ]
           }
@@ -1629,6 +2074,11 @@
               {
                 "kind": "account",
                 "path": "owner_to"
+              },
+              {
+                "kind": "account",
+                "path": "inventory_to.state_epoch",
+                "account": "Inventory"
               }
             ]
           }
@@ -1849,6 +2299,11 @@
               {
                 "kind": "account",
                 "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "escrow.state_epoch",
+                "account": "SessionEscrow"
               }
             ]
           }
@@ -1913,6 +2368,19 @@
         155,
         206,
         218
+      ]
+    },
+    {
+      "name": "PlayerNamespaceConfig",
+      "discriminator": [
+        24,
+        5,
+        44,
+        200,
+        137,
+        126,
+        26,
+        75
       ]
     },
     {
@@ -2042,6 +2510,16 @@
     },
     {
       "code": 6022,
+      "name": "Unauthorized",
+      "msg": "Unauthorized"
+    },
+    {
+      "code": 6023,
+      "name": "StateEpochMismatch",
+      "msg": "State epoch mismatch between accounts"
+    },
+    {
+      "code": 6024,
       "name": "PlayerPermanentlyDead",
       "msg": "Player is permanently dead and cannot be revived"
     }
@@ -2321,6 +2799,10 @@
             "type": "pubkey"
           },
           {
+            "name": "state_epoch",
+            "type": "u16"
+          },
+          {
             "name": "expires_at",
             "type": "i64"
           },
@@ -2343,6 +2825,10 @@
           {
             "name": "owner",
             "type": "pubkey"
+          },
+          {
+            "name": "state_epoch",
+            "type": "u16"
           },
           {
             "name": "items",
@@ -2461,6 +2947,10 @@
           {
             "name": "owner",
             "type": "pubkey"
+          },
+          {
+            "name": "state_epoch",
+            "type": "u16"
           },
           {
             "name": "player_id",
@@ -2665,6 +3155,26 @@
       }
     },
     {
+      "name": "PlayerNamespaceConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "state_epoch",
+            "type": "u16"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
       "name": "PlayerStats",
       "type": {
         "kind": "struct",
@@ -2757,6 +3267,10 @@
           {
             "name": "authority",
             "type": "pubkey"
+          },
+          {
+            "name": "state_epoch",
+            "type": "u16"
           },
           {
             "name": "balance",

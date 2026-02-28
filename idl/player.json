@@ -2929,6 +2929,10 @@
             "type": "u8"
           },
           {
+            "name": "player_class",
+            "type": "u8"
+          },
+          {
             "name": "num_rolls",
             "type": "u8"
           },

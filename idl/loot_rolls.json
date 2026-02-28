@@ -742,6 +742,14 @@
         "kind": "struct",
         "fields": [
           {
+            "name": "content_version",
+            "type": "u16"
+          },
+          {
+            "name": "item_tier",
+            "type": "u8"
+          },
+          {
             "name": "slot",
             "type": {
               "defined": {
@@ -967,6 +975,10 @@
           },
           {
             "name": "enemy_level",
+            "type": "u8"
+          },
+          {
+            "name": "player_class",
             "type": "u8"
           },
           {

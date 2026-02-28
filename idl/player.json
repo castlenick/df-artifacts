@@ -1202,7 +1202,115 @@
           }
         },
         {
-          "name": "item_account"
+          "name": "item_account",
+          "docs": [
+            "it will be destroyed; otherwise the inventory reference is pruned only."
+          ],
+          "writable": true
+        },
+        {
+          "name": "loot_rolls_program",
+          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "remove_lowest_rarity_item_from_inventory_with_session",
+      "docs": [
+        "Session-aware item removal for lowest-rarity junk items.",
+        "If valid, closes the item account via loot_rolls and returns rent to session escrow."
+      ],
+      "discriminator": [
+        244,
+        197,
+        215,
+        198,
+        76,
+        42,
+        233,
+        174
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority"
+        },
+        {
+          "name": "session"
+        },
+        {
+          "name": "inventory",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "item_account",
+          "writable": true
+        },
+        {
+          "name": "escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "loot_rolls_program",
+          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
         },
         {
           "name": "system_program",
@@ -1864,71 +1972,76 @@
     },
     {
       "code": 6008,
+      "name": "ItemNotLowestRarity",
+      "msg": "Only lowest rarity items can be session-destroyed"
+    },
+    {
+      "code": 6009,
       "name": "InvalidActionSlot",
       "msg": "Invalid action slot index"
     },
     {
-      "code": 6009,
+      "code": 6010,
       "name": "MaxActionsEnabled",
       "msg": "Maximum number of actions already enabled (3)"
     },
     {
-      "code": 6010,
+      "code": 6011,
       "name": "EmptyActionSlot",
       "msg": "Cannot enable an empty action slot"
     },
     {
-      "code": 6011,
+      "code": 6012,
       "name": "SameSlotSwap",
       "msg": "Cannot swap a slot with itself"
     },
     {
-      "code": 6012,
+      "code": 6013,
       "name": "InvalidSessionDuration",
       "msg": "Invalid session duration"
     },
     {
-      "code": 6013,
+      "code": 6014,
       "name": "SessionTooLong",
       "msg": "Session duration cannot exceed 24 hours"
     },
     {
-      "code": 6014,
+      "code": 6015,
       "name": "SessionExpired",
       "msg": "Session has expired"
     },
     {
-      "code": 6015,
+      "code": 6016,
       "name": "NotSessionAuthority",
       "msg": "Not the session authority"
     },
     {
-      "code": 6016,
+      "code": 6017,
       "name": "NotPlayerOwner",
       "msg": "Not the player owner"
     },
     {
-      "code": 6017,
+      "code": 6018,
       "name": "NotEscrowAuthority",
       "msg": "Not the escrow authority"
     },
     {
-      "code": 6018,
+      "code": 6019,
       "name": "InsufficientEscrowBalance",
       "msg": "Insufficient escrow balance"
     },
     {
-      "code": 6019,
+      "code": 6020,
       "name": "InvalidAmount",
       "msg": "Invalid amount"
     },
     {
-      "code": 6020,
+      "code": 6021,
       "name": "InvalidSession",
       "msg": "Invalid session - session key mismatch"
     },
     {
-      "code": 6021,
+      "code": 6022,
       "name": "PlayerPermanentlyDead",
       "msg": "Player is permanently dead and cannot be revived"
     }
@@ -2446,6 +2559,10 @@
             "type": "bool"
           },
           {
+            "name": "equipped_weapon_type",
+            "type": "u8"
+          },
+          {
             "name": "helmet",
             "type": "pubkey"
           },
@@ -2501,28 +2618,16 @@
         "kind": "enum",
         "variants": [
           {
-            "name": "Warrior"
+            "name": "Barbarian"
           },
           {
-            "name": "Mage"
+            "name": "Warrior"
           },
           {
             "name": "Rogue"
           },
           {
-            "name": "Cleric"
-          },
-          {
-            "name": "Ranger"
-          },
-          {
-            "name": "Paladin"
-          },
-          {
-            "name": "Necromancer"
-          },
-          {
-            "name": "Berserker"
+            "name": "Wizard"
           }
         ]
       }

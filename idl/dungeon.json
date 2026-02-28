@@ -1493,6 +1493,90 @@
       "args": []
     },
     {
+      "name": "exit_dungeon_with_session",
+      "docs": [
+        "Exit dungeon early using session key"
+      ],
+      "discriminator": [
+        58,
+        171,
+        45,
+        65,
+        124,
+        80,
+        67,
+        236
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority"
+        },
+        {
+          "name": "session"
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "loot_config"
+        },
+        {
+          "name": "loot_rolls_program",
+          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+        },
+        {
+          "name": "player_program",
+          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "generate_player_dungeon",
       "docs": [
         "Generate a private dungeon with random enemies",
@@ -2550,9 +2634,6 @@
     },
     {
       "name": "BattleEvent",
-      "docs": [
-        "A single event that occurred during battle"
-      ],
       "type": {
         "kind": "struct",
         "fields": [
@@ -2598,140 +2679,21 @@
             }
           },
           {
-            "name": "base_roll",
+            "name": "detail_codec_version",
             "type": "u8"
           },
           {
-            "name": "roll_bonus",
+            "name": "detail_len",
             "type": "u8"
           },
           {
-            "name": "final_roll",
-            "type": "u8"
-          },
-          {
-            "name": "miss_threshold",
-            "type": "u8"
-          },
-          {
-            "name": "crit_threshold",
-            "type": "u8"
-          },
-          {
-            "name": "success_threshold",
-            "type": "u8"
-          },
-          {
-            "name": "next_action_slot",
-            "type": "u8"
-          },
-          {
-            "name": "action_advanced",
-            "type": "bool"
-          },
-          {
-            "name": "is_miss",
-            "type": "bool"
-          },
-          {
-            "name": "is_crit",
-            "type": "bool"
-          },
-          {
-            "name": "target_weakened",
-            "type": "bool"
-          },
-          {
-            "name": "effect_applied",
-            "type": "bool"
-          },
-          {
-            "name": "attacker_health_before",
-            "type": "i16"
-          },
-          {
-            "name": "attacker_health_after",
-            "type": "i16"
-          },
-          {
-            "name": "attacker_max_health",
-            "type": "i16"
-          },
-          {
-            "name": "target_health_before",
-            "type": "i16"
-          },
-          {
-            "name": "target_health_after",
-            "type": "i16"
-          },
-          {
-            "name": "target_max_health",
-            "type": "i16"
-          },
-          {
-            "name": "attacker_strength",
-            "type": "u16"
-          },
-          {
-            "name": "effective_attack",
-            "type": "i16"
-          },
-          {
-            "name": "target_armor",
-            "type": "i16"
-          },
-          {
-            "name": "raw_damage_bonus",
-            "type": "i16"
-          },
-          {
-            "name": "action_multiplier_percent",
-            "type": "u16"
-          },
-          {
-            "name": "combo_multiplier_percent",
-            "type": "u16"
-          },
-          {
-            "name": "damage_multiplier_percent",
-            "type": "u16"
-          },
-          {
-            "name": "crit_multiplier_percent",
-            "type": "u16"
-          },
-          {
-            "name": "weakened_multiplier_percent",
-            "type": "u16"
-          },
-          {
-            "name": "raw_damage_base",
-            "type": "i32"
-          },
-          {
-            "name": "raw_damage_after_multipliers",
-            "type": "i32"
-          },
-          {
-            "name": "damage_after_armor",
-            "type": "i16"
-          },
-          {
-            "name": "final_damage_calculated",
-            "type": "i16"
-          },
-          {
-            "name": "effect_type",
-            "type": "u8"
-          },
-          {
-            "name": "effect_value1",
-            "type": "i16"
-          },
-          {
-            "name": "effect_value2",
-            "type": "u8"
+            "name": "detail_payload",
+            "type": {
+              "array": [
+                "u8",
+                48
+              ]
+            }
           }
         ]
       }
@@ -3271,6 +3233,10 @@
             "type": "bool"
           },
           {
+            "name": "equipped_weapon_type",
+            "type": "u8"
+          },
+          {
             "name": "helmet",
             "type": "pubkey"
           },
@@ -3326,28 +3292,16 @@
         "kind": "enum",
         "variants": [
           {
-            "name": "Warrior"
+            "name": "Barbarian"
           },
           {
-            "name": "Mage"
+            "name": "Warrior"
           },
           {
             "name": "Rogue"
           },
           {
-            "name": "Cleric"
-          },
-          {
-            "name": "Ranger"
-          },
-          {
-            "name": "Paladin"
-          },
-          {
-            "name": "Necromancer"
-          },
-          {
-            "name": "Berserker"
+            "name": "Wizard"
           }
         ]
       }
@@ -3424,6 +3378,115 @@
       }
     },
     {
+      "name": "ReplayActionSlot",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "enabled",
+            "type": "bool"
+          },
+          {
+            "name": "success_threshold",
+            "type": "u8"
+          },
+          {
+            "name": "effect_type",
+            "type": "u8"
+          },
+          {
+            "name": "effect_value1",
+            "type": "i16"
+          },
+          {
+            "name": "effect_value2",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ReplayEnemySnapshot",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "health",
+            "type": "i16"
+          },
+          {
+            "name": "strength",
+            "type": "u16"
+          },
+          {
+            "name": "intelligence",
+            "type": "u16"
+          },
+          {
+            "name": "attack",
+            "type": "i16"
+          },
+          {
+            "name": "defense",
+            "type": "i16"
+          },
+          {
+            "name": "experience_reward",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ReplayPlayerSnapshot",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "health",
+            "type": "i16"
+          },
+          {
+            "name": "max_health",
+            "type": "i16"
+          },
+          {
+            "name": "strength",
+            "type": "u16"
+          },
+          {
+            "name": "intelligence",
+            "type": "u16"
+          },
+          {
+            "name": "attack",
+            "type": "i16"
+          },
+          {
+            "name": "defense",
+            "type": "i16"
+          },
+          {
+            "name": "current_action_slot",
+            "type": "u8"
+          },
+          {
+            "name": "action_slots",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "ReplayActionSlot"
+                  }
+                },
+                5
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "RoomBattleLog",
       "docs": [
         "Battle log for a single room"
@@ -3466,6 +3529,39 @@
           {
             "name": "timestamp",
             "type": "i64"
+          },
+          {
+            "name": "replay_codec_version",
+            "type": "u8"
+          },
+          {
+            "name": "replay_engine_version",
+            "type": "u16"
+          },
+          {
+            "name": "replay_seed_slot_bytes",
+            "type": {
+              "array": [
+                "u8",
+                8
+              ]
+            }
+          },
+          {
+            "name": "replay_player",
+            "type": {
+              "defined": {
+                "name": "ReplayPlayerSnapshot"
+              }
+            }
+          },
+          {
+            "name": "replay_enemy",
+            "type": {
+              "defined": {
+                "name": "ReplayEnemySnapshot"
+              }
+            }
           },
           {
             "name": "events",

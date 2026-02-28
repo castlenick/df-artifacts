@@ -8,6 +8,41 @@
   },
   "instructions": [
     {
+      "name": "close_empty_item_account",
+      "docs": [
+        "Close a placeholder no-drop item account and return rent to payer.",
+        "Used when create_item/create_item_with_payer rolled no item."
+      ],
+      "discriminator": [
+        207,
+        60,
+        20,
+        130,
+        108,
+        215,
+        248,
+        115
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "docs": [
+            "Receiver for rent refund."
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "item_account",
+          "docs": [
+            "Placeholder item account to close."
+          ],
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "create_item",
       "discriminator": [
         176,
@@ -188,6 +223,84 @@
           }
         }
       ]
+    },
+    {
+      "name": "destroy_item",
+      "docs": [
+        "Destroy an item account and return rent to its owner."
+      ],
+      "discriminator": [
+        160,
+        243,
+        144,
+        203,
+        171,
+        80,
+        178,
+        173
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "docs": [
+            "Current owner of the item."
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "item_account",
+          "docs": [
+            "Item account to destroy. Must be owned by signer."
+          ],
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "destroy_lowest_rarity_item_with_session",
+      "docs": [
+        "Destroy a lowest-rarity item using a valid player session.",
+        "Rent from item close is returned to the player's session escrow PDA."
+      ],
+      "discriminator": [
+        244,
+        155,
+        76,
+        241,
+        139,
+        227,
+        113,
+        209
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "docs": [
+            "Session key signer."
+          ],
+          "signer": true
+        },
+        {
+          "name": "authority"
+        },
+        {
+          "name": "session"
+        },
+        {
+          "name": "escrow",
+          "writable": true
+        },
+        {
+          "name": "item_account",
+          "docs": [
+            "Item account to close to escrow."
+          ],
+          "writable": true
+        }
+      ],
+      "args": []
     },
     {
       "name": "initialize",
@@ -483,6 +596,31 @@
       "code": 6001,
       "name": "InvalidOwner",
       "msg": "Invalid owner - you don't own this item"
+    },
+    {
+      "code": 6002,
+      "name": "NotEmptyItemAccount",
+      "msg": "Item account is not an empty no-drop placeholder"
+    },
+    {
+      "code": 6003,
+      "name": "InvalidSession",
+      "msg": "Invalid or expired player session"
+    },
+    {
+      "code": 6004,
+      "name": "SessionExpired",
+      "msg": "Session has expired"
+    },
+    {
+      "code": 6005,
+      "name": "InvalidEscrowAccount",
+      "msg": "Invalid session escrow account"
+    },
+    {
+      "code": 6006,
+      "name": "ItemNotLowestRarity",
+      "msg": "Item is not the lowest rarity tier"
     }
   ],
   "types": [
@@ -518,6 +656,84 @@
       }
     },
     {
+      "name": "BootsType",
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "LeatherBoots"
+          },
+          {
+            "name": "IronBoots"
+          },
+          {
+            "name": "SteelBoots"
+          },
+          {
+            "name": "MagicBoots"
+          },
+          {
+            "name": "RunningShoes"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ChestType",
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "LeatherArmor"
+          },
+          {
+            "name": "ChainMail"
+          },
+          {
+            "name": "PlateArmor"
+          },
+          {
+            "name": "Robes"
+          },
+          {
+            "name": "BattleVest"
+          }
+        ]
+      }
+    },
+    {
+      "name": "HelmetType",
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "LeatherCap"
+          },
+          {
+            "name": "IronHelmet"
+          },
+          {
+            "name": "SteelHelmet"
+          },
+          {
+            "name": "MagicHood"
+          },
+          {
+            "name": "Crown"
+          }
+        ]
+      }
+    },
+    {
       "name": "Item",
       "docs": [
         "Complete item definition"
@@ -537,7 +753,7 @@
             "name": "item_type",
             "type": {
               "defined": {
-                "name": "ItemType"
+                "name": "ItemKind"
               }
             }
           },
@@ -606,6 +822,69 @@
       }
     },
     {
+      "name": "ItemKind",
+      "docs": [
+        "Tagged item kind using per-slot enums."
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Weapon",
+            "fields": [
+              {
+                "name": "weapon_type",
+                "type": {
+                  "defined": {
+                    "name": "WeaponType"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "Helmet",
+            "fields": [
+              {
+                "name": "helmet_type",
+                "type": {
+                  "defined": {
+                    "name": "HelmetType"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "Chest",
+            "fields": [
+              {
+                "name": "chest_type",
+                "type": {
+                  "defined": {
+                    "name": "ChestType"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "Boots",
+            "fields": [
+              {
+                "name": "boots_type",
+                "type": {
+                  "defined": {
+                    "name": "BootsType"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
       "name": "ItemSlot",
       "docs": [
         "Equipment slots where items can be equipped"
@@ -627,104 +906,6 @@
           },
           {
             "name": "Boots"
-          }
-        ]
-      }
-    },
-    {
-      "name": "ItemType",
-      "docs": [
-        "All item types in the game"
-      ],
-      "repr": {
-        "kind": "rust"
-      },
-      "type": {
-        "kind": "enum",
-        "variants": [
-          {
-            "name": "ShortSword"
-          },
-          {
-            "name": "BroadSword"
-          },
-          {
-            "name": "LongSword"
-          },
-          {
-            "name": "CrystalSword"
-          },
-          {
-            "name": "Mace"
-          },
-          {
-            "name": "WarHammer"
-          },
-          {
-            "name": "BattleAxe"
-          },
-          {
-            "name": "Dagger"
-          },
-          {
-            "name": "ThrowingKnife"
-          },
-          {
-            "name": "Staff"
-          },
-          {
-            "name": "Wand"
-          },
-          {
-            "name": "Bow"
-          },
-          {
-            "name": "Crossbow"
-          },
-          {
-            "name": "LeatherCap"
-          },
-          {
-            "name": "IronHelmet"
-          },
-          {
-            "name": "SteelHelmet"
-          },
-          {
-            "name": "MagicHood"
-          },
-          {
-            "name": "Crown"
-          },
-          {
-            "name": "LeatherArmor"
-          },
-          {
-            "name": "ChainMail"
-          },
-          {
-            "name": "PlateArmor"
-          },
-          {
-            "name": "Robes"
-          },
-          {
-            "name": "BattleVest"
-          },
-          {
-            "name": "LeatherBoots"
-          },
-          {
-            "name": "IronBoots"
-          },
-          {
-            "name": "SteelBoots"
-          },
-          {
-            "name": "MagicBoots"
-          },
-          {
-            "name": "RunningShoes"
           }
         ]
       }
@@ -960,6 +1141,29 @@
           },
           {
             "name": "ArmorPierce"
+          }
+        ]
+      }
+    },
+    {
+      "name": "WeaponType",
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Sword"
+          },
+          {
+            "name": "Mace"
+          },
+          {
+            "name": "Dagger"
+          },
+          {
+            "name": "Wand"
           }
         ]
       }

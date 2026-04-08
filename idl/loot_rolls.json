@@ -44,6 +44,9 @@
     },
     {
       "name": "create_item",
+      "docs": [
+        "Create an item account. CPI-only — cannot be called directly by users."
+      ],
       "discriminator": [
         176,
         125,
@@ -131,7 +134,7 @@
     {
       "name": "create_item_with_payer",
       "docs": [
-        "Create an item with a separate payer (for session-aware CPI calls)",
+        "Create an item with a separate payer (for session-aware CPI calls). CPI-only.",
         "Owner is used for seed derivation and ownership, payer pays for account"
       ],
       "discriminator": [
@@ -621,6 +624,11 @@
       "code": 6006,
       "name": "ItemNotLowestRarity",
       "msg": "Item is not the lowest rarity tier"
+    },
+    {
+      "code": 6007,
+      "name": "DirectCallNotAllowed",
+      "msg": "This instruction can only be called via CPI, not directly"
     }
   ],
   "types": [
@@ -772,6 +780,22 @@
                 "name": "Rarity"
               }
             }
+          },
+          {
+            "name": "template_id",
+            "type": "u16"
+          },
+          {
+            "name": "prefix_id",
+            "type": "u16"
+          },
+          {
+            "name": "suffix_id",
+            "type": "u16"
+          },
+          {
+            "name": "name",
+            "type": "string"
           },
           {
             "name": "base_stats",
@@ -1001,6 +1025,18 @@
         "kind": "struct",
         "fields": [
           {
+            "name": "source",
+            "type": {
+              "defined": {
+                "name": "ModifierSource"
+              }
+            }
+          },
+          {
+            "name": "name_id",
+            "type": "u16"
+          },
+          {
             "name": "mod_type",
             "type": {
               "defined": {
@@ -1010,7 +1046,11 @@
           },
           {
             "name": "value",
-            "type": "u8"
+            "type": "i16"
+          },
+          {
+            "name": "is_percent",
+            "type": "bool"
           },
           {
             "name": "max_rolled",
@@ -1020,7 +1060,7 @@
       }
     },
     {
-      "name": "ModifierType",
+      "name": "ModifierSource",
       "docs": [
         "Types of modifiers that can be on items"
       ],
@@ -1031,49 +1071,87 @@
         "kind": "enum",
         "variants": [
           {
-            "name": "Signature"
+            "name": "Prefix"
           },
           {
-            "name": "Masterwork"
+            "name": "Action"
           },
           {
-            "name": "Bizarre"
+            "name": "Suffix"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ModifierType",
+      "docs": [
+        "Modifier stat/effect category."
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "None"
           },
           {
-            "name": "Swift"
+            "name": "Damage"
           },
           {
-            "name": "Sharpened"
+            "name": "DamageMultiplier"
           },
           {
-            "name": "Vampiric"
+            "name": "AttackSpeed"
           },
           {
-            "name": "Flaming"
+            "name": "Speed"
           },
           {
-            "name": "Frozen"
+            "name": "RollBonus"
           },
           {
-            "name": "Holy"
+            "name": "MagicFind"
           },
           {
-            "name": "Light"
+            "name": "Durability"
           },
           {
-            "name": "Padded"
+            "name": "Hit"
           },
           {
-            "name": "Hardened"
+            "name": "Crit"
           },
           {
-            "name": "Fortified"
+            "name": "CritMiss"
           },
           {
-            "name": "Resilient"
+            "name": "Armor"
           },
           {
-            "name": "MaxRolled"
+            "name": "Health"
+          },
+          {
+            "name": "HealthRegen"
+          },
+          {
+            "name": "Strength"
+          },
+          {
+            "name": "Agility"
+          },
+          {
+            "name": "Technique"
+          },
+          {
+            "name": "Intelligence"
+          },
+          {
+            "name": "Combo"
+          },
+          {
+            "name": "All"
           }
         ]
       }
@@ -1090,19 +1168,16 @@
         "kind": "enum",
         "variants": [
           {
-            "name": "Rusty"
+            "name": "Common"
           },
           {
-            "name": "Damaged"
+            "name": "Uncommon"
           },
           {
-            "name": "BattleTested"
+            "name": "Rare"
           },
           {
-            "name": "Polished"
-          },
-          {
-            "name": "Masterwork"
+            "name": "Epic"
           },
           {
             "name": "Legendary"

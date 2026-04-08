@@ -70,6 +70,109 @@
       "args": []
     },
     {
+      "name": "admin_update_player_stats",
+      "docs": [
+        "Admin-only: directly update player stats. For gameplay use `update_player_stats_cpi`."
+      ],
+      "discriminator": [
+        228,
+        43,
+        102,
+        33,
+        16,
+        29,
+        20,
+        64
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "docs": [
+            "Admin authority — must match namespace_config.authority"
+          ],
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "namespace_config"
+          ]
+        },
+        {
+          "name": "namespace_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  110,
+                  97,
+                  109,
+                  101,
+                  115,
+                  112,
+                  97,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "docs": [
+            "The player's wallet (used for PDA derivation, does not need to sign)"
+          ],
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "player",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "health",
+          "type": {
+            "option": "i16"
+          }
+        },
+        {
+          "name": "wins",
+          "type": {
+            "option": "u32"
+          }
+        },
+        {
+          "name": "losses",
+          "type": {
+            "option": "u32"
+          }
+        },
+        {
+          "name": "experience",
+          "type": {
+            "option": "u64"
+          }
+        }
+      ]
+    },
+    {
       "name": "advance_action_slot",
       "docs": [
         "Advance to the next action slot (called when roll succeeds)"
@@ -83,6 +186,38 @@
         8,
         229,
         82
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "player",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_player",
+      "docs": [
+        "Close a dead player account and reclaim its rent to the owner.",
+        "Shared inventory is wallet-scoped and intentionally not touched here."
+      ],
+      "discriminator": [
+        225,
+        227,
+        204,
+        63,
+        32,
+        122,
+        58,
+        227
       ],
       "accounts": [
         {
@@ -695,7 +830,7 @@
     {
       "name": "create_session",
       "docs": [
-        "Create a game session - allows a temporary keypair to act on behalf of the player",
+        "Create a game session - allows a temporary keypair to act on behalf of the wallet authority",
         "The session keypair can sign transactions without wallet approval popups",
         "",
         "Parameters:",
@@ -761,7 +896,7 @@
         {
           "name": "player",
           "docs": [
-            "The player this session will control"
+            "Any authority-owned player in the current state epoch (used for creation-time validation)"
           ]
         },
         {
@@ -899,6 +1034,52 @@
           "relations": [
             "player"
           ]
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "item_account"
+        }
+      ],
+      "args": [
+        {
+          "name": "item_slot",
+          "type": {
+            "defined": {
+              "name": "ItemSlot"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "equip_item_with_session",
+      "docs": [
+        "Session-aware item equip."
+      ],
+      "discriminator": [
+        118,
+        45,
+        147,
+        60,
+        28,
+        190,
+        140,
+        37
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority"
+        },
+        {
+          "name": "session"
         },
         {
           "name": "player",
@@ -2141,7 +2322,54 @@
       ]
     },
     {
+      "name": "unequip_item_with_session",
+      "docs": [
+        "Session-aware item unequip."
+      ],
+      "discriminator": [
+        9,
+        22,
+        201,
+        19,
+        147,
+        30,
+        108,
+        33
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority"
+        },
+        {
+          "name": "session"
+        },
+        {
+          "name": "player",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "item_slot",
+          "type": {
+            "defined": {
+              "name": "ItemSlot"
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "update_player_stats",
+      "docs": [
+        "Owner-signed stat update, callable ONLY via CPI (not directly by users).",
+        "The dungeon program calls this to update stats after battles."
+      ],
       "discriminator": [
         61,
         85,
@@ -2522,6 +2750,21 @@
       "code": 6024,
       "name": "PlayerPermanentlyDead",
       "msg": "Player is permanently dead and cannot be revived"
+    },
+    {
+      "code": 6025,
+      "name": "PlayerMustBeDeadToClose",
+      "msg": "Only dead players can be closed"
+    },
+    {
+      "code": 6026,
+      "name": "PlayerHasEquippedItems",
+      "msg": "Cannot close player while items are equipped"
+    },
+    {
+      "code": 6027,
+      "name": "DirectCallNotAllowed",
+      "msg": "This instruction can only be called via CPI, not directly"
     }
   ],
   "types": [
@@ -2780,7 +3023,7 @@
     {
       "name": "GameSession",
       "docs": [
-        "Game Session - allows temporary keypair to act on behalf of player",
+        "Game Session - allows temporary keypair to act on behalf of wallet authority",
         "This enables auto-signing transactions without wallet approval popups"
       ],
       "type": {

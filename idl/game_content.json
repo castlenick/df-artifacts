@@ -190,7 +190,7 @@
     {
       "name": "create_enemy",
       "docs": [
-        "Create a battle-ready enemy account (template encounter content)"
+        "Create a battle-ready enemy account (admin only)"
       ],
       "discriminator": [
         81,
@@ -207,6 +207,31 @@
           "name": "creator",
           "writable": true,
           "signer": true
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
         },
         {
           "name": "enemy",
@@ -1434,6 +1459,11 @@
       "code": 6006,
       "name": "InvalidHealth",
       "msg": "Health must be greater than 0"
+    },
+    {
+      "code": 6007,
+      "name": "InvalidAuthority",
+      "msg": "New authority cannot be the default/zero address"
     }
   ],
   "types": [
@@ -1655,46 +1685,28 @@
             "name": "Goblin"
           },
           {
+            "name": "Spider"
+          },
+          {
+            "name": "Wolf"
+          },
+          {
+            "name": "FireElemental"
+          },
+          {
+            "name": "LavaGolem"
+          },
+          {
+            "name": "Bat"
+          },
+          {
             "name": "Skeleton"
           },
           {
             "name": "Zombie"
           },
           {
-            "name": "Wolf"
-          },
-          {
-            "name": "Spider"
-          },
-          {
-            "name": "Orc"
-          },
-          {
-            "name": "Troll"
-          },
-          {
-            "name": "Ogre"
-          },
-          {
-            "name": "Werewolf"
-          },
-          {
-            "name": "Dragon"
-          },
-          {
-            "name": "DarkKnight"
-          },
-          {
-            "name": "Lich"
-          },
-          {
-            "name": "Demon"
-          },
-          {
-            "name": "DragonLord"
-          },
-          {
-            "name": "UndeadKing"
+            "name": "Wraith"
           },
           {
             "name": "Custom"

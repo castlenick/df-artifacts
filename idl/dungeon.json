@@ -1,5 +1,5 @@
 {
-  "address": "6MVNvrSeVXJskBQM97z9e5v3u9c16MVBJKVbvTSJLi8f",
+  "address": "H8oUofszrN7yE9mJX2QSBXBAmhxRqoEj8nJ7Hq7yYCSP",
   "metadata": {
     "name": "dungeon",
     "version": "0.1.0",
@@ -69,7 +69,7 @@
         },
         {
           "name": "player_program",
-          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
         }
       ],
       "args": []
@@ -135,6 +135,13 @@
           }
         },
         {
+          "name": "inventory",
+          "docs": [
+            "Player's shared inventory — passed to player program on death to remove equipped items"
+          ],
+          "writable": true
+        },
+        {
           "name": "room_log",
           "writable": true,
           "signer": true
@@ -143,12 +150,12 @@
           "name": "loot_config"
         },
         {
-          "name": "loot_rolls_program",
-          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
         },
         {
           "name": "player_program",
-          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
         },
         {
           "name": "system_program",
@@ -224,38 +231,38 @@
             "program": {
               "kind": "const",
               "value": [
-                122,
-                205,
-                249,
-                21,
-                24,
-                196,
-                198,
-                190,
-                192,
-                31,
-                161,
-                242,
-                17,
-                34,
-                134,
-                49,
-                124,
-                243,
-                129,
-                45,
-                255,
-                132,
-                10,
-                135,
-                229,
-                18,
-                174,
+                106,
                 94,
-                104,
-                215,
-                204,
-                133
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
               ]
             }
           }
@@ -300,6 +307,13 @@
           }
         },
         {
+          "name": "inventory",
+          "docs": [
+            "Player's shared inventory — passed to player program on death to remove equipped items"
+          ],
+          "writable": true
+        },
+        {
           "name": "room_log",
           "writable": true,
           "signer": true
@@ -308,12 +322,12 @@
           "name": "loot_config"
         },
         {
-          "name": "loot_rolls_program",
-          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
         },
         {
           "name": "player_program",
-          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
         },
         {
           "name": "system_program",
@@ -386,6 +400,13 @@
           "name": "enemy"
         },
         {
+          "name": "inventory",
+          "docs": [
+            "Player's shared inventory — passed to player program on death to remove equipped items"
+          ],
+          "writable": true
+        },
+        {
           "name": "room_log",
           "writable": true,
           "signer": true
@@ -394,12 +415,12 @@
           "name": "loot_config"
         },
         {
-          "name": "loot_rolls_program",
-          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
         },
         {
           "name": "player_program",
-          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
         },
         {
           "name": "system_program",
@@ -483,11 +504,11 @@
         },
         {
           "name": "player_program",
-          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
         },
         {
-          "name": "loot_rolls_program",
-          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
         },
         {
           "name": "system_program",
@@ -582,11 +603,11 @@
         },
         {
           "name": "player_program",
-          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
         },
         {
-          "name": "loot_rolls_program",
-          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
         },
         {
           "name": "system_program",
@@ -725,38 +746,38 @@
             "program": {
               "kind": "const",
               "value": [
-                122,
-                205,
-                249,
-                21,
-                24,
-                196,
-                198,
-                190,
-                192,
-                31,
-                161,
-                242,
-                17,
-                34,
-                134,
-                49,
-                124,
-                243,
-                129,
-                45,
-                255,
-                132,
-                10,
-                135,
-                229,
-                18,
-                174,
+                106,
                 94,
-                104,
-                215,
-                204,
-                133
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
               ]
             }
           }
@@ -893,38 +914,38 @@
             "program": {
               "kind": "const",
               "value": [
-                122,
-                205,
-                249,
-                21,
-                24,
-                196,
-                198,
-                190,
-                192,
-                31,
-                161,
-                242,
-                17,
-                34,
-                134,
-                49,
-                124,
-                243,
-                129,
-                45,
-                255,
-                132,
-                10,
-                135,
-                229,
-                18,
-                174,
+                106,
                 94,
-                104,
-                215,
-                204,
-                133
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
               ]
             }
           }
@@ -1067,38 +1088,38 @@
             "program": {
               "kind": "const",
               "value": [
-                122,
-                205,
-                249,
-                21,
-                24,
-                196,
-                198,
-                190,
-                192,
-                31,
-                161,
-                242,
-                17,
-                34,
-                134,
-                49,
-                124,
-                243,
-                129,
-                45,
-                255,
-                132,
-                10,
-                135,
-                229,
-                18,
-                174,
+                106,
                 94,
-                104,
-                215,
-                204,
-                133
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
               ]
             }
           }
@@ -1280,38 +1301,38 @@
             "program": {
               "kind": "const",
               "value": [
-                122,
-                205,
-                249,
-                21,
-                24,
-                196,
-                198,
-                190,
-                192,
-                31,
-                161,
-                242,
-                17,
-                34,
-                134,
-                49,
-                124,
-                243,
-                129,
-                45,
-                255,
-                132,
-                10,
-                135,
-                229,
-                18,
-                174,
+                106,
                 94,
-                104,
-                215,
-                204,
-                133
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
               ]
             }
           }
@@ -1534,12 +1555,12 @@
           "name": "loot_config"
         },
         {
-          "name": "loot_rolls_program",
-          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
         },
         {
           "name": "player_program",
-          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
         },
         {
           "name": "system_program",
@@ -1618,12 +1639,12 @@
           "name": "loot_config"
         },
         {
-          "name": "loot_rolls_program",
-          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
         },
         {
           "name": "player_program",
-          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
         },
         {
           "name": "system_program",
@@ -1776,38 +1797,38 @@
             "program": {
               "kind": "const",
               "value": [
-                122,
-                205,
-                249,
-                21,
-                24,
-                196,
-                198,
-                190,
-                192,
-                31,
-                161,
-                242,
-                17,
-                34,
-                134,
-                49,
-                124,
-                243,
-                129,
-                45,
-                255,
-                132,
-                10,
-                135,
-                229,
-                18,
-                174,
+                106,
                 94,
-                104,
-                215,
-                204,
-                133
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
               ]
             }
           }
@@ -1853,7 +1874,7 @@
         },
         {
           "name": "player_program",
-          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
         },
         {
           "name": "system_program",
@@ -2134,38 +2155,38 @@
             "program": {
               "kind": "const",
               "value": [
-                122,
-                205,
-                249,
-                21,
-                24,
-                196,
-                198,
-                190,
-                192,
-                31,
-                161,
-                242,
-                17,
-                34,
-                134,
-                49,
-                124,
-                243,
-                129,
-                45,
-                255,
-                132,
-                10,
-                135,
-                229,
-                18,
-                174,
+                106,
                 94,
-                104,
-                215,
-                204,
-                133
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
               ]
             }
           }
@@ -2246,7 +2267,7 @@
         },
         {
           "name": "player_program",
-          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
         },
         {
           "name": "system_program",
@@ -2341,38 +2362,38 @@
             "program": {
               "kind": "const",
               "value": [
-                122,
-                205,
-                249,
-                21,
-                24,
-                196,
-                198,
-                190,
-                192,
-                31,
-                161,
-                242,
-                17,
-                34,
-                134,
-                49,
-                124,
-                243,
-                129,
-                45,
-                255,
-                132,
-                10,
-                135,
-                229,
-                18,
-                174,
+                106,
                 94,
-                104,
-                215,
-                204,
-                133
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
               ]
             }
           }
@@ -2414,7 +2435,7 @@
         },
         {
           "name": "player_program",
-          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
         },
         {
           "name": "system_program",
@@ -2761,38 +2782,38 @@
             "program": {
               "kind": "const",
               "value": [
-                122,
-                205,
-                249,
-                21,
-                24,
-                196,
-                198,
-                190,
-                192,
-                31,
-                161,
-                242,
-                17,
-                34,
-                134,
-                49,
-                124,
-                243,
-                129,
-                45,
-                255,
-                132,
-                10,
-                135,
-                229,
-                18,
-                174,
+                106,
                 94,
-                104,
-                215,
-                204,
-                133
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
               ]
             }
           }
@@ -2837,7 +2858,7 @@
         },
         {
           "name": "player_program",
-          "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc"
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
         },
         {
           "name": "system_program",
@@ -2848,6 +2869,19 @@
     }
   ],
   "accounts": [
+    {
+      "name": "DeadOrAlivePlayer",
+      "discriminator": [
+        38,
+        74,
+        218,
+        130,
+        236,
+        43,
+        233,
+        66
+      ]
+    },
     {
       "name": "DungeonChoices",
       "discriminator": [
@@ -2937,19 +2971,6 @@
         170,
         49,
         27
-      ]
-    },
-    {
-      "name": "Player",
-      "discriminator": [
-        205,
-        222,
-        112,
-        7,
-        165,
-        155,
-        206,
-        218
       ]
     },
     {
@@ -3354,6 +3375,32 @@
                 "type": "u8"
               }
             ]
+          },
+          {
+            "name": "BoostSelfSpeed",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              },
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "ReduceEnemySpeed",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              },
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
           }
         ]
       }
@@ -3411,6 +3458,10 @@
             }
           },
           {
+            "name": "timestamp",
+            "type": "u16"
+          },
+          {
             "name": "damage",
             "type": "u8"
           },
@@ -3455,6 +3506,159 @@
                 48
               ]
             }
+          }
+        ]
+      }
+    },
+    {
+      "name": "DeadOrAlivePlayer",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "state_epoch",
+            "type": "u16"
+          },
+          {
+            "name": "player_id",
+            "type": "u8"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "player_class",
+            "type": {
+              "defined": {
+                "name": "PlayerClass"
+              }
+            }
+          },
+          {
+            "name": "level",
+            "type": "u8"
+          },
+          {
+            "name": "health",
+            "type": "i16"
+          },
+          {
+            "name": "max_health",
+            "type": "i16"
+          },
+          {
+            "name": "strength",
+            "type": "u16"
+          },
+          {
+            "name": "agility",
+            "type": "u16"
+          },
+          {
+            "name": "technique",
+            "type": "u16"
+          },
+          {
+            "name": "intelligence",
+            "type": "u16"
+          },
+          {
+            "name": "base_attack",
+            "type": "i16"
+          },
+          {
+            "name": "base_defense",
+            "type": "i16"
+          },
+          {
+            "name": "total_attack",
+            "type": "i16"
+          },
+          {
+            "name": "total_defense",
+            "type": "i16"
+          },
+          {
+            "name": "equipment_attack_bonus",
+            "type": "i16"
+          },
+          {
+            "name": "equipment_defense_bonus",
+            "type": "i16"
+          },
+          {
+            "name": "equipment_health_bonus",
+            "type": "i16"
+          },
+          {
+            "name": "equipment_speed_bonus",
+            "type": "i16"
+          },
+          {
+            "name": "experience",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "weapon",
+            "type": "pubkey"
+          },
+          {
+            "name": "weapon_equipped",
+            "type": "bool"
+          },
+          {
+            "name": "equipped_weapon_type",
+            "type": "u8"
+          },
+          {
+            "name": "helmet",
+            "type": "pubkey"
+          },
+          {
+            "name": "helmet_equipped",
+            "type": "bool"
+          },
+          {
+            "name": "chest",
+            "type": "pubkey"
+          },
+          {
+            "name": "chest_equipped",
+            "type": "bool"
+          },
+          {
+            "name": "boots",
+            "type": "pubkey"
+          },
+          {
+            "name": "boots_equipped",
+            "type": "bool"
+          },
+          {
+            "name": "action_slots",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "Action"
+                  }
+                },
+                5
+              ]
+            }
+          },
+          {
+            "name": "current_action_slot",
+            "type": "u8"
           }
         ]
       }
@@ -3837,6 +4041,12 @@
           },
           {
             "name": "TurnStart"
+          },
+          {
+            "name": "TickDamage"
+          },
+          {
+            "name": "StunSkipped"
           }
         ]
       }
@@ -3957,163 +4167,6 @@
           },
           {
             "name": "bump",
-            "type": "u8"
-          }
-        ]
-      }
-    },
-    {
-      "name": "Player",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "owner",
-            "type": "pubkey"
-          },
-          {
-            "name": "state_epoch",
-            "type": "u16"
-          },
-          {
-            "name": "player_id",
-            "type": "u8"
-          },
-          {
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "name": "player_class",
-            "type": {
-              "defined": {
-                "name": "PlayerClass"
-              }
-            }
-          },
-          {
-            "name": "level",
-            "type": "u8"
-          },
-          {
-            "name": "health",
-            "type": "i16"
-          },
-          {
-            "name": "max_health",
-            "type": "i16"
-          },
-          {
-            "name": "strength",
-            "type": "u16"
-          },
-          {
-            "name": "agility",
-            "type": "u16"
-          },
-          {
-            "name": "technique",
-            "type": "u16"
-          },
-          {
-            "name": "intelligence",
-            "type": "u16"
-          },
-          {
-            "name": "base_attack",
-            "type": "i16"
-          },
-          {
-            "name": "base_defense",
-            "type": "i16"
-          },
-          {
-            "name": "total_attack",
-            "type": "i16"
-          },
-          {
-            "name": "total_defense",
-            "type": "i16"
-          },
-          {
-            "name": "equipment_attack_bonus",
-            "type": "i16"
-          },
-          {
-            "name": "equipment_defense_bonus",
-            "type": "i16"
-          },
-          {
-            "name": "equipment_health_bonus",
-            "type": "i16"
-          },
-          {
-            "name": "experience",
-            "type": "u64"
-          },
-          {
-            "name": "wins",
-            "type": "u32"
-          },
-          {
-            "name": "losses",
-            "type": "u32"
-          },
-          {
-            "name": "bump",
-            "type": "u8"
-          },
-          {
-            "name": "weapon",
-            "type": "pubkey"
-          },
-          {
-            "name": "weapon_equipped",
-            "type": "bool"
-          },
-          {
-            "name": "equipped_weapon_type",
-            "type": "u8"
-          },
-          {
-            "name": "helmet",
-            "type": "pubkey"
-          },
-          {
-            "name": "helmet_equipped",
-            "type": "bool"
-          },
-          {
-            "name": "chest",
-            "type": "pubkey"
-          },
-          {
-            "name": "chest_equipped",
-            "type": "bool"
-          },
-          {
-            "name": "boots",
-            "type": "pubkey"
-          },
-          {
-            "name": "boots_equipped",
-            "type": "bool"
-          },
-          {
-            "name": "action_slots",
-            "type": {
-              "array": [
-                {
-                  "defined": {
-                    "name": "Action"
-                  }
-                },
-                5
-              ]
-            }
-          },
-          {
-            "name": "current_action_slot",
             "type": "u8"
           }
         ]
@@ -4276,6 +4329,10 @@
           {
             "name": "experience_reward",
             "type": "u8"
+          },
+          {
+            "name": "speed",
+            "type": "u16"
           }
         ]
       }
@@ -4325,6 +4382,10 @@
                 5
               ]
             }
+          },
+          {
+            "name": "speed",
+            "type": "u16"
           }
         ]
       }

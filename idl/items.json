@@ -1,10 +1,10 @@
 {
   "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF",
   "metadata": {
-    "name": "loot_rolls",
+    "name": "items",
     "version": "0.1.0",
     "spec": "0.1.0",
-    "description": "Created with Anchor"
+    "description": "Item system for DungeonFighters"
   },
   "instructions": [
     {

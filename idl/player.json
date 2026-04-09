@@ -1,5 +1,5 @@
 {
-  "address": "9GNuMbKQmo9hQgkSdgWdNne9vC6ZtsgtnwDQpAKicNGc",
+  "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ",
   "metadata": {
     "name": "player",
     "version": "0.1.0",
@@ -150,18 +150,6 @@
           "name": "health",
           "type": {
             "option": "i16"
-          }
-        },
-        {
-          "name": "wins",
-          "type": {
-            "option": "u32"
-          }
-        },
-        {
-          "name": "losses",
-          "type": {
-            "option": "u32"
           }
         },
         {
@@ -434,7 +422,7 @@
       "name": "create_item_to_inventory",
       "docs": [
         "Create a new item via loot roll AND add it to inventory in one transaction",
-        "This combines the loot_rolls::create_item CPI with adding to inventory",
+        "This combines the items::create_item CPI with adding to inventory",
         "NOTE: Uses manual reallocation to avoid CPI lamport accounting issues"
       ],
       "discriminator": [
@@ -490,7 +478,7 @@
         {
           "name": "item_account",
           "docs": [
-            "The PDA is [b\"item\", owner, item_id] under loot_rolls program"
+            "The PDA is [b\"item\", owner, item_id] under items program"
           ],
           "writable": true
         },
@@ -501,8 +489,8 @@
           ]
         },
         {
-          "name": "loot_rolls_program",
-          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
         },
         {
           "name": "system_program",
@@ -593,7 +581,7 @@
         {
           "name": "item_account",
           "docs": [
-            "The PDA is [b\"item\", authority, item_id] under loot_rolls program"
+            "The PDA is [b\"item\", authority, item_id] under items program"
           ],
           "writable": true
         },
@@ -604,8 +592,8 @@
           ]
         },
         {
-          "name": "loot_rolls_program",
-          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
         },
         {
           "name": "system_program",
@@ -1741,8 +1729,8 @@
           "writable": true
         },
         {
-          "name": "loot_rolls_program",
-          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
         },
         {
           "name": "system_program",
@@ -1755,7 +1743,7 @@
       "name": "remove_lowest_rarity_item_from_inventory_with_session",
       "docs": [
         "Session-aware item removal for lowest-rarity junk items.",
-        "If valid, closes the item account via loot_rolls and returns rent to session escrow."
+        "If valid, closes the item account via items program and returns rent to session escrow."
       ],
       "discriminator": [
         244,
@@ -1851,8 +1839,8 @@
           }
         },
         {
-          "name": "loot_rolls_program",
-          "address": "3fXC7TxR9adDo115TfHqpkqSVgwMQubds1kDmnjaUYtu"
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
         },
         {
           "name": "system_program",
@@ -2267,14 +2255,14 @@
         {
           "name": "item_account",
           "docs": [
-            "Item account to be transferred - validated but owned by loot_rolls program"
+            "Item account to be transferred - validated but owned by items program"
           ],
           "writable": true
         },
         {
-          "name": "loot_rolls_program",
+          "name": "items_program",
           "docs": [
-            "The loot_rolls program that owns ItemAccount"
+            "The items program that owns ItemAccount"
           ]
         },
         {
@@ -2402,18 +2390,6 @@
           }
         },
         {
-          "name": "wins",
-          "type": {
-            "option": "u32"
-          }
-        },
-        {
-          "name": "losses",
-          "type": {
-            "option": "u32"
-          }
-        },
-        {
           "name": "experience",
           "type": {
             "option": "u64"
@@ -2456,18 +2432,6 @@
           "name": "health",
           "type": {
             "option": "i16"
-          }
-        },
-        {
-          "name": "wins",
-          "type": {
-            "option": "u32"
-          }
-        },
-        {
-          "name": "losses",
-          "type": {
-            "option": "u32"
           }
         },
         {
@@ -2547,6 +2511,19 @@
   ],
   "accounts": [
     {
+      "name": "DeadOrAlivePlayer",
+      "discriminator": [
+        38,
+        74,
+        218,
+        130,
+        236,
+        43,
+        233,
+        66
+      ]
+    },
+    {
       "name": "GameSession",
       "discriminator": [
         150,
@@ -2583,19 +2560,6 @@
         114,
         57,
         248
-      ]
-    },
-    {
-      "name": "Player",
-      "discriminator": [
-        205,
-        222,
-        112,
-        7,
-        165,
-        155,
-        206,
-        218
       ]
     },
     {
@@ -2967,6 +2931,32 @@
                 "type": "u8"
               }
             ]
+          },
+          {
+            "name": "BoostSelfSpeed",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              },
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "ReduceEnemySpeed",
+            "fields": [
+              {
+                "name": "amount",
+                "type": "i16"
+              },
+              {
+                "name": "duration",
+                "type": "u8"
+              }
+            ]
           }
         ]
       }
@@ -3016,6 +3006,159 @@
             "type": {
               "vec": "pubkey"
             }
+          }
+        ]
+      }
+    },
+    {
+      "name": "DeadOrAlivePlayer",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "state_epoch",
+            "type": "u16"
+          },
+          {
+            "name": "player_id",
+            "type": "u8"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "player_class",
+            "type": {
+              "defined": {
+                "name": "PlayerClass"
+              }
+            }
+          },
+          {
+            "name": "level",
+            "type": "u8"
+          },
+          {
+            "name": "health",
+            "type": "i16"
+          },
+          {
+            "name": "max_health",
+            "type": "i16"
+          },
+          {
+            "name": "strength",
+            "type": "u16"
+          },
+          {
+            "name": "agility",
+            "type": "u16"
+          },
+          {
+            "name": "technique",
+            "type": "u16"
+          },
+          {
+            "name": "intelligence",
+            "type": "u16"
+          },
+          {
+            "name": "base_attack",
+            "type": "i16"
+          },
+          {
+            "name": "base_defense",
+            "type": "i16"
+          },
+          {
+            "name": "total_attack",
+            "type": "i16"
+          },
+          {
+            "name": "total_defense",
+            "type": "i16"
+          },
+          {
+            "name": "equipment_attack_bonus",
+            "type": "i16"
+          },
+          {
+            "name": "equipment_defense_bonus",
+            "type": "i16"
+          },
+          {
+            "name": "equipment_health_bonus",
+            "type": "i16"
+          },
+          {
+            "name": "equipment_speed_bonus",
+            "type": "i16"
+          },
+          {
+            "name": "experience",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "weapon",
+            "type": "pubkey"
+          },
+          {
+            "name": "weapon_equipped",
+            "type": "bool"
+          },
+          {
+            "name": "equipped_weapon_type",
+            "type": "u8"
+          },
+          {
+            "name": "helmet",
+            "type": "pubkey"
+          },
+          {
+            "name": "helmet_equipped",
+            "type": "bool"
+          },
+          {
+            "name": "chest",
+            "type": "pubkey"
+          },
+          {
+            "name": "chest_equipped",
+            "type": "bool"
+          },
+          {
+            "name": "boots",
+            "type": "pubkey"
+          },
+          {
+            "name": "boots_equipped",
+            "type": "bool"
+          },
+          {
+            "name": "action_slots",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "Action"
+                  }
+                },
+                5
+              ]
+            }
+          },
+          {
+            "name": "current_action_slot",
+            "type": "u8"
           }
         ]
       }
@@ -3187,163 +3330,6 @@
       }
     },
     {
-      "name": "Player",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "owner",
-            "type": "pubkey"
-          },
-          {
-            "name": "state_epoch",
-            "type": "u16"
-          },
-          {
-            "name": "player_id",
-            "type": "u8"
-          },
-          {
-            "name": "name",
-            "type": "string"
-          },
-          {
-            "name": "player_class",
-            "type": {
-              "defined": {
-                "name": "PlayerClass"
-              }
-            }
-          },
-          {
-            "name": "level",
-            "type": "u8"
-          },
-          {
-            "name": "health",
-            "type": "i16"
-          },
-          {
-            "name": "max_health",
-            "type": "i16"
-          },
-          {
-            "name": "strength",
-            "type": "u16"
-          },
-          {
-            "name": "agility",
-            "type": "u16"
-          },
-          {
-            "name": "technique",
-            "type": "u16"
-          },
-          {
-            "name": "intelligence",
-            "type": "u16"
-          },
-          {
-            "name": "base_attack",
-            "type": "i16"
-          },
-          {
-            "name": "base_defense",
-            "type": "i16"
-          },
-          {
-            "name": "total_attack",
-            "type": "i16"
-          },
-          {
-            "name": "total_defense",
-            "type": "i16"
-          },
-          {
-            "name": "equipment_attack_bonus",
-            "type": "i16"
-          },
-          {
-            "name": "equipment_defense_bonus",
-            "type": "i16"
-          },
-          {
-            "name": "equipment_health_bonus",
-            "type": "i16"
-          },
-          {
-            "name": "experience",
-            "type": "u64"
-          },
-          {
-            "name": "wins",
-            "type": "u32"
-          },
-          {
-            "name": "losses",
-            "type": "u32"
-          },
-          {
-            "name": "bump",
-            "type": "u8"
-          },
-          {
-            "name": "weapon",
-            "type": "pubkey"
-          },
-          {
-            "name": "weapon_equipped",
-            "type": "bool"
-          },
-          {
-            "name": "equipped_weapon_type",
-            "type": "u8"
-          },
-          {
-            "name": "helmet",
-            "type": "pubkey"
-          },
-          {
-            "name": "helmet_equipped",
-            "type": "bool"
-          },
-          {
-            "name": "chest",
-            "type": "pubkey"
-          },
-          {
-            "name": "chest_equipped",
-            "type": "bool"
-          },
-          {
-            "name": "boots",
-            "type": "pubkey"
-          },
-          {
-            "name": "boots_equipped",
-            "type": "bool"
-          },
-          {
-            "name": "action_slots",
-            "type": {
-              "array": [
-                {
-                  "defined": {
-                    "name": "Action"
-                  }
-                },
-                5
-              ]
-            }
-          },
-          {
-            "name": "current_action_slot",
-            "type": "u8"
-          }
-        ]
-      }
-    },
-    {
       "name": "PlayerClass",
       "docs": [
         "Player character classes - determines abilities and stat growth"
@@ -3487,16 +3473,12 @@
             "type": "i16"
           },
           {
+            "name": "equipment_speed_bonus",
+            "type": "i16"
+          },
+          {
             "name": "experience",
             "type": "u64"
-          },
-          {
-            "name": "wins",
-            "type": "u32"
-          },
-          {
-            "name": "losses",
-            "type": "u32"
           }
         ]
       }

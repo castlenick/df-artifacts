@@ -157,6 +157,12 @@
           "type": {
             "option": "u64"
           }
+        },
+        {
+          "name": "battle_locked",
+          "type": {
+            "option": "bool"
+          }
         }
       ]
     },
@@ -2585,6 +2591,12 @@
           "type": {
             "option": "u64"
           }
+        },
+        {
+          "name": "battle_locked",
+          "type": {
+            "option": "bool"
+          }
         }
       ]
     },
@@ -2629,6 +2641,12 @@
           "name": "experience",
           "type": {
             "option": "u64"
+          }
+        },
+        {
+          "name": "battle_locked",
+          "type": {
+            "option": "bool"
           }
         }
       ]
@@ -2818,121 +2836,126 @@
     },
     {
       "code": 6007,
+      "name": "PlayerBattleLocked",
+      "msg": "Player is locked by a pending battle commit — resolve or forfeit the battle first"
+    },
+    {
+      "code": 6008,
       "name": "PlayerIdAlreadyExists",
       "msg": "Player ID already exists for this wallet"
     },
     {
-      "code": 6008,
+      "code": 6009,
       "name": "InvalidItemData",
       "msg": "Failed to deserialize item data"
     },
     {
-      "code": 6009,
+      "code": 6010,
       "name": "ItemNotLowestRarity",
       "msg": "Only lowest rarity items can be session-destroyed"
     },
     {
-      "code": 6010,
+      "code": 6011,
       "name": "InvalidActionSlot",
       "msg": "Invalid action slot index"
     },
     {
-      "code": 6011,
+      "code": 6012,
       "name": "MaxActionsEnabled",
       "msg": "Maximum number of actions already enabled (3)"
     },
     {
-      "code": 6012,
+      "code": 6013,
       "name": "EmptyActionSlot",
       "msg": "Cannot enable an empty action slot"
     },
     {
-      "code": 6013,
+      "code": 6014,
       "name": "SameSlotSwap",
       "msg": "Cannot swap a slot with itself"
     },
     {
-      "code": 6014,
+      "code": 6015,
       "name": "InvalidSessionDuration",
       "msg": "Invalid session duration"
     },
     {
-      "code": 6015,
+      "code": 6016,
       "name": "SessionTooLong",
       "msg": "Session duration cannot exceed 24 hours"
     },
     {
-      "code": 6016,
+      "code": 6017,
       "name": "SessionExpired",
       "msg": "Session has expired"
     },
     {
-      "code": 6017,
+      "code": 6018,
       "name": "NotSessionAuthority",
       "msg": "Not the session authority"
     },
     {
-      "code": 6018,
+      "code": 6019,
       "name": "NotPlayerOwner",
       "msg": "Not the player owner"
     },
     {
-      "code": 6019,
+      "code": 6020,
       "name": "NotEscrowAuthority",
       "msg": "Not the escrow authority"
     },
     {
-      "code": 6020,
+      "code": 6021,
       "name": "InsufficientEscrowBalance",
       "msg": "Insufficient escrow balance"
     },
     {
-      "code": 6021,
+      "code": 6022,
       "name": "InvalidAmount",
       "msg": "Invalid amount"
     },
     {
-      "code": 6022,
+      "code": 6023,
       "name": "InvalidSession",
       "msg": "Invalid session - session key mismatch"
     },
     {
-      "code": 6023,
+      "code": 6024,
       "name": "Unauthorized",
       "msg": "Unauthorized"
     },
     {
-      "code": 6024,
+      "code": 6025,
       "name": "StateEpochMismatch",
       "msg": "State epoch mismatch between accounts"
     },
     {
-      "code": 6025,
+      "code": 6026,
       "name": "PlayerPermanentlyDead",
       "msg": "Player is permanently dead and cannot be revived"
     },
     {
-      "code": 6026,
+      "code": 6027,
       "name": "PlayerMustBeDeadToClose",
       "msg": "Only dead players can be closed"
     },
     {
-      "code": 6027,
+      "code": 6028,
       "name": "PlayerHasEquippedItems",
       "msg": "Cannot close player while items are equipped"
     },
     {
-      "code": 6028,
+      "code": 6029,
       "name": "DirectCallNotAllowed",
       "msg": "This instruction can only be called via CPI, not directly"
     },
     {
-      "code": 6029,
+      "code": 6030,
       "name": "InventoryNotEmpty",
       "msg": "Cannot close inventory while items remain in it"
     },
     {
-      "code": 6030,
+      "code": 6031,
       "name": "SessionEscrowNotEmpty",
       "msg": "Cannot close session escrow while balance is non-zero"
     }
@@ -3365,6 +3388,16 @@
           {
             "name": "current_action_slot",
             "type": "u8"
+          },
+          {
+            "name": "battle_locked",
+            "docs": [
+              "True while this player is mid-battle-commit (between commit_battle and",
+              "reveal_battle/forfeit). Blocks item-stripping ixs (unequip, transfer,",
+              "remove_from_inventory) so an attacker can't strip equipment off a",
+              "character whose reveal-simulated outcome is \"dies\" before forfeiting."
+            ],
+            "type": "bool"
           }
         ]
       }

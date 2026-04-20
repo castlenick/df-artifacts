@@ -1112,7 +1112,8 @@
           "signer": true
         },
         {
-          "name": "player"
+          "name": "player",
+          "writable": true
         },
         {
           "name": "player_dungeon"
@@ -1187,6 +1188,10 @@
           }
         },
         {
+          "name": "player_program",
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
+        },
+        {
           "name": "system_program",
           "address": "11111111111111111111111111111111"
         }
@@ -1215,7 +1220,8 @@
           "signer": true
         },
         {
-          "name": "player"
+          "name": "player",
+          "writable": true
         },
         {
           "name": "player_dungeon"
@@ -1285,6 +1291,10 @@
               }
             ]
           }
+        },
+        {
+          "name": "player_program",
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
         },
         {
           "name": "system_program",
@@ -1398,7 +1408,8 @@
           }
         },
         {
-          "name": "player"
+          "name": "player",
+          "writable": true
         },
         {
           "name": "player_dungeon"
@@ -4819,6 +4830,16 @@
           {
             "name": "current_action_slot",
             "type": "u8"
+          },
+          {
+            "name": "battle_locked",
+            "docs": [
+              "True while this player is mid-battle-commit (between commit_battle and",
+              "reveal_battle/forfeit). Blocks item-stripping ixs (unequip, transfer,",
+              "remove_from_inventory) so an attacker can't strip equipment off a",
+              "character whose reveal-simulated outcome is \"dies\" before forfeiting."
+            ],
+            "type": "bool"
           }
         ]
       }

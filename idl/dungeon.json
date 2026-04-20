@@ -75,356 +75,64 @@
       "args": []
     },
     {
-      "name": "battle_generated_room",
+      "name": "anchor_battle_slothash",
       "docs": [
-        "Battle a generated enemy in the current room"
+        "Step 2 of commit-anchor-reveal: permissionless. Any signer can call this",
+        "after `reveal_slot` has passed to lock slothash(reveal_slot) into the",
+        "BattleCommit PDA. Once anchored, reveal has no time pressure."
       ],
       "discriminator": [
-        165,
-        5,
-        125,
-        127,
-        201,
-        129,
-        2,
-        167
+        174,
+        167,
+        78,
+        213,
+        31,
+        152,
+        6,
+        205
       ],
       "accounts": [
         {
-          "name": "owner",
+          "name": "payer",
+          "docs": [
+            "Anyone can call this ix — payer just covers the tx fee. No state-creation rent."
+          ],
           "writable": true,
           "signer": true
         },
         {
-          "name": "player",
-          "writable": true
-        },
-        {
-          "name": "player_dungeon"
-        },
-        {
-          "name": "dungeon_run",
+          "name": "battle_commit",
           "writable": true,
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  100,
-                  117,
-                  110,
-                  103,
+                  98,
+                  97,
+                  116,
+                  116,
+                  108,
                   101,
-                  111,
-                  110,
                   95,
-                  114,
-                  117,
-                  110
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "owner"
-              },
-              {
-                "kind": "account",
-                "path": "player_dungeon"
-              }
-            ]
-          }
-        },
-        {
-          "name": "inventory",
-          "docs": [
-            "Player's shared inventory — passed to player program on death to remove equipped items"
-          ],
-          "writable": true
-        },
-        {
-          "name": "room_log",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "loot_config"
-        },
-        {
-          "name": "items_program",
-          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
-        },
-        {
-          "name": "player_program",
-          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "battle_generated_room_with_session",
-      "docs": [
-        "Battle generated room using session key"
-      ],
-      "discriminator": [
-        146,
-        153,
-        186,
-        43,
-        147,
-        92,
-        218,
-        248
-      ],
-      "accounts": [
-        {
-          "name": "session_signer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "authority"
-        },
-        {
-          "name": "session"
-        },
-        {
-          "name": "escrow",
-          "docs": [
-            "Session escrow for automatic top-up"
-          ],
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  115,
-                  101,
-                  115,
-                  115,
-                  105,
-                  111,
-                  110,
-                  95,
-                  101,
-                  115,
                   99,
-                  114,
                   111,
-                  119
+                  109,
+                  109,
+                  105,
+                  116
                 ]
               },
               {
                 "kind": "account",
-                "path": "authority"
-              },
-              {
-                "kind": "account",
-                "path": "escrow.state_epoch",
-                "account": "SessionEscrow"
-              }
-            ],
-            "program": {
-              "kind": "const",
-              "value": [
-                106,
-                94,
-                70,
-                91,
-                61,
-                67,
-                239,
-                217,
-                47,
-                89,
-                155,
-                232,
-                183,
-                28,
-                35,
-                238,
-                121,
-                209,
-                143,
-                153,
-                236,
-                201,
-                92,
-                194,
-                161,
-                147,
-                124,
-                8,
-                100,
-                188,
-                234,
-                24
-              ]
-            }
-          }
-        },
-        {
-          "name": "player",
-          "writable": true
-        },
-        {
-          "name": "player_dungeon"
-        },
-        {
-          "name": "dungeon_run",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  100,
-                  117,
-                  110,
-                  103,
-                  101,
-                  111,
-                  110,
-                  95,
-                  114,
-                  117,
-                  110
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "authority"
-              },
-              {
-                "kind": "account",
-                "path": "player_dungeon"
+                "path": "battle_commit.dungeon_run",
+                "account": "BattleCommit"
               }
             ]
           }
         },
         {
-          "name": "inventory",
-          "docs": [
-            "Player's shared inventory — passed to player program on death to remove equipped items"
-          ],
-          "writable": true
-        },
-        {
-          "name": "room_log",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "loot_config"
-        },
-        {
-          "name": "items_program",
-          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
-        },
-        {
-          "name": "player_program",
-          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "battle_room",
-      "docs": [
-        "Battle the enemy in the current room (for template-based dungeons)"
-      ],
-      "discriminator": [
-        45,
-        82,
-        227,
-        197,
-        47,
-        122,
-        94,
-        77
-      ],
-      "accounts": [
-        {
-          "name": "owner",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "player",
-          "writable": true
-        },
-        {
-          "name": "player_dungeon"
-        },
-        {
-          "name": "dungeon_run",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  100,
-                  117,
-                  110,
-                  103,
-                  101,
-                  111,
-                  110,
-                  95,
-                  114,
-                  117,
-                  110
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "owner"
-              },
-              {
-                "kind": "account",
-                "path": "player_dungeon"
-              }
-            ]
-          }
-        },
-        {
-          "name": "enemy"
-        },
-        {
-          "name": "inventory",
-          "docs": [
-            "Player's shared inventory — passed to player program on death to remove equipped items"
-          ],
-          "writable": true
-        },
-        {
-          "name": "room_log",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "loot_config"
-        },
-        {
-          "name": "items_program",
-          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
-        },
-        {
-          "name": "player_program",
-          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
+          "name": "slot_hashes"
         }
       ],
       "args": []
@@ -1379,6 +1087,400 @@
       "args": []
     },
     {
+      "name": "commit_battle_room",
+      "docs": [
+        "Battle the enemy in the current room (for template-based dungeons)",
+        "Step 1 of commit-anchor-reveal battle flow for a template room.",
+        "Locks the player into this battle without computing the outcome, so that",
+        "`simulateTransaction` can't preview the result. See anchor_battle_slothash",
+        "and reveal_battle_room for the rest of the flow."
+      ],
+      "discriminator": [
+        39,
+        15,
+        84,
+        156,
+        138,
+        195,
+        76,
+        181
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "enemy"
+        },
+        {
+          "name": "room_log",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "battle_commit",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  97,
+                  116,
+                  116,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  109,
+                  109,
+                  105,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "dungeon_run"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "commit_generated_battle_room",
+      "docs": [
+        "Step 1 of commit-anchor-reveal battle flow for a generated room."
+      ],
+      "discriminator": [
+        89,
+        45,
+        31,
+        148,
+        240,
+        220,
+        128,
+        34
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "room_log",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "battle_commit",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  97,
+                  116,
+                  116,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  109,
+                  109,
+                  105,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "dungeon_run"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "commit_generated_battle_room_with_session",
+      "docs": [
+        "Battle generated room using session key",
+        "Session-signed step 1 of commit-anchor-reveal for generated rooms."
+      ],
+      "discriminator": [
+        158,
+        69,
+        172,
+        163,
+        90,
+        19,
+        38,
+        173
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority"
+        },
+        {
+          "name": "session"
+        },
+        {
+          "name": "escrow",
+          "docs": [
+            "Session escrow for automatic top-up"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "escrow.state_epoch",
+                "account": "SessionEscrow"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "room_log",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "battle_commit",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  97,
+                  116,
+                  116,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  109,
+                  109,
+                  105,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "dungeon_run"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player_program",
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "continue_to_next_room",
       "docs": [
         "Continue to the next room in the dungeon (closes previous room's battle log)"
@@ -1854,6 +1956,304 @@
         {
           "name": "items_program",
           "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
+        },
+        {
+          "name": "player_program",
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "forfeit_committed_battle",
+      "docs": [
+        "If a commit exists but was never anchored and the anchor window has",
+        "expired, the player must forfeit to unblock the dungeon run. The result",
+        "is the same as losing the battle normally (permadeath + Failed run)."
+      ],
+      "discriminator": [
+        58,
+        175,
+        235,
+        74,
+        162,
+        175,
+        165,
+        31
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "inventory",
+          "docs": [
+            "Player's shared inventory — passed to player program on death to remove equipped items"
+          ],
+          "writable": true
+        },
+        {
+          "name": "battle_commit",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  97,
+                  116,
+                  116,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  109,
+                  109,
+                  105,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "dungeon_run"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player_program",
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "forfeit_committed_battle_with_session",
+      "docs": [
+        "Session-signed variant of forfeit_committed_battle."
+      ],
+      "discriminator": [
+        221,
+        131,
+        49,
+        190,
+        229,
+        186,
+        244,
+        129
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority",
+          "writable": true
+        },
+        {
+          "name": "session"
+        },
+        {
+          "name": "escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "escrow.state_epoch",
+                "account": "SessionEscrow"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "inventory",
+          "docs": [
+            "Player's shared inventory — passed to player program on death to remove equipped items"
+          ],
+          "writable": true
+        },
+        {
+          "name": "battle_commit",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  97,
+                  116,
+                  116,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  109,
+                  109,
+                  105,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "dungeon_run"
+              }
+            ]
+          }
         },
         {
           "name": "player_program",
@@ -2798,6 +3198,451 @@
       "args": []
     },
     {
+      "name": "reveal_battle_room",
+      "docs": [
+        "Step 3 of commit-anchor-reveal: once the anchor tx has written a durable",
+        "seed into BattleCommit, this ix simulates the battle using that seed and",
+        "commits the result."
+      ],
+      "discriminator": [
+        99,
+        92,
+        176,
+        65,
+        188,
+        181,
+        206,
+        82
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "enemy"
+        },
+        {
+          "name": "inventory",
+          "docs": [
+            "Player's shared inventory — passed to player program on death to remove equipped items"
+          ],
+          "writable": true
+        },
+        {
+          "name": "room_log",
+          "writable": true
+        },
+        {
+          "name": "battle_commit",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  97,
+                  116,
+                  116,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  109,
+                  109,
+                  105,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "dungeon_run"
+              }
+            ]
+          }
+        },
+        {
+          "name": "loot_config"
+        },
+        {
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
+        },
+        {
+          "name": "player_program",
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "reveal_generated_battle_room",
+      "docs": [
+        "Step 3 of commit-anchor-reveal for generated rooms."
+      ],
+      "discriminator": [
+        254,
+        210,
+        218,
+        46,
+        196,
+        42,
+        207,
+        244
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "inventory",
+          "docs": [
+            "Player's shared inventory — passed to player program on death to remove equipped items"
+          ],
+          "writable": true
+        },
+        {
+          "name": "room_log",
+          "writable": true
+        },
+        {
+          "name": "battle_commit",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  97,
+                  116,
+                  116,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  109,
+                  109,
+                  105,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "dungeon_run"
+              }
+            ]
+          }
+        },
+        {
+          "name": "loot_config"
+        },
+        {
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
+        },
+        {
+          "name": "player_program",
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "reveal_generated_battle_room_with_session",
+      "docs": [
+        "Session-signed step 3 of commit-anchor-reveal for generated rooms."
+      ],
+      "discriminator": [
+        36,
+        63,
+        16,
+        68,
+        217,
+        225,
+        244,
+        25
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority",
+          "writable": true
+        },
+        {
+          "name": "session"
+        },
+        {
+          "name": "escrow",
+          "docs": [
+            "Session escrow for automatic top-up / rent refund on close"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "escrow.state_epoch",
+                "account": "SessionEscrow"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "inventory",
+          "docs": [
+            "Player's shared inventory — passed to player program on death to remove equipped items"
+          ],
+          "writable": true
+        },
+        {
+          "name": "room_log",
+          "writable": true
+        },
+        {
+          "name": "battle_commit",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  97,
+                  116,
+                  116,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  109,
+                  109,
+                  105,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "dungeon_run"
+              }
+            ]
+          }
+        },
+        {
+          "name": "loot_config"
+        },
+        {
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
+        },
+        {
+          "name": "player_program",
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "set_template_enemy",
       "docs": [
         "Set the enemy for a specific room in a template"
@@ -3082,6 +3927,19 @@
     }
   ],
   "accounts": [
+    {
+      "name": "BattleCommit",
+      "discriminator": [
+        15,
+        12,
+        75,
+        170,
+        241,
+        181,
+        133,
+        222
+      ]
+    },
     {
       "name": "DeadOrAlivePlayer",
       "discriminator": [
@@ -3386,6 +4244,51 @@
       "code": 6031,
       "name": "Unauthorized",
       "msg": "Unauthorized - admin authority required"
+    },
+    {
+      "code": 6032,
+      "name": "BattleRevealNotReady",
+      "msg": "Battle commit's reveal slot has not been reached yet; cannot anchor"
+    },
+    {
+      "code": 6033,
+      "name": "BattleAnchorExpired",
+      "msg": "Battle commit's anchor window has expired; call forfeit_committed_battle"
+    },
+    {
+      "code": 6034,
+      "name": "BattleNotAnchored",
+      "msg": "Battle must be anchored before revealing"
+    },
+    {
+      "code": 6035,
+      "name": "BattleAlreadyAnchored",
+      "msg": "Battle is already anchored; cannot re-anchor or forfeit"
+    },
+    {
+      "code": 6036,
+      "name": "BattleForfeitTooEarly",
+      "msg": "Cannot forfeit a battle before its anchor window expires"
+    },
+    {
+      "code": 6037,
+      "name": "BattleAlreadyCommitted",
+      "msg": "A battle is already committed for this dungeon run; resolve or forfeit it first"
+    },
+    {
+      "code": 6038,
+      "name": "InvalidSlotHashesAccount",
+      "msg": "SysvarSlotHashes account is invalid"
+    },
+    {
+      "code": 6039,
+      "name": "SlotHashNotAvailable",
+      "msg": "Slothash for the requested slot is no longer available"
+    },
+    {
+      "code": 6040,
+      "name": "BattleCommitMismatch",
+      "msg": "Battle commit does not match the provided dungeon run"
     }
   ],
   "types": [
@@ -3649,6 +4552,50 @@
           },
           {
             "name": "Skill"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BattleCommit",
+      "docs": [
+        "Commit-reveal handshake for a single battle. Created by commit_battle_*,",
+        "filled by anchor_battle_slothash, consumed (closed) by reveal_battle_* or",
+        "forfeit_committed_battle. Its existence on-chain = a battle is in progress",
+        "on the referenced dungeon_run."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "dungeon_run",
+            "type": "pubkey"
+          },
+          {
+            "name": "reveal_slot",
+            "type": "u64"
+          },
+          {
+            "name": "room_number",
+            "type": "u8"
+          },
+          {
+            "name": "anchored_seed",
+            "docs": [
+              "None until anchor_battle_slothash writes slothash(reveal_slot)."
+            ],
+            "type": {
+              "option": {
+                "array": [
+                  "u8",
+                  8
+                ]
+              }
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
           }
         ]
       }

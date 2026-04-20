@@ -192,6 +192,131 @@
       "args": []
     },
     {
+      "name": "close_inventory",
+      "docs": [
+        "Close an Inventory account; rent refunded to its owner. Requires the",
+        "inventory to be empty — callers should `remove_item_from_inventory` or",
+        "`transfer_item` everything out first."
+      ],
+      "discriminator": [
+        88,
+        141,
+        102,
+        160,
+        129,
+        133,
+        243,
+        233
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "inventory"
+          ]
+        },
+        {
+          "name": "inventory",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "inventory.state_epoch",
+                "account": "Inventory"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_namespace_config",
+      "docs": [
+        "Close the PlayerNamespaceConfig singleton. Root authority only — this",
+        "invalidates every PDA derived using the namespace (players, inventories,",
+        "session escrows). Intended for disaster recovery / migration to a new ID."
+      ],
+      "discriminator": [
+        120,
+        216,
+        103,
+        26,
+        80,
+        248,
+        175,
+        90
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "namespace_config"
+          ]
+        },
+        {
+          "name": "namespace_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  110,
+                  97,
+                  109,
+                  101,
+                  115,
+                  112,
+                  97,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "close_player",
       "docs": [
         "Close a dead player account and reclaim its rent to the owner.",
@@ -219,6 +344,71 @@
         {
           "name": "player",
           "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_session_escrow",
+      "docs": [
+        "Close a SessionEscrow account. Requires the tracked balance to be zero —",
+        "callers should `withdraw_from_escrow` first. Any residual lamports above",
+        "rent-exempt minimum are returned to the authority via `close = authority`."
+      ],
+      "discriminator": [
+        165,
+        106,
+        13,
+        81,
+        66,
+        196,
+        63,
+        27
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "escrow"
+          ]
+        },
+        {
+          "name": "escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "escrow.state_epoch",
+                "account": "SessionEscrow"
+              }
+            ]
+          }
         }
       ],
       "args": []
@@ -1714,6 +1904,15 @@
           }
         },
         {
+          "name": "player",
+          "docs": [
+            "The player that the caller is treating as \"holding\" this item. Used to",
+            "enforce that the item isn't currently equipped before removal. Any",
+            "DeadOrAlivePlayer the signer owns is accepted — pass the one most likely",
+            "to have the item equipped (typically the active player)."
+          ]
+        },
+        {
           "name": "item_account",
           "docs": [
             "it will be destroyed; otherwise the inventory reference is pruned only."
@@ -2614,113 +2813,128 @@
     },
     {
       "code": 6006,
+      "name": "ItemEquippedCannotRemove",
+      "msg": "Cannot remove an item from inventory while it is equipped by the passed player; unequip first"
+    },
+    {
+      "code": 6007,
       "name": "PlayerIdAlreadyExists",
       "msg": "Player ID already exists for this wallet"
     },
     {
-      "code": 6007,
+      "code": 6008,
       "name": "InvalidItemData",
       "msg": "Failed to deserialize item data"
     },
     {
-      "code": 6008,
+      "code": 6009,
       "name": "ItemNotLowestRarity",
       "msg": "Only lowest rarity items can be session-destroyed"
     },
     {
-      "code": 6009,
+      "code": 6010,
       "name": "InvalidActionSlot",
       "msg": "Invalid action slot index"
     },
     {
-      "code": 6010,
+      "code": 6011,
       "name": "MaxActionsEnabled",
       "msg": "Maximum number of actions already enabled (3)"
     },
     {
-      "code": 6011,
+      "code": 6012,
       "name": "EmptyActionSlot",
       "msg": "Cannot enable an empty action slot"
     },
     {
-      "code": 6012,
+      "code": 6013,
       "name": "SameSlotSwap",
       "msg": "Cannot swap a slot with itself"
     },
     {
-      "code": 6013,
+      "code": 6014,
       "name": "InvalidSessionDuration",
       "msg": "Invalid session duration"
     },
     {
-      "code": 6014,
+      "code": 6015,
       "name": "SessionTooLong",
       "msg": "Session duration cannot exceed 24 hours"
     },
     {
-      "code": 6015,
+      "code": 6016,
       "name": "SessionExpired",
       "msg": "Session has expired"
     },
     {
-      "code": 6016,
+      "code": 6017,
       "name": "NotSessionAuthority",
       "msg": "Not the session authority"
     },
     {
-      "code": 6017,
+      "code": 6018,
       "name": "NotPlayerOwner",
       "msg": "Not the player owner"
     },
     {
-      "code": 6018,
+      "code": 6019,
       "name": "NotEscrowAuthority",
       "msg": "Not the escrow authority"
     },
     {
-      "code": 6019,
+      "code": 6020,
       "name": "InsufficientEscrowBalance",
       "msg": "Insufficient escrow balance"
     },
     {
-      "code": 6020,
+      "code": 6021,
       "name": "InvalidAmount",
       "msg": "Invalid amount"
     },
     {
-      "code": 6021,
+      "code": 6022,
       "name": "InvalidSession",
       "msg": "Invalid session - session key mismatch"
     },
     {
-      "code": 6022,
+      "code": 6023,
       "name": "Unauthorized",
       "msg": "Unauthorized"
     },
     {
-      "code": 6023,
+      "code": 6024,
       "name": "StateEpochMismatch",
       "msg": "State epoch mismatch between accounts"
     },
     {
-      "code": 6024,
+      "code": 6025,
       "name": "PlayerPermanentlyDead",
       "msg": "Player is permanently dead and cannot be revived"
     },
     {
-      "code": 6025,
+      "code": 6026,
       "name": "PlayerMustBeDeadToClose",
       "msg": "Only dead players can be closed"
     },
     {
-      "code": 6026,
+      "code": 6027,
       "name": "PlayerHasEquippedItems",
       "msg": "Cannot close player while items are equipped"
     },
     {
-      "code": 6027,
+      "code": 6028,
       "name": "DirectCallNotAllowed",
       "msg": "This instruction can only be called via CPI, not directly"
+    },
+    {
+      "code": 6029,
+      "name": "InventoryNotEmpty",
+      "msg": "Cannot close inventory while items remain in it"
+    },
+    {
+      "code": 6030,
+      "name": "SessionEscrowNotEmpty",
+      "msg": "Cannot close session escrow while balance is non-zero"
     }
   ],
   "types": [

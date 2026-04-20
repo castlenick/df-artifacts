@@ -8,6 +8,58 @@
   },
   "instructions": [
     {
+      "name": "close_config",
+      "docs": [
+        "Close the LootConfig singleton. Root authority only — this invalidates",
+        "`roll_loot` / `create_item` flows until a new config is initialized."
+      ],
+      "discriminator": [
+        145,
+        9,
+        72,
+        157,
+        95,
+        125,
+        61,
+        85
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "config"
+          ]
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  111,
+                  111,
+                  116,
+                  45,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "close_empty_item_account",
       "docs": [
         "Close a placeholder no-drop item account and return rent to payer.",

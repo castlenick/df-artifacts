@@ -97,6 +97,349 @@
       "args": []
     },
     {
+      "name": "close_class_config",
+      "docs": [
+        "Close a ClassConfig; rent refunded to `authority`."
+      ],
+      "discriminator": [
+        168,
+        7,
+        176,
+        169,
+        136,
+        82,
+        101,
+        215
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "class_config",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_enemy",
+      "docs": [
+        "Close an Enemy instance account; rent refunded to `recipient`."
+      ],
+      "discriminator": [
+        24,
+        221,
+        181,
+        74,
+        199,
+        227,
+        252,
+        68
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "enemy",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  110,
+                  101,
+                  109,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "enemy.creator",
+                "account": "Enemy"
+              },
+              {
+                "kind": "account",
+                "path": "enemy.name",
+                "account": "Enemy"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_enemy_type_config",
+      "docs": [
+        "Close an EnemyTypeConfig; rent refunded to `authority`."
+      ],
+      "discriminator": [
+        65,
+        78,
+        100,
+        175,
+        100,
+        144,
+        131,
+        59
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "enemy_type_config",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_environment_config",
+      "docs": [
+        "Close an EnvironmentConfig; rent refunded to `authority`."
+      ],
+      "discriminator": [
+        146,
+        172,
+        21,
+        47,
+        123,
+        150,
+        190,
+        34
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "environment_config",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_item_type_config",
+      "docs": [
+        "Close an ItemTypeConfig; rent refunded to `authority`."
+      ],
+      "discriminator": [
+        38,
+        229,
+        251,
+        214,
+        74,
+        240,
+        96,
+        87
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "item_type_config",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_registry",
+      "docs": [
+        "Close the GameRegistry singleton. Root authority only — this is destructive",
+        "and invalidates every admin delegation / content config that references it."
+      ],
+      "discriminator": [
+        76,
+        32,
+        154,
+        180,
+        51,
+        159,
+        218,
+        102
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "registry"
+          ]
+        },
+        {
+          "name": "registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "create_class_config",
       "docs": [
         "Create a new player class configuration"

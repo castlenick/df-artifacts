@@ -622,6 +622,127 @@
       ]
     },
     {
+      "name": "close_dungeon_choices",
+      "docs": [
+        "Close a DungeonChoices account; rent refunded to its owner. Requires the",
+        "choices to have been consumed (i.e., a player_dungeon was already generated",
+        "from them) so mid-flow selection state isn't accidentally erased."
+      ],
+      "discriminator": [
+        148,
+        214,
+        59,
+        109,
+        124,
+        222,
+        53,
+        126
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "dungeon_choices"
+          ]
+        },
+        {
+          "name": "dungeon_choices",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  99,
+                  104,
+                  111,
+                  105,
+                  99,
+                  101,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "dungeon_choices.player",
+                "account": "DungeonChoices"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_dungeon_config",
+      "docs": [
+        "Close the DungeonConfig singleton. Root authority only — this invalidates",
+        "every dungeon template and admin-gated operation going forward."
+      ],
+      "discriminator": [
+        64,
+        117,
+        4,
+        153,
+        180,
+        51,
+        63,
+        210
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "config"
+          ]
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "close_dungeon_run",
       "docs": [
         "Close a finished dungeon run"
@@ -813,6 +934,98 @@
               {
                 "kind": "account",
                 "path": "player_dungeon"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_dungeon_template",
+      "docs": [
+        "Close a DungeonTemplate; rent refunded to the config authority."
+      ],
+      "discriminator": [
+        246,
+        39,
+        59,
+        126,
+        23,
+        59,
+        36,
+        103
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "config"
+          ]
+        },
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "template",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  116,
+                  101,
+                  109,
+                  112,
+                  108,
+                  97,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "template.creator",
+                "account": "DungeonTemplate"
+              },
+              {
+                "kind": "account",
+                "path": "template.name",
+                "account": "DungeonTemplate"
               }
             ]
           }

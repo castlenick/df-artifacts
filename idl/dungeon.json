@@ -4148,12 +4148,12 @@
     {
       "code": 6012,
       "name": "NotGeneratedDungeon",
-      "msg": "This is not a generated dungeon - use battle_room instead"
+      "msg": "This is not a generated dungeon - use commit_battle_room/reveal_battle_room instead"
     },
     {
       "code": 6013,
       "name": "UseGeneratedBattle",
-      "msg": "This is a generated dungeon - use battle_generated_room instead"
+      "msg": "This is a generated dungeon - use commit_generated_battle_room/reveal_generated_battle_room instead"
     },
     {
       "code": 6014,

@@ -682,10 +682,6 @@
       ],
       "args": [
         {
-          "name": "name",
-          "type": "string"
-        },
-        {
           "name": "player_id",
           "type": "u8"
         },
@@ -797,10 +793,6 @@
         }
       ],
       "args": [
-        {
-          "name": "name",
-          "type": "string"
-        },
         {
           "name": "player_id",
           "type": "u8"

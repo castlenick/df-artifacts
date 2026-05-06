@@ -330,6 +330,179 @@
       ]
     },
     {
+      "name": "close_combat_scenario",
+      "discriminator": [
+        239,
+        219,
+        59,
+        59,
+        183,
+        32,
+        230,
+        43
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "scenario",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  109,
+                  98,
+                  97,
+                  116,
+                  95,
+                  115,
+                  99,
+                  101,
+                  110,
+                  97,
+                  114,
+                  105,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "scenario.authority",
+                "account": "CombatScenario"
+              },
+              {
+                "kind": "account",
+                "path": "scenario.name",
+                "account": "CombatScenario"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "close_combat_scenario_log",
+      "discriminator": [
+        210,
+        75,
+        119,
+        149,
+        234,
+        116,
+        244,
+        147
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "scenario",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  109,
+                  98,
+                  97,
+                  116,
+                  95,
+                  115,
+                  99,
+                  101,
+                  110,
+                  97,
+                  114,
+                  105,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "scenario.authority",
+                "account": "CombatScenario"
+              },
+              {
+                "kind": "account",
+                "path": "scenario.name",
+                "account": "CombatScenario"
+              }
+            ]
+          }
+        },
+        {
+          "name": "scenario_log",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "close_dungeon_choices",
       "docs": [
         "Close a DungeonChoices account; rent refunded to its owner. Requires the",
@@ -1707,6 +1880,106 @@
         }
       ],
       "args": []
+    },
+    {
+      "name": "create_combat_scenario",
+      "discriminator": [
+        178,
+        126,
+        142,
+        165,
+        94,
+        104,
+        247,
+        92
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "scenario",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  109,
+                  98,
+                  97,
+                  116,
+                  95,
+                  115,
+                  99,
+                  101,
+                  110,
+                  97,
+                  114,
+                  105,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "arg",
+                "path": "name"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "input",
+          "type": {
+            "defined": {
+              "name": "CombatScenarioInput"
+            }
+          }
+        }
+      ]
     },
     {
       "name": "create_dungeon_template",
@@ -3654,6 +3927,232 @@
       "args": []
     },
     {
+      "name": "run_combat_scenario_mutating",
+      "discriminator": [
+        170,
+        97,
+        50,
+        31,
+        55,
+        192,
+        78,
+        12
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "scenario",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  109,
+                  98,
+                  97,
+                  116,
+                  95,
+                  115,
+                  99,
+                  101,
+                  110,
+                  97,
+                  114,
+                  105,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "scenario.authority",
+                "account": "CombatScenario"
+              },
+              {
+                "kind": "account",
+                "path": "scenario.name",
+                "account": "CombatScenario"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "inventory",
+          "writable": true
+        },
+        {
+          "name": "scenario_log",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player_program",
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "seed_slot_bytes",
+          "type": {
+            "array": [
+              "u8",
+              8
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "run_combat_scenario_preview",
+      "discriminator": [
+        205,
+        8,
+        207,
+        210,
+        148,
+        9,
+        235,
+        223
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "scenario",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  109,
+                  98,
+                  97,
+                  116,
+                  95,
+                  115,
+                  99,
+                  101,
+                  110,
+                  97,
+                  114,
+                  105,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "scenario.authority",
+                "account": "CombatScenario"
+              },
+              {
+                "kind": "account",
+                "path": "scenario.name",
+                "account": "CombatScenario"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "scenario_log",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "seed_slot_bytes",
+          "type": {
+            "array": [
+              "u8",
+              8
+            ]
+          }
+        }
+      ]
+    },
+    {
       "name": "set_template_enemy",
       "docs": [
         "Set the enemy for a specific room in a template"
@@ -3935,6 +4434,100 @@
         }
       ],
       "args": []
+    },
+    {
+      "name": "update_combat_scenario",
+      "discriminator": [
+        114,
+        197,
+        96,
+        138,
+        115,
+        233,
+        144,
+        67
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "scenario",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  111,
+                  109,
+                  98,
+                  97,
+                  116,
+                  95,
+                  115,
+                  99,
+                  101,
+                  110,
+                  97,
+                  114,
+                  105,
+                  111
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "scenario.authority",
+                "account": "CombatScenario"
+              },
+              {
+                "kind": "account",
+                "path": "scenario.name",
+                "account": "CombatScenario"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "input",
+          "type": {
+            "defined": {
+              "name": "CombatScenarioInput"
+            }
+          }
+        }
+      ]
     }
   ],
   "accounts": [
@@ -3949,6 +4542,32 @@
         181,
         133,
         222
+      ]
+    },
+    {
+      "name": "CombatScenario",
+      "discriminator": [
+        1,
+        151,
+        81,
+        116,
+        164,
+        220,
+        37,
+        198
+      ]
+    },
+    {
+      "name": "CombatScenarioLog",
+      "discriminator": [
+        173,
+        180,
+        13,
+        123,
+        189,
+        23,
+        255,
+        59
       ]
     },
     {
@@ -4300,6 +4919,41 @@
       "code": 6040,
       "name": "BattleCommitMismatch",
       "msg": "Battle commit does not match the provided dungeon run"
+    },
+    {
+      "code": 6041,
+      "name": "ScenarioDisabled",
+      "msg": "Combat scenario is disabled"
+    },
+    {
+      "code": 6042,
+      "name": "InvalidCombatScenario",
+      "msg": "Invalid combat scenario"
+    },
+    {
+      "code": 6043,
+      "name": "InvalidScenarioConfig",
+      "msg": "Invalid combat scenario configuration"
+    },
+    {
+      "code": 6044,
+      "name": "InvalidScenarioAction",
+      "msg": "Invalid scenario action"
+    },
+    {
+      "code": 6045,
+      "name": "InvalidActionSlot",
+      "msg": "Invalid action slot"
+    },
+    {
+      "code": 6046,
+      "name": "UnsupportedEnemyActionEffect",
+      "msg": "Enemy scenario action effect is not supported"
+    },
+    {
+      "code": 6047,
+      "name": "InvalidRoomEffect",
+      "msg": "Invalid room effect"
     }
   ],
   "types": [
@@ -4676,6 +5330,425 @@
                 "u8",
                 48
               ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "CombatScenario",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
+          },
+          {
+            "name": "max_turns",
+            "type": "u8"
+          },
+          {
+            "name": "player_override_mask",
+            "type": "u16"
+          },
+          {
+            "name": "player_health",
+            "type": "i16"
+          },
+          {
+            "name": "player_max_health",
+            "type": "i16"
+          },
+          {
+            "name": "player_strength",
+            "type": "u16"
+          },
+          {
+            "name": "player_intelligence",
+            "type": "u16"
+          },
+          {
+            "name": "player_attack",
+            "type": "i16"
+          },
+          {
+            "name": "player_defense",
+            "type": "i16"
+          },
+          {
+            "name": "player_speed",
+            "type": "u16"
+          },
+          {
+            "name": "player_current_action_slot",
+            "type": "u8"
+          },
+          {
+            "name": "player_action_slots",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "ScenarioActionSlot"
+                  }
+                },
+                5
+              ]
+            }
+          },
+          {
+            "name": "enemy_name",
+            "type": "string"
+          },
+          {
+            "name": "enemy_type",
+            "type": {
+              "defined": {
+                "name": "EnemyType"
+              }
+            }
+          },
+          {
+            "name": "enemy_level",
+            "type": "u8"
+          },
+          {
+            "name": "enemy_health",
+            "type": "i16"
+          },
+          {
+            "name": "enemy_strength",
+            "type": "u16"
+          },
+          {
+            "name": "enemy_intelligence",
+            "type": "u16"
+          },
+          {
+            "name": "enemy_attack",
+            "type": "i16"
+          },
+          {
+            "name": "enemy_defense",
+            "type": "i16"
+          },
+          {
+            "name": "enemy_speed",
+            "type": "u16"
+          },
+          {
+            "name": "enemy_experience_reward",
+            "type": "u8"
+          },
+          {
+            "name": "enemy_current_action_slot",
+            "type": "u8"
+          },
+          {
+            "name": "enemy_action_slots",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "ScenarioActionSlot"
+                  }
+                },
+                5
+              ]
+            }
+          },
+          {
+            "name": "room_effects",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "ScenarioRoomEffect"
+                  }
+                },
+                4
+              ]
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CombatScenarioInput",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "enabled",
+            "type": "bool"
+          },
+          {
+            "name": "max_turns",
+            "type": "u8"
+          },
+          {
+            "name": "player_override_mask",
+            "type": "u16"
+          },
+          {
+            "name": "player_health",
+            "type": "i16"
+          },
+          {
+            "name": "player_max_health",
+            "type": "i16"
+          },
+          {
+            "name": "player_strength",
+            "type": "u16"
+          },
+          {
+            "name": "player_intelligence",
+            "type": "u16"
+          },
+          {
+            "name": "player_attack",
+            "type": "i16"
+          },
+          {
+            "name": "player_defense",
+            "type": "i16"
+          },
+          {
+            "name": "player_speed",
+            "type": "u16"
+          },
+          {
+            "name": "player_current_action_slot",
+            "type": "u8"
+          },
+          {
+            "name": "player_action_slots",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "ScenarioActionSlot"
+                  }
+                },
+                5
+              ]
+            }
+          },
+          {
+            "name": "enemy_name",
+            "type": "string"
+          },
+          {
+            "name": "enemy_type",
+            "type": {
+              "defined": {
+                "name": "EnemyType"
+              }
+            }
+          },
+          {
+            "name": "enemy_level",
+            "type": "u8"
+          },
+          {
+            "name": "enemy_health",
+            "type": "i16"
+          },
+          {
+            "name": "enemy_strength",
+            "type": "u16"
+          },
+          {
+            "name": "enemy_intelligence",
+            "type": "u16"
+          },
+          {
+            "name": "enemy_attack",
+            "type": "i16"
+          },
+          {
+            "name": "enemy_defense",
+            "type": "i16"
+          },
+          {
+            "name": "enemy_speed",
+            "type": "u16"
+          },
+          {
+            "name": "enemy_experience_reward",
+            "type": "u8"
+          },
+          {
+            "name": "enemy_current_action_slot",
+            "type": "u8"
+          },
+          {
+            "name": "enemy_action_slots",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "ScenarioActionSlot"
+                  }
+                },
+                5
+              ]
+            }
+          },
+          {
+            "name": "room_effects",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "ScenarioRoomEffect"
+                  }
+                },
+                4
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "CombatScenarioLog",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "scenario",
+            "type": "pubkey"
+          },
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "mutating",
+            "type": "bool"
+          },
+          {
+            "name": "player_won",
+            "type": "bool"
+          },
+          {
+            "name": "experience_gained",
+            "type": "u8"
+          },
+          {
+            "name": "total_turns",
+            "type": "u8"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "replay_codec_version",
+            "type": "u8"
+          },
+          {
+            "name": "replay_engine_version",
+            "type": "u16"
+          },
+          {
+            "name": "replay_seed_slot_bytes",
+            "type": {
+              "array": [
+                "u8",
+                8
+              ]
+            }
+          },
+          {
+            "name": "replay_player",
+            "type": {
+              "defined": {
+                "name": "ReplayPlayerSnapshot"
+              }
+            }
+          },
+          {
+            "name": "replay_enemy",
+            "type": {
+              "defined": {
+                "name": "ReplayEnemySnapshot"
+              }
+            }
+          },
+          {
+            "name": "replay_enemy_type",
+            "type": {
+              "defined": {
+                "name": "EnemyType"
+              }
+            }
+          },
+          {
+            "name": "replay_enemy_level",
+            "type": "u8"
+          },
+          {
+            "name": "replay_enemy_current_action_slot",
+            "type": "u8"
+          },
+          {
+            "name": "replay_enemy_action_slots",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "ScenarioActionSlot"
+                  }
+                },
+                5
+              ]
+            }
+          },
+          {
+            "name": "replay_room_effects",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "ScenarioRoomEffect"
+                  }
+                },
+                4
+              ]
+            }
+          },
+          {
+            "name": "player_final_health",
+            "type": "i16"
+          },
+          {
+            "name": "enemy_final_health",
+            "type": "i16"
+          },
+          {
+            "name": "events",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "BattleEvent"
+                }
+              }
             }
           }
         ]
@@ -5657,6 +6730,63 @@
                 }
               }
             }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ScenarioActionSlot",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
+          },
+          {
+            "name": "success_threshold",
+            "type": "u8"
+          },
+          {
+            "name": "effect_type",
+            "type": "u8"
+          },
+          {
+            "name": "effect_value1",
+            "type": "i16"
+          },
+          {
+            "name": "effect_value2",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ScenarioRoomEffect",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "effect_type",
+            "type": "u8"
+          },
+          {
+            "name": "amount",
+            "type": "i16"
+          },
+          {
+            "name": "target",
+            "type": "u8"
           }
         ]
       }

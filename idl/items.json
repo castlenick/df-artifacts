@@ -646,41 +646,6 @@
       "code": 6000,
       "name": "InvalidRoll",
       "msg": "Invalid roll"
-    },
-    {
-      "code": 6001,
-      "name": "InvalidOwner",
-      "msg": "Invalid owner - you don't own this item"
-    },
-    {
-      "code": 6002,
-      "name": "NotEmptyItemAccount",
-      "msg": "Item account is not an empty no-drop placeholder"
-    },
-    {
-      "code": 6003,
-      "name": "InvalidSession",
-      "msg": "Invalid or expired player session"
-    },
-    {
-      "code": 6004,
-      "name": "SessionExpired",
-      "msg": "Session has expired"
-    },
-    {
-      "code": 6005,
-      "name": "InvalidEscrowAccount",
-      "msg": "Invalid session escrow account"
-    },
-    {
-      "code": 6006,
-      "name": "ItemNotLowestRarity",
-      "msg": "Item is not the lowest rarity tier"
-    },
-    {
-      "code": 6007,
-      "name": "DirectCallNotAllowed",
-      "msg": "This instruction can only be called via CPI, not directly"
     }
   ],
   "types": [

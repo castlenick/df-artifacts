@@ -198,11 +198,137 @@
       "args": []
     },
     {
+      "name": "approve_trade",
+      "discriminator": [
+        7,
+        254,
+        199,
+        234,
+        17,
+        251,
+        210,
+        183
+      ],
+      "accounts": [
+        {
+          "name": "actor",
+          "signer": true
+        },
+        {
+          "name": "trade",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  97,
+                  100,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "trade.initiator",
+                "account": "TradeSession"
+              },
+              {
+                "kind": "account",
+                "path": "trade.counterparty",
+                "account": "TradeSession"
+              },
+              {
+                "kind": "account",
+                "path": "trade.nonce",
+                "account": "TradeSession"
+              },
+              {
+                "kind": "account",
+                "path": "trade.state_epoch",
+                "account": "TradeSession"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "expected_state_hash",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "cancel_trade",
+      "discriminator": [
+        124,
+        66,
+        91,
+        59,
+        175,
+        107,
+        208,
+        120
+      ],
+      "accounts": [
+        {
+          "name": "actor",
+          "signer": true
+        },
+        {
+          "name": "trade",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  97,
+                  100,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "trade.initiator",
+                "account": "TradeSession"
+              },
+              {
+                "kind": "account",
+                "path": "trade.counterparty",
+                "account": "TradeSession"
+              },
+              {
+                "kind": "account",
+                "path": "trade.nonce",
+                "account": "TradeSession"
+              },
+              {
+                "kind": "account",
+                "path": "trade.state_epoch",
+                "account": "TradeSession"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "close_inventory",
       "docs": [
         "Close an Inventory account; rent refunded to its owner. Requires the",
-        "inventory to be empty — callers should `remove_item_from_inventory` or",
-        "`transfer_item` everything out first."
+        "inventory to be empty — callers should `remove_item_from_inventory`",
+        "everything first. Player-to-player moves must use trade settlement."
       ],
       "discriminator": [
         88,
@@ -1117,6 +1243,121 @@
         {
           "name": "duration_seconds",
           "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "create_trade",
+      "discriminator": [
+        183,
+        82,
+        24,
+        245,
+        248,
+        30,
+        204,
+        246
+      ],
+      "accounts": [
+        {
+          "name": "initiator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "counterparty"
+        },
+        {
+          "name": "namespace_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  110,
+                  97,
+                  109,
+                  101,
+                  115,
+                  112,
+                  97,
+                  99,
+                  101,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "trade",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  97,
+                  100,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "initiator"
+              },
+              {
+                "kind": "account",
+                "path": "counterparty"
+              },
+              {
+                "kind": "arg",
+                "path": "nonce"
+              },
+              {
+                "kind": "account",
+                "path": "namespace_config.state_epoch",
+                "account": "PlayerNamespaceConfig"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "nonce",
+          "type": "u64"
+        },
+        {
+          "name": "initiator_items",
+          "type": {
+            "vec": "pubkey"
+          }
+        },
+        {
+          "name": "counterparty_items",
+          "type": {
+            "vec": "pubkey"
+          }
         }
       ]
     },
@@ -2407,6 +2648,181 @@
       ]
     },
     {
+      "name": "settle_trade",
+      "discriminator": [
+        252,
+        176,
+        98,
+        248,
+        73,
+        123,
+        8,
+        157
+      ],
+      "accounts": [
+        {
+          "name": "initiator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "counterparty",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "transfer_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  97,
+                  100,
+                  101,
+                  95,
+                  116,
+                  114,
+                  97,
+                  110,
+                  115,
+                  102,
+                  101,
+                  114,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "trade",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  97,
+                  100,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "trade.initiator",
+                "account": "TradeSession"
+              },
+              {
+                "kind": "account",
+                "path": "trade.counterparty",
+                "account": "TradeSession"
+              },
+              {
+                "kind": "account",
+                "path": "trade.nonce",
+                "account": "TradeSession"
+              },
+              {
+                "kind": "account",
+                "path": "trade.state_epoch",
+                "account": "TradeSession"
+              }
+            ]
+          }
+        },
+        {
+          "name": "initiator_inventory",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "initiator"
+              },
+              {
+                "kind": "account",
+                "path": "initiator_inventory.state_epoch",
+                "account": "Inventory"
+              }
+            ]
+          }
+        },
+        {
+          "name": "initiator_player"
+        },
+        {
+          "name": "counterparty_inventory",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "counterparty"
+              },
+              {
+                "kind": "account",
+                "path": "counterparty_inventory.state_epoch",
+                "account": "Inventory"
+              }
+            ]
+          }
+        },
+        {
+          "name": "counterparty_player"
+        },
+        {
+          "name": "items_program"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "swap_action_slots",
       "docs": [
         "Swap two action slots"
@@ -2735,6 +3151,77 @@
       ]
     },
     {
+      "name": "update_trade",
+      "discriminator": [
+        19,
+        11,
+        153,
+        209,
+        187,
+        44,
+        139,
+        9
+      ],
+      "accounts": [
+        {
+          "name": "actor",
+          "signer": true
+        },
+        {
+          "name": "trade",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  97,
+                  100,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "trade.initiator",
+                "account": "TradeSession"
+              },
+              {
+                "kind": "account",
+                "path": "trade.counterparty",
+                "account": "TradeSession"
+              },
+              {
+                "kind": "account",
+                "path": "trade.nonce",
+                "account": "TradeSession"
+              },
+              {
+                "kind": "account",
+                "path": "trade.state_epoch",
+                "account": "TradeSession"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "initiator_items",
+          "type": {
+            "vec": "pubkey"
+          }
+        },
+        {
+          "name": "counterparty_items",
+          "type": {
+            "vec": "pubkey"
+          }
+        }
+      ]
+    },
+    {
       "name": "withdraw_from_escrow",
       "docs": [
         "Withdraw SOL from the session escrow back to the authority",
@@ -2878,6 +3365,19 @@
         92,
         234,
         241
+      ]
+    },
+    {
+      "name": "TradeSession",
+      "discriminator": [
+        43,
+        20,
+        111,
+        188,
+        176,
+        148,
+        140,
+        69
       ]
     }
   ],
@@ -3059,13 +3559,63 @@
     },
     {
       "code": 6035,
+      "name": "DirectTransferDisabled",
+      "msg": "Direct player item transfer is disabled; use an approved trade settlement"
+    },
+    {
+      "code": 6036,
       "name": "InventoryNotEmpty",
       "msg": "Cannot close inventory while items remain in it"
     },
     {
-      "code": 6036,
+      "code": 6037,
       "name": "SessionEscrowNotEmpty",
       "msg": "Cannot close session escrow while balance is non-zero"
+    },
+    {
+      "code": 6038,
+      "name": "TradeTooManyItems",
+      "msg": "Trade contains too many items"
+    },
+    {
+      "code": 6039,
+      "name": "InvalidTradeItem",
+      "msg": "Trade contains an invalid item"
+    },
+    {
+      "code": 6040,
+      "name": "DuplicateTradeItem",
+      "msg": "Trade contains a duplicate item"
+    },
+    {
+      "code": 6041,
+      "name": "UnauthorizedTradeActor",
+      "msg": "Signer is not a participant in this trade"
+    },
+    {
+      "code": 6042,
+      "name": "TradeNotOpen",
+      "msg": "Trade is not open"
+    },
+    {
+      "code": 6043,
+      "name": "TradeStateHashMismatch",
+      "msg": "Trade state hash does not match current terms"
+    },
+    {
+      "code": 6044,
+      "name": "TradeNotApproved",
+      "msg": "Both parties must approve the current trade state before settlement"
+    },
+    {
+      "code": 6045,
+      "name": "InvalidTradeParty",
+      "msg": "Invalid trade participant"
+    },
+    {
+      "code": 6046,
+      "name": "MissingTradeItemAccount",
+      "msg": "Missing item account required for trade settlement"
     }
   ],
   "types": [
@@ -3887,6 +4437,98 @@
           {
             "name": "bump",
             "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TradeSession",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "initiator",
+            "type": "pubkey"
+          },
+          {
+            "name": "counterparty",
+            "type": "pubkey"
+          },
+          {
+            "name": "state_epoch",
+            "type": "u16"
+          },
+          {
+            "name": "nonce",
+            "type": "u64"
+          },
+          {
+            "name": "initiator_items",
+            "type": {
+              "vec": "pubkey"
+            }
+          },
+          {
+            "name": "counterparty_items",
+            "type": {
+              "vec": "pubkey"
+            }
+          },
+          {
+            "name": "state_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "initiator_ok_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "counterparty_ok_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "TradeStatus"
+              }
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TradeStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Open"
+          },
+          {
+            "name": "Settled"
+          },
+          {
+            "name": "Cancelled"
           }
         ]
       }

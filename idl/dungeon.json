@@ -299,9 +299,73 @@
         {
           "name": "inventory",
           "docs": [
-            "Player's inventory (will be reallocated by CPI)"
+            "Player's inventory (will be deserialized and reallocated by the player CPI)."
           ],
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session.state_epoch",
+                "account": "GameSession"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "item_account",
@@ -2318,9 +2382,74 @@
         {
           "name": "inventory",
           "docs": [
-            "Player's shared inventory — passed to player program on death to remove equipped items"
+            "Player's shared inventory — validated without deserializing its unbounded item vec.",
+            "The player program deserializes it only when the forfeiture removes equipment."
           ],
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player.state_epoch",
+                "account": "DeadOrAlivePlayer"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "battle_commit",
@@ -2506,9 +2635,74 @@
         {
           "name": "inventory",
           "docs": [
-            "Player's shared inventory — passed to player program on death to remove equipped items"
+            "Player's shared inventory — validated without deserializing its unbounded item vec.",
+            "The player program deserializes it only when the forfeiture removes equipment."
           ],
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session.state_epoch",
+                "account": "GameSession"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "battle_commit",
@@ -3550,9 +3744,74 @@
         {
           "name": "inventory",
           "docs": [
-            "Player's shared inventory — passed to player program on death to remove equipped items"
+            "Player's shared inventory — validated without deserializing its unbounded item vec.",
+            "The player program deserializes it only when a death actually removes equipment."
           ],
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player.state_epoch",
+                "account": "LivePlayer"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "room_log",
@@ -3669,9 +3928,74 @@
         {
           "name": "inventory",
           "docs": [
-            "Player's shared inventory — passed to player program on death to remove equipped items"
+            "Player's shared inventory — validated without deserializing its unbounded item vec.",
+            "The player program deserializes it only when a death actually removes equipment."
           ],
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player.state_epoch",
+                "account": "LivePlayer"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "room_log",
@@ -3871,9 +4195,74 @@
         {
           "name": "inventory",
           "docs": [
-            "Player's shared inventory — passed to player program on death to remove equipped items"
+            "Player's shared inventory — validated without deserializing its unbounded item vec.",
+            "The player program deserializes it only when a death actually removes equipment."
           ],
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session.state_epoch",
+                "account": "GameSession"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "room_log",
@@ -4019,7 +4408,74 @@
         },
         {
           "name": "inventory",
-          "writable": true
+          "docs": [
+            "deserializing its unbounded item vec in the dungeon program."
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player.state_epoch",
+                "account": "LivePlayer"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "scenario_log",
@@ -4660,19 +5116,6 @@
         121,
         220,
         240
-      ]
-    },
-    {
-      "name": "Inventory",
-      "discriminator": [
-        97,
-        218,
-        167,
-        233,
-        216,
-        170,
-        49,
-        27
       ]
     },
     {
@@ -6397,32 +6840,6 @@
           },
           {
             "name": "experience_reward",
-            "type": "u8"
-          }
-        ]
-      }
-    },
-    {
-      "name": "Inventory",
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "owner",
-            "type": "pubkey"
-          },
-          {
-            "name": "state_epoch",
-            "type": "u16"
-          },
-          {
-            "name": "items",
-            "type": {
-              "vec": "pubkey"
-            }
-          },
-          {
-            "name": "bump",
             "type": "u8"
           }
         ]

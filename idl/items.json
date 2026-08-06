@@ -513,6 +513,13 @@
           "signer": true
         },
         {
+          "name": "transfer_authority",
+          "docs": [
+            "Player-program PDA proving the CPI came through authorized trade logic."
+          ],
+          "signer": true
+        },
+        {
           "name": "item_account",
           "docs": [
             "Item account to transfer ownership of"
@@ -681,6 +688,11 @@
       "code": 6007,
       "name": "DirectCallNotAllowed",
       "msg": "This instruction can only be called via CPI, not directly"
+    },
+    {
+      "code": 6008,
+      "name": "InvalidTransferAuthority",
+      "msg": "Invalid transfer authority"
     }
   ],
   "types": [

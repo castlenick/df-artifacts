@@ -276,6 +276,80 @@
       ]
     },
     {
+      "name": "bootstrap_missing_class_configs",
+      "docs": [
+        "Idempotently provision any missing built-in class accounts and repair the",
+        "empty action arrays produced by older class-creation flows.",
+        "",
+        "Existing valid class content is never reset: customized stats, names,",
+        "actions, tags, and enabled state are preserved exactly."
+      ],
+      "discriminator": [
+        133,
+        41,
+        66,
+        172,
+        128,
+        197,
+        1,
+        146
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "barbarian_class_config",
+          "writable": true
+        },
+        {
+          "name": "warrior_class_config",
+          "writable": true
+        },
+        {
+          "name": "rogue_class_config",
+          "writable": true
+        },
+        {
+          "name": "wizard_class_config",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "bump_equipment_content_revision",
       "docs": [
         "Invalidates cached equipment after mutable item content changes.",
@@ -322,59 +396,6 @@
               }
             ]
           }
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "close_class_config",
-      "docs": [
-        "Close a ClassConfig; rent refunded to `authority`."
-      ],
-      "discriminator": [
-        168,
-        7,
-        176,
-        169,
-        136,
-        82,
-        101,
-        215
-      ],
-      "accounts": [
-        {
-          "name": "authority",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "registry",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
-                  105,
-                  115,
-                  116,
-                  114,
-                  121
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "name": "class_config",
-          "writable": true
         }
       ],
       "args": []
@@ -636,60 +657,6 @@
         {
           "name": "item_type_config",
           "writable": true
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "close_registry",
-      "docs": [
-        "Close the GameRegistry singleton. Root authority only — this is destructive",
-        "and invalidates every admin delegation / content config that references it."
-      ],
-      "discriminator": [
-        76,
-        32,
-        154,
-        180,
-        51,
-        159,
-        218,
-        102
-      ],
-      "accounts": [
-        {
-          "name": "authority",
-          "writable": true,
-          "signer": true,
-          "relations": [
-            "registry"
-          ]
-        },
-        {
-          "name": "registry",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
-                  105,
-                  115,
-                  116,
-                  114,
-                  121
-                ]
-              }
-            ]
-          }
         }
       ],
       "args": []
@@ -1339,6 +1306,22 @@
           }
         },
         {
+          "name": "barbarian_class_config",
+          "writable": true
+        },
+        {
+          "name": "warrior_class_config",
+          "writable": true
+        },
+        {
+          "name": "rogue_class_config",
+          "writable": true
+        },
+        {
+          "name": "wizard_class_config",
+          "writable": true
+        },
+        {
           "name": "system_program",
           "address": "11111111111111111111111111111111"
         }
@@ -1418,65 +1401,6 @@
               }
             ]
           }
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "migrate_class_config",
-      "docs": [
-        "Migrate a ClassConfig account to the new size that includes default_actions.",
-        "This is needed for accounts created before the default_actions field was added.",
-        "After migration, the default_actions array will be initialized to empty/default values."
-      ],
-      "discriminator": [
-        203,
-        124,
-        169,
-        49,
-        153,
-        56,
-        140,
-        131
-      ],
-      "accounts": [
-        {
-          "name": "authority",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "registry",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
-                  105,
-                  115,
-                  116,
-                  114,
-                  121
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "name": "class_config",
-          "writable": true
         },
         {
           "name": "system_program",
@@ -3083,96 +3007,101 @@
     },
     {
       "code": 6007,
+      "name": "InvalidClassConfig",
+      "msg": "Class configuration is malformed or does not match its canonical class PDA"
+    },
+    {
+      "code": 6008,
       "name": "InvalidEnvironmentType",
       "msg": "Environment ID does not name a supported canonical environment"
     },
     {
-      "code": 6008,
+      "code": 6009,
       "name": "Unauthorized",
       "msg": "Unauthorized - you are not the registry authority"
     },
     {
-      "code": 6009,
+      "code": 6010,
       "name": "InvalidLevel",
       "msg": "Level must be between 1 and 100"
     },
     {
-      "code": 6010,
+      "code": 6011,
       "name": "InvalidHealth",
       "msg": "Health must be greater than 0"
     },
     {
-      "code": 6011,
+      "code": 6012,
       "name": "InvalidAuthority",
       "msg": "New authority cannot be the default/zero address"
     },
     {
-      "code": 6012,
+      "code": 6013,
       "name": "InvalidTagName",
       "msg": "Tag name is not in canonical lowercase ASCII form"
     },
     {
-      "code": 6013,
+      "code": 6014,
       "name": "InvalidCustomTagId",
       "msg": "Custom tag ID is not the next allocatable ID"
     },
     {
-      "code": 6014,
+      "code": 6015,
       "name": "InvalidTagRulebook",
       "msg": "Tag rulebook is invalid, unsealed, corrupt, or has invalid lineage"
     },
     {
-      "code": 6015,
+      "code": 6016,
       "name": "InvalidTagRulebookVersion",
       "msg": "Tag rulebook version is not the next version in the active lineage"
     },
     {
-      "code": 6016,
+      "code": 6017,
       "name": "TagRulebookSealed",
       "msg": "A sealed tag rulebook is immutable"
     },
     {
-      "code": 6017,
+      "code": 6018,
       "name": "TooManyTagRules",
       "msg": "Tag rulebook exceeds its fixed rule capacity"
     },
     {
-      "code": 6018,
+      "code": 6019,
       "name": "InvalidTags",
       "msg": "Tags are invalid, non-canonical, or exceed entity capacity"
     },
     {
-      "code": 6019,
+      "code": 6020,
       "name": "InvalidActionConfig",
       "msg": "Action configuration has an invalid effect, threshold, name, or structural tag"
     },
     {
-      "code": 6020,
+      "code": 6021,
       "name": "UnregisteredTag",
       "msg": "Custom tag ID has not been registered"
     },
     {
-      "code": 6021,
+      "code": 6022,
       "name": "EmbeddedGrantedActionTags",
       "msg": "Granted-action tags must be authored through the tag-authority setter"
     },
     {
-      "code": 6022,
+      "code": 6023,
       "name": "MissingGrantedAction",
       "msg": "Item type does not grant an action"
     },
     {
-      "code": 6023,
+      "code": 6024,
       "name": "TooManyAllowedEnemyTypes",
       "msg": "Environment allows more enemy types than its fixed account capacity"
     },
     {
-      "code": 6024,
+      "code": 6025,
       "name": "InvalidAllowedEnemyTypes",
       "msg": "Environment enemy type IDs must be supported, unique, and strictly increasing"
     },
     {
-      "code": 6025,
+      "code": 6026,
       "name": "EquipmentContentRevisionOverflow",
       "msg": "Equipment content revision cannot advance further"
     }

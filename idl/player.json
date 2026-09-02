@@ -159,9 +159,13 @@
           }
         },
         {
-          "name": "battle_locked",
+          "name": "battle_lock_transition",
           "type": {
-            "option": "bool"
+            "option": {
+              "defined": {
+                "name": "BattleLockTransition"
+              }
+            }
           }
         }
       ]
@@ -451,8 +455,9 @@
     {
       "name": "close_player",
       "docs": [
-        "Close a dead player account and reclaim its rent to the owner.",
-        "Shared inventory is wallet-scoped and intentionally not touched here."
+        "Close a dead player account and reclaim its rent to the owner. Every",
+        "preserved dead-equipment reference must be recovered first so no Items",
+        "claim can be stranded after the Player account disappears."
       ],
       "discriminator": [
         225,
@@ -767,6 +772,82 @@
           ]
         },
         {
+          "name": "loot_authority",
+          "docs": [
+            "Dungeon-program PDA signer authorizing this loot settlement. Its signer",
+            "privilege is propagated unchanged through the nested items CPI."
+          ],
+          "signer": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  111,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                239,
+                186,
+                156,
+                99,
+                237,
+                143,
+                147,
+                198,
+                55,
+                94,
+                9,
+                41,
+                190,
+                110,
+                104,
+                87,
+                247,
+                155,
+                143,
+                2,
+                79,
+                45,
+                189,
+                129,
+                127,
+                122,
+                32,
+                60,
+                112,
+                172,
+                222,
+                100
+              ]
+            }
+          }
+        },
+        {
           "name": "inventory",
           "writable": true,
           "pda": {
@@ -798,6 +879,9 @@
           }
         },
         {
+          "name": "player"
+        },
+        {
           "name": "item_account",
           "docs": [
             "The PDA is [b\"item\", owner, item_id] under items program"
@@ -809,6 +893,137 @@
           "docs": [
             "Loot config for generating the item"
           ]
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
         },
         {
           "name": "items_program",
@@ -864,6 +1079,82 @@
           "name": "authority"
         },
         {
+          "name": "loot_authority",
+          "docs": [
+            "Dungeon-program PDA signer authorizing this loot settlement. Its signer",
+            "privilege is propagated unchanged through the nested items CPI."
+          ],
+          "signer": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  111,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                239,
+                186,
+                156,
+                99,
+                237,
+                143,
+                147,
+                198,
+                55,
+                94,
+                9,
+                41,
+                190,
+                110,
+                104,
+                87,
+                247,
+                155,
+                143,
+                2,
+                79,
+                45,
+                189,
+                129,
+                127,
+                122,
+                32,
+                60,
+                112,
+                172,
+                222,
+                100
+              ]
+            }
+          }
+        },
+        {
           "name": "session",
           "docs": [
             "Valid session linking session_key to authority"
@@ -901,6 +1192,9 @@
           }
         },
         {
+          "name": "player"
+        },
+        {
           "name": "item_account",
           "docs": [
             "The PDA is [b\"item\", authority, item_id] under items program"
@@ -912,6 +1206,137 @@
           "docs": [
             "Loot config for generating the item"
           ]
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
         },
         {
           "name": "items_program",
@@ -940,7 +1365,7 @@
     {
       "name": "create_player",
       "docs": [
-        "Create a player. Optionally pass ClassConfig as remaining_account[0] to use on-chain actions."
+        "Create a player from the canonical enabled on-chain ClassConfig."
       ],
       "discriminator": [
         19,
@@ -992,6 +1417,9 @@
               }
             ]
           }
+        },
+        {
+          "name": "class_config"
         },
         {
           "name": "player",
@@ -1073,6 +1501,9 @@
               }
             ]
           }
+        },
+        {
+          "name": "class_config"
         },
         {
           "name": "player",
@@ -1303,6 +1734,137 @@
           }
         },
         {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
           "name": "trade",
           "writable": true,
           "pda": {
@@ -1433,6 +1995,12 @@
     },
     {
       "name": "equip_item",
+      "docs": [
+        "Remaining accounts must include the replaced item (if any), plus every",
+        "unchanged item's account and every final item's canonical ItemTypeConfig.",
+        "Item accounts whose membership changes must be writable; unchanged item",
+        "accounts and config accounts may be read-only. Order is irrelevant."
+      ],
       "discriminator": [
         38,
         155,
@@ -1457,7 +2025,179 @@
           "writable": true
         },
         {
-          "name": "item_account"
+          "name": "equipment_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109,
+                  95,
+                  101,
+                  113,
+                  117,
+                  105,
+                  112,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "item_account",
+          "writable": true
+        },
+        {
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
         }
       ],
       "args": [
@@ -1474,7 +2214,7 @@
     {
       "name": "equip_item_with_session",
       "docs": [
-        "Session-aware item equip."
+        "Session-aware item equip. Remaining-account requirements match `equip_item`."
       ],
       "discriminator": [
         118,
@@ -1503,7 +2243,179 @@
           "writable": true
         },
         {
-          "name": "item_account"
+          "name": "equipment_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109,
+                  95,
+                  101,
+                  113,
+                  117,
+                  105,
+                  112,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "item_account",
+          "writable": true
+        },
+        {
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
         }
       ],
       "args": [
@@ -2069,8 +2981,8 @@
     {
       "name": "recalculate_equipment_stats",
       "docs": [
-        "Recalculate all equipment stats by reading all equipped items",
-        "Useful for recovering from inconsistent state or after account migrations"
+        "Recalculate all equipment stats by reading all equipped items and their",
+        "canonical ItemTypeConfigs from remaining accounts."
       ],
       "discriminator": [
         85,
@@ -2094,104 +3006,156 @@
         {
           "name": "player",
           "writable": true
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "remove_item_from_inventory",
-      "discriminator": [
-        54,
-        89,
-        81,
-        51,
-        245,
-        88,
-        178,
-        150
-      ],
-      "accounts": [
-        {
-          "name": "owner",
-          "writable": true,
-          "signer": true,
-          "relations": [
-            "inventory"
-          ]
         },
         {
-          "name": "inventory",
-          "writable": true,
+          "name": "tag_registry",
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  105,
-                  110,
-                  118,
-                  101,
-                  110,
                   116,
-                  111,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
                   114,
                   121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
                 ]
               },
               {
                 "kind": "account",
-                "path": "owner"
+                "path": "tag_registry"
               },
               {
                 "kind": "account",
-                "path": "inventory.state_epoch",
-                "account": "Inventory"
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
               }
-            ]
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
           }
-        },
-        {
-          "name": "player",
-          "docs": [
-            "The player that the caller is treating as \"holding\" this item. Used to",
-            "enforce that the item isn't currently equipped before removal. Any",
-            "DeadOrAlivePlayer the signer owns is accepted — pass the one most likely",
-            "to have the item equipped (typically the active player)."
-          ]
-        },
-        {
-          "name": "item_account",
-          "docs": [
-            "it will be destroyed; otherwise the inventory reference is pruned only."
-          ],
-          "writable": true
-        },
-        {
-          "name": "items_program",
-          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
         }
       ],
       "args": []
     },
     {
-      "name": "remove_lowest_rarity_item_from_inventory_with_session",
+      "name": "recover_dead_item_with_session",
       "docs": [
-        "Session-aware item removal for lowest-rarity junk items.",
-        "If valid, closes the item account via items program and returns rent to session escrow."
+        "Recover and destroy an item retained on an exact dead Player after death",
+        "removed it from shared inventory. Unlike junk removal, rarity is irrelevant."
       ],
       "discriminator": [
-        244,
-        197,
-        215,
-        198,
-        76,
-        42,
-        233,
-        174
+        137,
+        165,
+        91,
+        123,
+        1,
+        184,
+        165,
+        32
       ],
       "accounts": [
         {
@@ -2204,6 +3168,10 @@
         },
         {
           "name": "session"
+        },
+        {
+          "name": "player",
+          "writable": true
         },
         {
           "name": "inventory",
@@ -2277,8 +3245,799 @@
           }
         },
         {
+          "name": "destroy_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109,
+                  95,
+                  100,
+                  101,
+                  115,
+                  116,
+                  114,
+                  111,
+                  121,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "equipment_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109,
+                  95,
+                  101,
+                  113,
+                  117,
+                  105,
+                  112,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "equipment_revision_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  113,
+                  117,
+                  105,
+                  112,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  114,
+                  101,
+                  118,
+                  105,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                224,
+                166,
+                93,
+                89,
+                226,
+                65,
+                147,
+                69,
+                181,
+                236,
+                242,
+                78,
+                49,
+                5,
+                140,
+                67,
+                93,
+                54,
+                205,
+                111,
+                205,
+                52,
+                154,
+                44,
+                115,
+                41,
+                25,
+                93,
+                131,
+                50,
+                28,
+                58
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
           "name": "items_program",
           "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
+        },
+        {
+          "name": "game_content_program",
+          "address": "HSzZSCzCN5NX7YiGeX9mkmj2jag6f9i8uhwo61VCf429"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "remove_item_from_inventory",
+      "discriminator": [
+        54,
+        89,
+        81,
+        51,
+        245,
+        88,
+        178,
+        150
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "inventory",
+            "player"
+          ]
+        },
+        {
+          "name": "inventory",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "inventory.state_epoch",
+                "account": "Inventory"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player",
+          "docs": [
+            "Canonical player used for live-equipment checks and exact dead-item",
+            "recovery. A dead player's preserved slot is also an authorization proof."
+          ],
+          "writable": true
+        },
+        {
+          "name": "item_account",
+          "docs": [
+            "mismatched accounts fail closed and never prune an inventory reference."
+          ],
+          "writable": true
+        },
+        {
+          "name": "destroy_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109,
+                  95,
+                  100,
+                  101,
+                  115,
+                  116,
+                  114,
+                  111,
+                  121,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "equipment_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109,
+                  95,
+                  101,
+                  113,
+                  117,
+                  105,
+                  112,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "equipment_revision_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  113,
+                  117,
+                  105,
+                  112,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  114,
+                  101,
+                  118,
+                  105,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                224,
+                166,
+                93,
+                89,
+                226,
+                65,
+                147,
+                69,
+                181,
+                236,
+                242,
+                78,
+                49,
+                5,
+                140,
+                67,
+                93,
+                54,
+                205,
+                111,
+                205,
+                52,
+                154,
+                44,
+                115,
+                41,
+                25,
+                93,
+                131,
+                50,
+                28,
+                58
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
+        },
+        {
+          "name": "game_content_program",
+          "address": "HSzZSCzCN5NX7YiGeX9mkmj2jag6f9i8uhwo61VCf429"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "remove_lowest_rarity_item_from_inventory_with_session",
+      "docs": [
+        "Session-aware item removal for lowest-rarity junk items.",
+        "If valid, closes the item account via items program and returns rent to session escrow."
+      ],
+      "discriminator": [
+        244,
+        197,
+        215,
+        198,
+        76,
+        42,
+        233,
+        174
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority"
+        },
+        {
+          "name": "session"
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "inventory",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "inventory.state_epoch",
+                "account": "Inventory"
+              }
+            ]
+          }
+        },
+        {
+          "name": "item_account",
+          "writable": true
+        },
+        {
+          "name": "escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "escrow.state_epoch",
+                "account": "SessionEscrow"
+              }
+            ]
+          }
+        },
+        {
+          "name": "destroy_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109,
+                  95,
+                  100,
+                  101,
+                  115,
+                  116,
+                  114,
+                  111,
+                  121,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "equipment_revision_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  113,
+                  117,
+                  105,
+                  112,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  114,
+                  101,
+                  118,
+                  105,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                224,
+                166,
+                93,
+                89,
+                226,
+                65,
+                147,
+                69,
+                181,
+                236,
+                242,
+                78,
+                49,
+                5,
+                140,
+                67,
+                93,
+                54,
+                205,
+                111,
+                205,
+                52,
+                154,
+                44,
+                115,
+                41,
+                25,
+                93,
+                131,
+                50,
+                28,
+                58
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
+        },
+        {
+          "name": "game_content_program",
+          "address": "HSzZSCzCN5NX7YiGeX9mkmj2jag6f9i8uhwo61VCf429"
         },
         {
           "name": "system_program",
@@ -2498,7 +4257,10 @@
     {
       "name": "set_equipment_loadout",
       "docs": [
-        "Atomically replace the player's equipment with a full desired loadout."
+        "Atomically replace the player's equipment with a full desired loadout.",
+        "Remaining accounts must include the union of current and desired item",
+        "accounts plus every desired canonical ItemTypeConfig. Added and removed",
+        "item accounts must be writable; unchanged items/configs may be read-only."
       ],
       "discriminator": [
         33,
@@ -2522,6 +4284,177 @@
         {
           "name": "player",
           "writable": true
+        },
+        {
+          "name": "equipment_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109,
+                  95,
+                  101,
+                  113,
+                  117,
+                  105,
+                  112,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
         }
       ],
       "args": [
@@ -2538,7 +4471,8 @@
     {
       "name": "set_equipment_loadout_with_session",
       "docs": [
-        "Session-aware atomic loadout replacement."
+        "Session-aware atomic loadout replacement. Remaining-account requirements",
+        "match `set_equipment_loadout`."
       ],
       "discriminator": [
         59,
@@ -2565,6 +4499,177 @@
         {
           "name": "player",
           "writable": true
+        },
+        {
+          "name": "equipment_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109,
+                  95,
+                  101,
+                  113,
+                  117,
+                  105,
+                  112,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
         }
       ],
       "args": [
@@ -2573,6 +4678,112 @@
           "type": {
             "defined": {
               "name": "EquipmentLoadout"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_player_tags",
+      "docs": [
+        "Replaces admin-authored player traits. Class and life-state tags remain derived."
+      ],
+      "discriminator": [
+        136,
+        12,
+        63,
+        113,
+        6,
+        9,
+        233,
+        182
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "tag_registry"
+          ]
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "owner",
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "player",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "tags",
+          "type": {
+            "defined": {
+              "name": "TagSetV1"
             }
           }
         }
@@ -2742,6 +4953,137 @@
                 "account": "TradeSession"
               }
             ]
+          }
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "trade.rulebook_version",
+                "account": "TradeSession"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
           }
         },
         {
@@ -2970,6 +5312,10 @@
     },
     {
       "name": "unequip_item",
+      "docs": [
+        "Remaining accounts must include the removed item as writable, plus each",
+        "surviving item's account and canonical ItemTypeConfig. Order is irrelevant."
+      ],
       "discriminator": [
         96,
         192,
@@ -2992,6 +5338,177 @@
         {
           "name": "player",
           "writable": true
+        },
+        {
+          "name": "equipment_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109,
+                  95,
+                  101,
+                  113,
+                  117,
+                  105,
+                  112,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
         }
       ],
       "args": [
@@ -3008,7 +5525,7 @@
     {
       "name": "unequip_item_with_session",
       "docs": [
-        "Session-aware item unequip."
+        "Session-aware item unequip. Remaining-account requirements match `unequip_item`."
       ],
       "discriminator": [
         9,
@@ -3035,6 +5552,177 @@
         {
           "name": "player",
           "writable": true
+        },
+        {
+          "name": "equipment_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109,
+                  95,
+                  101,
+                  113,
+                  117,
+                  105,
+                  112,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
         }
       ],
       "args": [
@@ -3051,8 +5739,8 @@
     {
       "name": "update_player_stats",
       "docs": [
-        "Owner-signed stat update, callable ONLY via CPI (not directly by users).",
-        "The dungeon program calls this to update stats after battles."
+        "Owner-signed gameplay stat update, authorized by the canonical Dungeon",
+        "program signer capability."
       ],
       "discriminator": [
         61,
@@ -3074,6 +5762,91 @@
           ]
         },
         {
+          "name": "player_stats_authority",
+          "docs": [
+            "Canonical Dungeon-program signer capability. Requiring both the PDA",
+            "address and signer privilege prevents arbitrary programs from relaying",
+            "owner signatures into this gameplay-only mutation boundary."
+          ],
+          "signer": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  115,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                239,
+                186,
+                156,
+                99,
+                237,
+                143,
+                147,
+                198,
+                55,
+                94,
+                9,
+                41,
+                190,
+                110,
+                104,
+                87,
+                247,
+                155,
+                143,
+                2,
+                79,
+                45,
+                189,
+                129,
+                127,
+                122,
+                32,
+                60,
+                112,
+                172,
+                222,
+                100
+              ]
+            }
+          }
+        },
+        {
           "name": "player",
           "writable": true
         }
@@ -3092,9 +5865,13 @@
           }
         },
         {
-          "name": "battle_locked",
+          "name": "battle_lock_transition",
           "type": {
-            "option": "bool"
+            "option": {
+              "defined": {
+                "name": "BattleLockTransition"
+              }
+            }
           }
         }
       ]
@@ -3102,7 +5879,8 @@
     {
       "name": "update_player_stats_cpi",
       "docs": [
-        "Update player stats via CPI - validates via session instead of owner signature"
+        "Session-authorized gameplay stat update. The session proves player",
+        "authority while the Dungeon PDA proves the caller is trusted gameplay."
       ],
       "discriminator": [
         209,
@@ -3117,6 +5895,90 @@
       "accounts": [
         {
           "name": "authority"
+        },
+        {
+          "name": "player_stats_authority",
+          "docs": [
+            "Canonical Dungeon-program signer capability. A valid session alone does",
+            "not authorize arbitrary programs to mutate gameplay stats."
+          ],
+          "signer": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  115,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                239,
+                186,
+                156,
+                99,
+                237,
+                143,
+                147,
+                198,
+                55,
+                94,
+                9,
+                41,
+                190,
+                110,
+                104,
+                87,
+                247,
+                155,
+                143,
+                2,
+                79,
+                45,
+                189,
+                129,
+                127,
+                122,
+                32,
+                60,
+                112,
+                172,
+                222,
+                100
+              ]
+            }
+          }
         },
         {
           "name": "session",
@@ -3143,9 +6005,13 @@
           }
         },
         {
-          "name": "battle_locked",
+          "name": "battle_lock_transition",
           "type": {
-            "option": "bool"
+            "option": {
+              "defined": {
+                "name": "BattleLockTransition"
+              }
+            }
           }
         }
       ]
@@ -3290,6 +6156,19 @@
   ],
   "accounts": [
     {
+      "name": "ClassConfig",
+      "discriminator": [
+        12,
+        14,
+        218,
+        247,
+        8,
+        85,
+        10,
+        250
+      ]
+    },
+    {
       "name": "DeadOrAlivePlayer",
       "discriminator": [
         38,
@@ -3368,6 +6247,32 @@
       ]
     },
     {
+      "name": "TagRegistry",
+      "discriminator": [
+        53,
+        122,
+        94,
+        145,
+        240,
+        168,
+        232,
+        12
+      ]
+    },
+    {
+      "name": "TagRulebook",
+      "discriminator": [
+        221,
+        42,
+        29,
+        88,
+        48,
+        55,
+        248,
+        13
+      ]
+    },
+    {
       "name": "TradeSession",
       "discriminator": [
         43,
@@ -3424,198 +6329,263 @@
     },
     {
       "code": 6008,
+      "name": "InvalidBattleLockToken",
+      "msg": "Battle lock transitions require a non-zero BattleCommit key"
+    },
+    {
+      "code": 6009,
+      "name": "BattleLockTokenMismatch",
+      "msg": "Only the BattleCommit that owns this player lock may release it"
+    },
+    {
+      "code": 6010,
+      "name": "BattleLockAcquireWithStats",
+      "msg": "Acquiring a battle lock cannot mutate player health or experience"
+    },
+    {
+      "code": 6011,
       "name": "PlayerIdAlreadyExists",
       "msg": "Player ID already exists for this wallet"
     },
     {
-      "code": 6009,
+      "code": 6012,
       "name": "InvalidItemData",
       "msg": "Failed to deserialize item data"
     },
     {
-      "code": 6010,
+      "code": 6013,
       "name": "MissingEquipmentAccount",
       "msg": "Missing account for an item in the final equipment loadout"
     },
     {
-      "code": 6011,
+      "code": 6014,
       "name": "DuplicateEquipmentItem",
       "msg": "Equipment loadout cannot use the same item in multiple slots"
     },
     {
-      "code": 6012,
+      "code": 6015,
       "name": "InvalidEquipmentLoadout",
       "msg": "Equipment loadout contains an invalid item pubkey"
     },
     {
-      "code": 6013,
+      "code": 6016,
       "name": "InvalidItemAccountOwner",
       "msg": "Equipment item account is not owned by the items program"
     },
     {
-      "code": 6014,
+      "code": 6017,
+      "name": "ItemEquipmentClaimMismatch",
+      "msg": "Equipment claim does not match the required player state"
+    },
+    {
+      "code": 6018,
+      "name": "EquipmentItemMustBeWritable",
+      "msg": "An added or removed equipment item account must be writable"
+    },
+    {
+      "code": 6019,
+      "name": "MissingItemTypeConfig",
+      "msg": "Missing the canonical ItemTypeConfig for an equipped item"
+    },
+    {
+      "code": 6020,
+      "name": "InvalidItemTypeConfig",
+      "msg": "ItemTypeConfig must be the canonical enabled definition for the equipped item type and slot"
+    },
+    {
+      "code": 6021,
       "name": "EquipmentRequirementNotMet",
       "msg": "Equipment requirements are not met by the final loadout"
     },
     {
-      "code": 6015,
+      "code": 6022,
       "name": "ItemNotLowestRarity",
       "msg": "Only lowest rarity items can be session-destroyed"
     },
     {
-      "code": 6016,
+      "code": 6023,
       "name": "InvalidActionSlot",
       "msg": "Invalid action slot index"
     },
     {
-      "code": 6017,
+      "code": 6024,
       "name": "MaxActionsEnabled",
       "msg": "Maximum number of actions already enabled (3)"
     },
     {
-      "code": 6018,
+      "code": 6025,
+      "name": "NoAvailableActionSlot",
+      "msg": "No empty action slot is available for an equipment-granted action"
+    },
+    {
+      "code": 6026,
       "name": "EmptyActionSlot",
       "msg": "Cannot enable an empty action slot"
     },
     {
-      "code": 6019,
+      "code": 6027,
       "name": "SameSlotSwap",
       "msg": "Cannot swap a slot with itself"
     },
     {
-      "code": 6020,
+      "code": 6028,
       "name": "InvalidSessionDuration",
       "msg": "Invalid session duration"
     },
     {
-      "code": 6021,
+      "code": 6029,
       "name": "SessionTooLong",
       "msg": "Session duration cannot exceed 24 hours"
     },
     {
-      "code": 6022,
+      "code": 6030,
       "name": "SessionExpired",
       "msg": "Session has expired"
     },
     {
-      "code": 6023,
+      "code": 6031,
       "name": "NotSessionAuthority",
       "msg": "Not the session authority"
     },
     {
-      "code": 6024,
+      "code": 6032,
       "name": "NotPlayerOwner",
       "msg": "Not the player owner"
     },
     {
-      "code": 6025,
+      "code": 6033,
       "name": "NotEscrowAuthority",
       "msg": "Not the escrow authority"
     },
     {
-      "code": 6026,
+      "code": 6034,
       "name": "InsufficientEscrowBalance",
       "msg": "Insufficient escrow balance"
     },
     {
-      "code": 6027,
+      "code": 6035,
       "name": "InvalidAmount",
       "msg": "Invalid amount"
     },
     {
-      "code": 6028,
+      "code": 6036,
       "name": "InvalidSession",
       "msg": "Invalid session - session key mismatch"
     },
     {
-      "code": 6029,
+      "code": 6037,
       "name": "Unauthorized",
       "msg": "Unauthorized"
     },
     {
-      "code": 6030,
+      "code": 6038,
       "name": "StateEpochMismatch",
       "msg": "State epoch mismatch between accounts"
     },
     {
-      "code": 6031,
+      "code": 6039,
       "name": "PlayerPermanentlyDead",
       "msg": "Player is permanently dead and cannot be revived"
     },
     {
-      "code": 6032,
+      "code": 6040,
       "name": "PlayerMustBeDeadToClose",
       "msg": "Only dead players can be closed"
     },
     {
-      "code": 6033,
+      "code": 6041,
       "name": "PlayerHasEquippedItems",
-      "msg": "Cannot close player while items are equipped"
+      "msg": "Cannot close player while equipment claims or preserved item references remain"
     },
     {
-      "code": 6034,
+      "code": 6042,
+      "name": "InvalidDeadItemRecovery",
+      "msg": "Dead-item recovery does not match the exact preserved player slot"
+    },
+    {
+      "code": 6043,
       "name": "DirectCallNotAllowed",
       "msg": "This instruction can only be called via CPI, not directly"
     },
     {
-      "code": 6035,
+      "code": 6044,
       "name": "DirectTransferDisabled",
       "msg": "Direct player item transfer is disabled; use an approved trade settlement"
     },
     {
-      "code": 6036,
+      "code": 6045,
       "name": "InventoryNotEmpty",
       "msg": "Cannot close inventory while items remain in it"
     },
     {
-      "code": 6037,
+      "code": 6046,
       "name": "SessionEscrowNotEmpty",
       "msg": "Cannot close session escrow while balance is non-zero"
     },
     {
-      "code": 6038,
+      "code": 6047,
       "name": "TradeTooManyItems",
       "msg": "Trade contains too many items"
     },
     {
-      "code": 6039,
+      "code": 6048,
       "name": "InvalidTradeItem",
       "msg": "Trade contains an invalid item"
     },
     {
-      "code": 6040,
+      "code": 6049,
       "name": "DuplicateTradeItem",
       "msg": "Trade contains a duplicate item"
     },
     {
-      "code": 6041,
+      "code": 6050,
       "name": "UnauthorizedTradeActor",
       "msg": "Signer is not a participant in this trade"
     },
     {
-      "code": 6042,
+      "code": 6051,
       "name": "TradeNotOpen",
       "msg": "Trade is not open"
     },
     {
-      "code": 6043,
+      "code": 6052,
       "name": "TradeStateHashMismatch",
       "msg": "Trade state hash does not match current terms"
     },
     {
-      "code": 6044,
+      "code": 6053,
       "name": "TradeNotApproved",
       "msg": "Both parties must approve the current trade state before settlement"
     },
     {
-      "code": 6045,
+      "code": 6054,
       "name": "InvalidTradeParty",
       "msg": "Invalid trade participant"
     },
     {
-      "code": 6046,
+      "code": 6055,
       "name": "MissingTradeItemAccount",
       "msg": "Missing item account required for trade settlement"
+    },
+    {
+      "code": 6056,
+      "name": "InvalidTags",
+      "msg": "Tags are invalid, non-canonical, or exceed entity capacity"
+    },
+    {
+      "code": 6057,
+      "name": "InvalidClassConfig",
+      "msg": "ClassConfig must be the canonical enabled definition for the requested class and contain valid actions and tags"
+    },
+    {
+      "code": 6058,
+      "name": "InvalidTagRulebook",
+      "msg": "Tag rulebook is not the canonical sealed active rulebook"
+    },
+    {
+      "code": 6059,
+      "name": "TradeDeniedByTags",
+      "msg": "The pinned tag rules prohibit this item from being traded between these players"
     }
   ],
   "types": [
@@ -3659,6 +6629,80 @@
           {
             "name": "enabled",
             "type": "bool"
+          },
+          {
+            "name": "tags",
+            "docs": [
+              "Authored semantic traits. Structural source/effect tags are derived at use time."
+            ],
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
+          },
+          {
+            "name": "source_tags",
+            "docs": [
+              "Effective traits of the concrete entity granting this action.",
+              "",
+              "This is intentionally stored per action instead of on a combatant snapshot:",
+              "a silver weapon action must not make an unrelated helmet or class action",
+              "satisfy a source predicate requiring `material:silver`."
+            ],
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ActionConfig",
+      "docs": [
+        "Action configuration for class defaults"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "effect_type",
+            "type": "u8"
+          },
+          {
+            "name": "effect_value1",
+            "type": "i16"
+          },
+          {
+            "name": "effect_value2",
+            "type": "u8"
+          },
+          {
+            "name": "success_threshold",
+            "type": "u8"
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
+          },
+          {
+            "name": "tags",
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
           }
         ]
       }
@@ -3898,6 +6942,115 @@
       }
     },
     {
+      "name": "BattleLockTransition",
+      "docs": [
+        "Exact ownership transition for the player's single outstanding battle lock.",
+        "",
+        "A battle commit acquires the lock with its canonical account address. Only",
+        "the same commit may release it, which prevents one dungeon run from",
+        "unlocking a different run's pending reveal."
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Acquire",
+            "fields": [
+              {
+                "name": "commit",
+                "type": "pubkey"
+              }
+            ]
+          },
+          {
+            "name": "Release",
+            "fields": [
+              {
+                "name": "commit",
+                "type": "pubkey"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "ClassConfig",
+      "docs": [
+        "Configuration for a player class"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "class_id",
+            "type": "u8"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "base_health",
+            "type": "i16"
+          },
+          {
+            "name": "base_attack",
+            "type": "i16"
+          },
+          {
+            "name": "base_defense",
+            "type": "i16"
+          },
+          {
+            "name": "health_per_level",
+            "type": "i16"
+          },
+          {
+            "name": "attack_per_level",
+            "type": "i16"
+          },
+          {
+            "name": "defense_per_level",
+            "type": "i16"
+          },
+          {
+            "name": "default_actions",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "ActionConfig"
+                  }
+                },
+                5
+              ]
+            }
+          },
+          {
+            "name": "tags",
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
       "name": "DeadOrAlivePlayer",
       "type": {
         "kind": "struct",
@@ -3923,6 +7076,28 @@
             "type": {
               "defined": {
                 "name": "PlayerClass"
+              }
+            }
+          },
+          {
+            "name": "class_tags",
+            "docs": [
+              "Class-config traits snapshotted at player creation."
+            ],
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
+          },
+          {
+            "name": "tags",
+            "docs": [
+              "Authored player traits; entity/class/life-state tags are derived when evaluated."
+            ],
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
               }
             }
           },
@@ -3987,6 +7162,34 @@
             "type": "i16"
           },
           {
+            "name": "equipment_tag_rulebook",
+            "docs": [
+              "Immutable TagRulebook that produced all cached equipment bonuses/actions.",
+              "The zero identity means the player currently has no equipped items."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "equipment_tag_rulebook_version",
+            "type": "u32"
+          },
+          {
+            "name": "equipment_tag_rulebook_digest",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "equipment_content_revision",
+            "docs": [
+              "Mutable item/type content epoch used to derive the cached loadout."
+            ],
+            "type": "u64"
+          },
+          {
             "name": "experience",
             "type": "u64"
           },
@@ -4048,14 +7251,13 @@
             "type": "u8"
           },
           {
-            "name": "battle_locked",
+            "name": "battle_lock",
             "docs": [
-              "True while this player is mid-battle-commit (between commit_battle and",
-              "reveal_battle/forfeit). Blocks item-stripping ixs (unequip, transfer,",
-              "remove_from_inventory) so an attacker can't strip equipment off a",
-              "character whose reveal-simulated outcome is \"dies\" before forfeiting."
+              "Exact BattleCommit account that owns the pending battle lock. The zero",
+              "key means unlocked. Only that commit may release the lock during reveal",
+              "or forfeit, preventing another run from clearing it."
             ],
-            "type": "bool"
+            "type": "pubkey"
           }
         ]
       }
@@ -4254,6 +7456,33 @@
           {
             "name": "drop_chance",
             "type": "u8"
+          },
+          {
+            "name": "actor_tags",
+            "docs": [
+              "Additional/effective role tags supplied by the authoritative caller."
+            ],
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
+          },
+          {
+            "name": "target_tags",
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
+          },
+          {
+            "name": "environment_tags",
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
           }
         ]
       }
@@ -4442,6 +7671,370 @@
       }
     },
     {
+      "name": "TagClauseV1",
+      "docs": [
+        "One canonical fixed-capacity predicate clause.",
+        "",
+        "The active prefix is nonzero, sorted, and unique. Unused slots must remain",
+        "zero-filled, preserving one deterministic wire representation per clause."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "len",
+            "type": "u8"
+          },
+          {
+            "name": "ids",
+            "type": {
+              "array": [
+                "u16",
+                4
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagEffect",
+      "docs": [
+        "A fixed-width rule result. Basis-point channels use 10_000 = 100%."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "channel",
+            "type": {
+              "defined": {
+                "name": "TagEffectChannel"
+              }
+            }
+          },
+          {
+            "name": "amount",
+            "type": "i32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagEffectChannel",
+      "docs": [
+        "Orthogonal numeric channels produced by tag rules."
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Deny"
+          },
+          {
+            "name": "AttackFlat"
+          },
+          {
+            "name": "DefenseFlat"
+          },
+          {
+            "name": "HealthFlat"
+          },
+          {
+            "name": "SpeedFlat"
+          },
+          {
+            "name": "RollFlat"
+          },
+          {
+            "name": "DamageFlat"
+          },
+          {
+            "name": "DamageBps"
+          },
+          {
+            "name": "LootChanceBps"
+          },
+          {
+            "name": "RaritySteps"
+          },
+          {
+            "name": "ExperienceBps"
+          },
+          {
+            "name": "SpawnWeightBps"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagPredicateV1",
+      "docs": [
+        "Allocation-free role predicate.",
+        "",
+        "`required_all` must all be present. At least one `required_any` tag must be",
+        "present unless that clause is empty. No `forbidden_any` tag may be present."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "required_all",
+            "type": {
+              "defined": {
+                "name": "TagClauseV1"
+              }
+            }
+          },
+          {
+            "name": "required_any",
+            "type": {
+              "defined": {
+                "name": "TagClauseV1"
+              }
+            }
+          },
+          {
+            "name": "forbidden_any",
+            "type": {
+              "defined": {
+                "name": "TagClauseV1"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagRegistry",
+      "docs": [
+        "Root singleton for authority, custom-ID allocation, and rulebook activation."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "next_custom_tag_id",
+            "type": "u16"
+          },
+          {
+            "name": "custom_definition_count",
+            "type": "u32"
+          },
+          {
+            "name": "active_rulebook",
+            "type": "pubkey"
+          },
+          {
+            "name": "active_rulebook_version",
+            "type": "u32"
+          },
+          {
+            "name": "equipment_content_revision",
+            "docs": [
+              "Monotonic invalidation epoch for cached equipment state. Any mutation",
+              "to a concrete item's authored tags or canonical ItemTypeConfig bumps it."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagRuleV1",
+      "docs": [
+        "A bounded predicate for each role in the tag context."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "stage",
+            "type": {
+              "defined": {
+                "name": "TagStage"
+              }
+            }
+          },
+          {
+            "name": "actor",
+            "type": {
+              "defined": {
+                "name": "TagPredicateV1"
+              }
+            }
+          },
+          {
+            "name": "source",
+            "type": {
+              "defined": {
+                "name": "TagPredicateV1"
+              }
+            }
+          },
+          {
+            "name": "action",
+            "type": {
+              "defined": {
+                "name": "TagPredicateV1"
+              }
+            }
+          },
+          {
+            "name": "target",
+            "type": {
+              "defined": {
+                "name": "TagPredicateV1"
+              }
+            }
+          },
+          {
+            "name": "environment",
+            "type": {
+              "defined": {
+                "name": "TagPredicateV1"
+              }
+            }
+          },
+          {
+            "name": "effect",
+            "type": {
+              "defined": {
+                "name": "TagEffect"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagRulebook",
+      "docs": [
+        "A preallocated rulebook that becomes immutable once sealed.",
+        "",
+        "Rules may be appended over multiple transactions until `seal` computes the",
+        "canonical digest and locks the account. Publishing a replacement creates a",
+        "new version whose `previous_rulebook` points to the formerly active account."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "registry",
+            "type": "pubkey"
+          },
+          {
+            "name": "version",
+            "type": "u32"
+          },
+          {
+            "name": "previous_rulebook",
+            "type": "pubkey"
+          },
+          {
+            "name": "rules",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "TagRuleV1"
+                }
+              }
+            }
+          },
+          {
+            "name": "sealed",
+            "type": "bool"
+          },
+          {
+            "name": "digest",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagSetV1",
+      "docs": [
+        "A fixed-capacity set stored as a strict ascending prefix and zero padding.",
+        "",
+        "Deserialization cannot enforce semantic invariants, so account/argument",
+        "boundaries must call [`TagSetV1::validate`] (or a higher-level API that does)."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "len",
+            "type": "u8"
+          },
+          {
+            "name": "ids",
+            "type": {
+              "array": [
+                "u16",
+                32
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagStage",
+      "docs": [
+        "Runtime boundary at which a tag rule may be evaluated."
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Equip"
+          },
+          {
+            "name": "Action"
+          },
+          {
+            "name": "CombatRoll"
+          },
+          {
+            "name": "CombatDamage"
+          },
+          {
+            "name": "Loot"
+          },
+          {
+            "name": "Trade"
+          },
+          {
+            "name": "Spawn"
+          }
+        ]
+      }
+    },
+    {
       "name": "TradeSession",
       "type": {
         "kind": "struct",
@@ -4472,6 +8065,26 @@
             "name": "counterparty_items",
             "type": {
               "vec": "pubkey"
+            }
+          },
+          {
+            "name": "rulebook",
+            "docs": [
+              "Immutable rules governing this trade, pinned when it is created."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "rulebook_version",
+            "type": "u32"
+          },
+          {
+            "name": "rulebook_digest",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
             }
           },
           {

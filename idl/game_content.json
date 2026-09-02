@@ -8,6 +8,90 @@
   },
   "instructions": [
     {
+      "name": "activate_tag_rulebook",
+      "docs": [
+        "Atomically publishes the next sealed rulebook version for new operations."
+      ],
+      "discriminator": [
+        87,
+        71,
+        9,
+        116,
+        43,
+        178,
+        135,
+        58
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "tag_registry"
+          ]
+        },
+        {
+          "name": "tag_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "add_admin",
       "docs": [
         "Root admin grants delegated admin access to another wallet."
@@ -92,6 +176,152 @@
         {
           "name": "system_program",
           "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "append_tag_rules",
+      "docs": [
+        "Appends a bounded transaction-sized batch while the rulebook is unsealed."
+      ],
+      "discriminator": [
+        245,
+        239,
+        104,
+        231,
+        127,
+        55,
+        116,
+        193
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "tag_registry"
+          ]
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "rules",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "TagRuleV1"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "bump_equipment_content_revision",
+      "docs": [
+        "Invalidates cached equipment after mutable item content changes.",
+        "",
+        "This instruction is also the CPI boundary used by the Items program",
+        "when an individual item's authored tags are replaced."
+      ],
+      "discriminator": [
+        154,
+        138,
+        126,
+        246,
+        48,
+        221,
+        85,
+        98
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true
+        },
+        {
+          "name": "tag_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
         }
       ],
       "args": []
@@ -379,6 +609,31 @@
           }
         },
         {
+          "name": "tag_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
           "name": "item_type_config",
           "writable": true
         }
@@ -575,6 +830,9 @@
               }
             ]
           }
+        },
+        {
+          "name": "enemy_type_config"
         },
         {
           "name": "enemy",
@@ -867,6 +1125,34 @@
           }
         },
         {
+          "name": "tag_registry",
+          "docs": [
+            "Equipment-content revision invalidated by every canonical type change."
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
           "name": "item_type_config",
           "writable": true
         },
@@ -913,6 +1199,99 @@
       ]
     },
     {
+      "name": "create_tag_rulebook",
+      "docs": [
+        "Starts authoring exactly the next rulebook version in the active lineage."
+      ],
+      "discriminator": [
+        125,
+        204,
+        58,
+        94,
+        81,
+        194,
+        172,
+        184
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "tag_registry"
+          ]
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "arg",
+                "path": "version"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "version",
+          "type": "u32"
+        }
+      ]
+    },
+    {
       "name": "initialize_registry",
       "docs": [
         "Initialize the game content registry (one-time setup by admin)"
@@ -945,6 +1324,87 @@
                   97,
                   109,
                   101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize_tag_registry",
+      "docs": [
+        "Creates the permanent root registry for custom tags and immutable rulebooks."
+      ],
+      "discriminator": [
+        114,
+        50,
+        60,
+        142,
+        107,
+        227,
+        104,
+        34
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "registry"
+          ]
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
                   95,
                   114,
                   101,
@@ -1026,6 +1486,135 @@
       "args": []
     },
     {
+      "name": "register_tag_definition",
+      "docs": [
+        "Allocates the next stable custom tag ID and binds it to canonical metadata."
+      ],
+      "discriminator": [
+        231,
+        139,
+        235,
+        136,
+        7,
+        247,
+        125,
+        142
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "tag_registry"
+          ]
+        },
+        {
+          "name": "tag_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_definition",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  100,
+                  101,
+                  102,
+                  105,
+                  110,
+                  105,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "arg",
+                "path": "id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_name_index",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  110,
+                  97,
+                  109,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "arg",
+                "path": "name"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "id",
+          "type": "u16"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        }
+      ]
+    },
+    {
       "name": "remove_admin",
       "docs": [
         "Root admin revokes delegated admin access."
@@ -1103,6 +1692,90 @@
               {
                 "kind": "account",
                 "path": "admin"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "seal_tag_rulebook",
+      "docs": [
+        "Permanently seals a rulebook and records its canonical digest."
+      ],
+      "discriminator": [
+        224,
+        161,
+        121,
+        143,
+        78,
+        142,
+        36,
+        3
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "tag_registry"
+          ]
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
               }
             ]
           }
@@ -1193,6 +1866,478 @@
       ]
     },
     {
+      "name": "set_class_action_tags",
+      "docs": [
+        "Replaces authored traits on one configured class action."
+      ],
+      "discriminator": [
+        234,
+        122,
+        206,
+        88,
+        214,
+        40,
+        254,
+        62
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "tag_registry"
+          ]
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "class_config",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "action_slot",
+          "type": "u8"
+        },
+        {
+          "name": "tags",
+          "type": {
+            "defined": {
+              "name": "TagSetV1"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_class_tags",
+      "docs": [
+        "Replaces traits snapshotted into players subsequently created from this class."
+      ],
+      "discriminator": [
+        182,
+        206,
+        135,
+        214,
+        118,
+        81,
+        89,
+        11
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "tag_registry"
+          ]
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "class_config",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "tags",
+          "type": {
+            "defined": {
+              "name": "TagSetV1"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_enemy_tags",
+      "docs": [
+        "Replaces the authored traits on a concrete enemy instance."
+      ],
+      "discriminator": [
+        94,
+        39,
+        181,
+        212,
+        141,
+        6,
+        248,
+        146
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "tag_registry"
+          ]
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "enemy",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  110,
+                  101,
+                  109,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "enemy.creator",
+                "account": "Enemy"
+              },
+              {
+                "kind": "account",
+                "path": "enemy.name",
+                "account": "Enemy"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "tags",
+          "type": {
+            "defined": {
+              "name": "TagSetV1"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_enemy_type_tags",
+      "docs": [
+        "Replaces the authored traits inherited by this enemy-type configuration."
+      ],
+      "discriminator": [
+        22,
+        4,
+        39,
+        241,
+        167,
+        38,
+        60,
+        107
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "tag_registry"
+          ]
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "enemy_type_config",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "tags",
+          "type": {
+            "defined": {
+              "name": "TagSetV1"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_environment_tags",
+      "docs": [
+        "Replaces authored traits on an environment configuration."
+      ],
+      "discriminator": [
+        8,
+        135,
+        83,
+        244,
+        232,
+        14,
+        19,
+        151
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "tag_registry"
+          ]
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "environment_config",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "tags",
+          "type": {
+            "defined": {
+              "name": "TagSetV1"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_item_type_granted_action_tags",
+      "docs": [
+        "Replaces authored traits on the action granted by this item type."
+      ],
+      "discriminator": [
+        129,
+        62,
+        251,
+        31,
+        55,
+        163,
+        147,
+        28
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "tag_registry"
+          ]
+        },
+        {
+          "name": "tag_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "item_type_config",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "tags",
+          "type": {
+            "defined": {
+              "name": "TagSetV1"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_item_type_tags",
+      "docs": [
+        "Replaces authored traits supplied by this canonical item-type definition.",
+        "Item consumers compose these with the concrete instance's authored tags."
+      ],
+      "discriminator": [
+        9,
+        16,
+        187,
+        19,
+        16,
+        64,
+        136,
+        70
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "tag_registry"
+          ]
+        },
+        {
+          "name": "tag_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "item_type_config",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "tags",
+          "type": {
+            "defined": {
+              "name": "TagSetV1"
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "transfer_authority",
       "docs": [
         "Transfer registry authority to a new admin"
@@ -1225,6 +2370,62 @@
                   97,
                   109,
                   101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "new_authority",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "transfer_tag_authority",
+      "docs": [
+        "Transfers tag-authoring authority without changing any existing tag meaning."
+      ],
+      "discriminator": [
+        29,
+        237,
+        75,
+        2,
+        34,
+        214,
+        65,
+        211
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "tag_registry"
+          ]
+        },
+        {
+          "name": "tag_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
                   95,
                   114,
                   101,
@@ -1600,6 +2801,31 @@
           }
         },
         {
+          "name": "tag_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
           "name": "item_type_config",
           "writable": true
         }
@@ -1635,7 +2861,7 @@
             "option": {
               "array": [
                 "u8",
-                3
+                5
               ]
             }
           }
@@ -1646,7 +2872,7 @@
             "option": {
               "array": [
                 "u8",
-                3
+                5
               ]
             }
           }
@@ -1765,6 +2991,58 @@
         99,
         139
       ]
+    },
+    {
+      "name": "TagDefinition",
+      "discriminator": [
+        187,
+        183,
+        105,
+        145,
+        225,
+        213,
+        157,
+        132
+      ]
+    },
+    {
+      "name": "TagNameIndex",
+      "discriminator": [
+        97,
+        121,
+        164,
+        17,
+        188,
+        127,
+        126,
+        80
+      ]
+    },
+    {
+      "name": "TagRegistry",
+      "discriminator": [
+        53,
+        122,
+        94,
+        145,
+        240,
+        168,
+        232,
+        12
+      ]
+    },
+    {
+      "name": "TagRulebook",
+      "discriminator": [
+        221,
+        42,
+        29,
+        88,
+        48,
+        55,
+        248,
+        13
+      ]
     }
   ],
   "errors": [
@@ -1790,23 +3068,113 @@
     },
     {
       "code": 6004,
+      "name": "InvalidItemType",
+      "msg": "Item type ID does not name a supported canonical item kind"
+    },
+    {
+      "code": 6005,
+      "name": "InvalidEnemyType",
+      "msg": "Enemy type ID does not name a supported canonical enemy type"
+    },
+    {
+      "code": 6006,
+      "name": "InvalidPlayerClass",
+      "msg": "Class ID does not name a supported canonical player class"
+    },
+    {
+      "code": 6007,
+      "name": "InvalidEnvironmentType",
+      "msg": "Environment ID does not name a supported canonical environment"
+    },
+    {
+      "code": 6008,
       "name": "Unauthorized",
       "msg": "Unauthorized - you are not the registry authority"
     },
     {
-      "code": 6005,
+      "code": 6009,
       "name": "InvalidLevel",
       "msg": "Level must be between 1 and 100"
     },
     {
-      "code": 6006,
+      "code": 6010,
       "name": "InvalidHealth",
       "msg": "Health must be greater than 0"
     },
     {
-      "code": 6007,
+      "code": 6011,
       "name": "InvalidAuthority",
       "msg": "New authority cannot be the default/zero address"
+    },
+    {
+      "code": 6012,
+      "name": "InvalidTagName",
+      "msg": "Tag name is not in canonical lowercase ASCII form"
+    },
+    {
+      "code": 6013,
+      "name": "InvalidCustomTagId",
+      "msg": "Custom tag ID is not the next allocatable ID"
+    },
+    {
+      "code": 6014,
+      "name": "InvalidTagRulebook",
+      "msg": "Tag rulebook is invalid, unsealed, corrupt, or has invalid lineage"
+    },
+    {
+      "code": 6015,
+      "name": "InvalidTagRulebookVersion",
+      "msg": "Tag rulebook version is not the next version in the active lineage"
+    },
+    {
+      "code": 6016,
+      "name": "TagRulebookSealed",
+      "msg": "A sealed tag rulebook is immutable"
+    },
+    {
+      "code": 6017,
+      "name": "TooManyTagRules",
+      "msg": "Tag rulebook exceeds its fixed rule capacity"
+    },
+    {
+      "code": 6018,
+      "name": "InvalidTags",
+      "msg": "Tags are invalid, non-canonical, or exceed entity capacity"
+    },
+    {
+      "code": 6019,
+      "name": "InvalidActionConfig",
+      "msg": "Action configuration has an invalid effect, threshold, name, or structural tag"
+    },
+    {
+      "code": 6020,
+      "name": "UnregisteredTag",
+      "msg": "Custom tag ID has not been registered"
+    },
+    {
+      "code": 6021,
+      "name": "EmbeddedGrantedActionTags",
+      "msg": "Granted-action tags must be authored through the tag-authority setter"
+    },
+    {
+      "code": 6022,
+      "name": "MissingGrantedAction",
+      "msg": "Item type does not grant an action"
+    },
+    {
+      "code": 6023,
+      "name": "TooManyAllowedEnemyTypes",
+      "msg": "Environment allows more enemy types than its fixed account capacity"
+    },
+    {
+      "code": 6024,
+      "name": "InvalidAllowedEnemyTypes",
+      "msg": "Environment enemy type IDs must be supported, unique, and strictly increasing"
+    },
+    {
+      "code": 6025,
+      "name": "EquipmentContentRevisionOverflow",
+      "msg": "Equipment content revision cannot advance further"
     }
   ],
   "types": [
@@ -1846,6 +3214,14 @@
           {
             "name": "enabled",
             "type": "bool"
+          },
+          {
+            "name": "tags",
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
           }
         ]
       }
@@ -1935,6 +3311,14 @@
             }
           },
           {
+            "name": "tags",
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
+          },
+          {
             "name": "enabled",
             "type": "bool"
           },
@@ -2004,6 +3388,28 @@
           {
             "name": "experience_reward",
             "type": "u8"
+          },
+          {
+            "name": "type_tags",
+            "docs": [
+              "Canonical enemy-type traits snapshotted when this encounter is authored."
+            ],
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
+          },
+          {
+            "name": "tags",
+            "docs": [
+              "Authored semantic traits. Enemy identity/state tags are derived at use time."
+            ],
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
           },
           {
             "name": "bump",
@@ -2106,6 +3512,14 @@
             "type": "i16"
           },
           {
+            "name": "tags",
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
+          },
+          {
             "name": "enabled",
             "type": "bool"
           },
@@ -2155,6 +3569,14 @@
           {
             "name": "allowed_enemy_types",
             "type": "bytes"
+          },
+          {
+            "name": "tags",
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
           },
           {
             "name": "enabled",
@@ -2239,7 +3661,7 @@
             "type": {
               "array": [
                 "u8",
-                3
+                5
               ]
             }
           },
@@ -2248,7 +3670,7 @@
             "type": {
               "array": [
                 "u8",
-                3
+                5
               ]
             }
           },
@@ -2263,12 +3685,437 @@
             }
           },
           {
+            "name": "tags",
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
+          },
+          {
             "name": "enabled",
             "type": "bool"
           },
           {
             "name": "bump",
             "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagClauseV1",
+      "docs": [
+        "One canonical fixed-capacity predicate clause.",
+        "",
+        "The active prefix is nonzero, sorted, and unique. Unused slots must remain",
+        "zero-filled, preserving one deterministic wire representation per clause."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "len",
+            "type": "u8"
+          },
+          {
+            "name": "ids",
+            "type": {
+              "array": [
+                "u16",
+                4
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagDefinition",
+      "docs": [
+        "Human-readable metadata for a tag, addressed by `id` in its PDA seeds."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "registry",
+            "type": "pubkey"
+          },
+          {
+            "name": "id",
+            "type": "u16"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagEffect",
+      "docs": [
+        "A fixed-width rule result. Basis-point channels use 10_000 = 100%."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "channel",
+            "type": {
+              "defined": {
+                "name": "TagEffectChannel"
+              }
+            }
+          },
+          {
+            "name": "amount",
+            "type": "i32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagEffectChannel",
+      "docs": [
+        "Orthogonal numeric channels produced by tag rules."
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Deny"
+          },
+          {
+            "name": "AttackFlat"
+          },
+          {
+            "name": "DefenseFlat"
+          },
+          {
+            "name": "HealthFlat"
+          },
+          {
+            "name": "SpeedFlat"
+          },
+          {
+            "name": "RollFlat"
+          },
+          {
+            "name": "DamageFlat"
+          },
+          {
+            "name": "DamageBps"
+          },
+          {
+            "name": "LootChanceBps"
+          },
+          {
+            "name": "RaritySteps"
+          },
+          {
+            "name": "ExperienceBps"
+          },
+          {
+            "name": "SpawnWeightBps"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagNameIndex",
+      "docs": [
+        "Permanent uniqueness index for a canonical custom tag name.",
+        "",
+        "Definitions are addressed by numeric ID for efficient tooling, while this",
+        "PDA prevents two IDs from ever acquiring the same human-readable meaning."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "registry",
+            "type": "pubkey"
+          },
+          {
+            "name": "id",
+            "type": "u16"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagPredicateV1",
+      "docs": [
+        "Allocation-free role predicate.",
+        "",
+        "`required_all` must all be present. At least one `required_any` tag must be",
+        "present unless that clause is empty. No `forbidden_any` tag may be present."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "required_all",
+            "type": {
+              "defined": {
+                "name": "TagClauseV1"
+              }
+            }
+          },
+          {
+            "name": "required_any",
+            "type": {
+              "defined": {
+                "name": "TagClauseV1"
+              }
+            }
+          },
+          {
+            "name": "forbidden_any",
+            "type": {
+              "defined": {
+                "name": "TagClauseV1"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagRegistry",
+      "docs": [
+        "Root singleton for authority, custom-ID allocation, and rulebook activation."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "next_custom_tag_id",
+            "type": "u16"
+          },
+          {
+            "name": "custom_definition_count",
+            "type": "u32"
+          },
+          {
+            "name": "active_rulebook",
+            "type": "pubkey"
+          },
+          {
+            "name": "active_rulebook_version",
+            "type": "u32"
+          },
+          {
+            "name": "equipment_content_revision",
+            "docs": [
+              "Monotonic invalidation epoch for cached equipment state. Any mutation",
+              "to a concrete item's authored tags or canonical ItemTypeConfig bumps it."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagRuleV1",
+      "docs": [
+        "A bounded predicate for each role in the tag context."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "stage",
+            "type": {
+              "defined": {
+                "name": "TagStage"
+              }
+            }
+          },
+          {
+            "name": "actor",
+            "type": {
+              "defined": {
+                "name": "TagPredicateV1"
+              }
+            }
+          },
+          {
+            "name": "source",
+            "type": {
+              "defined": {
+                "name": "TagPredicateV1"
+              }
+            }
+          },
+          {
+            "name": "action",
+            "type": {
+              "defined": {
+                "name": "TagPredicateV1"
+              }
+            }
+          },
+          {
+            "name": "target",
+            "type": {
+              "defined": {
+                "name": "TagPredicateV1"
+              }
+            }
+          },
+          {
+            "name": "environment",
+            "type": {
+              "defined": {
+                "name": "TagPredicateV1"
+              }
+            }
+          },
+          {
+            "name": "effect",
+            "type": {
+              "defined": {
+                "name": "TagEffect"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagRulebook",
+      "docs": [
+        "A preallocated rulebook that becomes immutable once sealed.",
+        "",
+        "Rules may be appended over multiple transactions until `seal` computes the",
+        "canonical digest and locks the account. Publishing a replacement creates a",
+        "new version whose `previous_rulebook` points to the formerly active account."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "registry",
+            "type": "pubkey"
+          },
+          {
+            "name": "version",
+            "type": "u32"
+          },
+          {
+            "name": "previous_rulebook",
+            "type": "pubkey"
+          },
+          {
+            "name": "rules",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "TagRuleV1"
+                }
+              }
+            }
+          },
+          {
+            "name": "sealed",
+            "type": "bool"
+          },
+          {
+            "name": "digest",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagSetV1",
+      "docs": [
+        "A fixed-capacity set stored as a strict ascending prefix and zero padding.",
+        "",
+        "Deserialization cannot enforce semantic invariants, so account/argument",
+        "boundaries must call [`TagSetV1::validate`] (or a higher-level API that does)."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "len",
+            "type": "u8"
+          },
+          {
+            "name": "ids",
+            "type": {
+              "array": [
+                "u16",
+                32
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "TagStage",
+      "docs": [
+        "Runtime boundary at which a tag rule may be evaluated."
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Equip"
+          },
+          {
+            "name": "Action"
+          },
+          {
+            "name": "CombatRoll"
+          },
+          {
+            "name": "CombatDamage"
+          },
+          {
+            "name": "Loot"
+          },
+          {
+            "name": "Trade"
+          },
+          {
+            "name": "Spawn"
           }
         ]
       }

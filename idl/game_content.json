@@ -401,6 +401,64 @@
       "args": []
     },
     {
+      "name": "clear_class_action",
+      "docs": [
+        "Clear a class action slot, including any independently authored tags."
+      ],
+      "discriminator": [
+        184,
+        17,
+        124,
+        176,
+        137,
+        6,
+        193,
+        169
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  97,
+                  109,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "class_config",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "slot",
+          "type": "u8"
+        }
+      ]
+    },
+    {
       "name": "close_enemy",
       "docs": [
         "Close an Enemy instance account; rent refunded to `recipient`."
@@ -1278,6 +1336,13 @@
           "name": "authority",
           "writable": true,
           "signer": true
+        },
+        {
+          "name": "game_content_program",
+          "address": "HSzZSCzCN5NX7YiGeX9mkmj2jag6f9i8uhwo61VCf429"
+        },
+        {
+          "name": "program_data"
         },
         {
           "name": "registry",

@@ -6575,7 +6575,7 @@
     {
       "code": 6057,
       "name": "InvalidClassConfig",
-      "msg": "ClassConfig must be the canonical enabled definition for the requested class and contain valid actions and tags"
+      "msg": "ClassConfig must be the canonical enabled definition for the requested class and contain valid stats, actions, and tags"
     },
     {
       "code": 6058,
@@ -7051,6 +7051,44 @@
       }
     },
     {
+      "name": "ClassStatProfile",
+      "docs": [
+        "Immutable class stat progression copied from the canonical ClassConfig when",
+        "a player is created. Keeping the snapshot on the player makes later class",
+        "balance edits apply only to newly created characters and avoids requiring a",
+        "mutable external config account on every level-up or equipment operation."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "base_health",
+            "type": "i16"
+          },
+          {
+            "name": "base_attack",
+            "type": "i16"
+          },
+          {
+            "name": "base_defense",
+            "type": "i16"
+          },
+          {
+            "name": "health_per_level",
+            "type": "i16"
+          },
+          {
+            "name": "attack_per_level",
+            "type": "i16"
+          },
+          {
+            "name": "defense_per_level",
+            "type": "i16"
+          }
+        ]
+      }
+    },
+    {
       "name": "DeadOrAlivePlayer",
       "type": {
         "kind": "struct",
@@ -7076,6 +7114,17 @@
             "type": {
               "defined": {
                 "name": "PlayerClass"
+              }
+            }
+          },
+          {
+            "name": "class_stat_profile",
+            "docs": [
+              "Class stat progression snapshotted at player creation."
+            ],
+            "type": {
+              "defined": {
+                "name": "ClassStatProfile"
               }
             }
           },

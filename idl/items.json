@@ -28,6 +28,73 @@
           "name": "owner"
         },
         {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
           "name": "equipment_authority",
           "docs": [
             "Player-program PDA proving all Player/loadout invariants were checked."
@@ -63,6 +130,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -106,7 +177,34 @@
         },
         {
           "name": "item_account",
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.genesis_owner",
+                "account": "ItemAccount"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.item_id",
+                "account": "ItemAccount"
+              }
+            ]
+          }
         }
       ],
       "args": [
@@ -119,8 +217,8 @@
     {
       "name": "close_config",
       "docs": [
-        "Close the LootConfig singleton. Root authority only — this invalidates",
-        "`roll_loot` / `create_item` flows until a new config is initialized."
+        "Close this Universe's root LootConfig. Universe authority only — this",
+        "invalidates its `roll_loot` / `create_item` flows until reinitialized."
       ],
       "discriminator": [
         145,
@@ -138,8 +236,75 @@
           "writable": true,
           "signer": true,
           "relations": [
-            "config"
+            "universe"
           ]
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
         },
         {
           "name": "config",
@@ -161,6 +326,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -194,11 +363,105 @@
           "signer": true
         },
         {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
           "name": "item_account",
           "docs": [
             "Placeholder item account to close."
           ],
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.genesis_owner",
+                "account": "ItemAccount"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.item_id",
+                "account": "ItemAccount"
+              }
+            ]
+          }
         }
       ],
       "args": []
@@ -223,6 +486,73 @@
           "name": "owner",
           "writable": true,
           "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
         },
         {
           "name": "loot_authority",
@@ -259,6 +589,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -316,6 +650,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "owner"
               },
               {
@@ -344,6 +682,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -368,6 +710,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -528,6 +874,73 @@
           "name": "owner"
         },
         {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
           "name": "loot_authority",
           "docs": [
             "Dungeon-program PDA signer proving this mint request came from",
@@ -562,6 +975,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -619,6 +1036,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "owner"
               },
               {
@@ -647,6 +1068,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -671,6 +1096,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -828,6 +1257,73 @@
           "signer": true
         },
         {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
           "name": "destroy_authority",
           "docs": [
             "Player-program PDA proving inventory/equipment checks ran before close."
@@ -861,6 +1357,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -938,6 +1438,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -963,6 +1467,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -1009,7 +1517,34 @@
           "docs": [
             "Item account to destroy. Must be owned by signer."
           ],
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.genesis_owner",
+                "account": "ItemAccount"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.item_id",
+                "account": "ItemAccount"
+              }
+            ]
+          }
         },
         {
           "name": "game_content_program",
@@ -1047,6 +1582,73 @@
           "name": "authority"
         },
         {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
           "name": "destroy_authority",
           "docs": [
             "Player-program PDA proving inventory/equipment checks ran before close."
@@ -1080,6 +1682,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -1157,6 +1763,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -1189,6 +1799,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -1235,7 +1849,34 @@
           "docs": [
             "Item account to close to escrow."
           ],
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.genesis_owner",
+                "account": "ItemAccount"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.item_id",
+                "account": "ItemAccount"
+              }
+            ]
+          }
         },
         {
           "name": "game_content_program",
@@ -1272,6 +1913,73 @@
           "name": "authority"
         },
         {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
           "name": "destroy_authority",
           "docs": [
             "Player-program PDA proving inventory/equipment checks ran before close."
@@ -1305,6 +2013,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -1382,6 +2094,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -1414,6 +2130,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -1460,7 +2180,34 @@
           "docs": [
             "Item account to close to escrow."
           ],
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.genesis_owner",
+                "account": "ItemAccount"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.item_id",
+                "account": "ItemAccount"
+              }
+            ]
+          }
         },
         {
           "name": "game_content_program",
@@ -1485,7 +2232,77 @@
         {
           "name": "authority",
           "writable": true,
-          "signer": true
+          "signer": true,
+          "relations": [
+            "universe"
+          ]
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
         },
         {
           "name": "config",
@@ -1507,6 +2324,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -1564,6 +2385,73 @@
           "name": "owner"
         },
         {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
           "name": "equipment_authority",
           "docs": [
             "Player-program PDA proving all Player/loadout invariants were checked."
@@ -1599,6 +2487,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -1642,7 +2534,34 @@
         },
         {
           "name": "item_account",
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.genesis_owner",
+                "account": "ItemAccount"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.item_id",
+                "account": "ItemAccount"
+              }
+            ]
+          }
         }
       ],
       "args": [
@@ -1671,6 +2590,73 @@
           "signer": true
         },
         {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
           "name": "config",
           "pda": {
             "seeds": [
@@ -1689,6 +2675,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -1713,6 +2703,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -1846,7 +2840,8 @@
         "Replaces the authored traits on a concrete item instance.",
         "",
         "Structural facts such as rarity, slot, and concrete item type remain",
-        "derived from the typed item fields and therefore cannot drift."
+        "derived from the typed item fields and therefore cannot drift. The live",
+        "Universe root and the optional tag-specific delegate are authorized."
       ],
       "discriminator": [
         96,
@@ -1861,10 +2856,74 @@
       "accounts": [
         {
           "name": "authority",
-          "signer": true,
-          "relations": [
-            "tag_registry"
-          ]
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
         },
         {
           "name": "tag_registry",
@@ -1887,6 +2946,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -1930,7 +2993,34 @@
         },
         {
           "name": "item_account",
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.genesis_owner",
+                "account": "ItemAccount"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.item_id",
+                "account": "ItemAccount"
+              }
+            ]
+          }
         },
         {
           "name": "game_content_program",
@@ -1973,18 +3063,186 @@
           "signer": true
         },
         {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
           "name": "transfer_authority",
           "docs": [
             "Player-program PDA proving the CPI came through authorized trade logic."
           ],
-          "signer": true
+          "signer": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  97,
+                  100,
+                  101,
+                  95,
+                  116,
+                  114,
+                  97,
+                  110,
+                  115,
+                  102,
+                  101,
+                  114,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "item_account",
           "docs": [
             "Item account to transfer ownership of"
           ],
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.genesis_owner",
+                "account": "ItemAccount"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.item_id",
+                "account": "ItemAccount"
+              }
+            ]
+          }
         }
       ],
       "args": [
@@ -2012,8 +3270,75 @@
           "writable": true,
           "signer": true,
           "relations": [
-            "config"
+            "universe"
           ]
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
         },
         {
           "name": "config",
@@ -2035,6 +3360,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -2132,98 +3461,131 @@
         248,
         13
       ]
+    },
+    {
+      "name": "Universe",
+      "discriminator": [
+        86,
+        112,
+        227,
+        226,
+        88,
+        47,
+        242,
+        113
+      ]
     }
   ],
   "errors": [
     {
       "code": 6000,
+      "name": "UniverseMismatch",
+      "msg": "Accounts belong to different universes"
+    },
+    {
+      "code": 6001,
+      "name": "UnsupportedUniverseSchema",
+      "msg": "Universe schema is not supported by this program version"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidUniverseAuthority",
+      "msg": "Only the universe authority may initialize this configuration"
+    },
+    {
+      "code": 6003,
       "name": "InvalidRoll",
       "msg": "Invalid roll"
     },
     {
-      "code": 6001,
+      "code": 6004,
       "name": "InvalidOwner",
       "msg": "Invalid owner - you don't own this item"
     },
     {
-      "code": 6002,
+      "code": 6005,
       "name": "NotEmptyItemAccount",
       "msg": "Item account is not an empty no-drop placeholder"
     },
     {
-      "code": 6003,
+      "code": 6006,
       "name": "InvalidSession",
       "msg": "Invalid or expired player session"
     },
     {
-      "code": 6004,
+      "code": 6007,
       "name": "SessionExpired",
       "msg": "Session has expired"
     },
     {
-      "code": 6005,
+      "code": 6008,
       "name": "InvalidEscrowAccount",
       "msg": "Invalid session escrow account"
     },
     {
-      "code": 6006,
+      "code": 6009,
       "name": "ItemNotLowestRarity",
       "msg": "Item is not the lowest rarity tier"
     },
     {
-      "code": 6007,
+      "code": 6010,
       "name": "DirectCallNotAllowed",
       "msg": "This instruction can only be called via CPI, not directly"
     },
     {
-      "code": 6008,
+      "code": 6011,
       "name": "InvalidTransferAuthority",
       "msg": "Invalid transfer authority"
     },
     {
-      "code": 6009,
+      "code": 6012,
       "name": "InvalidTagRulebook",
       "msg": "Tag rulebook is not canonical, sealed, or active where required"
     },
     {
-      "code": 6010,
+      "code": 6013,
       "name": "InvalidTagRegistry",
       "msg": "Tag registry is invalid"
     },
     {
-      "code": 6011,
+      "code": 6014,
       "name": "InvalidTagAuthority",
-      "msg": "Only the tag authority may update item tags"
+      "msg": "Only the Universe root or explicit tag delegate may update item tags"
     },
     {
-      "code": 6012,
+      "code": 6015,
       "name": "InvalidTags",
       "msg": "Tags are not in canonical authored form"
     },
     {
-      "code": 6013,
+      "code": 6016,
       "name": "UnregisteredTag",
       "msg": "Tag ID has not been registered"
     },
     {
-      "code": 6014,
+      "code": 6017,
       "name": "InvalidPlayer",
       "msg": "Player account cannot be the zero pubkey"
     },
     {
-      "code": 6015,
+      "code": 6018,
       "name": "ItemAlreadyEquipped",
       "msg": "Item is already claimed by a player"
     },
     {
-      "code": 6016,
+      "code": 6019,
       "name": "ItemEquipmentClaimMismatch",
       "msg": "Only the exact claiming player can release this item"
     },
     {
-      "code": 6017,
+      "code": 6020,
       "name": "ItemStillEquipped",
       "msg": "Equipped items cannot be transferred or destroyed"
+    },
+    {
+      "code": 6021,
+      "name": "InvalidRentPayer",
+      "msg": "Only the wallet that funded a no-drop account may reclaim its rent"
     }
   ],
   "types": [
@@ -2433,6 +3795,29 @@
         "kind": "struct",
         "fields": [
           {
+            "name": "universe",
+            "docs": [
+              "Universe whose content and economy this item belongs to."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "genesis_owner",
+            "docs": [
+              "Immutable wallet used in this account's PDA. Ownership may change,",
+              "while this provenance keeps the account address verifiable forever."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "rent_payer",
+            "docs": [
+              "Wallet that funded account creation and is entitled to reclaim a",
+              "no-drop placeholder's rent."
+            ],
+            "type": "pubkey"
+          },
+          {
             "name": "owner",
             "type": "pubkey"
           },
@@ -2560,13 +3945,15 @@
     {
       "name": "LootConfig",
       "docs": [
-        "Loot roll configuration - admin configurable"
+        "Universe-wide loot roll configuration. Administrative authority is read",
+        "from the canonical Universe account so ownership transfers cannot leave a",
+        "stale controller duplicated here."
       ],
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "authority",
+            "name": "universe",
             "type": "pubkey"
           },
           {
@@ -3015,13 +4402,21 @@
     {
       "name": "TagRegistry",
       "docs": [
-        "Root singleton for authority, custom-ID allocation, and rulebook activation."
+        "Universe-scoped root for authority, custom-ID allocation, and rulebook activation."
       ],
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "authority",
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
+            "name": "delegate_authority",
+            "docs": [
+              "Optional tag-specific delegate. The zero key means no delegate.",
+              "Universe root/delegated admins are authorized independently of this role."
+            ],
             "type": "pubkey"
           },
           {
@@ -3234,6 +4629,50 @@
           },
           {
             "name": "Spawn"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Universe",
+      "docs": [
+        "Stable root identity and authority boundary for one independent game world."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "genesis_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "id",
+            "type": "u64"
+          },
+          {
+            "name": "schema_version",
+            "type": "u16"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                64
+              ]
+            }
           }
         ]
       }

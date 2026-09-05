@@ -24,6 +24,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "owner",
           "writable": true,
           "signer": true
@@ -55,6 +58,10 @@
                   117,
                   110
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -105,6 +112,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -135,6 +146,9 @@
         205
       ],
       "accounts": [
+        {
+          "name": "universe"
+        },
         {
           "name": "payer",
           "docs": [
@@ -168,6 +182,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "battle_commit.dungeon_run",
                 "account": "BattleCommit"
               }
@@ -196,6 +214,9 @@
         66
       ],
       "accounts": [
+        {
+          "name": "universe"
+        },
         {
           "name": "owner",
           "writable": true,
@@ -237,6 +258,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -264,6 +289,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "owner"
               },
               {
@@ -276,16 +305,202 @@
         {
           "name": "inventory",
           "docs": [
-            "Player's inventory (will be reallocated by CPI)"
+            "Player's inventory (will be reallocated by CPI)."
           ],
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "item_account",
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "arg",
+                "path": "item_id"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                224,
+                166,
+                93,
+                89,
+                226,
+                65,
+                147,
+                69,
+                181,
+                236,
+                242,
+                78,
+                49,
+                5,
+                140,
+                67,
+                93,
+                54,
+                205,
+                111,
+                205,
+                52,
+                154,
+                44,
+                115,
+                41,
+                25,
+                93,
+                131,
+                50,
+                28,
+                58
+              ]
+            }
+          }
         },
         {
-          "name": "loot_config"
+          "name": "loot_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  111,
+                  111,
+                  116,
+                  45,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                224,
+                166,
+                93,
+                89,
+                226,
+                65,
+                147,
+                69,
+                181,
+                236,
+                242,
+                78,
+                49,
+                5,
+                140,
+                67,
+                93,
+                54,
+                205,
+                111,
+                205,
+                52,
+                154,
+                44,
+                115,
+                41,
+                25,
+                93,
+                131,
+                50,
+                28,
+                58
+              ]
+            }
+          }
         },
         {
           "name": "tag_registry",
@@ -307,6 +522,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -455,6 +674,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "session_signer",
           "writable": true,
           "signer": true
@@ -463,7 +685,72 @@
           "name": "authority"
         },
         {
-          "name": "session"
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "player"
@@ -501,6 +788,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -525,6 +816,10 @@
                   117,
                   110
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -561,12 +856,11 @@
               },
               {
                 "kind": "account",
-                "path": "authority"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "session.state_epoch",
-                "account": "GameSession"
+                "path": "authority"
               }
             ],
             "program": {
@@ -610,10 +904,133 @@
         },
         {
           "name": "item_account",
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "arg",
+                "path": "item_id"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                224,
+                166,
+                93,
+                89,
+                226,
+                65,
+                147,
+                69,
+                181,
+                236,
+                242,
+                78,
+                49,
+                5,
+                140,
+                67,
+                93,
+                54,
+                205,
+                111,
+                205,
+                52,
+                154,
+                44,
+                115,
+                41,
+                25,
+                93,
+                131,
+                50,
+                28,
+                58
+              ]
+            }
+          }
         },
         {
-          "name": "loot_config"
+          "name": "loot_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  111,
+                  111,
+                  116,
+                  45,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                224,
+                166,
+                93,
+                89,
+                226,
+                65,
+                147,
+                69,
+                181,
+                236,
+                242,
+                78,
+                49,
+                5,
+                140,
+                67,
+                93,
+                54,
+                205,
+                111,
+                205,
+                52,
+                154,
+                44,
+                115,
+                41,
+                25,
+                93,
+                131,
+                50,
+                28,
+                58
+              ]
+            }
+          }
         },
         {
           "name": "tag_registry",
@@ -635,6 +1052,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -785,6 +1206,9 @@
           "signer": true
         },
         {
+          "name": "universe"
+        },
+        {
           "name": "config",
           "pda": {
             "seeds": [
@@ -806,6 +1230,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -837,7 +1265,11 @@
               },
               {
                 "kind": "account",
-                "path": "scenario.authority",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "scenario.creator",
                 "account": "CombatScenario"
               },
               {
@@ -870,6 +1302,9 @@
           "signer": true
         },
         {
+          "name": "universe"
+        },
+        {
           "name": "config",
           "pda": {
             "seeds": [
@@ -891,6 +1326,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -930,6 +1369,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "scenario_effects.scenario",
                 "account": "CombatScenarioEffects"
               }
@@ -958,6 +1401,9 @@
           "signer": true
         },
         {
+          "name": "universe"
+        },
+        {
           "name": "config",
           "pda": {
             "seeds": [
@@ -979,6 +1425,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -1009,7 +1459,11 @@
               },
               {
                 "kind": "account",
-                "path": "scenario.authority",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "scenario.creator",
                 "account": "CombatScenario"
               },
               {
@@ -1046,6 +1500,9 @@
           "signer": true
         },
         {
+          "name": "universe"
+        },
+        {
           "name": "config",
           "pda": {
             "seeds": [
@@ -1067,6 +1524,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -1118,6 +1579,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "scenario_log"
               }
             ]
@@ -1144,6 +1609,9 @@
         126
       ],
       "accounts": [
+        {
+          "name": "universe"
+        },
         {
           "name": "owner",
           "writable": true,
@@ -1179,6 +1647,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "owner"
               },
               {
@@ -1195,8 +1667,8 @@
     {
       "name": "close_dungeon_config",
       "docs": [
-        "Close the DungeonConfig singleton. Root authority only — this invalidates",
-        "every dungeon template and admin-gated operation going forward."
+        "Close this Universe's root DungeonConfig. Universe authority only — this",
+        "invalidates templates and admin-gated operations in that Universe."
       ],
       "discriminator": [
         64,
@@ -1210,12 +1682,12 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "authority",
           "writable": true,
-          "signer": true,
-          "relations": [
-            "config"
-          ]
+          "signer": true
         },
         {
           "name": "config",
@@ -1240,6 +1712,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -1263,6 +1739,9 @@
         101
       ],
       "accounts": [
+        {
+          "name": "universe"
+        },
         {
           "name": "owner",
           "writable": true,
@@ -1291,6 +1770,10 @@
                   117,
                   110
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -1323,6 +1806,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "session_signer",
           "signer": true
         },
@@ -1330,7 +1816,72 @@
           "name": "authority"
         },
         {
-          "name": "session"
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "escrow",
@@ -1361,12 +1912,11 @@
               },
               {
                 "kind": "account",
-                "path": "authority"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "escrow.state_epoch",
-                "account": "SessionEscrow"
+                "path": "authority"
               }
             ],
             "program": {
@@ -1434,6 +1984,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "authority"
               },
               {
@@ -1463,12 +2017,12 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "authority",
           "writable": true,
-          "signer": true,
-          "relations": [
-            "config"
-          ]
+          "signer": true
         },
         {
           "name": "config",
@@ -1492,6 +2046,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -1521,6 +2079,10 @@
                   116,
                   101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -1555,6 +2117,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "owner",
           "writable": true,
           "signer": true
@@ -1583,6 +2148,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "session_signer",
           "signer": true
         },
@@ -1590,7 +2158,72 @@
           "name": "authority"
         },
         {
-          "name": "session"
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "escrow",
@@ -1621,12 +2254,11 @@
               },
               {
                 "kind": "account",
-                "path": "authority"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "escrow.state_epoch",
-                "account": "SessionEscrow"
+                "path": "authority"
               }
             ],
             "program": {
@@ -1692,6 +2324,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "owner",
           "writable": true,
           "signer": true
@@ -1721,6 +2356,10 @@
                   117,
                   110
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -1757,6 +2396,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "session_signer",
           "signer": true
         },
@@ -1764,7 +2406,72 @@
           "name": "authority"
         },
         {
-          "name": "session"
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "escrow",
@@ -1795,12 +2502,11 @@
               },
               {
                 "kind": "account",
-                "path": "authority"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "escrow.state_epoch",
-                "account": "SessionEscrow"
+                "path": "authority"
               }
             ],
             "program": {
@@ -1864,6 +2570,10 @@
                   117,
                   110
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -1904,6 +2614,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "owner",
           "writable": true,
           "signer": true
@@ -1937,6 +2650,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "owner"
               },
               {
@@ -1947,7 +2664,72 @@
           }
         },
         {
-          "name": "enemy"
+          "name": "enemy",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  110,
+                  101,
+                  109,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "enemy.creator",
+                "account": "Enemy"
+              },
+              {
+                "kind": "account",
+                "path": "enemy.name",
+                "account": "Enemy"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
         },
         {
           "name": "room_log",
@@ -1979,6 +2761,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "dungeon_run"
               }
             ]
@@ -2004,6 +2790,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -2153,6 +2943,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -2185,6 +2979,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "owner",
           "writable": true,
           "signer": true
@@ -2215,6 +3012,10 @@
                   117,
                   110
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -2257,6 +3058,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "dungeon_run"
               }
             ]
@@ -2282,6 +3087,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -2431,6 +3240,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -2464,6 +3277,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "session_signer",
           "writable": true,
           "signer": true
@@ -2472,7 +3288,72 @@
           "name": "authority"
         },
         {
-          "name": "session"
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "escrow",
@@ -2503,12 +3384,11 @@
               },
               {
                 "kind": "account",
-                "path": "authority"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "escrow.state_epoch",
-                "account": "SessionEscrow"
+                "path": "authority"
               }
             ],
             "program": {
@@ -2579,6 +3459,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "authority"
               },
               {
@@ -2618,6 +3502,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "dungeon_run"
               }
             ]
@@ -2643,6 +3531,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -2792,6 +3684,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -2824,6 +3720,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "owner",
           "writable": true,
           "signer": true
@@ -2854,6 +3753,10 @@
                   117,
                   110
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -2893,6 +3796,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "session_signer",
           "signer": true
         },
@@ -2901,7 +3807,72 @@
           "writable": true
         },
         {
-          "name": "session"
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "escrow",
@@ -2932,12 +3903,11 @@
               },
               {
                 "kind": "account",
-                "path": "authority"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "escrow.state_epoch",
-                "account": "SessionEscrow"
+                "path": "authority"
               }
             ],
             "program": {
@@ -3008,6 +3978,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "authority"
               },
               {
@@ -3043,6 +4017,9 @@
           "signer": true
         },
         {
+          "name": "universe"
+        },
+        {
           "name": "config",
           "pda": {
             "seeds": [
@@ -3064,6 +4041,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -3092,6 +4073,10 @@
                   105,
                   111
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -3142,6 +4127,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "creator",
           "writable": true,
           "signer": true
@@ -3168,6 +4156,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -3197,6 +4189,10 @@
                   116,
                   101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -3254,6 +4250,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "owner",
           "writable": true,
           "signer": true
@@ -3288,6 +4287,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "owner"
               },
               {
@@ -3298,7 +4301,68 @@
           }
         },
         {
-          "name": "loot_config"
+          "name": "loot_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  111,
+                  111,
+                  116,
+                  45,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                224,
+                166,
+                93,
+                89,
+                226,
+                65,
+                147,
+                69,
+                181,
+                236,
+                242,
+                78,
+                49,
+                5,
+                140,
+                67,
+                93,
+                54,
+                205,
+                111,
+                205,
+                52,
+                154,
+                44,
+                115,
+                41,
+                25,
+                93,
+                131,
+                50,
+                28,
+                58
+              ]
+            }
+          }
         },
         {
           "name": "player_stats_authority",
@@ -3338,6 +4402,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -3374,6 +4442,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "session_signer",
           "writable": true,
           "signer": true
@@ -3382,7 +4453,72 @@
           "name": "authority"
         },
         {
-          "name": "session"
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "player",
@@ -3414,6 +4550,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "authority"
               },
               {
@@ -3424,7 +4564,68 @@
           }
         },
         {
-          "name": "loot_config"
+          "name": "loot_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  111,
+                  111,
+                  116,
+                  45,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                224,
+                166,
+                93,
+                89,
+                226,
+                65,
+                147,
+                69,
+                181,
+                236,
+                242,
+                78,
+                49,
+                5,
+                140,
+                67,
+                93,
+                54,
+                205,
+                111,
+                205,
+                52,
+                154,
+                44,
+                115,
+                41,
+                25,
+                93,
+                131,
+                50,
+                28,
+                58
+              ]
+            }
+          }
         },
         {
           "name": "player_stats_authority",
@@ -3464,6 +4665,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -3502,6 +4707,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "owner",
           "writable": true,
           "signer": true
@@ -3536,6 +4744,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "owner"
               },
               {
@@ -3570,12 +4782,11 @@
               },
               {
                 "kind": "account",
-                "path": "owner"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "player.state_epoch",
-                "account": "DeadOrAlivePlayer"
+                "path": "owner"
               }
             ],
             "program": {
@@ -3642,6 +4853,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "dungeon_run"
               }
             ]
@@ -3685,6 +4900,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -3717,6 +4936,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "session_signer",
           "writable": true,
           "signer": true
@@ -3726,7 +4948,72 @@
           "writable": true
         },
         {
-          "name": "session"
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "escrow",
@@ -3754,12 +5041,11 @@
               },
               {
                 "kind": "account",
-                "path": "authority"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "escrow.state_epoch",
-                "account": "SessionEscrow"
+                "path": "authority"
               }
             ],
             "program": {
@@ -3831,6 +5117,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "authority"
               },
               {
@@ -3865,12 +5155,11 @@
               },
               {
                 "kind": "account",
-                "path": "authority"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "session.state_epoch",
-                "account": "GameSession"
+                "path": "authority"
               }
             ],
             "program": {
@@ -3937,6 +5226,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "dungeon_run"
               }
             ]
@@ -3980,6 +5273,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -4013,6 +5310,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "owner",
           "writable": true,
           "signer": true
@@ -4044,6 +5344,10 @@
                   101,
                   115
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -4089,6 +5393,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "session_signer",
           "writable": true,
           "signer": true
@@ -4097,7 +5404,72 @@
           "name": "authority"
         },
         {
-          "name": "session"
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "escrow",
@@ -4128,12 +5500,11 @@
               },
               {
                 "kind": "account",
-                "path": "authority"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "escrow.state_epoch",
-                "account": "SessionEscrow"
+                "path": "authority"
               }
             ],
             "program": {
@@ -4202,6 +5573,10 @@
                   101,
                   115
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -4252,6 +5627,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "owner",
           "writable": true,
           "signer": true
@@ -4279,6 +5657,10 @@
                   111,
                   110
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -4336,6 +5718,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "owner",
           "writable": true,
           "signer": true
@@ -4367,6 +5752,10 @@
                   101,
                   115
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -4402,6 +5791,10 @@
                   111,
                   110
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -4446,6 +5839,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -4590,6 +5987,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "session_signer",
           "writable": true,
           "signer": true
@@ -4598,7 +5998,72 @@
           "name": "authority"
         },
         {
-          "name": "session"
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "escrow",
@@ -4629,12 +6094,11 @@
               },
               {
                 "kind": "account",
-                "path": "authority"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "escrow.state_epoch",
-                "account": "SessionEscrow"
+                "path": "authority"
               }
             ],
             "program": {
@@ -4706,6 +6170,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "authority"
               },
               {
@@ -4738,6 +6206,10 @@
                   111,
                   110
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -4782,6 +6254,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -4931,6 +6407,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "session_signer",
           "docs": [
             "The session keypair signs and pays for the transaction"
@@ -4948,7 +6427,72 @@
           "name": "session",
           "docs": [
             "Valid session linking session_key to authority"
-          ]
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "escrow",
@@ -4979,12 +6523,11 @@
               },
               {
                 "kind": "account",
-                "path": "authority"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "escrow.state_epoch",
-                "account": "SessionEscrow"
+                "path": "authority"
               }
             ],
             "program": {
@@ -5049,6 +6592,10 @@
                   111,
                   110
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -5112,6 +6659,9 @@
           "signer": true
         },
         {
+          "name": "universe"
+        },
+        {
           "name": "config",
           "writable": true,
           "pda": {
@@ -5134,6 +6684,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -5163,12 +6717,54 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "owner",
           "writable": true,
           "signer": true
         },
         {
-          "name": "template"
+          "name": "template",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  116,
+                  101,
+                  109,
+                  112,
+                  108,
+                  97,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "template.creator",
+                "account": "DungeonTemplate"
+              },
+              {
+                "kind": "account",
+                "path": "template.name",
+                "account": "DungeonTemplate"
+              }
+            ]
+          }
         },
         {
           "name": "environment_config"
@@ -5196,6 +6792,10 @@
                   111,
                   110
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -5234,6 +6834,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "owner",
           "writable": true,
           "signer": true
@@ -5268,6 +6871,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "owner"
               },
               {
@@ -5278,7 +6885,72 @@
           }
         },
         {
-          "name": "enemy"
+          "name": "enemy",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  110,
+                  101,
+                  109,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "enemy.creator",
+                "account": "Enemy"
+              },
+              {
+                "kind": "account",
+                "path": "enemy.name",
+                "account": "Enemy"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
         },
         {
           "name": "inventory",
@@ -5305,12 +6977,11 @@
               },
               {
                 "kind": "account",
-                "path": "owner"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "player.state_epoch",
-                "account": "LivePlayer"
+                "path": "owner"
               }
             ],
             "program": {
@@ -5381,6 +7052,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "dungeon_run"
               }
             ]
@@ -5406,6 +7081,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -5518,7 +7197,68 @@
           }
         },
         {
-          "name": "loot_config"
+          "name": "loot_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  111,
+                  111,
+                  116,
+                  45,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                224,
+                166,
+                93,
+                89,
+                226,
+                65,
+                147,
+                69,
+                181,
+                236,
+                242,
+                78,
+                49,
+                5,
+                140,
+                67,
+                93,
+                54,
+                205,
+                111,
+                205,
+                52,
+                154,
+                44,
+                115,
+                41,
+                25,
+                93,
+                131,
+                50,
+                28,
+                58
+              ]
+            }
+          }
         },
         {
           "name": "player_stats_authority",
@@ -5558,6 +7298,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -5594,6 +7338,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "owner",
           "writable": true,
           "signer": true
@@ -5625,6 +7372,10 @@
                   117,
                   110
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -5662,12 +7413,11 @@
               },
               {
                 "kind": "account",
-                "path": "owner"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "player.state_epoch",
-                "account": "LivePlayer"
+                "path": "owner"
               }
             ],
             "program": {
@@ -5738,6 +7488,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "dungeon_run"
               }
             ]
@@ -5763,6 +7517,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -5875,7 +7633,68 @@
           }
         },
         {
-          "name": "loot_config"
+          "name": "loot_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  111,
+                  111,
+                  116,
+                  45,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                224,
+                166,
+                93,
+                89,
+                226,
+                65,
+                147,
+                69,
+                181,
+                236,
+                242,
+                78,
+                49,
+                5,
+                140,
+                67,
+                93,
+                54,
+                205,
+                111,
+                205,
+                52,
+                154,
+                44,
+                115,
+                41,
+                25,
+                93,
+                131,
+                50,
+                28,
+                58
+              ]
+            }
+          }
         },
         {
           "name": "player_stats_authority",
@@ -5915,6 +7734,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -5951,6 +7774,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "session_signer",
           "writable": true,
           "signer": true
@@ -5960,7 +7786,72 @@
           "writable": true
         },
         {
-          "name": "session"
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "escrow",
@@ -5991,12 +7882,11 @@
               },
               {
                 "kind": "account",
-                "path": "authority"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "escrow.state_epoch",
-                "account": "SessionEscrow"
+                "path": "authority"
               }
             ],
             "program": {
@@ -6068,6 +7958,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "authority"
               },
               {
@@ -6102,12 +7996,11 @@
               },
               {
                 "kind": "account",
-                "path": "authority"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "session.state_epoch",
-                "account": "GameSession"
+                "path": "authority"
               }
             ],
             "program": {
@@ -6178,6 +8071,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "dungeon_run"
               }
             ]
@@ -6203,6 +8100,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -6315,7 +8216,68 @@
           }
         },
         {
-          "name": "loot_config"
+          "name": "loot_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  111,
+                  111,
+                  116,
+                  45,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                224,
+                166,
+                93,
+                89,
+                226,
+                65,
+                147,
+                69,
+                181,
+                236,
+                242,
+                78,
+                49,
+                5,
+                140,
+                67,
+                93,
+                54,
+                205,
+                111,
+                205,
+                52,
+                154,
+                44,
+                115,
+                41,
+                25,
+                93,
+                131,
+                50,
+                28,
+                58
+              ]
+            }
+          }
         },
         {
           "name": "player_stats_authority",
@@ -6355,6 +8317,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -6398,6 +8364,9 @@
           "signer": true
         },
         {
+          "name": "universe"
+        },
+        {
           "name": "config",
           "pda": {
             "seeds": [
@@ -6419,6 +8388,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -6449,7 +8422,11 @@
               },
               {
                 "kind": "account",
-                "path": "scenario.authority",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "scenario.creator",
                 "account": "CombatScenario"
               },
               {
@@ -6488,12 +8465,11 @@
               },
               {
                 "kind": "account",
-                "path": "owner"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "player.state_epoch",
-                "account": "LivePlayer"
+                "path": "owner"
               }
             ],
             "program": {
@@ -6578,6 +8554,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -6627,6 +8607,9 @@
           "signer": true
         },
         {
+          "name": "universe"
+        },
+        {
           "name": "config",
           "pda": {
             "seeds": [
@@ -6648,6 +8631,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -6678,7 +8665,11 @@
               },
               {
                 "kind": "account",
-                "path": "scenario.authority",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "scenario.creator",
                 "account": "CombatScenario"
               },
               {
@@ -6723,6 +8714,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "scenario"
               }
             ]
@@ -6756,12 +8751,11 @@
               },
               {
                 "kind": "account",
-                "path": "owner"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "player.state_epoch",
-                "account": "LivePlayer"
+                "path": "owner"
               }
             ],
             "program": {
@@ -6851,6 +8845,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "scenario_log"
               }
             ]
@@ -6894,6 +8892,10 @@
                   116,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -6938,6 +8940,9 @@
           "signer": true
         },
         {
+          "name": "universe"
+        },
+        {
           "name": "config",
           "pda": {
             "seeds": [
@@ -6959,6 +8964,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -6989,7 +8998,11 @@
               },
               {
                 "kind": "account",
-                "path": "scenario.authority",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "scenario.creator",
                 "account": "CombatScenario"
               },
               {
@@ -7048,6 +9061,9 @@
           "signer": true
         },
         {
+          "name": "universe"
+        },
+        {
           "name": "config",
           "pda": {
             "seeds": [
@@ -7069,6 +9085,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -7099,7 +9119,11 @@
               },
               {
                 "kind": "account",
-                "path": "scenario.authority",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "scenario.creator",
                 "account": "CombatScenario"
               },
               {
@@ -7141,6 +9165,10 @@
                   116,
                   115
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -7200,6 +9228,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "scenario_log"
               }
             ]
@@ -7239,11 +9271,11 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "authority",
-          "signer": true,
-          "relations": [
-            "tag_registry"
-          ]
+          "signer": true
         },
         {
           "name": "tag_registry",
@@ -7265,6 +9297,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ],
             "program": {
@@ -7334,6 +9370,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "template.creator",
                 "account": "DungeonTemplate"
               },
@@ -7374,12 +9414,12 @@
       ],
       "accounts": [
         {
-          "name": "creator",
+          "name": "universe"
+        },
+        {
+          "name": "authority",
           "writable": true,
-          "signer": true,
-          "relations": [
-            "template"
-          ]
+          "signer": true
         },
         {
           "name": "config",
@@ -7403,16 +9443,124 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
         },
         {
           "name": "template",
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  116,
+                  101,
+                  109,
+                  112,
+                  108,
+                  97,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "template.creator",
+                "account": "DungeonTemplate"
+              },
+              {
+                "kind": "account",
+                "path": "template.name",
+                "account": "DungeonTemplate"
+              }
+            ]
+          }
         },
         {
-          "name": "enemy"
+          "name": "enemy",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  110,
+                  101,
+                  109,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "enemy.creator",
+                "account": "Enemy"
+              },
+              {
+                "kind": "account",
+                "path": "enemy.name",
+                "account": "Enemy"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
         }
       ],
       "args": [
@@ -7438,6 +9586,9 @@
         150
       ],
       "accounts": [
+        {
+          "name": "universe"
+        },
         {
           "name": "owner",
           "writable": true,
@@ -7469,6 +9620,10 @@
                   117,
                   110
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -7505,6 +9660,9 @@
       ],
       "accounts": [
         {
+          "name": "universe"
+        },
+        {
           "name": "session_signer",
           "writable": true,
           "signer": true
@@ -7513,7 +9671,72 @@
           "name": "authority"
         },
         {
-          "name": "session"
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
         },
         {
           "name": "escrow",
@@ -7544,12 +9767,11 @@
               },
               {
                 "kind": "account",
-                "path": "authority"
+                "path": "universe"
               },
               {
                 "kind": "account",
-                "path": "escrow.state_epoch",
-                "account": "SessionEscrow"
+                "path": "authority"
               }
             ],
             "program": {
@@ -7620,6 +9842,10 @@
               },
               {
                 "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
                 "path": "authority"
               },
               {
@@ -7659,6 +9885,9 @@
           "signer": true
         },
         {
+          "name": "universe"
+        },
+        {
           "name": "config",
           "pda": {
             "seeds": [
@@ -7680,6 +9909,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -7711,7 +9944,11 @@
               },
               {
                 "kind": "account",
-                "path": "scenario.authority",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "scenario.creator",
                 "account": "CombatScenario"
               },
               {
@@ -7738,8 +9975,7 @@
       "name": "upsert_combat_scenario_effects",
       "docs": [
         "Create or replace the optional phase-aware effect fixture associated",
-        "with a legacy combat scenario. Keeping this in a companion PDA leaves",
-        "every existing CombatScenario account byte-compatible."
+        "with a combat scenario."
       ],
       "discriminator": [
         237,
@@ -7756,6 +9992,9 @@
           "name": "authority",
           "writable": true,
           "signer": true
+        },
+        {
+          "name": "universe"
         },
         {
           "name": "config",
@@ -7779,6 +10018,10 @@
                   105,
                   103
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -7809,7 +10052,11 @@
               },
               {
                 "kind": "account",
-                "path": "scenario.authority",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "scenario.creator",
                 "account": "CombatScenario"
               },
               {
@@ -7852,6 +10099,10 @@
                   116,
                   115
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -8061,6 +10312,19 @@
       ]
     },
     {
+      "name": "LootConfig",
+      "discriminator": [
+        117,
+        243,
+        220,
+        194,
+        39,
+        114,
+        57,
+        248
+      ]
+    },
+    {
       "name": "PlayerDungeon",
       "discriminator": [
         77,
@@ -8124,306 +10388,329 @@
         248,
         13
       ]
+    },
+    {
+      "name": "Universe",
+      "discriminator": [
+        86,
+        112,
+        227,
+        226,
+        88,
+        47,
+        242,
+        113
+      ]
     }
   ],
   "errors": [
     {
       "code": 6000,
+      "name": "UniverseMismatch",
+      "msg": "Account belongs to a different universe"
+    },
+    {
+      "code": 6001,
+      "name": "UnsupportedUniverseSchema",
+      "msg": "Universe schema version is not supported"
+    },
+    {
+      "code": 6002,
       "name": "NameTooLong",
       "msg": "Name must be 32 characters or less"
     },
     {
-      "code": 6001,
+      "code": 6003,
       "name": "InvalidRoomCount",
       "msg": "Room count must be between 1 and 10"
     },
     {
-      "code": 6002,
+      "code": 6004,
       "name": "InvalidDifficulty",
       "msg": "Difficulty must be at least 1"
     },
     {
-      "code": 6003,
+      "code": 6005,
       "name": "InvalidRoomIndex",
       "msg": "Invalid room index"
     },
     {
-      "code": 6004,
+      "code": 6006,
       "name": "InvalidPlayer",
       "msg": "Player not found or invalid"
     },
     {
-      "code": 6005,
+      "code": 6007,
       "name": "PlayerDead",
       "msg": "Player is dead - heal before entering dungeon"
     },
     {
-      "code": 6006,
+      "code": 6008,
       "name": "PlayerBattleLocked",
       "msg": "Player is locked by a pending battle commit — resolve or forfeit it first"
     },
     {
-      "code": 6007,
+      "code": 6009,
       "name": "DungeonNotInProgress",
       "msg": "Dungeon run is not in progress"
     },
     {
-      "code": 6008,
+      "code": 6010,
       "name": "WrongEnemy",
       "msg": "Wrong enemy for this room"
     },
     {
-      "code": 6009,
+      "code": 6011,
       "name": "WrongDungeon",
       "msg": "Wrong dungeon for this run"
     },
     {
-      "code": 6010,
+      "code": 6012,
       "name": "NoMoreRooms",
       "msg": "No more rooms in this dungeon"
     },
     {
-      "code": 6011,
+      "code": 6013,
       "name": "RoomNotCompleted",
       "msg": "Must complete current room before continuing"
     },
     {
-      "code": 6012,
+      "code": 6014,
       "name": "DungeonStillInProgress",
       "msg": "Dungeon run is still in progress - complete or abandon it first"
     },
     {
-      "code": 6013,
+      "code": 6015,
       "name": "NotGeneratedDungeon",
       "msg": "This is not a generated dungeon - use commit_battle_room/reveal_battle_room instead"
     },
     {
-      "code": 6014,
+      "code": 6016,
       "name": "UseGeneratedBattle",
       "msg": "This is a generated dungeon - use commit_generated_battle_room/reveal_generated_battle_room instead"
     },
     {
-      "code": 6015,
+      "code": 6017,
       "name": "UseDungeonChoicesFlow",
       "msg": "Direct generation is disabled - use dungeon choices flow"
     },
     {
-      "code": 6016,
+      "code": 6018,
       "name": "NotDungeonOwner",
       "msg": "You are not the owner of this dungeon"
     },
     {
-      "code": 6017,
+      "code": 6019,
       "name": "InvalidEnvironment",
       "msg": "Invalid environment"
     },
     {
-      "code": 6018,
+      "code": 6020,
       "name": "InvalidEnvironmentConfig",
       "msg": "Selected environment must use its canonical enabled game-content configuration"
     },
     {
-      "code": 6019,
+      "code": 6021,
       "name": "InvalidEnemyTypeConfig",
       "msg": "Generated enemy pool must use canonical enabled game-content configurations in pool order"
     },
     {
-      "code": 6020,
+      "code": 6022,
       "name": "NoEligibleEnemySpawn",
       "msg": "No enemy candidate remains eligible after applying spawn tag rules"
     },
     {
-      "code": 6021,
+      "code": 6023,
       "name": "InvalidPlayerLevel",
       "msg": "Player level must be at least 1"
     },
     {
-      "code": 6022,
+      "code": 6024,
       "name": "WrongPlayerForDungeon",
       "msg": "This generated dungeon is bound to a different player"
     },
     {
-      "code": 6023,
+      "code": 6025,
       "name": "WrongPlayerForDungeonRun",
       "msg": "Dungeon run does not belong to this player"
     },
     {
-      "code": 6024,
+      "code": 6026,
       "name": "DungeonChoicesPending",
       "msg": "There are pending dungeon choices - select one before generating new choices"
     },
     {
-      "code": 6025,
+      "code": 6027,
       "name": "DungeonChoicesUnavailable",
       "msg": "Dungeon choices are unavailable - generate choices first"
     },
     {
-      "code": 6026,
+      "code": 6028,
       "name": "InvalidDungeonChoiceIndex",
       "msg": "Invalid dungeon choice index"
     },
     {
-      "code": 6027,
+      "code": 6029,
       "name": "InvalidDungeonChoiceSet",
       "msg": "Invalid dungeon choices account"
     },
     {
-      "code": 6028,
+      "code": 6030,
       "name": "DungeonNotComplete",
       "msg": "Dungeon must be completed or exited to claim loot"
     },
     {
-      "code": 6029,
+      "code": 6031,
       "name": "NoLootAvailable",
       "msg": "No loot available to claim"
     },
     {
-      "code": 6030,
+      "code": 6032,
       "name": "LootAlreadyClaimed",
       "msg": "Loot has already been claimed"
     },
     {
-      "code": 6031,
+      "code": 6033,
       "name": "TemplateNotReady",
       "msg": "Template is not fully configured - all rooms need enemies"
     },
     {
-      "code": 6032,
+      "code": 6034,
       "name": "SessionExpired",
       "msg": "Session has expired"
     },
     {
-      "code": 6033,
+      "code": 6035,
       "name": "InvalidSession",
       "msg": "Invalid session - session key or authority mismatch"
     },
     {
-      "code": 6034,
+      "code": 6036,
       "name": "InsufficientEscrowBalance",
       "msg": "Insufficient escrow balance - deposit more SOL"
     },
     {
-      "code": 6035,
+      "code": 6037,
       "name": "Unauthorized",
       "msg": "Unauthorized - admin authority required"
     },
     {
-      "code": 6036,
+      "code": 6038,
       "name": "BattleRevealNotReady",
       "msg": "Battle commit's reveal slot has not been reached yet; cannot anchor"
     },
     {
-      "code": 6037,
+      "code": 6039,
       "name": "BattleAnchorExpired",
       "msg": "Battle commit's anchor window has expired; call forfeit_committed_battle"
     },
     {
-      "code": 6038,
+      "code": 6040,
       "name": "BattleNotAnchored",
       "msg": "Battle must be anchored before revealing"
     },
     {
-      "code": 6039,
+      "code": 6041,
       "name": "BattleAlreadyAnchored",
       "msg": "Battle is already anchored; cannot re-anchor or forfeit"
     },
     {
-      "code": 6040,
+      "code": 6042,
       "name": "BattleForfeitTooEarly",
       "msg": "Cannot forfeit a battle before its anchor window expires"
     },
     {
-      "code": 6041,
+      "code": 6043,
       "name": "BattleAlreadyCommitted",
       "msg": "A battle is already committed for this dungeon run; resolve or forfeit it first"
     },
     {
-      "code": 6042,
+      "code": 6044,
       "name": "InvalidSlotHashesAccount",
       "msg": "SysvarSlotHashes account is invalid"
     },
     {
-      "code": 6043,
+      "code": 6045,
       "name": "SlotHashNotAvailable",
       "msg": "Slothash for the requested slot is no longer available"
     },
     {
-      "code": 6044,
+      "code": 6046,
       "name": "BattleCommitMismatch",
       "msg": "Battle commit does not match the provided dungeon run"
     },
     {
-      "code": 6045,
+      "code": 6047,
       "name": "InvalidTags",
       "msg": "Tag data is invalid or exceeds its canonical fixed capacity"
     },
     {
-      "code": 6046,
+      "code": 6048,
       "name": "InvalidTagRulebook",
       "msg": "Tag registry or sealed rulebook is invalid"
     },
     {
-      "code": 6047,
+      "code": 6049,
       "name": "BattleRulebookMismatch",
       "msg": "Battle rulebook does not match the identity pinned at commit time"
     },
     {
-      "code": 6048,
+      "code": 6050,
       "name": "LootRulebookMismatch",
       "msg": "Loot rulebook does not match the identity pinned when the reward was created"
     },
     {
-      "code": 6049,
+      "code": 6051,
       "name": "StaleEquipmentTagCache",
       "msg": "Equipped-item tag bonuses/actions must be recalculated with the active rulebook"
     },
     {
-      "code": 6050,
+      "code": 6052,
       "name": "ScenarioDisabled",
       "msg": "Combat scenario is disabled"
     },
     {
-      "code": 6051,
+      "code": 6053,
       "name": "InvalidCombatScenario",
       "msg": "Invalid combat scenario"
     },
     {
-      "code": 6052,
+      "code": 6054,
       "name": "InvalidScenarioConfig",
       "msg": "Invalid combat scenario configuration"
     },
     {
-      "code": 6053,
+      "code": 6055,
       "name": "InvalidScenarioAction",
       "msg": "Invalid scenario action"
     },
     {
-      "code": 6054,
+      "code": 6056,
       "name": "InvalidActionSlot",
       "msg": "Invalid action slot"
     },
     {
-      "code": 6055,
+      "code": 6057,
       "name": "UnsupportedEnemyActionEffect",
       "msg": "Enemy scenario action effect is not supported"
     },
     {
-      "code": 6056,
+      "code": 6058,
       "name": "InvalidRoomEffect",
       "msg": "Invalid room effect"
     },
     {
-      "code": 6057,
+      "code": 6059,
       "name": "TooManyScenarioEffects",
       "msg": "Too many scoped effects in combat scenario fixture"
     },
     {
-      "code": 6058,
+      "code": 6060,
       "name": "InvalidScenarioEffect",
       "msg": "Invalid scoped effect in combat scenario fixture"
     },
     {
-      "code": 6059,
+      "code": 6061,
       "name": "ScenarioEffectSnapshotRequired",
       "msg": "Scoped scenario logs must be closed with their effect snapshot"
     }
@@ -8731,6 +11018,10 @@
         "kind": "struct",
         "fields": [
           {
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
             "name": "dungeon_run",
             "type": "pubkey"
           },
@@ -8916,7 +11207,14 @@
         "kind": "struct",
         "fields": [
           {
-            "name": "authority",
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
+            "name": "creator",
+            "docs": [
+              "Immutable PDA seed provenance. Administration follows Universe authority."
+            ],
             "type": "pubkey"
           },
           {
@@ -9064,15 +11362,20 @@
     {
       "name": "CombatScenarioEffectSnapshot",
       "docs": [
-        "Immutable effect inputs and surviving state for one V2 scenario log. The",
-        "legacy CombatScenarioLog remains byte-compatible and references this PDA via",
-        "its own public key as the derivation seed."
+        "Immutable effect inputs and surviving state for one V2 scenario log."
       ],
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "authority",
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
+            "name": "creator",
+            "docs": [
+              "Immutable provenance of the administrator who created this run snapshot."
+            ],
             "type": "pubkey"
           },
           {
@@ -9113,15 +11416,21 @@
     {
       "name": "CombatScenarioEffects",
       "docs": [
-        "Optional phase-aware fixture for an existing CombatScenario. This companion",
-        "account is deliberately separate so legacy scenario accounts need no realloc",
-        "or migration."
+        "Optional phase-aware fixture for a CombatScenario. This companion account",
+        "keeps reusable effect state independent from the core scenario definition."
       ],
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "authority",
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
+            "name": "creator",
+            "docs": [
+              "Immutable provenance inherited from the parent scenario creator."
+            ],
             "type": "pubkey"
           },
           {
@@ -9320,6 +11629,10 @@
         "kind": "struct",
         "fields": [
           {
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
             "name": "scenario",
             "type": "pubkey"
           },
@@ -9474,12 +11787,15 @@
         "kind": "struct",
         "fields": [
           {
-            "name": "owner",
+            "name": "universe",
+            "docs": [
+              "Canonical GameContent Universe containing all of this player's state."
+            ],
             "type": "pubkey"
           },
           {
-            "name": "state_epoch",
-            "type": "u16"
+            "name": "owner",
+            "type": "pubkey"
           },
           {
             "name": "player_id",
@@ -9713,6 +12029,10 @@
         "kind": "struct",
         "fields": [
           {
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
             "name": "owner",
             "type": "pubkey"
           },
@@ -9759,13 +12079,13 @@
     {
       "name": "DungeonConfig",
       "docs": [
-        "Dungeon program admin config — singleton PDA"
+        "Dungeon program admin config — one root PDA per Universe."
       ],
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "authority",
+            "name": "universe",
             "type": "pubkey"
           },
           {
@@ -9783,6 +12103,10 @@
       "type": {
         "kind": "struct",
         "fields": [
+          {
+            "name": "universe",
+            "type": "pubkey"
+          },
           {
             "name": "player",
             "type": "pubkey"
@@ -9937,6 +12261,10 @@
         "kind": "struct",
         "fields": [
           {
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
             "name": "creator",
             "type": "pubkey"
           },
@@ -9998,6 +12326,10 @@
       "type": {
         "kind": "struct",
         "fields": [
+          {
+            "name": "universe",
+            "type": "pubkey"
+          },
           {
             "name": "creator",
             "type": "pubkey"
@@ -10133,7 +12465,7 @@
         "kind": "struct",
         "fields": [
           {
-            "name": "authority",
+            "name": "universe",
             "type": "pubkey"
           },
           {
@@ -10200,7 +12532,7 @@
         "kind": "struct",
         "fields": [
           {
-            "name": "authority",
+            "name": "universe",
             "type": "pubkey"
           },
           {
@@ -10316,20 +12648,16 @@
         "kind": "struct",
         "fields": [
           {
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
             "name": "authority",
             "type": "pubkey"
           },
           {
             "name": "session_key",
             "type": "pubkey"
-          },
-          {
-            "name": "player",
-            "type": "pubkey"
-          },
-          {
-            "name": "state_epoch",
-            "type": "u16"
           },
           {
             "name": "expires_at",
@@ -10413,6 +12741,51 @@
       }
     },
     {
+      "name": "LootConfig",
+      "docs": [
+        "Universe-wide loot roll configuration. Administrative authority is read",
+        "from the canonical Universe account so ownership transfers cannot leave a",
+        "stale controller duplicated here."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
+            "name": "slot_weights",
+            "type": "bytes"
+          },
+          {
+            "name": "item_type_weights",
+            "type": "bytes"
+          },
+          {
+            "name": "rarity_weights",
+            "type": "bytes"
+          },
+          {
+            "name": "mod_type_weights",
+            "type": "bytes"
+          },
+          {
+            "name": "mod_count_by_rarity",
+            "type": "bytes"
+          },
+          {
+            "name": "default_drop_chance",
+            "type": "u8"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
       "name": "PlayerClass",
       "docs": [
         "Player character classes - determines abilities and stat growth"
@@ -10446,6 +12819,10 @@
       "type": {
         "kind": "struct",
         "fields": [
+          {
+            "name": "universe",
+            "type": "pubkey"
+          },
           {
             "name": "owner",
             "type": "pubkey"
@@ -10702,6 +13079,10 @@
       "type": {
         "kind": "struct",
         "fields": [
+          {
+            "name": "universe",
+            "type": "pubkey"
+          },
           {
             "name": "dungeon_run",
             "type": "pubkey"
@@ -10964,12 +13345,12 @@
         "kind": "struct",
         "fields": [
           {
-            "name": "authority",
+            "name": "universe",
             "type": "pubkey"
           },
           {
-            "name": "state_epoch",
-            "type": "u16"
+            "name": "authority",
+            "type": "pubkey"
           },
           {
             "name": "balance",
@@ -11123,13 +13504,21 @@
     {
       "name": "TagRegistry",
       "docs": [
-        "Root singleton for authority, custom-ID allocation, and rulebook activation."
+        "Universe-scoped root for authority, custom-ID allocation, and rulebook activation."
       ],
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "authority",
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
+            "name": "delegate_authority",
+            "docs": [
+              "Optional tag-specific delegate. The zero key means no delegate.",
+              "Universe root/delegated admins are authorized independently of this role."
+            ],
             "type": "pubkey"
           },
           {
@@ -11342,6 +13731,50 @@
           },
           {
             "name": "Spawn"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Universe",
+      "docs": [
+        "Stable root identity and authority boundary for one independent game world."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "genesis_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "id",
+            "type": "u64"
+          },
+          {
+            "name": "schema_version",
+            "type": "u16"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                64
+              ]
+            }
           }
         ]
       }

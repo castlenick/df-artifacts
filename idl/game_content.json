@@ -25,10 +25,37 @@
       "accounts": [
         {
           "name": "authority",
-          "signer": true,
-          "relations": [
-            "tag_registry"
-          ]
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
         },
         {
           "name": "tag_registry",
@@ -51,6 +78,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -116,26 +147,31 @@
           "name": "new_admin"
         },
         {
-          "name": "registry",
+          "name": "universe",
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
+                  117,
+                  110,
                   105,
-                  115,
-                  116,
+                  118,
+                  101,
                   114,
-                  121
+                  115,
+                  101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ]
           }
@@ -164,7 +200,7 @@
               },
               {
                 "kind": "account",
-                "path": "registry"
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -198,10 +234,37 @@
       "accounts": [
         {
           "name": "authority",
-          "signer": true,
-          "relations": [
-            "tag_registry"
-          ]
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
         },
         {
           "name": "tag_registry",
@@ -223,6 +286,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -276,80 +343,6 @@
       ]
     },
     {
-      "name": "bootstrap_missing_class_configs",
-      "docs": [
-        "Idempotently provision any missing built-in class accounts and repair the",
-        "empty action arrays produced by older class-creation flows.",
-        "",
-        "Existing valid class content is never reset: customized stats, names,",
-        "actions, tags, and enabled state are preserved exactly."
-      ],
-      "discriminator": [
-        133,
-        41,
-        66,
-        172,
-        128,
-        197,
-        1,
-        146
-      ],
-      "accounts": [
-        {
-          "name": "authority",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "registry",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
-                  105,
-                  115,
-                  116,
-                  114,
-                  121
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "name": "barbarian_class_config",
-          "writable": true
-        },
-        {
-          "name": "warrior_class_config",
-          "writable": true
-        },
-        {
-          "name": "rogue_class_config",
-          "writable": true
-        },
-        {
-          "name": "wizard_class_config",
-          "writable": true
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": []
-    },
-    {
       "name": "bump_equipment_content_revision",
       "docs": [
         "Invalidates cached equipment after mutable item content changes.",
@@ -373,6 +366,36 @@
           "signer": true
         },
         {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
+        },
+        {
           "name": "tag_registry",
           "writable": true,
           "pda": {
@@ -393,6 +416,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -422,26 +449,31 @@
           "signer": true
         },
         {
-          "name": "registry",
+          "name": "universe",
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
+                  117,
+                  110,
                   105,
-                  115,
-                  116,
+                  118,
+                  101,
                   114,
-                  121
+                  115,
+                  101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ]
           }
@@ -480,26 +512,31 @@
           "signer": true
         },
         {
-          "name": "registry",
+          "name": "universe",
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
+                  117,
+                  110,
                   105,
-                  115,
-                  116,
+                  118,
+                  101,
                   114,
-                  121
+                  115,
+                  101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ]
           }
@@ -518,6 +555,10 @@
                   109,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -557,26 +598,31 @@
           "signer": true
         },
         {
-          "name": "registry",
+          "name": "universe",
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
+                  117,
+                  110,
                   105,
-                  115,
-                  116,
+                  118,
+                  101,
                   114,
-                  121
+                  115,
+                  101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ]
           }
@@ -610,26 +656,31 @@
           "signer": true
         },
         {
-          "name": "registry",
+          "name": "universe",
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
+                  117,
+                  110,
                   105,
-                  115,
-                  116,
+                  118,
+                  101,
                   114,
-                  121
+                  115,
+                  101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ]
           }
@@ -663,26 +714,31 @@
           "signer": true
         },
         {
-          "name": "registry",
+          "name": "universe",
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
+                  117,
+                  110,
                   105,
-                  115,
-                  116,
+                  118,
+                  101,
                   114,
-                  121
+                  115,
+                  101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ]
           }
@@ -708,6 +764,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -718,97 +778,6 @@
         }
       ],
       "args": []
-    },
-    {
-      "name": "create_class_config",
-      "docs": [
-        "Create a new player class configuration"
-      ],
-      "discriminator": [
-        149,
-        85,
-        166,
-        215,
-        52,
-        169,
-        123,
-        1
-      ],
-      "accounts": [
-        {
-          "name": "authority",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "registry",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
-                  105,
-                  115,
-                  116,
-                  114,
-                  121
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "name": "class_config",
-          "writable": true
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": [
-        {
-          "name": "class_id",
-          "type": "u8"
-        },
-        {
-          "name": "name",
-          "type": "string"
-        },
-        {
-          "name": "base_health",
-          "type": "i16"
-        },
-        {
-          "name": "base_attack",
-          "type": "i16"
-        },
-        {
-          "name": "base_defense",
-          "type": "i16"
-        },
-        {
-          "name": "health_per_level",
-          "type": "i16"
-        },
-        {
-          "name": "attack_per_level",
-          "type": "i16"
-        },
-        {
-          "name": "defense_per_level",
-          "type": "i16"
-        }
-      ]
     },
     {
       "name": "create_enemy",
@@ -832,26 +801,31 @@
           "signer": true
         },
         {
-          "name": "registry",
+          "name": "universe",
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
+                  117,
+                  110,
                   105,
-                  115,
-                  116,
+                  118,
+                  101,
                   114,
-                  121
+                  115,
+                  101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ]
           }
@@ -873,6 +847,10 @@
                   109,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -947,27 +925,31 @@
           "signer": true
         },
         {
-          "name": "registry",
-          "writable": true,
+          "name": "universe",
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
+                  117,
+                  110,
                   105,
-                  115,
-                  116,
+                  118,
+                  101,
                   114,
-                  121
+                  115,
+                  101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ]
           }
@@ -1042,27 +1024,31 @@
           "signer": true
         },
         {
-          "name": "registry",
-          "writable": true,
+          "name": "universe",
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
+                  117,
+                  110,
                   105,
-                  115,
-                  116,
+                  118,
+                  101,
                   114,
-                  121
+                  115,
+                  101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ]
           }
@@ -1125,26 +1111,31 @@
           "signer": true
         },
         {
-          "name": "registry",
+          "name": "universe",
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
+                  117,
+                  110,
                   105,
-                  115,
-                  116,
+                  118,
+                  101,
                   114,
-                  121
+                  115,
+                  101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ]
           }
@@ -1173,6 +1164,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -1242,10 +1237,37 @@
         {
           "name": "authority",
           "writable": true,
-          "signer": true,
-          "relations": [
-            "tag_registry"
-          ]
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
         },
         {
           "name": "tag_registry",
@@ -1267,6 +1289,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -1317,45 +1343,70 @@
       ]
     },
     {
-      "name": "initialize_registry",
+      "name": "initialize_tag_registry",
       "docs": [
-        "Initialize the game content registry (one-time setup by admin)"
+        "Creates the permanent root registry for custom tags and immutable rulebooks."
       ],
       "discriminator": [
-        189,
-        181,
-        20,
-        17,
-        174,
-        57,
-        249,
-        59
+        114,
+        50,
+        60,
+        142,
+        107,
+        227,
+        104,
+        34
       ],
       "accounts": [
         {
           "name": "authority",
           "writable": true,
-          "signer": true
+          "signer": true,
+          "relations": [
+            "universe"
+          ]
         },
         {
-          "name": "game_content_program",
-          "address": "HSzZSCzCN5NX7YiGeX9mkmj2jag6f9i8uhwo61VCf429"
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
         },
         {
-          "name": "program_data"
-        },
-        {
-          "name": "registry",
+          "name": "tag_registry",
           "writable": true,
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  103,
+                  116,
                   97,
-                  109,
-                  101,
+                  103,
                   95,
                   114,
                   101,
@@ -1366,6 +1417,67 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize_universe",
+      "docs": [
+        "Spawn a fresh, independently-addressed game universe."
+      ],
+      "discriminator": [
+        122,
+        246,
+        79,
+        134,
+        70,
+        174,
+        143,
+        171
+      ],
+      "accounts": [
+        {
+          "name": "genesis_authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "genesis_authority"
+              },
+              {
+                "kind": "arg",
+                "path": "id"
               }
             ]
           }
@@ -1391,88 +1503,12 @@
           "address": "11111111111111111111111111111111"
         }
       ],
-      "args": []
-    },
-    {
-      "name": "initialize_tag_registry",
-      "docs": [
-        "Creates the permanent root registry for custom tags and immutable rulebooks."
-      ],
-      "discriminator": [
-        114,
-        50,
-        60,
-        142,
-        107,
-        227,
-        104,
-        34
-      ],
-      "accounts": [
+      "args": [
         {
-          "name": "authority",
-          "writable": true,
-          "signer": true,
-          "relations": [
-            "registry"
-          ]
-        },
-        {
-          "name": "registry",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
-                  105,
-                  115,
-                  116,
-                  114,
-                  121
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "name": "tag_registry",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  116,
-                  97,
-                  103,
-                  95,
-                  114,
-                  101,
-                  103,
-                  105,
-                  115,
-                  116,
-                  114,
-                  121
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
+          "name": "id",
+          "type": "u64"
         }
-      ],
-      "args": []
+      ]
     },
     {
       "name": "register_tag_definition",
@@ -1493,10 +1529,37 @@
         {
           "name": "authority",
           "writable": true,
-          "signer": true,
-          "relations": [
-            "tag_registry"
-          ]
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
         },
         {
           "name": "tag_registry",
@@ -1519,6 +1582,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -1628,26 +1695,31 @@
           "name": "admin"
         },
         {
-          "name": "registry",
+          "name": "universe",
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
+                  117,
+                  110,
                   105,
-                  115,
-                  116,
+                  118,
+                  101,
                   114,
-                  121
+                  115,
+                  101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ]
           }
@@ -1676,7 +1748,7 @@
               },
               {
                 "kind": "account",
-                "path": "registry"
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -1706,10 +1778,37 @@
       "accounts": [
         {
           "name": "authority",
-          "signer": true,
-          "relations": [
-            "tag_registry"
-          ]
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
         },
         {
           "name": "tag_registry",
@@ -1731,6 +1830,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -1794,26 +1897,31 @@
           "signer": true
         },
         {
-          "name": "registry",
+          "name": "universe",
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
+                  117,
+                  110,
                   105,
-                  115,
-                  116,
+                  118,
+                  101,
                   114,
-                  121
+                  115,
+                  101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ]
           }
@@ -1872,10 +1980,37 @@
       "accounts": [
         {
           "name": "authority",
-          "signer": true,
-          "relations": [
-            "tag_registry"
-          ]
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
         },
         {
           "name": "tag_registry",
@@ -1897,6 +2032,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -1939,10 +2078,37 @@
       "accounts": [
         {
           "name": "authority",
-          "signer": true,
-          "relations": [
-            "tag_registry"
-          ]
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
         },
         {
           "name": "tag_registry",
@@ -1964,6 +2130,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -2002,10 +2172,37 @@
       "accounts": [
         {
           "name": "authority",
-          "signer": true,
-          "relations": [
-            "tag_registry"
-          ]
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
         },
         {
           "name": "tag_registry",
@@ -2027,6 +2224,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -2045,6 +2246,10 @@
                   109,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               },
               {
                 "kind": "account",
@@ -2089,10 +2294,37 @@
       "accounts": [
         {
           "name": "authority",
-          "signer": true,
-          "relations": [
-            "tag_registry"
-          ]
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
         },
         {
           "name": "tag_registry",
@@ -2114,6 +2346,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -2152,10 +2388,37 @@
       "accounts": [
         {
           "name": "authority",
-          "signer": true,
-          "relations": [
-            "tag_registry"
-          ]
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
         },
         {
           "name": "tag_registry",
@@ -2177,6 +2440,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -2215,10 +2482,37 @@
       "accounts": [
         {
           "name": "authority",
-          "signer": true,
-          "relations": [
-            "tag_registry"
-          ]
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
         },
         {
           "name": "tag_registry",
@@ -2241,6 +2535,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -2280,10 +2578,37 @@
       "accounts": [
         {
           "name": "authority",
-          "signer": true,
-          "relations": [
-            "tag_registry"
-          ]
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
         },
         {
           "name": "tag_registry",
@@ -2306,6 +2631,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -2327,82 +2656,58 @@
       ]
     },
     {
-      "name": "transfer_authority",
+      "name": "set_tag_delegate",
       "docs": [
-        "Transfer registry authority to a new admin"
+        "Sets or clears the optional tag-specific delegate. Universe admins remain",
+        "authorized regardless of this role, and only the current root may change it."
       ],
       "discriminator": [
-        48,
-        169,
-        76,
-        72,
-        229,
-        180,
-        55,
-        161
-      ],
-      "accounts": [
-        {
-          "name": "authority",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "registry",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
-                  105,
-                  115,
-                  116,
-                  114,
-                  121
-                ]
-              }
-            ]
-          }
-        }
-      ],
-      "args": [
-        {
-          "name": "new_authority",
-          "type": "pubkey"
-        }
-      ]
-    },
-    {
-      "name": "transfer_tag_authority",
-      "docs": [
-        "Transfers tag-authoring authority without changing any existing tag meaning."
-      ],
-      "discriminator": [
-        29,
-        237,
-        75,
-        2,
-        34,
-        214,
-        65,
-        211
+        209,
+        37,
+        235,
+        74,
+        215,
+        123,
+        126,
+        110
       ],
       "accounts": [
         {
           "name": "authority",
           "signer": true,
           "relations": [
-            "tag_registry"
+            "universe"
           ]
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
         },
         {
           "name": "tag_registry",
@@ -2425,6 +2730,72 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "delegate_authority",
+          "type": {
+            "option": "pubkey"
+          }
+        }
+      ]
+    },
+    {
+      "name": "transfer_universe_authority",
+      "docs": [
+        "Transfer control of a universe without changing its stable address."
+      ],
+      "discriminator": [
+        107,
+        36,
+        56,
+        246,
+        121,
+        124,
+        226,
+        20
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ]
           }
@@ -2459,26 +2830,31 @@
           "signer": true
         },
         {
-          "name": "registry",
+          "name": "universe",
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
+                  117,
+                  110,
                   105,
-                  115,
-                  116,
+                  118,
+                  101,
                   114,
-                  121
+                  115,
+                  101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ]
           }
@@ -2561,26 +2937,31 @@
           "signer": true
         },
         {
-          "name": "registry",
+          "name": "universe",
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
+                  117,
+                  110,
                   105,
-                  115,
-                  116,
+                  118,
+                  101,
                   114,
-                  121
+                  115,
+                  101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ]
           }
@@ -2669,26 +3050,31 @@
           "signer": true
         },
         {
-          "name": "registry",
+          "name": "universe",
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
+                  117,
+                  110,
                   105,
-                  115,
-                  116,
+                  118,
+                  101,
                   114,
-                  121
+                  115,
+                  101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ]
           }
@@ -2765,26 +3151,31 @@
           "signer": true
         },
         {
-          "name": "registry",
+          "name": "universe",
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  103,
-                  97,
-                  109,
-                  101,
-                  95,
-                  114,
-                  101,
-                  103,
+                  117,
+                  110,
                   105,
-                  115,
-                  116,
+                  118,
+                  101,
                   114,
-                  121
+                  115,
+                  101
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ]
           }
@@ -2810,6 +3201,10 @@
                   114,
                   121
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
               }
             ]
           }
@@ -2956,19 +3351,6 @@
       ]
     },
     {
-      "name": "GameRegistry",
-      "discriminator": [
-        24,
-        88,
-        182,
-        125,
-        149,
-        163,
-        9,
-        71
-      ]
-    },
-    {
       "name": "ItemTypeConfig",
       "discriminator": [
         136,
@@ -3032,6 +3414,19 @@
         248,
         13
       ]
+    },
+    {
+      "name": "Universe",
+      "discriminator": [
+        86,
+        112,
+        227,
+        226,
+        88,
+        47,
+        242,
+        113
+      ]
     }
   ],
   "errors": [
@@ -3083,90 +3478,100 @@
     {
       "code": 6009,
       "name": "Unauthorized",
-      "msg": "Unauthorized - you are not the registry authority"
+      "msg": "Unauthorized - you are not an authority for this universe"
     },
     {
       "code": 6010,
+      "name": "UniverseMismatch",
+      "msg": "Accounts belong to different universes"
+    },
+    {
+      "code": 6011,
+      "name": "UnsupportedUniverseSchema",
+      "msg": "Universe schema is not supported by this program version"
+    },
+    {
+      "code": 6012,
       "name": "InvalidLevel",
       "msg": "Level must be between 1 and 100"
     },
     {
-      "code": 6011,
+      "code": 6013,
       "name": "InvalidHealth",
       "msg": "Health must be greater than 0"
     },
     {
-      "code": 6012,
+      "code": 6014,
       "name": "InvalidAuthority",
       "msg": "New authority cannot be the default/zero address"
     },
     {
-      "code": 6013,
+      "code": 6015,
       "name": "InvalidTagName",
       "msg": "Tag name is not in canonical lowercase ASCII form"
     },
     {
-      "code": 6014,
+      "code": 6016,
       "name": "InvalidCustomTagId",
       "msg": "Custom tag ID is not the next allocatable ID"
     },
     {
-      "code": 6015,
+      "code": 6017,
       "name": "InvalidTagRulebook",
       "msg": "Tag rulebook is invalid, unsealed, corrupt, or has invalid lineage"
     },
     {
-      "code": 6016,
+      "code": 6018,
       "name": "InvalidTagRulebookVersion",
       "msg": "Tag rulebook version is not the next version in the active lineage"
     },
     {
-      "code": 6017,
+      "code": 6019,
       "name": "TagRulebookSealed",
       "msg": "A sealed tag rulebook is immutable"
     },
     {
-      "code": 6018,
+      "code": 6020,
       "name": "TooManyTagRules",
       "msg": "Tag rulebook exceeds its fixed rule capacity"
     },
     {
-      "code": 6019,
+      "code": 6021,
       "name": "InvalidTags",
       "msg": "Tags are invalid, non-canonical, or exceed entity capacity"
     },
     {
-      "code": 6020,
+      "code": 6022,
       "name": "InvalidActionConfig",
       "msg": "Action configuration has an invalid effect, threshold, name, or structural tag"
     },
     {
-      "code": 6021,
+      "code": 6023,
       "name": "UnregisteredTag",
       "msg": "Custom tag ID has not been registered"
     },
     {
-      "code": 6022,
+      "code": 6024,
       "name": "EmbeddedGrantedActionTags",
       "msg": "Granted-action tags must be authored through the tag-authority setter"
     },
     {
-      "code": 6023,
+      "code": 6025,
       "name": "MissingGrantedAction",
       "msg": "Item type does not grant an action"
     },
     {
-      "code": 6024,
+      "code": 6026,
       "name": "TooManyAllowedEnemyTypes",
       "msg": "Environment allows more enemy types than its fixed account capacity"
     },
     {
-      "code": 6025,
+      "code": 6027,
       "name": "InvalidAllowedEnemyTypes",
       "msg": "Environment enemy type IDs must be supported, unique, and strictly increasing"
     },
     {
-      "code": 6026,
+      "code": 6028,
       "name": "EquipmentContentRevisionOverflow",
       "msg": "Equipment content revision cannot advance further"
     }
@@ -3223,13 +3628,13 @@
     {
       "name": "AdminMember",
       "docs": [
-        "Delegated admin membership for the game registry."
+        "Delegated admin membership for one universe."
       ],
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "registry",
+            "name": "universe",
             "type": "pubkey"
           },
           {
@@ -3256,7 +3661,7 @@
         "kind": "struct",
         "fields": [
           {
-            "name": "authority",
+            "name": "universe",
             "type": "pubkey"
           },
           {
@@ -3331,6 +3736,10 @@
       "type": {
         "kind": "struct",
         "fields": [
+          {
+            "name": "universe",
+            "type": "pubkey"
+          },
           {
             "name": "creator",
             "type": "pubkey"
@@ -3466,7 +3875,7 @@
         "kind": "struct",
         "fields": [
           {
-            "name": "authority",
+            "name": "universe",
             "type": "pubkey"
           },
           {
@@ -3533,7 +3942,7 @@
         "kind": "struct",
         "fields": [
           {
-            "name": "authority",
+            "name": "universe",
             "type": "pubkey"
           },
           {
@@ -3584,37 +3993,6 @@
       }
     },
     {
-      "name": "GameRegistry",
-      "docs": [
-        "Game content registry - tracks all content types"
-      ],
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "authority",
-            "type": "pubkey"
-          },
-          {
-            "name": "enemy_type_count",
-            "type": "u16"
-          },
-          {
-            "name": "class_count",
-            "type": "u8"
-          },
-          {
-            "name": "environment_count",
-            "type": "u8"
-          },
-          {
-            "name": "bump",
-            "type": "u8"
-          }
-        ]
-      }
-    },
-    {
       "name": "ItemTypeConfig",
       "docs": [
         "Configuration for an item type"
@@ -3623,7 +4001,7 @@
         "kind": "struct",
         "fields": [
           {
-            "name": "authority",
+            "name": "universe",
             "type": "pubkey"
           },
           {
@@ -3891,13 +4269,21 @@
     {
       "name": "TagRegistry",
       "docs": [
-        "Root singleton for authority, custom-ID allocation, and rulebook activation."
+        "Universe-scoped root for authority, custom-ID allocation, and rulebook activation."
       ],
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "authority",
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
+            "name": "delegate_authority",
+            "docs": [
+              "Optional tag-specific delegate. The zero key means no delegate.",
+              "Universe root/delegated admins are authorized independently of this role."
+            ],
             "type": "pubkey"
           },
           {
@@ -4110,6 +4496,50 @@
           },
           {
             "name": "Spawn"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Universe",
+      "docs": [
+        "Stable root identity and authority boundary for one independent game world."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "genesis_authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "id",
+            "type": "u64"
+          },
+          {
+            "name": "schema_version",
+            "type": "u16"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "reserved",
+            "type": {
+              "array": [
+                "u8",
+                64
+              ]
+            }
           }
         ]
       }

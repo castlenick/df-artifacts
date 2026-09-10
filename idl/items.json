@@ -1234,8 +1234,9 @@
     {
       "name": "destroy_item",
       "docs": [
-        "Destroy an inventory item through the Player program and invalidate all",
-        "equipment caches before the account is closed."
+        "Destroy an unclaimed inventory item through the Player program.",
+        "Claims prevent destroying live equipment, so closing an unclaimed item",
+        "cannot change any live equipment cache or the Universe content revision."
       ],
       "discriminator": [
         160,
@@ -1403,116 +1404,6 @@
           }
         },
         {
-          "name": "equipment_revision_authority",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  101,
-                  113,
-                  117,
-                  105,
-                  112,
-                  109,
-                  101,
-                  110,
-                  116,
-                  95,
-                  114,
-                  101,
-                  118,
-                  105,
-                  115,
-                  105,
-                  111,
-                  110,
-                  95,
-                  97,
-                  117,
-                  116,
-                  104,
-                  111,
-                  114,
-                  105,
-                  116,
-                  121
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              }
-            ]
-          }
-        },
-        {
-          "name": "tag_registry",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  116,
-                  97,
-                  103,
-                  95,
-                  114,
-                  101,
-                  103,
-                  105,
-                  115,
-                  116,
-                  114,
-                  121
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              }
-            ],
-            "program": {
-              "kind": "const",
-              "value": [
-                244,
-                99,
-                151,
-                237,
-                47,
-                11,
-                136,
-                173,
-                73,
-                183,
-                102,
-                123,
-                244,
-                101,
-                159,
-                248,
-                89,
-                209,
-                187,
-                253,
-                59,
-                44,
-                154,
-                132,
-                61,
-                253,
-                93,
-                11,
-                202,
-                2,
-                101,
-                78
-              ]
-            }
-          }
-        },
-        {
           "name": "item_account",
           "docs": [
             "Item account to destroy. Must be owned by signer."
@@ -1545,10 +1436,6 @@
               }
             ]
           }
-        },
-        {
-          "name": "game_content_program",
-          "address": "HSzZSCzCN5NX7YiGeX9mkmj2jag6f9i8uhwo61VCf429"
         }
       ],
       "args": []
@@ -1728,50 +1615,6 @@
           }
         },
         {
-          "name": "equipment_revision_authority",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  101,
-                  113,
-                  117,
-                  105,
-                  112,
-                  109,
-                  101,
-                  110,
-                  116,
-                  95,
-                  114,
-                  101,
-                  118,
-                  105,
-                  115,
-                  105,
-                  111,
-                  110,
-                  95,
-                  97,
-                  117,
-                  116,
-                  104,
-                  111,
-                  114,
-                  105,
-                  116,
-                  121
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              }
-            ]
-          }
-        },
-        {
           "name": "session"
         },
         {
@@ -1779,30 +1622,93 @@
           "writable": true
         },
         {
-          "name": "tag_registry",
+          "name": "item_account",
+          "docs": [
+            "Item account to close to escrow."
+          ],
           "writable": true,
           "pda": {
             "seeds": [
               {
                 "kind": "const",
                 "value": [
-                  116,
-                  97,
-                  103,
-                  95,
-                  114,
-                  101,
-                  103,
                   105,
-                  115,
                   116,
-                  114,
-                  121
+                  101,
+                  109
                 ]
               },
               {
                 "kind": "account",
                 "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.genesis_owner",
+                "account": "ItemAccount"
+              },
+              {
+                "kind": "account",
+                "path": "item_account.item_id",
+                "account": "ItemAccount"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "destroy_items",
+      "docs": [
+        "CPI-only bulk close. The Player capability proves inventory membership",
+        "and exact dead-player claim releases; Items still validates every target."
+      ],
+      "discriminator": [
+        163,
+        70,
+        67,
+        156,
+        61,
+        26,
+        13,
+        242
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "docs": [
+            "Current owner of the item."
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
               }
             ],
             "program": {
@@ -1845,11 +1751,11 @@
           }
         },
         {
-          "name": "item_account",
+          "name": "destroy_authority",
           "docs": [
-            "Item account to close to escrow."
+            "Player-program PDA proving inventory/equipment checks ran before close."
           ],
-          "writable": true,
+          "signer": true,
           "pda": {
             "seeds": [
               {
@@ -1858,32 +1764,261 @@
                   105,
                   116,
                   101,
-                  109
+                  109,
+                  95,
+                  100,
+                  101,
+                  115,
+                  116,
+                  114,
+                  111,
+                  121,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
                 ]
               },
               {
                 "kind": "account",
                 "path": "universe"
-              },
-              {
-                "kind": "account",
-                "path": "item_account.genesis_owner",
-                "account": "ItemAccount"
-              },
-              {
-                "kind": "account",
-                "path": "item_account.item_id",
-                "account": "ItemAccount"
               }
-            ]
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
           }
-        },
-        {
-          "name": "game_content_program",
-          "address": "HSzZSCzCN5NX7YiGeX9mkmj2jag6f9i8uhwo61VCf429"
         }
       ],
       "args": []
+    },
+    {
+      "name": "destroy_items_with_session",
+      "docs": [
+        "The trusted Player capability sets bits only for exact recovered dead",
+        "claims. Unmasked targets must be Common, and all targets must be unclaimed."
+      ],
+      "discriminator": [
+        195,
+        122,
+        185,
+        30,
+        37,
+        112,
+        78,
+        118
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "docs": [
+            "Session key signer."
+          ],
+          "signer": true
+        },
+        {
+          "name": "authority"
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "destroy_authority",
+          "docs": [
+            "Player-program PDA proving inventory/equipment checks ran before close."
+          ],
+          "signer": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109,
+                  95,
+                  100,
+                  101,
+                  115,
+                  116,
+                  114,
+                  111,
+                  121,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
+        },
+        {
+          "name": "session"
+        },
+        {
+          "name": "escrow",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "dead_recovery_mask",
+          "type": "u32"
+        }
+      ]
     },
     {
       "name": "destroy_lowest_rarity_item_with_session",
@@ -2059,121 +2194,11 @@
           }
         },
         {
-          "name": "equipment_revision_authority",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  101,
-                  113,
-                  117,
-                  105,
-                  112,
-                  109,
-                  101,
-                  110,
-                  116,
-                  95,
-                  114,
-                  101,
-                  118,
-                  105,
-                  115,
-                  105,
-                  111,
-                  110,
-                  95,
-                  97,
-                  117,
-                  116,
-                  104,
-                  111,
-                  114,
-                  105,
-                  116,
-                  121
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              }
-            ]
-          }
-        },
-        {
           "name": "session"
         },
         {
           "name": "escrow",
           "writable": true
-        },
-        {
-          "name": "tag_registry",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  116,
-                  97,
-                  103,
-                  95,
-                  114,
-                  101,
-                  103,
-                  105,
-                  115,
-                  116,
-                  114,
-                  121
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              }
-            ],
-            "program": {
-              "kind": "const",
-              "value": [
-                244,
-                99,
-                151,
-                237,
-                47,
-                11,
-                136,
-                173,
-                73,
-                183,
-                102,
-                123,
-                244,
-                101,
-                159,
-                248,
-                89,
-                209,
-                187,
-                253,
-                59,
-                44,
-                154,
-                132,
-                61,
-                253,
-                93,
-                11,
-                202,
-                2,
-                101,
-                78
-              ]
-            }
-          }
         },
         {
           "name": "item_account",
@@ -2208,10 +2233,6 @@
               }
             ]
           }
-        },
-        {
-          "name": "game_content_program",
-          "address": "HSzZSCzCN5NX7YiGeX9mkmj2jag6f9i8uhwo61VCf429"
         }
       ],
       "args": []
@@ -3057,10 +3078,9 @@
         {
           "name": "current_owner",
           "docs": [
-            "Current owner of the item"
-          ],
-          "writable": true,
-          "signer": true
+            "The Player transfer capability proves both durable wallet approvals;",
+            "this wallet does not have to sign again when the other party settles."
+          ]
         },
         {
           "name": "universe",
@@ -3249,6 +3269,185 @@
         {
           "name": "new_owner",
           "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "transfer_items_ownership",
+      "docs": [
+        "Transfer a bounded, ordered trade in one CPI. Player proves the exact",
+        "approved offer; Items independently checks every identity and claim."
+      ],
+      "discriminator": [
+        141,
+        50,
+        24,
+        58,
+        167,
+        163,
+        65,
+        231
+      ],
+      "accounts": [
+        {
+          "name": "initiator",
+          "docs": [
+            "canonical Player capability proves the stored wallet approvals."
+          ]
+        },
+        {
+          "name": "counterparty"
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "transfer_authority",
+          "signer": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  97,
+                  100,
+                  101,
+                  95,
+                  116,
+                  114,
+                  97,
+                  110,
+                  115,
+                  102,
+                  101,
+                  114,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "initiator_count",
+          "type": "u8"
         }
       ]
     },
@@ -3586,6 +3785,46 @@
       "code": 6021,
       "name": "InvalidRentPayer",
       "msg": "Only the wallet that funded a no-drop account may reclaim its rent"
+    },
+    {
+      "code": 6022,
+      "name": "InvalidCleanupCount",
+      "msg": "Item cleanup requires between 1 and 32 accounts"
+    },
+    {
+      "code": 6023,
+      "name": "DuplicateCleanupItem",
+      "msg": "Item cleanup contains a duplicate account"
+    },
+    {
+      "code": 6024,
+      "name": "CleanupItemMustBeWritable",
+      "msg": "Every cleanup target must be writable"
+    },
+    {
+      "code": 6025,
+      "name": "InvalidDeadRecoveryMask",
+      "msg": "Dead recovery mask contains bits outside the cleanup targets"
+    },
+    {
+      "code": 6026,
+      "name": "InvalidItemAddress",
+      "msg": "Item account is not its canonical PDA"
+    },
+    {
+      "code": 6027,
+      "name": "InvalidTradeTransferCount",
+      "msg": "Trade transfer requires 1 to 16 items and at most 8 items per side"
+    },
+    {
+      "code": 6028,
+      "name": "DuplicateTradeTransferItem",
+      "msg": "Trade transfer contains a duplicate item"
+    },
+    {
+      "code": 6029,
+      "name": "TradeTransferItemMustBeWritable",
+      "msg": "Every trade transfer item must be writable"
     }
   ],
   "types": [
@@ -4040,6 +4279,19 @@
               "defined": {
                 "name": "TagSetV1"
               }
+            }
+          },
+          {
+            "name": "seed",
+            "docs": [
+              "Fixed entropy supplied by the authorized reward issuer. Item creation",
+              "must not mix in the claim slot, payer, or caller-chosen item address."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
             }
           }
         ]

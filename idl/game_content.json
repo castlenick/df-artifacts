@@ -331,6 +331,10 @@
       ],
       "args": [
         {
+          "name": "expected_start",
+          "type": "u16"
+        },
+        {
           "name": "rules",
           "type": {
             "vec": {
@@ -1759,6 +1763,214 @@
         }
       ],
       "args": []
+    },
+    {
+      "name": "replace_class_definition",
+      "docs": [
+        "Atomically replaces stats, every action and authored tags after a digest CAS."
+      ],
+      "discriminator": [
+        2,
+        3,
+        156,
+        78,
+        247,
+        221,
+        152,
+        78
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "class_config",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "expected_digest",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "definition",
+          "type": {
+            "defined": {
+              "name": "ClassDefinition"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "replace_item_type_definition",
+      "docs": [
+        "Atomically replaces one item type, including its optional action and tags."
+      ],
+      "discriminator": [
+        247,
+        18,
+        225,
+        105,
+        224,
+        239,
+        215,
+        57
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_registry",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "item_type_config",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "expected_digest",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "definition",
+          "type": {
+            "defined": {
+              "name": "ItemTypeDefinition"
+            }
+          }
+        }
+      ]
     },
     {
       "name": "seal_tag_rulebook",
@@ -3574,6 +3786,21 @@
       "code": 6028,
       "name": "EquipmentContentRevisionOverflow",
       "msg": "Equipment content revision cannot advance further"
+    },
+    {
+      "code": 6029,
+      "name": "UnexpectedTagRuleOffset",
+      "msg": "Rule chunk does not start at the current draft offset"
+    },
+    {
+      "code": 6030,
+      "name": "ConflictingTagRuleChunk",
+      "msg": "Rule chunk conflicts with content already stored at this offset"
+    },
+    {
+      "code": 6031,
+      "name": "ContentDefinitionConflict",
+      "msg": "Definition changed since review; reload before replacing it"
     }
   ],
   "types": [
@@ -3724,6 +3951,67 @@
           {
             "name": "bump",
             "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ClassDefinition",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "base_health",
+            "type": "i16"
+          },
+          {
+            "name": "base_attack",
+            "type": "i16"
+          },
+          {
+            "name": "base_defense",
+            "type": "i16"
+          },
+          {
+            "name": "health_per_level",
+            "type": "i16"
+          },
+          {
+            "name": "attack_per_level",
+            "type": "i16"
+          },
+          {
+            "name": "defense_per_level",
+            "type": "i16"
+          },
+          {
+            "name": "default_actions",
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "ActionConfig"
+                  }
+                },
+                5
+              ]
+            }
+          },
+          {
+            "name": "tags",
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
           }
         ]
       }
@@ -4071,6 +4359,70 @@
           {
             "name": "bump",
             "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ItemTypeDefinition",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "base_damage",
+            "type": "u8"
+          },
+          {
+            "name": "base_defense",
+            "type": "u8"
+          },
+          {
+            "name": "base_attack_speed",
+            "type": "u8"
+          },
+          {
+            "name": "rarity_damage_multipliers",
+            "type": {
+              "array": [
+                "u8",
+                5
+              ]
+            }
+          },
+          {
+            "name": "rarity_defense_multipliers",
+            "type": {
+              "array": [
+                "u8",
+                5
+              ]
+            }
+          },
+          {
+            "name": "granted_action",
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "ActionConfig"
+                }
+              }
+            }
+          },
+          {
+            "name": "tags",
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
           }
         ]
       }

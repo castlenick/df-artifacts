@@ -1284,105 +1284,6 @@
       "args": []
     },
     {
-      "name": "close_combat_scenario_effects",
-      "discriminator": [
-        175,
-        90,
-        87,
-        197,
-        49,
-        104,
-        142,
-        17
-      ],
-      "accounts": [
-        {
-          "name": "authority",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "universe"
-        },
-        {
-          "name": "config",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  100,
-                  117,
-                  110,
-                  103,
-                  101,
-                  111,
-                  110,
-                  95,
-                  99,
-                  111,
-                  110,
-                  102,
-                  105,
-                  103
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              }
-            ]
-          }
-        },
-        {
-          "name": "scenario_effects",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  99,
-                  111,
-                  109,
-                  98,
-                  97,
-                  116,
-                  95,
-                  115,
-                  99,
-                  101,
-                  110,
-                  97,
-                  114,
-                  105,
-                  111,
-                  95,
-                  101,
-                  102,
-                  102,
-                  101,
-                  99,
-                  116,
-                  115
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              },
-              {
-                "kind": "account",
-                "path": "scenario_effects.scenario",
-                "account": "CombatScenarioEffects"
-              }
-            ]
-          }
-        }
-      ],
-      "args": []
-    },
-    {
       "name": "close_combat_scenario_log",
       "discriminator": [
         210,
@@ -1434,159 +1335,8 @@
           }
         },
         {
-          "name": "scenario",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  99,
-                  111,
-                  109,
-                  98,
-                  97,
-                  116,
-                  95,
-                  115,
-                  99,
-                  101,
-                  110,
-                  97,
-                  114,
-                  105,
-                  111
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              },
-              {
-                "kind": "account",
-                "path": "scenario.creator",
-                "account": "CombatScenario"
-              },
-              {
-                "kind": "account",
-                "path": "scenario.name",
-                "account": "CombatScenario"
-              }
-            ]
-          }
-        },
-        {
           "name": "scenario_log",
           "writable": true
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "close_combat_scenario_log_v2",
-      "discriminator": [
-        241,
-        212,
-        60,
-        72,
-        44,
-        130,
-        119,
-        77
-      ],
-      "accounts": [
-        {
-          "name": "authority",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "universe"
-        },
-        {
-          "name": "config",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  100,
-                  117,
-                  110,
-                  103,
-                  101,
-                  111,
-                  110,
-                  95,
-                  99,
-                  111,
-                  110,
-                  102,
-                  105,
-                  103
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              }
-            ]
-          }
-        },
-        {
-          "name": "scenario_log",
-          "writable": true
-        },
-        {
-          "name": "effect_snapshot",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  99,
-                  111,
-                  109,
-                  98,
-                  97,
-                  116,
-                  95,
-                  115,
-                  99,
-                  101,
-                  110,
-                  97,
-                  114,
-                  105,
-                  111,
-                  95,
-                  101,
-                  102,
-                  102,
-                  101,
-                  99,
-                  116,
-                  95,
-                  115,
-                  110,
-                  97,
-                  112,
-                  115,
-                  104,
-                  111,
-                  116
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              },
-              {
-                "kind": "account",
-                "path": "scenario_log"
-              }
-            ]
-          }
         }
       ],
       "args": []
@@ -8584,344 +8334,6 @@
       ]
     },
     {
-      "name": "run_combat_scenario_mutating_v2",
-      "discriminator": [
-        113,
-        55,
-        130,
-        12,
-        140,
-        78,
-        141,
-        42
-      ],
-      "accounts": [
-        {
-          "name": "authority",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "owner",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "universe"
-        },
-        {
-          "name": "config",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  100,
-                  117,
-                  110,
-                  103,
-                  101,
-                  111,
-                  110,
-                  95,
-                  99,
-                  111,
-                  110,
-                  102,
-                  105,
-                  103
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              }
-            ]
-          }
-        },
-        {
-          "name": "scenario",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  99,
-                  111,
-                  109,
-                  98,
-                  97,
-                  116,
-                  95,
-                  115,
-                  99,
-                  101,
-                  110,
-                  97,
-                  114,
-                  105,
-                  111
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              },
-              {
-                "kind": "account",
-                "path": "scenario.creator",
-                "account": "CombatScenario"
-              },
-              {
-                "kind": "account",
-                "path": "scenario.name",
-                "account": "CombatScenario"
-              }
-            ]
-          }
-        },
-        {
-          "name": "scenario_effects",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  99,
-                  111,
-                  109,
-                  98,
-                  97,
-                  116,
-                  95,
-                  115,
-                  99,
-                  101,
-                  110,
-                  97,
-                  114,
-                  105,
-                  111,
-                  95,
-                  101,
-                  102,
-                  102,
-                  101,
-                  99,
-                  116,
-                  115
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              },
-              {
-                "kind": "account",
-                "path": "scenario"
-              }
-            ]
-          }
-        },
-        {
-          "name": "player",
-          "writable": true
-        },
-        {
-          "name": "inventory",
-          "docs": [
-            "deserializing its unbounded item vec in the dungeon program."
-          ],
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  105,
-                  110,
-                  118,
-                  101,
-                  110,
-                  116,
-                  111,
-                  114,
-                  121
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              },
-              {
-                "kind": "account",
-                "path": "owner"
-              }
-            ],
-            "program": {
-              "kind": "const",
-              "value": [
-                106,
-                94,
-                70,
-                91,
-                61,
-                67,
-                239,
-                217,
-                47,
-                89,
-                155,
-                232,
-                183,
-                28,
-                35,
-                238,
-                121,
-                209,
-                143,
-                153,
-                236,
-                201,
-                92,
-                194,
-                161,
-                147,
-                124,
-                8,
-                100,
-                188,
-                234,
-                24
-              ]
-            }
-          }
-        },
-        {
-          "name": "scenario_log",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "effect_snapshot",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  99,
-                  111,
-                  109,
-                  98,
-                  97,
-                  116,
-                  95,
-                  115,
-                  99,
-                  101,
-                  110,
-                  97,
-                  114,
-                  105,
-                  111,
-                  95,
-                  101,
-                  102,
-                  102,
-                  101,
-                  99,
-                  116,
-                  95,
-                  115,
-                  110,
-                  97,
-                  112,
-                  115,
-                  104,
-                  111,
-                  116
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              },
-              {
-                "kind": "account",
-                "path": "scenario_log"
-              }
-            ]
-          }
-        },
-        {
-          "name": "player_stats_authority",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  100,
-                  117,
-                  110,
-                  103,
-                  101,
-                  111,
-                  110,
-                  95,
-                  112,
-                  108,
-                  97,
-                  121,
-                  101,
-                  114,
-                  95,
-                  115,
-                  116,
-                  97,
-                  116,
-                  115,
-                  95,
-                  97,
-                  117,
-                  116,
-                  104,
-                  111,
-                  114,
-                  105,
-                  116,
-                  121
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              }
-            ]
-          }
-        },
-        {
-          "name": "player_program",
-          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": [
-        {
-          "name": "seed_slot_bytes",
-          "type": {
-            "array": [
-              "u8",
-              8
-            ]
-          }
-        }
-      ]
-    },
-    {
       "name": "run_combat_scenario_preview",
       "discriminator": [
         205,
@@ -9020,222 +8432,6 @@
           "name": "scenario_log",
           "writable": true,
           "signer": true
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": [
-        {
-          "name": "seed_slot_bytes",
-          "type": {
-            "array": [
-              "u8",
-              8
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "name": "run_combat_scenario_preview_v2",
-      "docs": [
-        "Run a deterministic preview with a reusable scoped-effect fixture and",
-        "snapshot both the entering and surviving ledgers for later inspection."
-      ],
-      "discriminator": [
-        108,
-        32,
-        222,
-        12,
-        120,
-        8,
-        101,
-        216
-      ],
-      "accounts": [
-        {
-          "name": "authority",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "universe"
-        },
-        {
-          "name": "config",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  100,
-                  117,
-                  110,
-                  103,
-                  101,
-                  111,
-                  110,
-                  95,
-                  99,
-                  111,
-                  110,
-                  102,
-                  105,
-                  103
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              }
-            ]
-          }
-        },
-        {
-          "name": "scenario",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  99,
-                  111,
-                  109,
-                  98,
-                  97,
-                  116,
-                  95,
-                  115,
-                  99,
-                  101,
-                  110,
-                  97,
-                  114,
-                  105,
-                  111
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              },
-              {
-                "kind": "account",
-                "path": "scenario.creator",
-                "account": "CombatScenario"
-              },
-              {
-                "kind": "account",
-                "path": "scenario.name",
-                "account": "CombatScenario"
-              }
-            ]
-          }
-        },
-        {
-          "name": "scenario_effects",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  99,
-                  111,
-                  109,
-                  98,
-                  97,
-                  116,
-                  95,
-                  115,
-                  99,
-                  101,
-                  110,
-                  97,
-                  114,
-                  105,
-                  111,
-                  95,
-                  101,
-                  102,
-                  102,
-                  101,
-                  99,
-                  116,
-                  115
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              },
-              {
-                "kind": "account",
-                "path": "scenario"
-              }
-            ]
-          }
-        },
-        {
-          "name": "player"
-        },
-        {
-          "name": "scenario_log",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "effect_snapshot",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  99,
-                  111,
-                  109,
-                  98,
-                  97,
-                  116,
-                  95,
-                  115,
-                  99,
-                  101,
-                  110,
-                  97,
-                  114,
-                  105,
-                  111,
-                  95,
-                  101,
-                  102,
-                  102,
-                  101,
-                  99,
-                  116,
-                  95,
-                  115,
-                  110,
-                  97,
-                  112,
-                  115,
-                  104,
-                  111,
-                  116
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              },
-              {
-                "kind": "account",
-                "path": "scenario_log"
-              }
-            ]
-          }
         },
         {
           "name": "system_program",
@@ -9970,162 +9166,6 @@
           }
         }
       ]
-    },
-    {
-      "name": "upsert_combat_scenario_effects",
-      "docs": [
-        "Create or replace the optional phase-aware effect fixture associated",
-        "with a combat scenario."
-      ],
-      "discriminator": [
-        237,
-        43,
-        226,
-        39,
-        142,
-        171,
-        205,
-        17
-      ],
-      "accounts": [
-        {
-          "name": "authority",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "universe"
-        },
-        {
-          "name": "config",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  100,
-                  117,
-                  110,
-                  103,
-                  101,
-                  111,
-                  110,
-                  95,
-                  99,
-                  111,
-                  110,
-                  102,
-                  105,
-                  103
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              }
-            ]
-          }
-        },
-        {
-          "name": "scenario",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  99,
-                  111,
-                  109,
-                  98,
-                  97,
-                  116,
-                  95,
-                  115,
-                  99,
-                  101,
-                  110,
-                  97,
-                  114,
-                  105,
-                  111
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              },
-              {
-                "kind": "account",
-                "path": "scenario.creator",
-                "account": "CombatScenario"
-              },
-              {
-                "kind": "account",
-                "path": "scenario.name",
-                "account": "CombatScenario"
-              }
-            ]
-          }
-        },
-        {
-          "name": "scenario_effects",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  99,
-                  111,
-                  109,
-                  98,
-                  97,
-                  116,
-                  95,
-                  115,
-                  99,
-                  101,
-                  110,
-                  97,
-                  114,
-                  105,
-                  111,
-                  95,
-                  101,
-                  102,
-                  102,
-                  101,
-                  99,
-                  116,
-                  115
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "universe"
-              },
-              {
-                "kind": "account",
-                "path": "scenario"
-              }
-            ]
-          }
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": [
-        {
-          "name": "input",
-          "type": {
-            "defined": {
-              "name": "CombatScenarioEffectsInput"
-            }
-          }
-        }
-      ]
     }
   ],
   "accounts": [
@@ -10153,32 +9193,6 @@
         220,
         37,
         198
-      ]
-    },
-    {
-      "name": "CombatScenarioEffectSnapshot",
-      "discriminator": [
-        125,
-        104,
-        244,
-        246,
-        244,
-        194,
-        239,
-        17
-      ]
-    },
-    {
-      "name": "CombatScenarioEffects",
-      "discriminator": [
-        108,
-        205,
-        15,
-        79,
-        184,
-        235,
-        247,
-        20
       ]
     },
     {
@@ -10708,11 +9722,6 @@
       "code": 6060,
       "name": "InvalidScenarioEffect",
       "msg": "Invalid scoped effect in combat scenario fixture"
-    },
-    {
-      "code": 6061,
-      "name": "ScenarioEffectSnapshotRequired",
-      "msg": "Scoped scenario logs must be closed with their effect snapshot"
     }
   ],
   "types": [
@@ -11355,103 +10364,14 @@
           {
             "name": "bump",
             "type": "u8"
-          }
-        ]
-      }
-    },
-    {
-      "name": "CombatScenarioEffectSnapshot",
-      "docs": [
-        "Immutable effect inputs and surviving state for one V2 scenario log."
-      ],
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "universe",
-            "type": "pubkey"
           },
           {
-            "name": "creator",
-            "docs": [
-              "Immutable provenance of the administrator who created this run snapshot."
-            ],
-            "type": "pubkey"
-          },
-          {
-            "name": "scenario",
-            "type": "pubkey"
-          },
-          {
-            "name": "scenario_log",
-            "type": "pubkey"
-          },
-          {
-            "name": "schema_version",
-            "type": "u8"
-          },
-          {
-            "name": "initial_state",
+            "name": "initial_effects",
             "type": {
               "defined": {
                 "name": "ScenarioEffectState"
               }
             }
-          },
-          {
-            "name": "remaining_state",
-            "type": {
-              "defined": {
-                "name": "ScenarioEffectState"
-              }
-            }
-          },
-          {
-            "name": "bump",
-            "type": "u8"
-          }
-        ]
-      }
-    },
-    {
-      "name": "CombatScenarioEffects",
-      "docs": [
-        "Optional phase-aware fixture for a CombatScenario. This companion account",
-        "keeps reusable effect state independent from the core scenario definition."
-      ],
-      "type": {
-        "kind": "struct",
-        "fields": [
-          {
-            "name": "universe",
-            "type": "pubkey"
-          },
-          {
-            "name": "creator",
-            "docs": [
-              "Immutable provenance inherited from the parent scenario creator."
-            ],
-            "type": "pubkey"
-          },
-          {
-            "name": "scenario",
-            "type": "pubkey"
-          },
-          {
-            "name": "schema_version",
-            "type": "u8"
-          },
-          {
-            "name": "state",
-            "type": {
-              "defined": {
-                "name": "ScenarioEffectState"
-              }
-            }
-          },
-          {
-            "name": "bump",
-            "type": "u8"
           }
         ]
       }
@@ -11619,6 +10539,14 @@
                 4
               ]
             }
+          },
+          {
+            "name": "initial_effects",
+            "type": {
+              "defined": {
+                "name": "CombatScenarioEffectsInput"
+              }
+            }
           }
         ]
       }
@@ -11775,6 +10703,22 @@
                 "defined": {
                   "name": "BattleEvent"
                 }
+              }
+            }
+          },
+          {
+            "name": "initial_effects",
+            "type": {
+              "defined": {
+                "name": "ScenarioEffectState"
+              }
+            }
+          },
+          {
+            "name": "remaining_effects",
+            "type": {
+              "defined": {
+                "name": "ScenarioEffectState"
               }
             }
           }
@@ -12214,6 +11158,19 @@
               "defined": {
                 "name": "TagSetV1"
               }
+            }
+          },
+          {
+            "name": "loot_seed",
+            "docs": [
+              "Completion reward entropy fixed from the final committed battle. Claims",
+              "materialize this outcome without adding transaction-time randomness."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
             }
           },
           {

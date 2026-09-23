@@ -2447,6 +2447,277 @@
       ]
     },
     {
+      "name": "fund_battle_commit_from_escrow",
+      "docs": [
+        "Move an active session's completion budget directly into its locked",
+        "Dungeon commitment. It never passes through the spendable session key."
+      ],
+      "discriminator": [
+        88,
+        6,
+        67,
+        173,
+        100,
+        251,
+        220,
+        248
+      ],
+      "accounts": [
+        {
+          "name": "universe"
+        },
+        {
+          "name": "owner",
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "session_signer",
+          "signer": true
+        },
+        {
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "dungeon_run",
+          "docs": [
+            "separately validates the run's player and committed room before funding."
+          ]
+        },
+        {
+          "name": "battle_commit",
+          "docs": [
+            "exact battle lock can receive the reserved escrow funds."
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  97,
+                  116,
+                  116,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  109,
+                  109,
+                  105,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "dungeon_run"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                239,
+                186,
+                156,
+                99,
+                237,
+                143,
+                147,
+                198,
+                55,
+                94,
+                9,
+                41,
+                190,
+                110,
+                104,
+                87,
+                247,
+                155,
+                143,
+                2,
+                79,
+                45,
+                189,
+                129,
+                127,
+                122,
+                32,
+                60,
+                112,
+                172,
+                222,
+                100
+              ]
+            }
+          }
+        },
+        {
+          "name": "player_stats_authority",
+          "signer": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  115,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                239,
+                186,
+                156,
+                99,
+                237,
+                143,
+                147,
+                198,
+                55,
+                94,
+                9,
+                41,
+                190,
+                110,
+                104,
+                87,
+                247,
+                155,
+                143,
+                2,
+                79,
+                45,
+                189,
+                129,
+                127,
+                122,
+                32,
+                60,
+                112,
+                172,
+                222,
+                100
+              ]
+            }
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
       "name": "fund_session_from_escrow",
       "docs": [
         "Fund a session keypair from the escrow",
@@ -5424,6 +5695,146 @@
             "defined": {
               "name": "TagSetV1"
             }
+          }
+        }
+      ]
+    },
+    {
+      "name": "settle_committed_battle",
+      "docs": [
+        "Complete a battle that was already authorized and locked. The canonical",
+        "Dungeon capability supplies the result; no live session or wallet",
+        "signature is needed to release this exact commitment's lock."
+      ],
+      "discriminator": [
+        61,
+        100,
+        3,
+        172,
+        74,
+        38,
+        231,
+        36
+      ],
+      "accounts": [
+        {
+          "name": "universe"
+        },
+        {
+          "name": "owner",
+          "docs": [
+            "renewed wallet authorization after this battle has been committed."
+          ],
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "player_stats_authority",
+          "docs": [
+            "Only Dungeon can sign this capability. It verifies the frozen battle",
+            "inputs and computes the outcome before crossing this completion boundary."
+          ],
+          "signer": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  115,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                239,
+                186,
+                156,
+                99,
+                237,
+                143,
+                147,
+                198,
+                55,
+                94,
+                9,
+                41,
+                190,
+                110,
+                104,
+                87,
+                247,
+                155,
+                143,
+                2,
+                79,
+                45,
+                189,
+                129,
+                127,
+                122,
+                32,
+                60,
+                112,
+                172,
+                222,
+                100
+              ]
+            }
+          }
+        },
+        {
+          "name": "player",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "battle_commit",
+          "type": "pubkey"
+        },
+        {
+          "name": "health",
+          "type": "i16"
+        },
+        {
+          "name": "experience",
+          "type": {
+            "option": "u64"
           }
         }
       ]

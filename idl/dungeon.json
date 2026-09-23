@@ -199,6 +199,84 @@
       "args": []
     },
     {
+      "name": "anchor_funded_battle",
+      "docs": [
+        "Save the seed and reimburse the first successful submitter from the reserve."
+      ],
+      "discriminator": [
+        57,
+        20,
+        22,
+        34,
+        103,
+        39,
+        94,
+        113
+      ],
+      "accounts": [
+        {
+          "name": "universe"
+        },
+        {
+          "name": "payer",
+          "docs": [
+            "Anyone can call this ix — payer just covers the tx fee. No state-creation rent."
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "battle_commit",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  97,
+                  116,
+                  116,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  109,
+                  109,
+                  105,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "battle_commit.dungeon_run",
+                "account": "BattleCommit"
+              }
+            ]
+          }
+        },
+        {
+          "name": "slot_hashes"
+        }
+      ],
+      "args": [
+        {
+          "name": "commitment_id",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
       "name": "claim_dungeon_loot",
       "docs": [
         "Claim a single item from dungeon loot (call multiple times for multiple items)"
@@ -1877,6 +1955,44 @@
         {
           "name": "player_dungeon",
           "writable": true
+        },
+        {
+          "name": "dungeon_run",
+          "docs": [
+            "and terminal status are checked before the instance can be closed."
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
         }
       ],
       "args": []
@@ -2053,6 +2169,44 @@
         {
           "name": "player_dungeon",
           "writable": true
+        },
+        {
+          "name": "dungeon_run",
+          "docs": [
+            "and terminal status are checked before the instance can be closed."
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
         }
       ],
       "args": []
@@ -8767,6 +8921,388 @@
       ]
     },
     {
+      "name": "settle_funded_battle",
+      "docs": [
+        "Completion authority comes from the immutable commitment, not a live session.",
+        "Outcome, capped reimbursement and refund all commit or roll back together."
+      ],
+      "discriminator": [
+        114,
+        176,
+        30,
+        109,
+        90,
+        196,
+        160,
+        197
+      ],
+      "accounts": [
+        {
+          "name": "universe"
+        },
+        {
+          "name": "resolver",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "owner",
+          "writable": true
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "player_dungeon"
+        },
+        {
+          "name": "dungeon_run",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  114,
+                  117,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "player_dungeon"
+              }
+            ]
+          }
+        },
+        {
+          "name": "inventory",
+          "docs": [
+            "An unequipped player does not require an empty inventory to stay open."
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
+        },
+        {
+          "name": "room_log",
+          "writable": true
+        },
+        {
+          "name": "battle_commit",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  97,
+                  116,
+                  116,
+                  108,
+                  101,
+                  95,
+                  99,
+                  111,
+                  109,
+                  109,
+                  105,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "dungeon_run"
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "player_stats_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  115,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player_program",
+          "address": "8ADbQBviyywrcZyWzVUFTvdxzRzkZcNRmt4UbFXKWMZZ"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "commitment_id",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        }
+      ]
+    },
+    {
       "name": "start_dungeon_run",
       "docs": [
         "Start a new dungeon run (only owner of the player dungeon can run it)"
@@ -9722,6 +10258,41 @@
       "code": 6060,
       "name": "InvalidScenarioEffect",
       "msg": "Invalid scoped effect in combat scenario fixture"
+    },
+    {
+      "code": 6061,
+      "name": "RoomAlreadyCompleted",
+      "msg": "The current room has already been completed; continue before committing another battle"
+    },
+    {
+      "code": 6062,
+      "name": "BattleLogPending",
+      "msg": "A pending battle log cannot be closed while its dungeon run is in progress"
+    },
+    {
+      "code": 6063,
+      "name": "InvalidBattleLog",
+      "msg": "Battle log must be unfinished and belong to the committed room and dungeon run"
+    },
+    {
+      "code": 6064,
+      "name": "InvalidDungeonRun",
+      "msg": "The canonical dungeon run account is invalid"
+    },
+    {
+      "code": 6065,
+      "name": "InvalidBattleFunding",
+      "msg": "Invalid or unsupported battle funding record"
+    },
+    {
+      "code": 6066,
+      "name": "FundedBattleRequiresSettlement",
+      "msg": "Funded battles must use settle_funded_battle"
+    },
+    {
+      "code": 6067,
+      "name": "InsufficientBattleReserve",
+      "msg": "Battle completion reserve is insufficient"
     }
   ],
   "types": [

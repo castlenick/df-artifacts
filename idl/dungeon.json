@@ -2530,10 +2530,80 @@
           "writable": true
         },
         {
+          "name": "player_skills",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  115,
+                  107,
+                  105,
+                  108,
+                  108,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
+        },
+        {
+          "name": "skill_tree"
+        },
+        {
           "name": "player_dungeon"
         },
         {
           "name": "dungeon_run",
+          "writable": true,
           "pda": {
             "seeds": [
               {
@@ -2895,10 +2965,80 @@
           "writable": true
         },
         {
+          "name": "player_skills",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  115,
+                  107,
+                  105,
+                  108,
+                  108,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
+        },
+        {
+          "name": "skill_tree"
+        },
+        {
           "name": "player_dungeon"
         },
         {
           "name": "dungeon_run",
+          "writable": true,
           "pda": {
             "seeds": [
               {
@@ -3339,10 +3479,80 @@
           "writable": true
         },
         {
+          "name": "player_skills",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  115,
+                  107,
+                  105,
+                  108,
+                  108,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
+        },
+        {
+          "name": "skill_tree"
+        },
+        {
           "name": "player_dungeon"
         },
         {
           "name": "dungeon_run",
+          "writable": true,
           "pda": {
             "seeds": [
               {
@@ -10545,6 +10755,19 @@
               {
                 "name": "duration",
                 "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "Skill",
+            "fields": [
+              {
+                "name": "kind",
+                "type": "u8"
+              },
+              {
+                "name": "amount",
+                "type": "i16"
               }
             ]
           }

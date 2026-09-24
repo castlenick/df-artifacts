@@ -1223,6 +1223,101 @@
       ]
     },
     {
+      "name": "create_skill_tree",
+      "discriminator": [
+        148,
+        213,
+        204,
+        123,
+        157,
+        93,
+        165,
+        182
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "skill_tree",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "class_id",
+          "type": "u8"
+        },
+        {
+          "name": "version",
+          "type": "u32"
+        },
+        {
+          "name": "name",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "material_tags",
+          "type": {
+            "array": [
+              "u16",
+              3
+            ]
+          }
+        },
+        {
+          "name": "quality_tags",
+          "type": {
+            "array": [
+              "u16",
+              3
+            ]
+          }
+        }
+      ]
+    },
+    {
       "name": "create_tag_rulebook",
       "docs": [
         "Starts authoring exactly the next rulebook version in the active lineage."
@@ -1340,6 +1435,77 @@
         }
       ],
       "args": [
+        {
+          "name": "version",
+          "type": "u32"
+        }
+      ]
+    },
+    {
+      "name": "initialize_default_skill_tree",
+      "docs": [
+        "Explicitly publishes the CSV defaults for one class in this Universe."
+      ],
+      "discriminator": [
+        184,
+        159,
+        44,
+        72,
+        110,
+        18,
+        123,
+        26
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "skill_tree",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "class_id",
+          "type": "u8"
+        },
         {
           "name": "version",
           "type": "u32"
@@ -1971,6 +2137,60 @@
           }
         }
       ]
+    },
+    {
+      "name": "seal_skill_tree",
+      "discriminator": [
+        195,
+        141,
+        39,
+        241,
+        253,
+        42,
+        48,
+        109
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "skill_tree",
+          "writable": true
+        }
+      ],
+      "args": []
     },
     {
       "name": "seal_tag_rulebook",
@@ -3494,6 +3714,69 @@
           }
         }
       ]
+    },
+    {
+      "name": "write_skill_node",
+      "discriminator": [
+        250,
+        123,
+        244,
+        248,
+        139,
+        248,
+        129,
+        105
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "skill_tree",
+          "writable": true
+        }
+      ],
+      "args": [
+        {
+          "name": "node",
+          "type": {
+            "defined": {
+              "name": "SkillNodeDefinition"
+            }
+          }
+        }
+      ]
     }
   ],
   "accounts": [
@@ -3573,6 +3856,19 @@
         218,
         99,
         139
+      ]
+    },
+    {
+      "name": "SkillTreeDefinition",
+      "discriminator": [
+        128,
+        79,
+        234,
+        104,
+        120,
+        235,
+        135,
+        150
       ]
     },
     {
@@ -3801,6 +4097,41 @@
       "code": 6031,
       "name": "ContentDefinitionConflict",
       "msg": "Definition changed since review; reload before replacing it"
+    },
+    {
+      "code": 7000,
+      "name": "InvalidTree",
+      "msg": "Skill tree is malformed or belongs to another Universe, class, or version"
+    },
+    {
+      "code": 7001,
+      "name": "InvalidNode",
+      "msg": "Skill definition is malformed"
+    },
+    {
+      "code": 7002,
+      "name": "InvalidPrerequisites",
+      "msg": "Skill prerequisites must reference earlier nodes and form a valid progression"
+    },
+    {
+      "code": 7003,
+      "name": "InvalidText",
+      "msg": "Skill names and descriptions must be valid bounded UTF-8 text"
+    },
+    {
+      "code": 7004,
+      "name": "DuplicateNode",
+      "msg": "Skill node keys must be unique within a tree"
+    },
+    {
+      "code": 7005,
+      "name": "TreeSealed",
+      "msg": "A sealed skill tree cannot be changed"
+    },
+    {
+      "code": 7006,
+      "name": "TreeNotSealed",
+      "msg": "Publish this skill tree before using it"
     }
   ],
   "types": [
@@ -4423,6 +4754,166 @@
           {
             "name": "enabled",
             "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkillNodeDefinition",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "u8"
+          },
+          {
+            "name": "key",
+            "type": {
+              "array": [
+                "u8",
+                24
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "description",
+            "type": {
+              "array": [
+                "u8",
+                128
+              ]
+            }
+          },
+          {
+            "name": "branch",
+            "type": {
+              "array": [
+                "u8",
+                20
+              ]
+            }
+          },
+          {
+            "name": "cost",
+            "type": "u8"
+          },
+          {
+            "name": "tier",
+            "type": "u8"
+          },
+          {
+            "name": "min_level",
+            "type": "u8"
+          },
+          {
+            "name": "prerequisites",
+            "docs": [
+              "Bitset of required node IDs. Every bit must already be learned."
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "effect_kind",
+            "type": "u8"
+          },
+          {
+            "name": "effect_amount",
+            "type": "i16"
+          },
+          {
+            "name": "active",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkillTreeDefinition",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
+            "name": "class_id",
+            "type": "u8"
+          },
+          {
+            "name": "version",
+            "type": "u32"
+          },
+          {
+            "name": "name",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "material_tags",
+            "type": {
+              "array": [
+                "u16",
+                3
+              ]
+            }
+          },
+          {
+            "name": "quality_tags",
+            "docs": [
+              "Zero padding is permitted after the last quality (Wizard currently has two)."
+            ],
+            "type": {
+              "array": [
+                "u16",
+                3
+              ]
+            }
+          },
+          {
+            "name": "node_count",
+            "type": "u8"
+          },
+          {
+            "name": "nodes",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "SkillNodeDefinition"
+                }
+              }
+            }
+          },
+          {
+            "name": "sealed",
+            "type": "bool"
+          },
+          {
+            "name": "digest",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
           }
         ]
       }

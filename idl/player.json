@@ -398,6 +398,36 @@
         {
           "name": "player",
           "writable": true
+        },
+        {
+          "name": "player_skills",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  115,
+                  107,
+                  105,
+                  108,
+                  108,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
         }
       ],
       "args": []
@@ -1387,9 +1417,6 @@
     },
     {
       "name": "create_player",
-      "docs": [
-        "Create a player from the canonical enabled on-chain ClassConfig."
-      ],
       "discriminator": [
         19,
         178,
@@ -2382,6 +2409,194 @@
       ]
     },
     {
+      "name": "equip_skill_action",
+      "discriminator": [
+        248,
+        155,
+        1,
+        27,
+        188,
+        140,
+        160,
+        195
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "skill_tree"
+        },
+        {
+          "name": "player_skills",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  115,
+                  107,
+                  105,
+                  108,
+                  108,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "node_id",
+          "type": "u8"
+        },
+        {
+          "name": "slot",
+          "type": "u8"
+        },
+        {
+          "name": "enabled",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "equip_skill_action_with_session",
+      "discriminator": [
+        100,
+        240,
+        121,
+        168,
+        101,
+        179,
+        243,
+        46
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "skill_tree"
+        },
+        {
+          "name": "player_skills",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  115,
+                  107,
+                  105,
+                  108,
+                  108,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "node_id",
+          "type": "u8"
+        },
+        {
+          "name": "slot",
+          "type": "u8"
+        },
+        {
+          "name": "enabled",
+          "type": "bool"
+        }
+      ]
+    },
+    {
       "name": "extend_session",
       "docs": [
         "Extend an existing session's expiry time"
@@ -3080,6 +3295,179 @@
       }
     },
     {
+      "name": "initialize_player_skills",
+      "docs": [
+        "Create a player from the canonical enabled on-chain ClassConfig."
+      ],
+      "discriminator": [
+        2,
+        8,
+        149,
+        5,
+        205,
+        129,
+        89,
+        93
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "skill_tree"
+        },
+        {
+          "name": "player_skills",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  115,
+                  107,
+                  105,
+                  108,
+                  108,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize_player_skills_with_session",
+      "discriminator": [
+        227,
+        215,
+        145,
+        180,
+        162,
+        160,
+        192,
+        132
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "skill_tree"
+        },
+        {
+          "name": "player_skills",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  115,
+                  107,
+                  105,
+                  108,
+                  108,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "initialize_session_escrow",
       "docs": [
         "Initialize a session escrow for the authority",
@@ -3145,6 +3533,178 @@
         }
       ],
       "args": []
+    },
+    {
+      "name": "learn_skill",
+      "discriminator": [
+        37,
+        105,
+        136,
+        80,
+        224,
+        172,
+        50,
+        107
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "skill_tree"
+        },
+        {
+          "name": "player_skills",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  115,
+                  107,
+                  105,
+                  108,
+                  108,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "node_id",
+          "type": "u8"
+        }
+      ]
+    },
+    {
+      "name": "learn_skill_with_session",
+      "discriminator": [
+        124,
+        222,
+        237,
+        9,
+        15,
+        198,
+        125,
+        147
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "skill_tree"
+        },
+        {
+          "name": "player_skills",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  115,
+                  107,
+                  105,
+                  108,
+                  108,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "node_id",
+          "type": "u8"
+        }
+      ]
     },
     {
       "name": "prepare_player_for_battle",
@@ -7331,6 +7891,19 @@
       ]
     },
     {
+      "name": "PlayerSkills",
+      "discriminator": [
+        91,
+        197,
+        31,
+        8,
+        234,
+        46,
+        64,
+        246
+      ]
+    },
+    {
       "name": "SessionEscrow",
       "discriminator": [
         251,
@@ -7341,6 +7914,19 @@
         92,
         234,
         241
+      ]
+    },
+    {
+      "name": "SkillTreeDefinition",
+      "discriminator": [
+        128,
+        79,
+        234,
+        104,
+        120,
+        235,
+        135,
+        150
       ]
     },
     {
@@ -7736,6 +8322,51 @@
       "code": 6067,
       "name": "TradeRevisionOverflow",
       "msg": "Trade consent revision overflow"
+    },
+    {
+      "code": 7000,
+      "name": "InvalidSkills",
+      "msg": "Skill ownership or pinned tree state is invalid"
+    },
+    {
+      "code": 7001,
+      "name": "UnknownSkill",
+      "msg": "This skill or action slot does not exist"
+    },
+    {
+      "code": 7002,
+      "name": "AlreadyLearned",
+      "msg": "This skill has already been learned"
+    },
+    {
+      "code": 7003,
+      "name": "LevelRequired",
+      "msg": "Reach the required level before learning this skill"
+    },
+    {
+      "code": 7004,
+      "name": "PrerequisiteRequired",
+      "msg": "Learn every prerequisite before this skill"
+    },
+    {
+      "code": 7005,
+      "name": "InsufficientPoints",
+      "msg": "Not enough unspent skill points"
+    },
+    {
+      "code": 7006,
+      "name": "ActiveSkillRequired",
+      "msg": "Choose a learned active skill"
+    },
+    {
+      "code": 7007,
+      "name": "EquipmentSlot",
+      "msg": "An equipment-granted action cannot be replaced by a skill"
+    },
+    {
+      "code": 7008,
+      "name": "DuplicateAction",
+      "msg": "This active skill is already equipped in another slot"
     }
   ],
   "types": [
@@ -8036,6 +8667,19 @@
               {
                 "name": "duration",
                 "type": "u8"
+              }
+            ]
+          },
+          {
+            "name": "Skill",
+            "fields": [
+              {
+                "name": "kind",
+                "type": "u8"
+              },
+              {
+                "name": "amount",
+                "type": "i16"
               }
             ]
           }
@@ -8696,6 +9340,22 @@
                 32
               ]
             }
+          },
+          {
+            "name": "material_tags",
+            "docs": [
+              "Immutable skill entitlement supplied only by the authorized reward issuer."
+            ],
+            "type": {
+              "array": [
+                "u16",
+                3
+              ]
+            }
+          },
+          {
+            "name": "material_bias_percent",
+            "type": "u16"
           }
         ]
       }
@@ -8754,6 +9414,58 @@
             "type": {
               "option": "pubkey"
             }
+          }
+        ]
+      }
+    },
+    {
+      "name": "PlayerSkills",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "tree",
+            "type": "pubkey"
+          },
+          {
+            "name": "tree_digest",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "created_slot",
+            "docs": [
+              "Character incarnation marker; never changes after initialization."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "learned_mask",
+            "type": "u16"
+          },
+          {
+            "name": "spent_points",
+            "type": "u16"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
           }
         ]
       }
@@ -8855,6 +9567,166 @@
           {
             "name": "balance",
             "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkillNodeDefinition",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "type": "u8"
+          },
+          {
+            "name": "key",
+            "type": {
+              "array": [
+                "u8",
+                24
+              ]
+            }
+          },
+          {
+            "name": "name",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "description",
+            "type": {
+              "array": [
+                "u8",
+                128
+              ]
+            }
+          },
+          {
+            "name": "branch",
+            "type": {
+              "array": [
+                "u8",
+                20
+              ]
+            }
+          },
+          {
+            "name": "cost",
+            "type": "u8"
+          },
+          {
+            "name": "tier",
+            "type": "u8"
+          },
+          {
+            "name": "min_level",
+            "type": "u8"
+          },
+          {
+            "name": "prerequisites",
+            "docs": [
+              "Bitset of required node IDs. Every bit must already be learned."
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "effect_kind",
+            "type": "u8"
+          },
+          {
+            "name": "effect_amount",
+            "type": "i16"
+          },
+          {
+            "name": "active",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkillTreeDefinition",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
+            "name": "class_id",
+            "type": "u8"
+          },
+          {
+            "name": "version",
+            "type": "u32"
+          },
+          {
+            "name": "name",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "material_tags",
+            "type": {
+              "array": [
+                "u16",
+                3
+              ]
+            }
+          },
+          {
+            "name": "quality_tags",
+            "docs": [
+              "Zero padding is permitted after the last quality (Wizard currently has two)."
+            ],
+            "type": {
+              "array": [
+                "u16",
+                3
+              ]
+            }
+          },
+          {
+            "name": "node_count",
+            "type": "u8"
+          },
+          {
+            "name": "nodes",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "SkillNodeDefinition"
+                }
+              }
+            }
+          },
+          {
+            "name": "sealed",
+            "type": "bool"
+          },
+          {
+            "name": "digest",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
           },
           {
             "name": "bump",

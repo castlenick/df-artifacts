@@ -8,6 +8,360 @@
   },
   "instructions": [
     {
+      "name": "admin_create_item",
+      "docs": [
+        "Author an exact item through Player's atomic admin inventory deposit."
+      ],
+      "discriminator": [
+        84,
+        79,
+        166,
+        4,
+        240,
+        228,
+        52,
+        154
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "owner"
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "admin_member",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  100,
+                  109,
+                  105,
+                  110,
+                  95,
+                  109,
+                  101,
+                  109,
+                  98,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "mint_authority",
+          "docs": [
+            "Only Player can sign this capability, ensuring the mint is deposited atomically."
+          ],
+          "signer": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  100,
+                  109,
+                  105,
+                  110,
+                  95,
+                  105,
+                  116,
+                  101,
+                  109,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
+        },
+        {
+          "name": "item_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "arg",
+                "path": "item_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "item_type_config"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "item_id",
+          "type": "u64"
+        },
+        {
+          "name": "item",
+          "type": {
+            "defined": {
+              "name": "Item"
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "claim_item_equipment",
       "docs": [
         "Claim an item for exactly one canonical Player account. Only the Player",
@@ -3623,6 +3977,19 @@
       ]
     },
     {
+      "name": "ItemTypeConfig",
+      "discriminator": [
+        136,
+        146,
+        215,
+        8,
+        107,
+        218,
+        99,
+        139
+      ]
+    },
+    {
       "name": "LootConfig",
       "discriminator": [
         117,
@@ -3678,156 +4045,64 @@
   "errors": [
     {
       "code": 6000,
-      "name": "UniverseMismatch",
-      "msg": "Accounts belong to different universes"
-    },
-    {
-      "code": 6001,
-      "name": "UnsupportedUniverseSchema",
-      "msg": "Universe schema is not supported by this program version"
-    },
-    {
-      "code": 6002,
-      "name": "InvalidUniverseAuthority",
-      "msg": "Only the universe authority may initialize this configuration"
-    },
-    {
-      "code": 6003,
       "name": "InvalidRoll",
       "msg": "Invalid roll"
     },
     {
-      "code": 6004,
-      "name": "InvalidOwner",
-      "msg": "Invalid owner - you don't own this item"
-    },
-    {
-      "code": 6005,
-      "name": "NotEmptyItemAccount",
-      "msg": "Item account is not an empty no-drop placeholder"
-    },
-    {
-      "code": 6006,
-      "name": "InvalidSession",
-      "msg": "Invalid or expired player session"
-    },
-    {
-      "code": 6007,
-      "name": "SessionExpired",
-      "msg": "Session has expired"
-    },
-    {
-      "code": 6008,
-      "name": "InvalidEscrowAccount",
-      "msg": "Invalid session escrow account"
-    },
-    {
-      "code": 6009,
-      "name": "ItemNotLowestRarity",
-      "msg": "Item is not the lowest rarity tier"
-    },
-    {
-      "code": 6010,
-      "name": "DirectCallNotAllowed",
-      "msg": "This instruction can only be called via CPI, not directly"
-    },
-    {
-      "code": 6011,
-      "name": "InvalidTransferAuthority",
-      "msg": "Invalid transfer authority"
-    },
-    {
-      "code": 6012,
-      "name": "InvalidTagRulebook",
-      "msg": "Tag rulebook is not canonical, sealed, or active where required"
-    },
-    {
-      "code": 6013,
-      "name": "InvalidTagRegistry",
-      "msg": "Tag registry is invalid"
-    },
-    {
-      "code": 6014,
-      "name": "InvalidTagAuthority",
-      "msg": "Only the Universe root or explicit tag delegate may update item tags"
-    },
-    {
-      "code": 6015,
+      "code": 6001,
       "name": "InvalidTags",
-      "msg": "Tags are not in canonical authored form"
-    },
-    {
-      "code": 6016,
-      "name": "UnregisteredTag",
-      "msg": "Tag ID has not been registered"
-    },
-    {
-      "code": 6017,
-      "name": "InvalidPlayer",
-      "msg": "Player account cannot be the zero pubkey"
-    },
-    {
-      "code": 6018,
-      "name": "ItemAlreadyEquipped",
-      "msg": "Item is already claimed by a player"
-    },
-    {
-      "code": 6019,
-      "name": "ItemEquipmentClaimMismatch",
-      "msg": "Only the exact claiming player can release this item"
-    },
-    {
-      "code": 6020,
-      "name": "ItemStillEquipped",
-      "msg": "Equipped items cannot be transferred or destroyed"
-    },
-    {
-      "code": 6021,
-      "name": "InvalidRentPayer",
-      "msg": "Only the wallet that funded a no-drop account may reclaim its rent"
-    },
-    {
-      "code": 6022,
-      "name": "InvalidCleanupCount",
-      "msg": "Item cleanup requires between 1 and 32 accounts"
-    },
-    {
-      "code": 6023,
-      "name": "DuplicateCleanupItem",
-      "msg": "Item cleanup contains a duplicate account"
-    },
-    {
-      "code": 6024,
-      "name": "CleanupItemMustBeWritable",
-      "msg": "Every cleanup target must be writable"
-    },
-    {
-      "code": 6025,
-      "name": "InvalidDeadRecoveryMask",
-      "msg": "Dead recovery mask contains bits outside the cleanup targets"
-    },
-    {
-      "code": 6026,
-      "name": "InvalidItemAddress",
-      "msg": "Item account is not its canonical PDA"
-    },
-    {
-      "code": 6027,
-      "name": "InvalidTradeTransferCount",
-      "msg": "Trade transfer requires 1 to 16 items and at most 8 items per side"
-    },
-    {
-      "code": 6028,
-      "name": "DuplicateTradeTransferItem",
-      "msg": "Trade transfer contains a duplicate item"
-    },
-    {
-      "code": 6029,
-      "name": "TradeTransferItemMustBeWritable",
-      "msg": "Every trade transfer item must be writable"
+      "msg": "Tags or tag rules are invalid"
     }
   ],
   "types": [
+    {
+      "name": "ActionConfig",
+      "docs": [
+        "Action configuration for class defaults"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "name",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "effect_type",
+            "type": "u8"
+          },
+          {
+            "name": "effect_value1",
+            "type": "i16"
+          },
+          {
+            "name": "effect_value2",
+            "type": "u8"
+          },
+          {
+            "name": "success_threshold",
+            "type": "u8"
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
+          },
+          {
+            "name": "tags",
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
+          }
+        ]
+      }
+    },
     {
       "name": "BaseStats",
       "docs": [
@@ -4177,6 +4452,89 @@
           },
           {
             "name": "Boots"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ItemTypeConfig",
+      "docs": [
+        "Configuration for an item type"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
+            "name": "item_type_id",
+            "type": "u8"
+          },
+          {
+            "name": "slot",
+            "type": "u8"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "base_damage",
+            "type": "u8"
+          },
+          {
+            "name": "base_defense",
+            "type": "u8"
+          },
+          {
+            "name": "base_attack_speed",
+            "type": "u8"
+          },
+          {
+            "name": "rarity_damage_multipliers",
+            "type": {
+              "array": [
+                "u8",
+                5
+              ]
+            }
+          },
+          {
+            "name": "rarity_defense_multipliers",
+            "type": {
+              "array": [
+                "u8",
+                5
+              ]
+            }
+          },
+          {
+            "name": "granted_action",
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "ActionConfig"
+                }
+              }
+            }
+          },
+          {
+            "name": "tags",
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
           }
         ]
       }

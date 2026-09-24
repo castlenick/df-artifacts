@@ -72,6 +72,329 @@
       "args": []
     },
     {
+      "name": "admin_create_item_to_inventory",
+      "docs": [
+        "Author an exact item and deposit it atomically; the Universe admin pays all rent."
+      ],
+      "discriminator": [
+        136,
+        1,
+        204,
+        210,
+        44,
+        70,
+        217,
+        214
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "owner",
+          "relations": [
+            "inventory"
+          ]
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "admin_member",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  100,
+                  109,
+                  105,
+                  110,
+                  95,
+                  109,
+                  101,
+                  109,
+                  98,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "inventory",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "item_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "arg",
+                "path": "item_id"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                224,
+                166,
+                93,
+                89,
+                226,
+                65,
+                147,
+                69,
+                181,
+                236,
+                242,
+                78,
+                49,
+                5,
+                140,
+                67,
+                93,
+                54,
+                205,
+                111,
+                205,
+                52,
+                154,
+                44,
+                115,
+                41,
+                25,
+                93,
+                131,
+                50,
+                28,
+                58
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "item_type_config"
+        },
+        {
+          "name": "mint_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  100,
+                  109,
+                  105,
+                  110,
+                  95,
+                  105,
+                  116,
+                  101,
+                  109,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "item_id",
+          "type": "u64"
+        },
+        {
+          "name": "item",
+          "type": {
+            "defined": {
+              "name": "Item"
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "admin_update_player_stats",
       "docs": [
         "Admin-only: directly update player stats. For gameplay use `update_player_stats_cpi`."
@@ -7878,6 +8201,19 @@
       ]
     },
     {
+      "name": "ItemTypeConfig",
+      "discriminator": [
+        136,
+        146,
+        215,
+        8,
+        107,
+        218,
+        99,
+        139
+      ]
+    },
+    {
       "name": "LootConfig",
       "discriminator": [
         117,
@@ -8736,6 +9072,37 @@
       }
     },
     {
+      "name": "BaseStats",
+      "docs": [
+        "Base stats for items"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "damage",
+            "type": "u8"
+          },
+          {
+            "name": "defense",
+            "type": "u8"
+          },
+          {
+            "name": "attack_speed",
+            "type": "u8"
+          },
+          {
+            "name": "special",
+            "type": {
+              "defined": {
+                "name": "SpecialAbility"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "BattleLockTransition",
       "docs": [
         "Exact ownership transition for the player's single outstanding battle lock.",
@@ -8764,6 +9131,58 @@
                 "type": "pubkey"
               }
             ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "BootsType",
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "LeatherBoots"
+          },
+          {
+            "name": "IronBoots"
+          },
+          {
+            "name": "SteelBoots"
+          },
+          {
+            "name": "MagicBoots"
+          },
+          {
+            "name": "RunningShoes"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ChestType",
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "LeatherArmor"
+          },
+          {
+            "name": "ChainMail"
+          },
+          {
+            "name": "PlateArmor"
+          },
+          {
+            "name": "Robes"
+          },
+          {
+            "name": "BattleVest"
           }
         ]
       }
@@ -9177,6 +9596,32 @@
       }
     },
     {
+      "name": "HelmetType",
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "LeatherCap"
+          },
+          {
+            "name": "IronHelmet"
+          },
+          {
+            "name": "SteelHelmet"
+          },
+          {
+            "name": "MagicHood"
+          },
+          {
+            "name": "Crown"
+          }
+        ]
+      }
+    },
+    {
       "name": "Inventory",
       "type": {
         "kind": "struct",
@@ -9203,6 +9648,157 @@
       }
     },
     {
+      "name": "Item",
+      "docs": [
+        "Complete item definition"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "content_version",
+            "type": "u16"
+          },
+          {
+            "name": "item_tier",
+            "type": "u8"
+          },
+          {
+            "name": "slot",
+            "type": {
+              "defined": {
+                "name": "ItemSlot"
+              }
+            }
+          },
+          {
+            "name": "item_type",
+            "type": {
+              "defined": {
+                "name": "ItemKind"
+              }
+            }
+          },
+          {
+            "name": "rarity",
+            "type": {
+              "defined": {
+                "name": "Rarity"
+              }
+            }
+          },
+          {
+            "name": "template_id",
+            "type": "u16"
+          },
+          {
+            "name": "prefix_id",
+            "type": "u16"
+          },
+          {
+            "name": "suffix_id",
+            "type": "u16"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "base_stats",
+            "type": {
+              "defined": {
+                "name": "BaseStats"
+              }
+            }
+          },
+          {
+            "name": "modifiers",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "Modifier"
+                }
+              }
+            }
+          },
+          {
+            "name": "tags",
+            "docs": [
+              "Authored semantic traits. Rarity, kind, slot, specials, and modifiers are derived tags."
+            ],
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "ItemKind",
+      "docs": [
+        "Tagged item kind using per-slot enums."
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Weapon",
+            "fields": [
+              {
+                "name": "weapon_type",
+                "type": {
+                  "defined": {
+                    "name": "WeaponType"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "Helmet",
+            "fields": [
+              {
+                "name": "helmet_type",
+                "type": {
+                  "defined": {
+                    "name": "HelmetType"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "Chest",
+            "fields": [
+              {
+                "name": "chest_type",
+                "type": {
+                  "defined": {
+                    "name": "ChestType"
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "Boots",
+            "fields": [
+              {
+                "name": "boots_type",
+                "type": {
+                  "defined": {
+                    "name": "BootsType"
+                  }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
       "name": "ItemSlot",
       "docs": [
         "Equipment slots where items can be equipped"
@@ -9224,6 +9820,89 @@
           },
           {
             "name": "Boots"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ItemTypeConfig",
+      "docs": [
+        "Configuration for an item type"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
+            "name": "item_type_id",
+            "type": "u8"
+          },
+          {
+            "name": "slot",
+            "type": "u8"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "base_damage",
+            "type": "u8"
+          },
+          {
+            "name": "base_defense",
+            "type": "u8"
+          },
+          {
+            "name": "base_attack_speed",
+            "type": "u8"
+          },
+          {
+            "name": "rarity_damage_multipliers",
+            "type": {
+              "array": [
+                "u8",
+                5
+              ]
+            }
+          },
+          {
+            "name": "rarity_defense_multipliers",
+            "type": {
+              "array": [
+                "u8",
+                5
+              ]
+            }
+          },
+          {
+            "name": "granted_action",
+            "type": {
+              "option": {
+                "defined": {
+                  "name": "ActionConfig"
+                }
+              }
+            }
+          },
+          {
+            "name": "tags",
+            "type": {
+              "defined": {
+                "name": "TagSetV1"
+              }
+            }
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
           }
         ]
       }
@@ -9356,6 +10035,146 @@
           {
             "name": "material_bias_percent",
             "type": "u16"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Modifier",
+      "docs": [
+        "A modifier on an item"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "source",
+            "type": {
+              "defined": {
+                "name": "ModifierSource"
+              }
+            }
+          },
+          {
+            "name": "name_id",
+            "type": "u16"
+          },
+          {
+            "name": "mod_type",
+            "type": {
+              "defined": {
+                "name": "ModifierType"
+              }
+            }
+          },
+          {
+            "name": "value",
+            "type": "i16"
+          },
+          {
+            "name": "is_percent",
+            "type": "bool"
+          },
+          {
+            "name": "max_rolled",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ModifierSource",
+      "docs": [
+        "Types of modifiers that can be on items"
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Prefix"
+          },
+          {
+            "name": "Action"
+          },
+          {
+            "name": "Suffix"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ModifierType",
+      "docs": [
+        "Modifier stat/effect category."
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "None"
+          },
+          {
+            "name": "Damage"
+          },
+          {
+            "name": "DamageMultiplier"
+          },
+          {
+            "name": "AttackSpeed"
+          },
+          {
+            "name": "Speed"
+          },
+          {
+            "name": "RollBonus"
+          },
+          {
+            "name": "MagicFind"
+          },
+          {
+            "name": "Durability"
+          },
+          {
+            "name": "Hit"
+          },
+          {
+            "name": "Crit"
+          },
+          {
+            "name": "CritMiss"
+          },
+          {
+            "name": "Armor"
+          },
+          {
+            "name": "Health"
+          },
+          {
+            "name": "HealthRegen"
+          },
+          {
+            "name": "Strength"
+          },
+          {
+            "name": "Agility"
+          },
+          {
+            "name": "Technique"
+          },
+          {
+            "name": "Intelligence"
+          },
+          {
+            "name": "Combo"
+          },
+          {
+            "name": "All"
           }
         ]
       }
@@ -9547,6 +10366,35 @@
       }
     },
     {
+      "name": "Rarity",
+      "docs": [
+        "Item rarity tiers"
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Common"
+          },
+          {
+            "name": "Uncommon"
+          },
+          {
+            "name": "Rare"
+          },
+          {
+            "name": "Epic"
+          },
+          {
+            "name": "Legendary"
+          }
+        ]
+      }
+    },
+    {
       "name": "SessionEscrow",
       "docs": [
         "Session Escrow - holds SOL that can be used to fund session keypairs",
@@ -9731,6 +10579,53 @@
           {
             "name": "bump",
             "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SpecialAbility",
+      "docs": [
+        "Special abilities for weapons"
+      ],
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "None"
+          },
+          {
+            "name": "FireDamage"
+          },
+          {
+            "name": "IceDamage"
+          },
+          {
+            "name": "PoisonDamage"
+          },
+          {
+            "name": "LightningDamage"
+          },
+          {
+            "name": "LifeSteal"
+          },
+          {
+            "name": "CriticalStrike"
+          },
+          {
+            "name": "Knockback"
+          },
+          {
+            "name": "Stun"
+          },
+          {
+            "name": "Bleed"
+          },
+          {
+            "name": "ArmorPierce"
           }
         ]
       }
@@ -10278,6 +11173,29 @@
                 64
               ]
             }
+          }
+        ]
+      }
+    },
+    {
+      "name": "WeaponType",
+      "repr": {
+        "kind": "rust"
+      },
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Sword"
+          },
+          {
+            "name": "Mace"
+          },
+          {
+            "name": "Dagger"
+          },
+          {
+            "name": "Wand"
           }
         ]
       }

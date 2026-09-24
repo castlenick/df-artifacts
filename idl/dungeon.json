@@ -10503,6 +10503,11 @@
       "code": 6067,
       "name": "InsufficientBattleReserve",
       "msg": "Battle completion reserve is insufficient"
+    },
+    {
+      "code": 6068,
+      "name": "SkillProgressionUpgradeRequired",
+      "msg": "Upgrade this fighter skill progression in Skills before starting a new battle"
     }
   ],
   "types": [

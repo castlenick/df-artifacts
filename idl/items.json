@@ -4822,6 +4822,32 @@
           {
             "name": "material_bias_percent",
             "type": "u16"
+          },
+          {
+            "name": "class_material_tags",
+            "docs": [
+              "Independent learned discipline bonuses, captured by the reward issuer."
+            ],
+            "type": {
+              "array": [
+                {
+                  "array": [
+                    "u16",
+                    3
+                  ]
+                },
+                4
+              ]
+            }
+          },
+          {
+            "name": "class_material_bias_percent",
+            "type": {
+              "array": [
+                "u16",
+                4
+              ]
+            }
           }
         ]
       }

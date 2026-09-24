@@ -10035,6 +10035,32 @@
           {
             "name": "material_bias_percent",
             "type": "u16"
+          },
+          {
+            "name": "class_material_tags",
+            "docs": [
+              "Independent learned discipline bonuses, captured by the reward issuer."
+            ],
+            "type": {
+              "array": [
+                {
+                  "array": [
+                    "u16",
+                    3
+                  ]
+                },
+                4
+              ]
+            }
+          },
+          {
+            "name": "class_material_bias_percent",
+            "type": {
+              "array": [
+                "u16",
+                4
+              ]
+            }
           }
         ]
       }
@@ -10238,6 +10264,43 @@
       }
     },
     {
+      "name": "PlayerSkillTree",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "tree",
+            "type": "pubkey"
+          },
+          {
+            "name": "tree_digest",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "learned_mask",
+            "type": "u16"
+          },
+          {
+            "name": "spent_points",
+            "type": "u16"
+          },
+          {
+            "name": "legacy_credit",
+            "docs": [
+              "Fixed compensation for purchases made before weapon-based point pools.",
+              "Only legacy migration can create credit; it cannot be moved or renewed."
+            ],
+            "type": "u16"
+          }
+        ]
+      }
+    },
+    {
       "name": "PlayerSkills",
       "type": {
         "kind": "struct",
@@ -10255,32 +10318,27 @@
             "type": "pubkey"
           },
           {
-            "name": "tree",
-            "type": "pubkey"
-          },
-          {
-            "name": "tree_digest",
-            "type": {
-              "array": [
-                "u8",
-                32
-              ]
-            }
-          },
-          {
             "name": "created_slot",
             "docs": [
-              "Character incarnation marker; never changes after initialization."
+              "Character incarnation marker; preserved through schema migration."
             ],
             "type": "u64"
           },
           {
-            "name": "learned_mask",
-            "type": "u16"
-          },
-          {
-            "name": "spent_points",
-            "type": "u16"
+            "name": "trees",
+            "docs": [
+              "Independent, pinned trees in Barbarian/Warrior/Rogue/Wizard order."
+            ],
+            "type": {
+              "array": [
+                {
+                  "defined": {
+                    "name": "PlayerSkillTree"
+                  }
+                },
+                4
+              ]
+            }
           },
           {
             "name": "bump",

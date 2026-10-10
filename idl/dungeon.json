@@ -2530,70 +2530,11 @@
           "writable": true
         },
         {
-          "name": "player_skills",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  112,
-                  108,
-                  97,
-                  121,
-                  101,
-                  114,
-                  95,
-                  115,
-                  107,
-                  105,
-                  108,
-                  108,
-                  115
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "player"
-              }
-            ],
-            "program": {
-              "kind": "const",
-              "value": [
-                106,
-                94,
-                70,
-                91,
-                61,
-                67,
-                239,
-                217,
-                47,
-                89,
-                155,
-                232,
-                183,
-                28,
-                35,
-                238,
-                121,
-                209,
-                143,
-                153,
-                236,
-                201,
-                92,
-                194,
-                161,
-                147,
-                124,
-                8,
-                100,
-                188,
-                234,
-                24
-              ]
-            }
-          }
+          "name": "player_skills"
+        },
+        {
+          "name": "action_loadout",
+          "writable": true
         },
         {
           "name": "skill_tree"
@@ -2965,70 +2906,11 @@
           "writable": true
         },
         {
-          "name": "player_skills",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  112,
-                  108,
-                  97,
-                  121,
-                  101,
-                  114,
-                  95,
-                  115,
-                  107,
-                  105,
-                  108,
-                  108,
-                  115
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "player"
-              }
-            ],
-            "program": {
-              "kind": "const",
-              "value": [
-                106,
-                94,
-                70,
-                91,
-                61,
-                67,
-                239,
-                217,
-                47,
-                89,
-                155,
-                232,
-                183,
-                28,
-                35,
-                238,
-                121,
-                209,
-                143,
-                153,
-                236,
-                201,
-                92,
-                194,
-                161,
-                147,
-                124,
-                8,
-                100,
-                188,
-                234,
-                24
-              ]
-            }
-          }
+          "name": "player_skills"
+        },
+        {
+          "name": "action_loadout",
+          "writable": true
         },
         {
           "name": "skill_tree"
@@ -3479,70 +3361,11 @@
           "writable": true
         },
         {
-          "name": "player_skills",
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  112,
-                  108,
-                  97,
-                  121,
-                  101,
-                  114,
-                  95,
-                  115,
-                  107,
-                  105,
-                  108,
-                  108,
-                  115
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "player"
-              }
-            ],
-            "program": {
-              "kind": "const",
-              "value": [
-                106,
-                94,
-                70,
-                91,
-                61,
-                67,
-                239,
-                217,
-                47,
-                89,
-                155,
-                232,
-                183,
-                28,
-                35,
-                238,
-                121,
-                209,
-                143,
-                153,
-                236,
-                201,
-                92,
-                194,
-                161,
-                147,
-                124,
-                8,
-                100,
-                188,
-                234,
-                24
-              ]
-            }
-          }
+          "name": "player_skills"
+        },
+        {
+          "name": "action_loadout",
+          "writable": true
         },
         {
           "name": "skill_tree"
@@ -9164,6 +8987,81 @@
           "writable": true
         },
         {
+          "name": "action_loadout",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  97,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  97,
+                  100,
+                  111,
+                  117,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                106,
+                94,
+                70,
+                91,
+                61,
+                67,
+                239,
+                217,
+                47,
+                89,
+                155,
+                232,
+                183,
+                28,
+                35,
+                238,
+                121,
+                209,
+                143,
+                153,
+                236,
+                201,
+                92,
+                194,
+                161,
+                147,
+                124,
+                8,
+                100,
+                188,
+                234,
+                24
+              ]
+            }
+          }
+        },
+        {
           "name": "player_dungeon"
         },
         {
@@ -10508,6 +10406,11 @@
       "code": 6068,
       "name": "SkillProgressionUpgradeRequired",
       "msg": "Upgrade this fighter skill progression in Skills before starting a new battle"
+    },
+    {
+      "code": 6069,
+      "name": "ReplayAllocationRequiresStaging",
+      "msg": "This sparse replay exceeds Solana's per-instruction account allocation limit. A staged replay buffer is required for this loadout."
     }
   ],
   "types": [

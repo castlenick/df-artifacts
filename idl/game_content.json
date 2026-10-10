@@ -217,6 +217,76 @@
       "args": []
     },
     {
+      "name": "append_class_action_catalog",
+      "discriminator": [
+        67,
+        189,
+        42,
+        133,
+        54,
+        115,
+        9,
+        98
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "class_action_catalog",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "actions",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ActionConfig"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "append_tag_rules",
       "docs": [
         "Appends a bounded transaction-sized batch while the rulebook is unsealed."
@@ -1442,6 +1512,157 @@
       ]
     },
     {
+      "name": "initialize_action_capacity_config",
+      "discriminator": [
+        161,
+        25,
+        177,
+        151,
+        59,
+        227,
+        228,
+        231
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "action_capacity",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  99,
+                  97,
+                  112,
+                  97,
+                  99,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize_class_action_catalog",
+      "discriminator": [
+        18,
+        165,
+        74,
+        71,
+        94,
+        121,
+        243,
+        157
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "class_action_catalog",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "class_id",
+          "type": "u8"
+        }
+      ]
+    },
+    {
       "name": "initialize_default_skill_tree",
       "docs": [
         "Explicitly publishes the CSV defaults for one class in this Universe."
@@ -2308,6 +2529,131 @@
       "args": []
     },
     {
+      "name": "set_action_capacity_config",
+      "discriminator": [
+        182,
+        132,
+        32,
+        98,
+        101,
+        101,
+        63,
+        142
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "action_capacity",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  99,
+                  97,
+                  112,
+                  97,
+                  99,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "class_bonus",
+          "type": {
+            "array": [
+              "u32",
+              4
+            ]
+          }
+        },
+        {
+          "name": "levels_per_slot",
+          "type": "u16"
+        },
+        {
+          "name": "slots_per_level_step",
+          "type": "u32"
+        },
+        {
+          "name": "item_grants",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ItemActionCapacityGrant"
+              }
+            }
+          }
+        },
+        {
+          "name": "skill_grants",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "SkillActionCapacityGrant"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "set_class_action",
       "docs": [
         "Set a default action for a class at a specific slot"
@@ -2391,6 +2737,148 @@
         {
           "name": "enabled",
           "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "set_class_action_catalog",
+      "discriminator": [
+        94,
+        110,
+        41,
+        61,
+        113,
+        88,
+        207,
+        164
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "class_action_catalog",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "actions",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "ActionConfig"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_class_action_catalog_entry",
+      "discriminator": [
+        86,
+        191,
+        112,
+        202,
+        95,
+        153,
+        18,
+        72
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  110,
+                  105,
+                  118,
+                  101,
+                  114,
+                  115,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe.genesis_authority",
+                "account": "Universe"
+              },
+              {
+                "kind": "account",
+                "path": "universe.id",
+                "account": "Universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "class_action_catalog",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "catalog_index",
+          "type": "u32"
+        },
+        {
+          "name": "action",
+          "type": {
+            "defined": {
+              "name": "ActionConfig"
+            }
+          }
         }
       ]
     },
@@ -3781,6 +4269,19 @@
   ],
   "accounts": [
     {
+      "name": "ActionCapacityConfig",
+      "discriminator": [
+        8,
+        188,
+        64,
+        232,
+        38,
+        92,
+        53,
+        163
+      ]
+    },
+    {
       "name": "AdminMember",
       "discriminator": [
         122,
@@ -3791,6 +4292,19 @@
         69,
         104,
         198
+      ]
+    },
+    {
+      "name": "ClassActionCatalog",
+      "discriminator": [
+        217,
+        193,
+        64,
+        132,
+        134,
+        77,
+        100,
+        141
       ]
     },
     {
@@ -4136,6 +4650,70 @@
   ],
   "types": [
     {
+      "name": "ActionCapacityConfig",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
+            "name": "version",
+            "type": "u32"
+          },
+          {
+            "name": "base_slots",
+            "type": "u32"
+          },
+          {
+            "name": "class_bonus",
+            "type": {
+              "array": [
+                "u32",
+                4
+              ]
+            }
+          },
+          {
+            "name": "levels_per_slot",
+            "docs": [
+              "Zero disables level grants. Otherwise each interval after level one grants slots."
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "slots_per_level_step",
+            "type": "u32"
+          },
+          {
+            "name": "item_grants",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "ItemActionCapacityGrant"
+                }
+              }
+            }
+          },
+          {
+            "name": "skill_grants",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "SkillActionCapacityGrant"
+                }
+              }
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
       "name": "ActionConfig",
       "docs": [
         "Action configuration for class defaults"
@@ -4202,6 +4780,44 @@
           {
             "name": "added_by",
             "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ClassActionCatalog",
+      "docs": [
+        "Additional class definitions have no five-action gameplay limit. The",
+        "legacy ClassConfig remains the source of indices zero through four."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
+            "name": "class_id",
+            "type": "u8"
+          },
+          {
+            "name": "version",
+            "type": "u32"
+          },
+          {
+            "name": "actions",
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "ActionConfig"
+                }
+              }
+            }
           },
           {
             "name": "bump",
@@ -4612,6 +5228,22 @@
       }
     },
     {
+      "name": "ItemActionCapacityGrant",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "item_type_id",
+            "type": "u8"
+          },
+          {
+            "name": "slots",
+            "type": "u32"
+          }
+        ]
+      }
+    },
+    {
       "name": "ItemTypeConfig",
       "docs": [
         "Configuration for an item type"
@@ -4754,6 +5386,26 @@
           {
             "name": "enabled",
             "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SkillActionCapacityGrant",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "class_id",
+            "type": "u8"
+          },
+          {
+            "name": "node_id",
+            "type": "u8"
+          },
+          {
+            "name": "slots",
+            "type": "u32"
           }
         ]
       }

@@ -628,6 +628,194 @@
       "args": []
     },
     {
+      "name": "clear_action_slot",
+      "discriminator": [
+        140,
+        90,
+        111,
+        47,
+        129,
+        93,
+        207,
+        50
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "action_loadout",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  97,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  97,
+                  100,
+                  111,
+                  117,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "slot",
+          "type": "u32"
+        }
+      ]
+    },
+    {
+      "name": "clear_action_slot_with_session",
+      "discriminator": [
+        4,
+        231,
+        125,
+        226,
+        3,
+        178,
+        100,
+        46
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "action_loadout",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  97,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  97,
+                  100,
+                  111,
+                  117,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "slot",
+          "type": "u32"
+        }
+      ]
+    },
+    {
       "name": "close_inventory",
       "docs": [
         "Close an Inventory account; rent refunded to its owner. Requires the",
@@ -743,6 +931,44 @@
                   108,
                   108,
                   115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "action_loadout",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  97,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  97,
+                  100,
+                  111,
+                  117,
+                  116
                 ]
               },
               {
@@ -3618,6 +3844,184 @@
       }
     },
     {
+      "name": "initialize_action_loadout",
+      "discriminator": [
+        167,
+        133,
+        15,
+        152,
+        145,
+        31,
+        56,
+        192
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "action_loadout",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  97,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  97,
+                  100,
+                  111,
+                  117,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize_action_loadout_with_session",
+      "discriminator": [
+        170,
+        147,
+        215,
+        80,
+        127,
+        176,
+        78,
+        52
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "action_loadout",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  97,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  97,
+                  100,
+                  111,
+                  117,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "initialize_player_skills",
       "docs": [
         "Create a player from the canonical enabled on-chain ClassConfig."
@@ -5994,6 +6398,210 @@
       ]
     },
     {
+      "name": "set_action_slot",
+      "discriminator": [
+        147,
+        3,
+        222,
+        148,
+        174,
+        11,
+        39,
+        88
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "action_loadout",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  97,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  97,
+                  100,
+                  111,
+                  117,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "slot",
+          "type": "u32"
+        },
+        {
+          "name": "reference",
+          "type": {
+            "defined": {
+              "name": "ActionReference"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "set_action_slot_with_session",
+      "discriminator": [
+        191,
+        2,
+        15,
+        66,
+        193,
+        226,
+        128,
+        194
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "action_loadout",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  97,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  97,
+                  100,
+                  111,
+                  117,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "slot",
+          "type": "u32"
+        },
+        {
+          "name": "reference",
+          "type": {
+            "defined": {
+              "name": "ActionReference"
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "set_equipment_loadout",
       "docs": [
         "Atomically replace the player's equipment with a full desired loadout.",
@@ -7051,6 +7659,202 @@
       ]
     },
     {
+      "name": "swap_action_loadout_slots",
+      "discriminator": [
+        198,
+        109,
+        121,
+        41,
+        90,
+        240,
+        243,
+        182
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "action_loadout",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  97,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  97,
+                  100,
+                  111,
+                  117,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "slot_a",
+          "type": "u32"
+        },
+        {
+          "name": "slot_b",
+          "type": "u32"
+        }
+      ]
+    },
+    {
+      "name": "swap_action_loadout_slots_with_session",
+      "discriminator": [
+        211,
+        19,
+        176,
+        143,
+        87,
+        191,
+        128,
+        191
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "action_loadout",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  97,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  97,
+                  100,
+                  111,
+                  117,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "slot_a",
+          "type": "u32"
+        },
+        {
+          "name": "slot_b",
+          "type": "u32"
+        }
+      ]
+    },
+    {
       "name": "swap_action_slots",
       "docs": [
         "Swap two action slots"
@@ -7092,6 +7896,184 @@
           "type": "u8"
         }
       ]
+    },
+    {
+      "name": "sync_action_loadout",
+      "discriminator": [
+        159,
+        254,
+        228,
+        16,
+        189,
+        80,
+        37,
+        90
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "action_loadout",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  97,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  97,
+                  100,
+                  111,
+                  117,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "sync_action_loadout_with_session",
+      "discriminator": [
+        100,
+        21,
+        177,
+        236,
+        39,
+        231,
+        43,
+        68
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "action_loadout",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  97,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  97,
+                  100,
+                  111,
+                  117,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
     },
     {
       "name": "transfer_item",
@@ -7677,6 +8659,165 @@
       ]
     },
     {
+      "name": "update_action_loadout_cursor",
+      "discriminator": [
+        227,
+        151,
+        193,
+        57,
+        192,
+        170,
+        139,
+        59
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "player_stats_authority",
+          "signer": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  115,
+                  116,
+                  97,
+                  116,
+                  115,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                239,
+                186,
+                156,
+                99,
+                237,
+                143,
+                147,
+                198,
+                55,
+                94,
+                9,
+                41,
+                190,
+                110,
+                104,
+                87,
+                247,
+                155,
+                143,
+                2,
+                79,
+                45,
+                189,
+                129,
+                127,
+                122,
+                32,
+                60,
+                112,
+                172,
+                222,
+                100
+              ]
+            }
+          }
+        },
+        {
+          "name": "action_loadout",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  97,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  97,
+                  100,
+                  111,
+                  117,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "battle_commit",
+          "type": "pubkey"
+        },
+        {
+          "name": "current_slot",
+          "type": "u32"
+        }
+      ]
+    },
+    {
       "name": "update_player_stats",
       "docs": [
         "Owner-signed gameplay stat update, authorized by the canonical Dungeon",
@@ -8079,6 +9220,68 @@
       ]
     },
     {
+      "name": "validate_action_loadout",
+      "docs": [
+        "Read-only canonical validation also exposes the sparse account schema in the IDL."
+      ],
+      "discriminator": [
+        208,
+        81,
+        58,
+        241,
+        66,
+        50,
+        220,
+        129
+      ],
+      "accounts": [
+        {
+          "name": "universe"
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "action_loadout",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  108,
+                  97,
+                  121,
+                  101,
+                  114,
+                  95,
+                  97,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  97,
+                  100,
+                  111,
+                  117,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "withdraw_from_escrow",
       "docs": [
         "Withdraw SOL from the session escrow back to the authority",
@@ -8224,6 +9427,19 @@
         114,
         57,
         248
+      ]
+    },
+    {
+      "name": "PlayerActionLoadout",
+      "discriminator": [
+        100,
+        171,
+        115,
+        172,
+        115,
+        178,
+        38,
+        31
       ]
     },
     {
@@ -8702,7 +9918,32 @@
     {
       "code": 7008,
       "name": "DuplicateAction",
-      "msg": "This active skill is already equipped in another slot"
+      "msg": "This action is already selected in another combat slot"
+    },
+    {
+      "code": 7009,
+      "name": "ActionSourceUnavailable",
+      "msg": "This action is not granted by an available source"
+    },
+    {
+      "code": 7010,
+      "name": "InvalidActionLoadout",
+      "msg": "Action loadout identity, scope or selected slots are invalid"
+    },
+    {
+      "code": 7011,
+      "name": "MissingActionSourceAccount",
+      "msg": "Missing the canonical proof account for an action source or capacity rule"
+    },
+    {
+      "code": 7012,
+      "name": "InvalidActionCapacity",
+      "msg": "Action capacity policy is invalid or exceeds its arithmetic range"
+    },
+    {
+      "code": 7013,
+      "name": "ActionLoadoutAllocationTooLarge",
+      "msg": "Action loadout allocation exceeds the platform's account budget"
     }
   ],
   "types": [
@@ -9016,6 +10257,53 @@
               {
                 "name": "amount",
                 "type": "i16"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "ActionReference",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Class",
+            "fields": [
+              {
+                "name": "action_index",
+                "type": "u32"
+              }
+            ]
+          },
+          {
+            "name": "Equipment",
+            "fields": [
+              {
+                "name": "equipment_slot",
+                "type": {
+                  "defined": {
+                    "name": "ItemSlot"
+                  }
+                }
+              },
+              {
+                "name": "item",
+                "type": "pubkey"
+              }
+            ]
+          },
+          {
+            "name": "Skill",
+            "fields": [
+              {
+                "name": "tree",
+                "type": "pubkey"
+              },
+              {
+                "name": "node_id",
+                "type": "u8"
               }
             ]
           }
@@ -10206,6 +11494,51 @@
       }
     },
     {
+      "name": "PlayerActionLoadout",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "universe",
+            "type": "pubkey"
+          },
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "capacity",
+            "type": "u32"
+          },
+          {
+            "name": "current_slot",
+            "type": "u32"
+          },
+          {
+            "name": "entries",
+            "docs": [
+              "Sorted occupied slots only. Every stored action is active."
+            ],
+            "type": {
+              "vec": {
+                "defined": {
+                  "name": "SelectedAction"
+                }
+              }
+            }
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
       "name": "PlayerClass",
       "docs": [
         "Player character classes - determines abilities and stat growth"
@@ -10448,6 +11781,34 @@
           },
           {
             "name": "Legendary"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SelectedAction",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "slot",
+            "type": "u32"
+          },
+          {
+            "name": "reference",
+            "type": {
+              "defined": {
+                "name": "ActionReference"
+              }
+            }
+          },
+          {
+            "name": "action",
+            "type": {
+              "defined": {
+                "name": "Action"
+              }
+            }
           }
         ]
       }

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "replayVersion": 14,
-  "sourceDigest": "d3ac723f7a070246df12890448510420900df7caa7b9c562931f06e0813f7182",
+  "sourceDigest": "ad36f062ccac752eb0541aceca1999d024f276dc225ea456f1ab4828a5a84ba2",
   "idls": {
     "dungeon.json": "d3d757d7f0cc34ec44caf894f06702239eaf4e04ff4dcccc886de278a97386b7",
     "game_content.json": "32733eb21706ad4717366b160306b15b606594f905c6d3be43466d677f61ac39",
@@ -13,13 +13,13 @@
       "platform": "darwin",
       "arch": "arm64",
       "path": "darwin-arm64/df-battle-replay",
-      "sha256": "9b4a739d4626115cec116fe4d9b2e532944a08d54b4d0f46dcf936a232c28326"
+      "sha256": "91a70abd8816c5a00c6a117cfc11adfbb065fcacb447a1dd152c84d633b76e43"
     },
     {
       "platform": "linux",
       "arch": "x64",
       "path": "linux-x64/df-battle-replay",
-      "sha256": "d1a038a2d260232d11d6f9fe71fbe9f279732e54ca1694aa74afc9157158d5d8"
+      "sha256": "5c8b5a209b3afa388cd12581c4f5983fb7e544c7ef64530484ff3d43d2ebc187"
     }
   ]
 }

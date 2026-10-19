@@ -498,6 +498,485 @@
       "args": []
     },
     {
+      "name": "apply_equipment_changes",
+      "docs": [
+        "Apply explicit equipment changes in order, cascading unsupported pieces."
+      ],
+      "discriminator": [
+        144,
+        92,
+        55,
+        138,
+        31,
+        99,
+        185,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "player"
+          ]
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "equipment_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109,
+                  95,
+                  101,
+                  113,
+                  117,
+                  105,
+                  112,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
+        }
+      ],
+      "args": [
+        {
+          "name": "changes",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "EquipmentLoadoutChange"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "apply_equipment_changes_with_session",
+      "docs": [
+        "Apply explicit equipment changes in order, cascading unsupported pieces."
+      ],
+      "discriminator": [
+        255,
+        87,
+        66,
+        171,
+        133,
+        51,
+        16,
+        233
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority"
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "session",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player",
+          "writable": true
+        },
+        {
+          "name": "equipment_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109,
+                  95,
+                  101,
+                  113,
+                  117,
+                  105,
+                  112,
+                  109,
+                  101,
+                  110,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ]
+          }
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
+        }
+      ],
+      "args": [
+        {
+          "name": "changes",
+          "type": {
+            "vec": {
+              "defined": {
+                "name": "EquipmentLoadoutChange"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
       "name": "approve_trade",
       "discriminator": [
         7,
@@ -1180,9 +1659,7 @@
     {
       "name": "create_item_to_inventory",
       "docs": [
-        "Create a new item via loot roll AND add it to inventory in one transaction",
-        "This combines the items::create_item CPI with adding to inventory",
-        "NOTE: Uses manual reallocation to avoid CPI lamport accounting issues"
+        "Legacy loot creation retains version-four semantics and its original ABI."
       ],
       "discriminator": [
         187,
@@ -1555,9 +2032,7 @@
     {
       "name": "create_item_to_inventory_cpi",
       "docs": [
-        "Session-aware version: create item and add to inventory",
-        "Uses session signer as payer, validates via session account",
-        "NOTE: Uses manual reallocation to avoid CPI lamport accounting issues"
+        "Legacy session-paid creation retains its original ABI and version."
       ],
       "discriminator": [
         132,
@@ -1959,6 +2434,789 @@
           "type": {
             "defined": {
               "name": "LootRollRequest"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_item_to_inventory_cpi_versioned",
+      "docs": [
+        "Session-paid creation with an explicitly frozen loot version."
+      ],
+      "discriminator": [
+        249,
+        184,
+        61,
+        147,
+        121,
+        166,
+        45,
+        183
+      ],
+      "accounts": [
+        {
+          "name": "session_signer",
+          "docs": [
+            "Session signer - pays for account creation"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "authority"
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "loot_authority",
+          "docs": [
+            "Dungeon-program PDA signer authorizing this loot settlement. Its signer",
+            "privilege is propagated unchanged through the nested items CPI."
+          ],
+          "signer": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  111,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                239,
+                186,
+                156,
+                99,
+                237,
+                143,
+                147,
+                198,
+                55,
+                94,
+                9,
+                41,
+                190,
+                110,
+                104,
+                87,
+                247,
+                155,
+                143,
+                2,
+                79,
+                45,
+                189,
+                129,
+                127,
+                122,
+                32,
+                60,
+                112,
+                172,
+                222,
+                100
+              ]
+            }
+          }
+        },
+        {
+          "name": "session",
+          "docs": [
+            "Valid session linking session_key to authority"
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  115,
+                  101,
+                  115,
+                  115,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "account",
+                "path": "session_signer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "inventory",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "item_account",
+          "docs": [
+            "The PDA is [b\"item\", universe, genesis_owner, item_id] under Items."
+          ],
+          "writable": true
+        },
+        {
+          "name": "loot_config",
+          "docs": [
+            "Loot config for generating the item"
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  111,
+                  111,
+                  116,
+                  45,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                224,
+                166,
+                93,
+                89,
+                226,
+                65,
+                147,
+                69,
+                181,
+                236,
+                242,
+                78,
+                49,
+                5,
+                140,
+                67,
+                93,
+                54,
+                205,
+                111,
+                205,
+                52,
+                154,
+                44,
+                115,
+                41,
+                25,
+                93,
+                131,
+                50,
+                28,
+                58
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "item_id",
+          "type": "u64"
+        },
+        {
+          "name": "request",
+          "type": {
+            "defined": {
+              "name": "VersionedLootRollRequest"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_item_to_inventory_versioned",
+      "docs": [
+        "Create loot using the version authenticated by Dungeon's frozen reward."
+      ],
+      "discriminator": [
+        116,
+        38,
+        11,
+        96,
+        84,
+        150,
+        155,
+        110
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "inventory"
+          ]
+        },
+        {
+          "name": "universe"
+        },
+        {
+          "name": "loot_authority",
+          "docs": [
+            "Dungeon-program PDA signer authorizing this loot settlement. Its signer",
+            "privilege is propagated unchanged through the nested items CPI."
+          ],
+          "signer": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  100,
+                  117,
+                  110,
+                  103,
+                  101,
+                  111,
+                  110,
+                  95,
+                  108,
+                  111,
+                  111,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104,
+                  111,
+                  114,
+                  105,
+                  116,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                239,
+                186,
+                156,
+                99,
+                237,
+                143,
+                147,
+                198,
+                55,
+                94,
+                9,
+                41,
+                190,
+                110,
+                104,
+                87,
+                247,
+                155,
+                143,
+                2,
+                79,
+                45,
+                189,
+                129,
+                127,
+                122,
+                32,
+                60,
+                112,
+                172,
+                222,
+                100
+              ]
+            }
+          }
+        },
+        {
+          "name": "inventory",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  110,
+                  118,
+                  101,
+                  110,
+                  116,
+                  111,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player"
+        },
+        {
+          "name": "item_account",
+          "docs": [
+            "The PDA is [b\"item\", universe, genesis_owner, item_id] under Items."
+          ],
+          "writable": true
+        },
+        {
+          "name": "loot_config",
+          "docs": [
+            "Loot config for generating the item"
+          ],
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  111,
+                  111,
+                  116,
+                  45,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                224,
+                166,
+                93,
+                89,
+                226,
+                65,
+                147,
+                69,
+                181,
+                236,
+                242,
+                78,
+                49,
+                5,
+                140,
+                67,
+                93,
+                54,
+                205,
+                111,
+                205,
+                52,
+                154,
+                44,
+                115,
+                41,
+                25,
+                93,
+                131,
+                50,
+                28,
+                58
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_registry",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  121
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "universe"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "tag_rulebook",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  97,
+                  103,
+                  95,
+                  114,
+                  117,
+                  108,
+                  101,
+                  98,
+                  111,
+                  111,
+                  107
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "tag_registry"
+              },
+              {
+                "kind": "account",
+                "path": "tag_rulebook.version",
+                "account": "TagRulebook"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                244,
+                99,
+                151,
+                237,
+                47,
+                11,
+                136,
+                173,
+                73,
+                183,
+                102,
+                123,
+                244,
+                101,
+                159,
+                248,
+                89,
+                209,
+                187,
+                253,
+                59,
+                44,
+                154,
+                132,
+                61,
+                253,
+                93,
+                11,
+                202,
+                2,
+                101,
+                78
+              ]
+            }
+          }
+        },
+        {
+          "name": "items_program",
+          "address": "G7wTZrFokZUG4i9rtqNbqvgqGrkDAdKKBCP7kp9aAeZF"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "item_id",
+          "type": "u64"
+        },
+        {
+          "name": "request",
+          "type": {
+            "defined": {
+              "name": "VersionedLootRollRequest"
             }
           }
         }
@@ -2474,10 +3732,9 @@
     {
       "name": "equip_item",
       "docs": [
-        "Remaining accounts must include the replaced item (if any), plus every",
-        "unchanged item's account and every final item's canonical ItemTypeConfig.",
-        "Item accounts whose membership changes must be writable; unchanged item",
-        "accounts and config accounts may be read-only. Order is irrelevant."
+        "Remaining accounts prove all current items and their canonical type configs,",
+        "plus the incoming type config. Every removed or cascaded item must be writable;",
+        "surviving item/config accounts may be read-only. Account order is irrelevant."
       ],
       "discriminator": [
         38,
@@ -6604,10 +7861,10 @@
     {
       "name": "set_equipment_loadout",
       "docs": [
-        "Atomically replace the player's equipment with a full desired loadout.",
-        "Remaining accounts must include the union of current and desired item",
-        "accounts plus every desired canonical ItemTypeConfig. Added and removed",
-        "item accounts must be writable; unchanged items/configs may be read-only."
+        "Legacy full-loadout ABI: remove changed slots, then equip Weapon/Helmet/Chest/Boots.",
+        "A desired state that this canonical order cannot realize is rejected. Use",
+        "apply_equipment_changes for another explicit order. Remaining accounts prove",
+        "the union of current/desired items and type configs; changed claims are writable."
       ],
       "discriminator": [
         33,
@@ -8185,8 +9442,9 @@
     {
       "name": "unequip_item",
       "docs": [
-        "Remaining accounts must include the removed item as writable, plus each",
-        "surviving item's account and canonical ItemTypeConfig. Order is irrelevant."
+        "Remaining accounts prove all current items and their canonical type configs.",
+        "The requested and every cascaded removal must be writable; missing proofs fail",
+        "before any claim changes. Account order is irrelevant."
       ],
       "discriminator": [
         96,
@@ -10848,6 +12106,31 @@
       }
     },
     {
+      "name": "EquipmentLoadoutChange",
+      "docs": [
+        "Explicit caller order for one equipment mutation. None removes a slot."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "slot",
+            "type": {
+              "defined": {
+                "name": "ItemSlot"
+              }
+            }
+          },
+          {
+            "name": "item",
+            "type": {
+              "option": "pubkey"
+            }
+          }
+        ]
+      }
+    },
+    {
       "name": "GameSession",
       "docs": [
         "Game Session - allows temporary keypair to act on behalf of wallet authority",
@@ -12591,6 +13874,31 @@
                 "u8",
                 64
               ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "VersionedLootRollRequest",
+      "docs": [
+        "Explicit envelope used by the versioned loot instructions and CPIs.",
+        "Original instructions retain the LootRollRequest ABI and always dispatch to",
+        "v4; adding another version never changes their meaning."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "table_version",
+            "type": "u16"
+          },
+          {
+            "name": "request",
+            "type": {
+              "defined": {
+                "name": "LootRollRequest"
+              }
             }
           }
         ]
